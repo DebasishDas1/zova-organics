@@ -13,17 +13,17 @@ const certifications = [
   },
 ]
 
+import { Section, SectionHeader } from '@/components/ui/section'
+
 export function CertificationsGrid() {
   return (
-    <section className="section-padding bg-secondary/30">
+    <Section className="bg-secondary/30">
       <div className="container-zova">
-        <div className="mb-20">
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            Standards
-          </span>
-
-          <h2 className="mt-4">Certifications we support and work with.</h2>
-        </div>
+        <SectionHeader
+          label="Standards"
+          title="Certifications we support and work with."
+          className="mb-20"
+        />
 
         <div className="grid gap-6 md:grid-cols-3">
           {certifications.map((item) => (
@@ -35,6 +35,6 @@ export function CertificationsGrid() {
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   )
 }

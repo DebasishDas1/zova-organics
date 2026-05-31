@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { Section, SectionHeader } from '@/components/ui/section'
 
 import { contactSchema, type ContactFormData } from '@/lib/validations/contact'
 
@@ -31,9 +32,14 @@ export function ContactForm() {
     },
   })
 
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+
   const onSubmit = async (values: ContactFormData) => {
     try {
       setIsSubmitting(true)
+      setFeedbackMessage(null)
+      setErrorMessage(null)
 
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -43,12 +49,16 @@ export function ContactForm() {
         body: JSON.stringify(values),
       })
 
+      const result = await response.json()
+
       if (!response.ok) {
-        throw new Error('Failed to submit inquiry')
+        throw new Error(result?.message ?? 'Failed to submit inquiry')
       }
 
       reset()
+      setFeedbackMessage('Thanks for reaching out! We will get back to you shortly.')
     } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred.')
       console.error(error)
     } finally {
       setIsSubmitting(false)
@@ -56,15 +66,15 @@ export function ContactForm() {
   }
 
   return (
-    <section className="section-padding">
+    <Section>
       <div className="container-zova">
         <div className="grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Inquiry Form
-            </span>
-
-            <h2 className="mt-4">Tell us about your project.</h2>
+            <SectionHeader
+              label="Inquiry Form"
+              title="Tell us about your project."
+              className="mb-0"
+            />
           </div>
 
           <div className="lg:col-span-8">
@@ -137,10 +147,16 @@ export function ContactForm() {
               <Button type="submit" size="lg" disabled={isSubmitting} className="rounded-full px-8">
                 {isSubmitting ? 'Sending...' : 'Send Inquiry'}
               </Button>
+
+              {feedbackMessage ? (
+                <p className="mt-4 text-sm text-green-600">{feedbackMessage}</p>
+              ) : null}
+
+              {errorMessage ? <p className="mt-4 text-sm text-red-600">{errorMessage}</p> : null}
             </form>
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   )
 }

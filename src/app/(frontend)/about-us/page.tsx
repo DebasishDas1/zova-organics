@@ -7,6 +7,12 @@ import { Values } from '@/components/sections/about/Values'
 import { Vision } from '@/components/sections/about/Vision'
 import { AboutCTA } from '@/components/sections/about/AboutCTA'
 
+export const metadata = {
+  title: 'About Us - Zova Organics',
+  description:
+    'Learn how Zova Organics combines sustainable sourcing, craftsmanship, and global export expertise.',
+}
+
 export default function AboutPage() {
   return (
     <>

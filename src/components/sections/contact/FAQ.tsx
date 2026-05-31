@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { Section, SectionHeader } from '@/components/ui/section'
 
 const faqs = [
   {
@@ -29,13 +30,9 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section className="section-padding">
+    <Section>
       <div className="container-zova max-w-4xl">
-        <div className="mb-16">
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">FAQ</span>
-
-          <h2 className="mt-4">Frequently asked questions.</h2>
-        </div>
+        <SectionHeader label="FAQ" title="Frequently asked questions." />
 
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
@@ -47,6 +44,6 @@ export function FAQ() {
           ))}
         </Accordion>
       </div>
-    </section>
+    </Section>
   )
 }

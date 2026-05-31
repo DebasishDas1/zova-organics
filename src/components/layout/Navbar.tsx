@@ -47,8 +47,15 @@ const NavbarComponent = () => {
   )
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 pt-4">
-      <div className="container-zova flex items-center justify-between">
+    <nav
+      className={cn(
+        'fixed top-0 inset-x-0 z-50 px-6 transition-all duration-700 ease-out',
+        'py-3',
+        'backdrop-blur-3xl',
+        'supports-backdrop-filter:bg-parchment/40',
+      )}
+    >
+      <div className="container mx-auto max-w-7xl flex items-center justify-between">
         {/* Logo */}
         <Link
           href="/"

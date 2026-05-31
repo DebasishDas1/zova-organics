@@ -17,19 +17,18 @@ const reasons = [
   },
 ]
 
+import { Section, SectionHeader } from '@/components/ui/section'
+
 export function WhyContact() {
   return (
-    <section className="section-padding bg-secondary/30">
+    <Section className="bg-secondary/30">
       <div className="container-zova">
         <div className="max-w-4xl">
-          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            How We Can Help
-          </span>
-
-          <h2 className="mt-4">
-            More than a supplier.
-            <br />A sourcing partner.
-          </h2>
+          <SectionHeader
+            label="How We Can Help"
+            title="More than a supplier. A sourcing partner."
+            className="mb-0"
+          />
         </div>
 
         <div className="mt-16 grid gap-6 md:grid-cols-2">
@@ -42,6 +41,6 @@ export function WhyContact() {
           ))}
         </div>
       </div>
-    </section>
+    </Section>
   )
 }

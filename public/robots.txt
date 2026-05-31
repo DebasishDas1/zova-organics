@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zovaorganics.com/sitemap.xml
+Host: zovaorganics.com
