@@ -5,6 +5,7 @@ export const Products: CollectionConfig = {
 
   admin: {
     useAsTitle: 'title',
+    defaultColumns: ['title', 'category'],
   },
 
   fields: [
@@ -13,30 +14,46 @@ export const Products: CollectionConfig = {
       type: 'text',
       required: true,
     },
+
     {
       name: 'slug',
       type: 'text',
       required: true,
       unique: true,
     },
+
     {
       name: 'category',
-      type: 'text',
+      type: 'select',
       required: true,
+      options: [
+        {
+          label: 'Organic Fabrics',
+          value: 'organic-fabrics',
+        },
+        {
+          label: 'Bags',
+          value: 'bags',
+        },
+        {
+          label: 'Home Textiles',
+          value: 'home-textiles',
+        },
+      ],
     },
+
     {
       name: 'shortDescription',
       type: 'textarea',
     },
-    {
-      name: 'description',
-      type: 'richText',
-    },
+
     {
       name: 'featuredImage',
       type: 'upload',
       relationTo: 'media',
+      required: true,
     },
+
     {
       name: 'featured',
       type: 'checkbox',

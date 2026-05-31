@@ -173,24 +173,9 @@ export interface Product {
   id: number;
   title: string;
   slug: string;
-  category: string;
+  category: 'organic-fabrics' | 'bags' | 'home-textiles';
   shortDescription?: string | null;
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  featuredImage?: (number | null) | Media;
+  featuredImage: number | Media;
   featured?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -342,7 +327,6 @@ export interface ProductsSelect<T extends boolean = true> {
   slug?: T;
   category?: T;
   shortDescription?: T;
-  description?: T;
   featuredImage?: T;
   featured?: T;
   updatedAt?: T;
