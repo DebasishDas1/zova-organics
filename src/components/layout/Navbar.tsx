@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '@/lib/utils'
@@ -21,28 +21,19 @@ import {
   SheetHeader,
 } from '@/components/ui/sheet'
 import { usePathname } from 'next/navigation'
+import { useUIStore } from '@/store/ui-store'
 
 const navLinks = [
-  {
-    name: 'Collections',
-    href: '/collections',
-  },
-  {
-    name: 'Capabilities',
-    href: '/capabilities',
-  },
-  {
-    name: 'About',
-    href: '/about',
-  },
-  {
-    name: 'Contact',
-    href: '/contact',
-  },
+  { name: 'Products', href: '/products' },
+  { name: 'Blogs', href: '/blogs' },
+  { name: 'Certifications', href: '/certifications' },
+  { name: 'About Us', href: '/about-us' },
+  { name: 'Contact', href: '/contact' },
 ]
 
-export const Navbar = () => {
+const NavbarComponent = () => {
   const pathname = usePathname()
+  const { mobileMenuOpen, closeMobileMenu, setMobileMenuOpen } = useUIStore()
 
   const isActiveLink = useCallback(
     (href: string) => {
@@ -61,40 +52,46 @@ export const Navbar = () => {
         {/* Logo */}
         <Link
           href="/"
-          className={cn(
-            'font-serif italic text-xl md:text-2xl font-bold tracking-tight transition-colors duration-500',
-          )}
+          aria-label="Zova Organic home"
+          className={cn('text-xl md:text-2xl font-bold tracking-tight transition-colors')}
         >
-          The Traveling Monk
+          Zova Organic
         </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-10">
           <NavigationMenu>
-            <NavigationMenuList className="gap-2">
+            <NavigationMenuList className="gap-10">
               {navLinks.map((link) => {
                 const isActive = isActiveLink(link.href)
-
-                const base =
-                  'relative px-5 py-2 rounded-full text-[11px] uppercase tracking-[0.3em] font-semibold transition-colors duration-300 block'
-
-                const inactive = cn('opacity-70 hover:opacity-100', 'hover:bg-black/5')
 
                 return (
                   <NavigationMenuItem key={link.name}>
                     <NavigationMenuLink asChild>
                       <Link
                         href={link.href}
-                        className={cn(base, isActive ? 'bg-green-500 text-white' : inactive)}
-                      >
-                        <span className="relative z-10">{link.name}</span>
-                        {isActive && (
-                          <motion.div
-                            layoutId="navbar-active-pill"
-                            className={cn('absolute inset-0 rounded-full', 'bg-black/5')}
-                            transition={{ type: 'spring', stiffness: 400, damping: 35 }}
-                          />
+                        className={cn(
+                          'group relative py-2',
+                          'text-[13px] font-medium tracking-[-0.01em]',
+                          'transition-all duration-200 ease-out',
+                          isActive ? 'text-black' : 'text-black/55 hover:text-black',
                         )}
+                      >
+                        {link.name}
+
+                        <motion.div
+                          layoutId="nav-indicator"
+                          className={cn(
+                            'absolute -bottom-1 left-1/2 h-[1.5px] -translate-x-1/2 rounded-full bg-black',
+                            isActive ? 'w-5' : 'w-0',
+                          )}
+                          transition={{
+                            type: 'spring',
+                            stiffness: 650,
+                            damping: 40,
+                            mass: 0.4,
+                          }}
+                        />
                       </Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
@@ -105,22 +102,25 @@ export const Navbar = () => {
 
           <Button
             className={cn(
-              'rounded-full px-7 h-11 text-[10px] font-bold uppercase tracking-[0.25em] transition-all duration-500',
-              'bg-black text-white hover:bg-black/80',
+              'h-10 rounded-full px-5',
+              'bg-black text-white',
+              'text-[12px] font-medium',
+              'shadow-[0_1px_2px_rgba(0,0,0,0.08)]',
+              'hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
+              'hover:-translate-y-px',
+              'transition-all duration-200',
             )}
           >
-            Become a Partner <ArrowRight className="size-3.5 ml-2" />
+            Become a Partner
+            <ArrowRight className="ml-2 size-3.5" />
           </Button>
         </div>
 
         {/* Mobile Toggle */}
         <div className="md:hidden">
-          <Sheet>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <button
-                // onClick={toggleMobileMenu}
-                className={cn('p-2 transition-colors duration-500')}
-              >
+              <button className="p-2">
                 <Menu className="size-6" />
               </button>
             </SheetTrigger>
@@ -133,7 +133,7 @@ export const Navbar = () => {
                 'p-8 flex flex-col rounded-l-2xl',
               )}
             >
-              <SheetHeader>
+              <SheetHeader className="hidden">
                 <SheetTitle>Are you absolutely sure?</SheetTitle>
                 <SheetDescription>This action cannot be undone.</SheetDescription>
               </SheetHeader>
@@ -148,14 +148,17 @@ export const Navbar = () => {
                   {navLinks.map((link, i) => (
                     <motion.div
                       key={link.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.05, duration: 0.6 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: i * 0.06,
+                        duration: 0.4,
+                      }}
                     >
                       <Link
                         href={link.href}
-                        //   onClick={closeMobileMenu}
-                        className="text-4xl font-serif italic text-[#2B1F14] hover:text-[#8C6B4A] transition-colors"
+                        onClick={closeMobileMenu}
+                        className="text-4xl hover:text-[#8C6B4A] transition-colors"
                       >
                         {link.name}
                       </Link>
@@ -166,7 +169,10 @@ export const Navbar = () => {
 
               {/* Mobile Footer */}
               <div className="mt-auto">
-                <Button className="w-full rounded-full h-16 text-xs uppercase tracking-[0.3em] font-bold bg-[#2B1F14] text-white">
+                <Button
+                  onClick={closeMobileMenu}
+                  className="w-full rounded-full h-16 text-xs uppercase tracking-[0.3em] font-bold bg-[#2B1F14] text-white"
+                >
                   Join a journey
                 </Button>
               </div>
@@ -177,3 +183,7 @@ export const Navbar = () => {
     </nav>
   )
 }
+
+NavbarComponent.displayName = 'Navbar'
+
+export const Navbar = React.memo(NavbarComponent)

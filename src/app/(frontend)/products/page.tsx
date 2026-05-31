@@ -1,8 +1,16 @@
+import { ProductsHero } from '@/components/sections/products/ProductsHero'
+import { ProductsGrid } from '@/components/sections/products/ProductsGrid'
+
+export const metadata = {
+  title: 'Our Products - Zova Organic',
+  description: 'Discover our range of sustainable products crafted for global markets.',
+}
+
 export default async function ProductsPage() {
   return (
-    <div>
-      <h1>Our Products</h1>
-      <p>Discover our range of organic products!</p>
-    </div>
+    <>
+      <ProductsHero />
+      <ProductsGrid products={[]} />
+    </>
   )
 }
