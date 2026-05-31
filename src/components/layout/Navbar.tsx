@@ -77,6 +77,7 @@ const NavbarComponent = () => {
                     <NavigationMenuLink asChild>
                       <Link
                         href={link.href}
+                        aria-current={isActive ? 'page' : undefined}
                         className={cn(
                           'group relative py-2',
                           'text-[13px] font-medium tracking-[-0.01em]',
@@ -127,13 +128,21 @@ const NavbarComponent = () => {
         <div className="md:hidden">
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <button className="p-2">
+              <button
+                className="p-2"
+                aria-label="Open mobile menu"
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
+              >
                 <Menu className="size-6" />
               </button>
             </SheetTrigger>
 
             <SheetContent
               side="right"
+              id="mobile-menu"
+              role="dialog"
+              aria-modal="true"
               className={cn(
                 'w-screen h-screen max-w-none border-none shadow-none',
                 'bg-monk-beige/60 backdrop-blur-3xl',
@@ -165,6 +174,7 @@ const NavbarComponent = () => {
                       <Link
                         href={link.href}
                         onClick={closeMobileMenu}
+                        aria-current={isActiveLink(link.href) ? 'page' : undefined}
                         className="text-4xl hover:text-[#8C6B4A] transition-colors"
                       >
                         {link.name}

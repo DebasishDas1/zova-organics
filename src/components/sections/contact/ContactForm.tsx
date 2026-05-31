@@ -80,13 +80,17 @@ export function ContactForm() {
           <div className="lg:col-span-8">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div>
-                <Input placeholder="Full Name" {...register('name')} />
+                <Input placeholder="Full Name" aria-label="Full name" {...register('name')} />
 
                 {errors.name && <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>}
               </div>
 
               <div>
-                <Input placeholder="Company Name" {...register('company')} />
+                <Input
+                  placeholder="Company Name"
+                  aria-label="Company name"
+                  {...register('company')}
+                />
 
                 {errors.company && (
                   <p className="mt-2 text-sm text-red-500">{errors.company.message}</p>
@@ -95,7 +99,12 @@ export function ContactForm() {
 
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
-                  <Input type="email" placeholder="Email Address" {...register('email')} />
+                  <Input
+                    type="email"
+                    placeholder="Email Address"
+                    aria-label="Email address"
+                    {...register('email')}
+                  />
 
                   {errors.email && (
                     <p className="mt-2 text-sm text-red-500">{errors.email.message}</p>
@@ -103,7 +112,11 @@ export function ContactForm() {
                 </div>
 
                 <div>
-                  <Input placeholder="Phone Number" {...register('phone')} />
+                  <Input
+                    placeholder="Phone Number"
+                    aria-label="Phone number"
+                    {...register('phone')}
+                  />
 
                   {errors.phone && (
                     <p className="mt-2 text-sm text-red-500">{errors.phone.message}</p>
@@ -114,6 +127,7 @@ export function ContactForm() {
               <div>
                 <select
                   {...register('category')}
+                  aria-label="Inquiry category"
                   className="flex h-12 w-full rounded-xl border bg-background px-4 text-sm"
                 >
                   <option value="organic-fabrics">Organic Fabrics</option>
@@ -136,6 +150,7 @@ export function ContactForm() {
                 <Textarea
                   rows={8}
                   placeholder="Tell us about your sourcing requirements..."
+                  aria-label="Message"
                   {...register('message')}
                 />
 

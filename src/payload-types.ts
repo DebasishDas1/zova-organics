@@ -71,6 +71,8 @@ export interface Config {
     media: Media;
     products: Product;
     leads: Lead;
+    certifications: Certification;
+    posts: Post;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +84,8 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
+    certifications: CertificationsSelect<false> | CertificationsSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -172,11 +176,202 @@ export interface Media {
 export interface Product {
   id: number;
   title: string;
+  /**
+   * URL-safe identifier. e.g. natural-cotton-tote-bag
+   */
   slug: string;
-  category: 'organic-fabrics' | 'bags' | 'home-textiles';
-  shortDescription?: string | null;
-  featuredImage: number | Media;
+  /**
+   * Internal SKU code. e.g. ZO-TB-001
+   */
+  sku: string;
+  status: 'draft' | 'active' | 'out-of-stock' | 'discontinued';
+  /**
+   * Show on homepage featured section
+   */
   featured?: boolean | null;
+  category: 'organic-fabrics' | 'bags' | 'pouches' | 'home-textiles' | 'yoga-wellness' | 'custom-oem';
+  /**
+   * e.g. "natural dye", "unbleached", "bulk"
+   */
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * One-line shown on product cards (max 160 chars)
+   */
+  shortDescription: string;
+  /**
+   * Full product story shown on detail page
+   */
+  fullDescription?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  featuredImage: number | Media;
+  /**
+   * Additional product images (packaging, close-ups, in-use)
+   */
+  gallery?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  specifications: {
+    /**
+     * e.g. 100% GOTS organic cotton
+     */
+    material: string;
+    /**
+     * e.g. 140–180 GSM (or range for customisable)
+     */
+    gsm?: string | null;
+    /**
+     * e.g. 38×42 cm
+     */
+    dimensions?: string | null;
+    /**
+     * e.g. Natural, Black, custom azo-free dye
+     */
+    colours?: string | null;
+    /**
+     * e.g. Unbleached, enzyme-washed, stonewashed
+     */
+    finish?: string | null;
+    /**
+     * Any extra spec key-value pairs for the detail table
+     */
+    additionalSpecs?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  pricing?: {
+    currency?: ('USD' | 'EUR' | 'GBP') | null;
+    incoterm?: ('FOB' | 'CIF' | 'DDP' | 'EXW') | null;
+    /**
+     * Port of origin for FOB/CIF pricing
+     */
+    port?: string | null;
+    /**
+     * Volume-based pricing. Add tiers from lowest to highest quantity.
+     */
+    tiers?:
+      | {
+          minQty: number;
+          /**
+           * Leave blank for "and above"
+           */
+          maxQty?: number | null;
+          pricePerUnit: number;
+          /**
+           * e.g. unit, metre, kg
+           */
+          unit?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  ordering: {
+    moq: number;
+    /**
+     * e.g. units, metres, kg
+     */
+    moqUnit?: string | null;
+    /**
+     * e.g. 21–28 days after artwork approval
+     */
+    leadTimeDays?: string | null;
+    sampleAvailable?: boolean | null;
+    /**
+     * e.g. 5–7 business days
+     */
+    sampleLeadTime?: string | null;
+  };
+  /**
+   * Link applicable certifications. Manage them in the Certifications collection.
+   */
+  certifications?: (number | Certification)[] | null;
+  customisation?: {
+    customLogoAvailable?: boolean | null;
+    customSizeAvailable?: boolean | null;
+    privateLabelAvailable?: boolean | null;
+    customDyeAvailable?: boolean | null;
+    /**
+     * Any extra details about customisation (shown on detail page)
+     */
+    customisationNotes?: string | null;
+  };
+  shipping?: {
+    /**
+     * Harmonised System code for customs. e.g. 6305.20
+     */
+    hsCode?: string | null;
+    reachCompliant?: boolean | null;
+    shippingModes?: ('sea' | 'air' | 'courier')[] | null;
+    documentsProvided?: ('commercial-invoice' | 'packing-list' | 'coo' | 'phyto' | 'test-reports' | 'gots-tc')[] | null;
+  };
+  seo?: {
+    /**
+     * Defaults to product title if empty
+     */
+    metaTitle?: string | null;
+    /**
+     * Max 160 chars. Defaults to shortDescription if empty.
+     */
+    metaDescription?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certifications".
+ */
+export interface Certification {
+  id: number;
+  /**
+   * e.g. GOTS 6.0, OEKO-TEX Standard 100
+   */
+  name: string;
+  /**
+   * Badge label shown on product cards. e.g. GOTS, OEKO-TEX
+   */
+  shortCode: string;
+  /**
+   * e.g. Control Union, Intertek
+   */
+  issuingBody?: string | null;
+  certificateNumber?: string | null;
+  validFrom?: string | null;
+  validUntil?: string | null;
+  /**
+   * PDF of the certificate — downloadable from the product page
+   */
+  certificateFile?: (number | null) | Media;
+  /**
+   * One-sentence explanation shown in certification tooltips
+   */
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -190,11 +385,175 @@ export interface Lead {
   company: string;
   email: string;
   phone?: string | null;
-  category?: ('organic-fabrics' | 'bags' | 'private-label' | 'custom-product' | 'other') | null;
+  /**
+   * Buyer country — important for export compliance & market tracking
+   */
+  country?: string | null;
+  website?: string | null;
+  inquiryType: 'rfq' | 'sample' | 'catalogue' | 'private-label' | 'partnership' | 'general';
+  /**
+   * Product categories the buyer is interested in
+   */
+  category?:
+    | ('organic-fabrics' | 'bags' | 'pouches' | 'home-textiles' | 'yoga-wellness' | 'custom-oem' | 'other')[]
+    | null;
+  /**
+   * Link specific products they enquired about
+   */
+  interestedProducts?: (number | Product)[] | null;
+  /**
+   * e.g. 500 units, 200 metres — free text so buyers can be flexible
+   */
+  estimatedOrderQty?: string | null;
+  /**
+   * When does the buyer need the goods?
+   */
+  targetDeliveryDate?: string | null;
   message: string;
-  status?: ('new' | 'contacted' | 'qualified' | 'closed') | null;
+  /**
+   * Where did this lead come from?
+   */
+  source?:
+    | ('website' | 'indiamart' | 'alibaba' | 'trade-show' | 'linkedin' | 'referral' | 'email-campaign' | 'other')
+    | null;
+  /**
+   * Auto-filled from URL params if using tracking links
+   */
+  utmSource?: string | null;
+  status: 'new' | 'contacted' | 'sample-sent' | 'negotiating' | 'qualified' | 'won' | 'lost';
+  priority?: ('high' | 'medium' | 'low') | null;
+  /**
+   * Team member handling this lead
+   */
+  assignedTo?: (number | null) | User;
+  /**
+   * Schedule next follow-up
+   */
+  followUpDate?: string | null;
+  /**
+   * Internal notes — not visible to the buyer
+   */
+  internalNotes?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  /**
+   * URL slug. e.g. what-is-gots-certification
+   */
+  slug: string;
+  status: 'draft' | 'review' | 'published' | 'archived';
+  /**
+   * Controls published date shown to readers. Defaults to now on first publish.
+   */
+  publishedAt?: string | null;
+  author?: (number | null) | User;
+  category:
+    | 'export-guides'
+    | 'certifications'
+    | 'sustainability'
+    | 'industry-news'
+    | 'supply-chain'
+    | 'buyer-resources'
+    | 'company-news';
+  /**
+   * e.g. GOTS, tote bags, EU export, organic cotton
+   */
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Short summary shown on blog listing cards and in search results (max 160 chars)
+   */
+  excerpt: string;
+  featuredImage: number | Media;
+  /**
+   * Alt text for accessibility and SEO
+   */
+  featuredImageAlt: string;
+  /**
+   * Main post body. Use headings (H2, H3) to structure for SEO.
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Link relevant products — shown at the bottom of the post
+   */
+  relatedProducts?: (number | Product)[] | null;
+  /**
+   * Suggested further reading — 2 or 3 posts max
+   */
+  relatedPosts?: (number | Post)[] | null;
+  seo?: {
+    /**
+     * Defaults to post title. Keep under 60 chars.
+     */
+    metaTitle?: string | null;
+    /**
+     * Defaults to excerpt. Keep under 160 chars.
+     */
+    metaDescription?: string | null;
+    /**
+     * Only set if this post is syndicated from another URL
+     */
+    canonicalUrl?: string | null;
+    /**
+     * Use for thin or duplicate content you do not want indexed
+     */
+    noIndex?: boolean | null;
+    /**
+     * Primary keyword this post targets — for internal tracking only
+     */
+    focusKeyword?: string | null;
+    /**
+     * Image shown when shared on LinkedIn, WhatsApp etc. (1200×630px ideal). Defaults to featured image.
+     */
+    ogImage?: (number | null) | Media;
+  };
+  /**
+   * Structured data for Google rich results
+   */
+  schema?: {
+    /**
+     * Affects the JSON-LD schema injected into the page <head>
+     */
+    articleType?: ('Article' | 'HowTo' | 'FAQPage') | null;
+    /**
+     * Only used when Article type is "FAQ page". Renders FAQ rich results.
+     */
+    faqItems?:
+      | {
+          question: string;
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -235,6 +594,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'leads';
         value: number | Lead;
+      } | null)
+    | ({
+        relationTo: 'certifications';
+        value: number | Certification;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -325,12 +692,94 @@ export interface MediaSelect<T extends boolean = true> {
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  category?: T;
-  shortDescription?: T;
-  featuredImage?: T;
+  sku?: T;
+  status?: T;
   featured?: T;
+  category?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  shortDescription?: T;
+  fullDescription?: T;
+  featuredImage?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  specifications?:
+    | T
+    | {
+        material?: T;
+        gsm?: T;
+        dimensions?: T;
+        colours?: T;
+        finish?: T;
+        additionalSpecs?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
+      };
+  pricing?:
+    | T
+    | {
+        currency?: T;
+        incoterm?: T;
+        port?: T;
+        tiers?:
+          | T
+          | {
+              minQty?: T;
+              maxQty?: T;
+              pricePerUnit?: T;
+              unit?: T;
+              id?: T;
+            };
+      };
+  ordering?:
+    | T
+    | {
+        moq?: T;
+        moqUnit?: T;
+        leadTimeDays?: T;
+        sampleAvailable?: T;
+        sampleLeadTime?: T;
+      };
+  certifications?: T;
+  customisation?:
+    | T
+    | {
+        customLogoAvailable?: T;
+        customSizeAvailable?: T;
+        privateLabelAvailable?: T;
+        customDyeAvailable?: T;
+        customisationNotes?: T;
+      };
+  shipping?:
+    | T
+    | {
+        hsCode?: T;
+        reachCompliant?: T;
+        shippingModes?: T;
+        documentsProvided?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -341,11 +790,88 @@ export interface LeadsSelect<T extends boolean = true> {
   company?: T;
   email?: T;
   phone?: T;
+  country?: T;
+  website?: T;
+  inquiryType?: T;
   category?: T;
+  interestedProducts?: T;
+  estimatedOrderQty?: T;
+  targetDeliveryDate?: T;
   message?: T;
+  source?: T;
+  utmSource?: T;
   status?: T;
+  priority?: T;
+  assignedTo?: T;
+  followUpDate?: T;
+  internalNotes?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certifications_select".
+ */
+export interface CertificationsSelect<T extends boolean = true> {
+  name?: T;
+  shortCode?: T;
+  issuingBody?: T;
+  certificateNumber?: T;
+  validFrom?: T;
+  validUntil?: T;
+  certificateFile?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  status?: T;
+  publishedAt?: T;
+  author?: T;
+  category?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  excerpt?: T;
+  featuredImage?: T;
+  featuredImageAlt?: T;
+  content?: T;
+  relatedProducts?: T;
+  relatedPosts?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        canonicalUrl?: T;
+        noIndex?: T;
+        focusKeyword?: T;
+        ogImage?: T;
+      };
+  schema?:
+    | T
+    | {
+        articleType?: T;
+        faqItems?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

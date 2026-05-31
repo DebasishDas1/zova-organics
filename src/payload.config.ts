@@ -9,6 +9,8 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Leads } from './collections/Leads'
+import { Certifications } from './collections/Certifications'
+import { Posts } from './collections/Posts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,16 +22,25 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Products, Leads],
+  collections: [Users, Media, Products, Leads, Certifications, Posts],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: (() => {
+    const s = process.env.PAYLOAD_SECRET
+    if (!s) throw new Error('Missing required env: PAYLOAD_SECRET')
+    return s
+  })(),
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: sqliteAdapter({
     client: {
-      url: process.env.DATABASE_URL || '',
+      url: (() => {
+        const u = process.env.DATABASE_URL
+        if (!u) throw new Error('Missing required env: DATABASE_URL')
+        return u
+      })(),
     },
+    push: false,
   }),
   sharp,
   plugins: [],
