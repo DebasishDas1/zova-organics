@@ -11,5 +11,5 @@ export async function getProducts() {
     depth: 1,
   })
 
-  return products.docs
+  return products?.docs ?? []
 }

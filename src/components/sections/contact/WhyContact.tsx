@@ -21,7 +21,7 @@ import { Section, SectionHeader } from '@/components/ui/section'
 
 export function WhyContact() {
   return (
-    <Section className="bg-secondary/30">
+    <Section className="bg-secondary">
       <div className="container-zova">
         <div className="max-w-4xl">
           <SectionHeader
@@ -33,7 +33,7 @@ export function WhyContact() {
 
         <div className="mt-16 grid gap-6 md:grid-cols-2">
           {reasons.map((reason) => (
-            <div key={reason.title} className="rounded-3xl bg-background p-8">
+            <div key={reason.title} className="rounded-3xl bg-white p-8">
               <h3 className="text-xl font-medium">{reason.title}</h3>
 
               <p className="mt-4 text-muted-foreground">{reason.description}</p>

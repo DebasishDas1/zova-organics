@@ -7,12 +7,32 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Section, SectionHeader } from '@/components/ui/section'
+import { Section } from '@/components/ui/section'
 
 import { contactSchema, type ContactFormData } from '@/lib/validations/contact'
 
+type FormFieldProps = {
+  label: string
+  error?: string
+  children: React.ReactNode
+}
+
+function FormField({ label, error, children }: FormFieldProps) {
+  return (
+    <div>
+      <label className="mb-2 block text-sm font-medium">{label}</label>
+
+      {children}
+
+      {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
+    </div>
+  )
+}
+
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const {
     register,
@@ -20,7 +40,7 @@ export function ContactForm() {
     reset,
     formState: { errors },
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(contactSchema as any),
 
     defaultValues: {
       name: '',
@@ -31,9 +51,6 @@ export function ContactForm() {
       message: '',
     },
   })
-
-  const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onSubmit = async (values: ContactFormData) => {
     try {
@@ -56,119 +73,134 @@ export function ContactForm() {
       }
 
       reset()
-      setFeedbackMessage('Thanks for reaching out! We will get back to you shortly.')
+
+      setFeedbackMessage(
+        'Thank you for reaching out. Our team will review your inquiry and get back to you within 24 business hours.',
+      )
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : 'An unexpected error occurred.')
-      console.error(error)
+      setErrorMessage(
+        error instanceof Error ? error.message : 'Something went wrong. Please try again.',
+      )
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <Section>
+    <Section className="pb-32">
       <div className="container-zova">
         <div className="grid gap-16 lg:grid-cols-12">
+          {/* Content */}
           <div className="lg:col-span-4">
-            <SectionHeader
-              label="Inquiry Form"
-              title="Tell us about your project."
-              className="mb-0"
-            />
+            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+              Inquiry Form
+            </span>
+
+            <h2 className="mt-4 text-4xl font-medium tracking-tight md:text-5xl">
+              Tell us about your sourcing requirements.
+            </h2>
+
+            <p className="mt-6 text-muted-foreground">
+              Whether you're looking for organic fabrics, custom bags, private label manufacturing,
+              or long-term sourcing partnerships, we'd love to learn more.
+            </p>
+
+            <div className="mt-12 space-y-8">
+              <div>
+                <p className="font-medium">Response Time</p>
+
+                <p className="text-sm text-muted-foreground">Within 24 business hours</p>
+              </div>
+
+              <div>
+                <p className="font-medium">MOQ Support</p>
+
+                <p className="text-sm text-muted-foreground">
+                  Flexible solutions for growing brands and importers
+                </p>
+              </div>
+
+              <div>
+                <p className="font-medium">Global Shipping</p>
+
+                <p className="text-sm text-muted-foreground">
+                  Air and sea freight available worldwide
+                </p>
+              </div>
+            </div>
           </div>
 
+          {/* Form */}
           <div className="lg:col-span-8">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div>
-                <Input placeholder="Full Name" aria-label="Full name" {...register('name')} />
+            <div className="rounded-3xl border bg-card p-8 md:p-10">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid gap-6 md:grid-cols-2">
+                  <FormField label="Your Name" error={errors.name?.message}>
+                    <Input placeholder="John Doe" {...register('name')} />
+                  </FormField>
 
-                {errors.name && <p className="mt-2 text-sm text-red-500">{errors.name.message}</p>}
-              </div>
-
-              <div>
-                <Input
-                  placeholder="Company Name"
-                  aria-label="Company name"
-                  {...register('company')}
-                />
-
-                {errors.company && (
-                  <p className="mt-2 text-sm text-red-500">{errors.company.message}</p>
-                )}
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2">
-                <div>
-                  <Input
-                    type="email"
-                    placeholder="Email Address"
-                    aria-label="Email address"
-                    {...register('email')}
-                  />
-
-                  {errors.email && (
-                    <p className="mt-2 text-sm text-red-500">{errors.email.message}</p>
-                  )}
+                  <FormField label="Company" error={errors.company?.message}>
+                    <Input placeholder="Company Name" {...register('company')} />
+                  </FormField>
                 </div>
 
-                <div>
-                  <Input
-                    placeholder="Phone Number"
-                    aria-label="Phone number"
-                    {...register('phone')}
-                  />
+                <div className="grid gap-6 md:grid-cols-2">
+                  <FormField label="Work Email" error={errors.email?.message}>
+                    <Input type="email" placeholder="john@company.com" {...register('email')} />
+                  </FormField>
 
-                  {errors.phone && (
-                    <p className="mt-2 text-sm text-red-500">{errors.phone.message}</p>
-                  )}
+                  <FormField label="Phone Number" error={errors.phone?.message}>
+                    <Input placeholder="+1 234 567 890" {...register('phone')} />
+                  </FormField>
                 </div>
-              </div>
 
-              <div>
-                <select
-                  {...register('category')}
-                  aria-label="Inquiry category"
-                  className="flex h-12 w-full rounded-xl border bg-background px-4 text-sm"
+                <FormField label="Product Category" error={errors.category?.message}>
+                  <select
+                    {...register('category')}
+                    className="flex h-12 w-full rounded-xl border bg-background px-4 text-sm"
+                  >
+                    <option value="organic-fabrics">Organic Fabrics</option>
+
+                    <option value="bags">Tote Bags & Pouches</option>
+
+                    <option value="private-label">Private Label</option>
+
+                    <option value="custom-product">Custom Product</option>
+
+                    <option value="other">Other</option>
+                  </select>
+                </FormField>
+
+                <FormField label="Project Details" error={errors.message?.message}>
+                  <Textarea
+                    rows={8}
+                    placeholder="Tell us about your product requirements, customization needs, expected quantity, certifications, and target market..."
+                    {...register('message')}
+                  />
+                </FormField>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  disabled={isSubmitting}
+                  className="h-14 rounded-full px-8"
                 >
-                  <option value="organic-fabrics">Organic Fabrics</option>
+                  {isSubmitting ? 'Sending Inquiry...' : 'Request Quote'}
+                </Button>
 
-                  <option value="bags">Bags</option>
-
-                  <option value="private-label">Private Label</option>
-
-                  <option value="custom-product">Custom Product</option>
-
-                  <option value="other">Other</option>
-                </select>
-
-                {errors.category && (
-                  <p className="mt-2 text-sm text-red-500">{errors.category.message}</p>
+                {feedbackMessage && (
+                  <div className="rounded-2xl border border-green-200 bg-green-50 p-4 text-sm text-green-700">
+                    {feedbackMessage}
+                  </div>
                 )}
-              </div>
 
-              <div>
-                <Textarea
-                  rows={8}
-                  placeholder="Tell us about your sourcing requirements..."
-                  aria-label="Message"
-                  {...register('message')}
-                />
-
-                {errors.message && (
-                  <p className="mt-2 text-sm text-red-500">{errors.message.message}</p>
+                {errorMessage && (
+                  <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                    {errorMessage}
+                  </div>
                 )}
-              </div>
-
-              <Button type="submit" size="lg" disabled={isSubmitting} className="rounded-full px-8">
-                {isSubmitting ? 'Sending...' : 'Send Inquiry'}
-              </Button>
-
-              {feedbackMessage ? (
-                <p className="mt-4 text-sm text-green-600">{feedbackMessage}</p>
-              ) : null}
-
-              {errorMessage ? <p className="mt-4 text-sm text-red-600">{errorMessage}</p> : null}
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

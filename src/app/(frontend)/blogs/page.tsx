@@ -1,3 +1,6 @@
+import Script from 'next/script'
+import { SectionHero } from '@/components/sections/sheared/SectionHero'
+
 export const metadata = {
   title: 'Insights - Zova Organics',
   description:
@@ -5,15 +8,68 @@ export const metadata = {
 }
 
 export default async function BlogsPage() {
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    headline: 'Insights - Zova Organics',
+    description:
+      'Read the latest insights on sustainable sourcing, textile trends, and responsible manufacturing.',
+    url: 'https://zovaorganics.com/blogs',
+    author: {
+      '@type': 'Organization',
+      name: 'Zova Organics',
+      url: 'https://zovaorganics.com',
+      sameAs: [
+        'https://www.facebook.com/zovaorganics',
+        'https://www.linkedin.com/company/zovaorganics',
+      ],
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Zova Organics',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://zovaorganics.com/logo.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': 'https://zovaorganics.com/blogs',
+    },
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://zovaorganics.com',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Insights',
+        item: 'https://zovaorganics.com/blogs',
+      },
+    ],
+  }
+
   return (
-    <section className="container-zova py-24">
-      <div className="max-w-4xl">
-        <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Insights</span>
-        <h1 className="mt-6 text-4xl font-semibold">Latest updates from Zova Organics</h1>
-        <p className="mt-6 text-lg text-muted-foreground">
-          Explore news, sourcing advice, and industry insights to support sustainable supply chains.
-        </p>
-      </div>
-    </section>
+    <>
+      <Script id="blog-schema" type="application/ld+json">
+        {JSON.stringify(blogSchema)}
+      </Script>
+      <Script id="blog-breadcrumb-schema" type="application/ld+json">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
+      <SectionHero
+        eyebrow="Insights"
+        title="Latest updates from Zova Organics"
+        description="Explore news, sourcing advice, and industry insights to support sustainable supply chains."
+      />
+    </>
   )
 }

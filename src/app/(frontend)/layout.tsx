@@ -1,16 +1,9 @@
 import type { Metadata } from 'next'
 import React from 'react'
+import Script from 'next/script'
 import { Navbar } from '@/components/layout/Navbar'
 
 import './styles.css'
-
-import { Geist } from 'next/font/google'
-
-const geist = Geist({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: {
@@ -46,17 +39,44 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': 'https://zovaorganics.com/#organization',
+  name: 'Zova Organics',
+  url: 'https://zovaorganics.com',
+  logo: 'https://zovaorganics.com/logo.png',
+  sameAs: [
+    'https://www.facebook.com/zovaorganics',
+    'https://www.linkedin.com/company/zovaorganics',
+  ],
+}
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  url: 'https://zovaorganics.com',
+  name: 'Zova Organics',
+  publisher: {
+    '@id': 'https://zovaorganics.com/#organization',
+  },
+}
+
+export default function FrontendLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={geist.variable}>
-      <body className="min-h-screen bg-background text-foreground antialiased">
-        <Navbar />
-        <main className="pt-24">{children}</main>
-      </body>
-    </html>
+    <>
+      <Script id="organization-schema" type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </Script>
+      <Script id="website-schema" type="application/ld+json">
+        {JSON.stringify(webSiteSchema)}
+      </Script>
+      <Navbar />
+      <main className="pt-24">{children}</main>
+    </>
   )
 }

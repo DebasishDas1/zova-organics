@@ -1,8 +1,8 @@
 import { CertificationsCTA } from '@/components/sections/certifications/CertificationsCTA'
 import { WhyCertifications } from '@/components/sections/certifications/WhyCertifications'
 import { CertificationsGrid } from '@/components/sections/certifications/CertificationsGrid'
-import { CertificationsHero } from '@/components/sections/certifications/CertificationsHero'
 import { QualityCommitment } from '@/components/sections/certifications/QualityCommitment'
+import { SectionHero } from '@/components/sections/sheared/SectionHero'
 
 export const metadata = {
   title: 'Certifications - Zova Organics',
@@ -13,7 +13,11 @@ export const metadata = {
 export default async function CertificationsPage() {
   return (
     <>
-      <CertificationsHero />
+      <SectionHero
+        eyebrow="Certifications"
+        title="Built around quality, sustainability, and trust."
+        description="Every product we source is guided by internationally recognized standards and a commitment to responsible manufacturing."
+      />
       <WhyCertifications />
       <CertificationsGrid />
       <QualityCommitment />

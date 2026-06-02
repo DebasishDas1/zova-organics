@@ -6,43 +6,70 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
-import { Section, SectionHeader } from '@/components/ui/section'
 
-const faqs = [
-  {
-    question: 'Do you offer private label manufacturing?',
-    answer:
-      'Yes. We work with brands looking to develop products under their own label, including custom packaging and branding.',
-  },
-  {
-    question: 'Can you support international shipping?',
-    answer: 'Yes. We coordinate export documentation and logistics for international buyers.',
-  },
-  {
-    question: 'What are your minimum order quantities?',
-    answer: 'MOQ varies depending on product category, materials, and customization requirements.',
-  },
-  {
-    question: 'Do you provide product samples?',
-    answer: 'Yes. Samples can be arranged before production begins.',
-  },
-]
+import { Section } from '@/components/ui/section'
+import { cn } from '@/lib/utils'
 
-export function FAQ() {
+type FAQItem = {
+  question: string
+  answer: string
+}
+
+type FAQProps = {
+  questionList: FAQItem[]
+
+  eyebrow?: string
+  title?: string
+  description?: string
+
+  className?: string
+}
+
+export function FAQ({
+  questionList,
+  eyebrow = 'FAQ',
+  title = 'Frequently asked questions.',
+  description,
+  className,
+}: FAQProps) {
   return (
-    <Section>
-      <div className="container-zova max-w-4xl">
-        <SectionHeader label="FAQ" title="Frequently asked questions." />
+    <Section className={className}>
+      <div className="container-zova">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+            {eyebrow}
+          </span>
 
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={faq.question} value={`item-${index}`}>
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
+          <h2 className="mt-4 text-4xl font-medium tracking-tight md:text-5xl">{title}</h2>
 
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+          {description && (
+            <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">{description}</p>
+          )}
+        </div>
+
+        <div className="mx-auto mt-16 max-w-4xl">
+          <Accordion type="single" collapsible className="w-full divide-y">
+            {questionList.map((faq, index) => (
+              <AccordionItem key={faq.question} value={`item-${index}`} className="border-none">
+                <AccordionTrigger
+                  className={cn(
+                    'py-8 text-left text-lg font-medium',
+                    'hover:no-underline',
+                    'transition-colors',
+                  )}
+                >
+                  {faq.question}
+                </AccordionTrigger>
+
+                <AccordionContent
+                  className={cn('pb-8', 'text-base leading-relaxed', 'text-muted-foreground')}
+                >
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </Section>
   )

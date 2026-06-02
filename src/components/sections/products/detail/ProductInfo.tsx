@@ -1,153 +1,150 @@
 import Link from 'next/link'
-import { Package, Clock, ArrowRight } from 'lucide-react'
+import { ArrowRight, Package, Clock3, BadgeCheck, Leaf, Globe } from 'lucide-react'
 
 import type { Product, Certification } from '@/payload-types'
 
 type Props = {
   product: Product
-  certs:   Certification[]
+  certs: Certification[]
 }
 
-const INCOTERM_LABEL: Record<string, string> = {
-  FOB: 'FOB – Free on Board',
-  CIF: 'CIF – Cost, Insurance & Freight',
-  DDP: 'DDP – Delivered Duty Paid',
-  EXW: 'EXW – Ex Works',
+const CATEGORY_LABELS: Record<string, string> = {
+  'organic-fabrics': 'Organic Fabrics',
+  bags: 'Bags',
+  pouches: 'Pouches',
+  'home-textiles': 'Home Textiles',
+  'yoga-wellness': 'Yoga & Wellness',
+  'custom-oem': 'Custom OEM',
 }
 
 export function ProductInfo({ product, certs }: Props) {
-  const pricing  = product.pricing
+  const pricing = product.pricing
   const ordering = product.ordering
-  const tiers    = pricing?.tiers ?? []
+  const tiers = pricing?.tiers ?? []
+
+  const lowestPrice = tiers.length > 0 ? Math.min(...tiers.map((t) => t.pricePerUnit)) : null
 
   return (
-    <div className="flex flex-col gap-6">
-
-      {/* Category + SKU */}
-      <div className="flex items-center justify-between">
-        <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-          {product.category.replace(/-/g, ' ')}
-        </span>
-        <span className="text-xs text-muted-foreground">SKU: {product.sku}</span>
-      </div>
+    <div className="flex flex-col">
+      {/* Category */}
+      <p className="text-xs font-medium uppercase tracking-[0.35em] text-muted-foreground">
+        {CATEGORY_LABELS[product.category] ?? product.category}
+      </p>
 
       {/* Title */}
-      <div>
-        <h1 className="text-3xl font-medium leading-tight">{product.title}</h1>
-        {product.shortDescription && (
-          <p className="mt-3 text-lg text-muted-foreground leading-relaxed">
-            {product.shortDescription}
-          </p>
-        )}
+      <h1 className="mt-4 text-4xl font-medium leading-[1.05] md:text-5xl">{product.title}</h1>
+
+      {/* Description */}
+      {product.shortDescription && (
+        <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          {product.shortDescription}
+        </p>
+      )}
+
+      {/* Trust badges */}
+      <div className="mt-8 flex flex-wrap gap-2">
+        {certs.map((cert) => (
+          <span
+            key={cert.id}
+            className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-medium"
+          >
+            <BadgeCheck className="h-3.5 w-3.5" />
+            {cert.shortCode}
+          </span>
+        ))}
       </div>
 
-      {/* Cert badges */}
-      {certs.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {certs.map((cert) => (
-            <span
-              key={cert.id}
-              className="rounded-full border border-border px-3 py-1 text-xs font-semibold uppercase tracking-wide"
-            >
-              {cert.shortCode}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Price tiers */}
-      {tiers.length > 0 && (
-        <div>
-          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            Price tiers ({pricing?.currency ?? 'USD'} · {pricing?.incoterm ?? 'FOB'} {pricing?.port})
-          </p>
-          <div className="grid grid-cols-3 gap-2">
-            {tiers.map((tier, i) => {
-              const isHighlighted = i === 1 || (tiers.length === 1)
-              return (
-                <div
-                  key={i}
-                  className={[
-                    'rounded-xl border p-3 text-center transition-colors',
-                    isHighlighted
-                      ? 'border-foreground bg-foreground text-background'
-                      : 'border-border bg-background',
-                  ].join(' ')}
-                >
-                  <p className={[
-                    'text-[10px] font-medium',
-                    isHighlighted ? 'text-background/70' : 'text-muted-foreground',
-                  ].join(' ')}>
-                    {tier.minQty.toLocaleString()}
-                    {tier.maxQty ? `–${tier.maxQty.toLocaleString()}` : '+'}
-                    {' '}{tier.unit ?? 'units'}
-                  </p>
-                  <p className="mt-1 text-base font-semibold">
-                    ${tier.pricePerUnit.toFixed(2)}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
-          {pricing?.incoterm && (
-            <p className="mt-2 text-xs text-muted-foreground">
-              {INCOTERM_LABEL[pricing.incoterm] ?? pricing.incoterm}
-            </p>
-          )}
-        </div>
-      )}
-
-      {/* MOQ + lead time */}
-      <div className="flex gap-6">
+      {/* Highlights */}
+      <div className="mt-10 grid gap-4 sm:grid-cols-3">
         {ordering?.moq && (
-          <div className="flex items-start gap-2">
-            <Package className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-            <div>
-              <p className="text-xs text-muted-foreground">Min. order</p>
-              <p className="text-sm font-medium">
-                {ordering.moq.toLocaleString()} {ordering.moqUnit ?? 'units'}
-              </p>
-            </div>
+          <div className="rounded-2xl border bg-card p-4">
+            <Package className="mb-3 h-5 w-5 text-muted-foreground" />
+
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">MOQ</p>
+
+            <p className="mt-1 text-lg font-medium">{ordering.moq.toLocaleString()}</p>
           </div>
         )}
+
         {ordering?.leadTimeDays && (
-          <div className="flex items-start gap-2">
-            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" />
-            <div>
-              <p className="text-xs text-muted-foreground">Lead time</p>
-              <p className="text-sm font-medium">{ordering.leadTimeDays}</p>
-            </div>
+          <div className="rounded-2xl border bg-card p-4">
+            <Clock3 className="mb-3 h-5 w-5 text-muted-foreground" />
+
+            <p className="text-xs uppercase tracking-wider text-muted-foreground">Lead Time</p>
+
+            <p className="mt-1 text-lg font-medium">{ordering.leadTimeDays} days</p>
           </div>
         )}
-        {ordering?.sampleAvailable && (
-          <div>
-            <p className="text-xs text-muted-foreground">Sample</p>
-            <p className="text-sm font-medium">
-              Available · {ordering.sampleLeadTime ?? 'enquire'}
-            </p>
-          </div>
-        )}
+
+        <div className="rounded-2xl border bg-card p-4">
+          <Globe className="mb-3 h-5 w-5 text-muted-foreground" />
+
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Shipping</p>
+
+          <p className="mt-1 text-lg font-medium">Worldwide</p>
+        </div>
       </div>
 
-      {/* CTAs */}
-      <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+      {/* Pricing */}
+      {lowestPrice && (
+        <div className="mt-10 border-t pt-8">
+          <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">Starting from</p>
+
+          <div className="mt-2 flex items-end gap-3">
+            <span className="text-5xl font-medium">${lowestPrice.toFixed(2)}</span>
+
+            <span className="pb-2 text-muted-foreground">/ unit</span>
+          </div>
+
+          <p className="mt-3 text-sm text-muted-foreground">
+            FOB India • Bulk export pricing • Volume discounts available
+          </p>
+        </div>
+      )}
+
+      {/* Sustainability */}
+      <div className="mt-10 rounded-3xl border bg-secondary/40 p-6">
+        <div className="flex items-start gap-4">
+          <Leaf className="mt-1 h-5 w-5 shrink-0" />
+
+          <div>
+            <h3 className="font-medium">Sustainably sourced</h3>
+
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              Manufactured in India using certified organic materials and ethical production
+              practices. Ideal for brands seeking sustainable supply chains and private label
+              partnerships.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="mt-10 flex flex-col gap-3 sm:flex-row">
         <Link
           href={`/contact?product=${product.slug}&type=rfq`}
-          className="flex flex-1 items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80"
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-foreground px-8 py-4 text-sm font-medium text-background transition-opacity hover:opacity-90"
         >
-          Request a quote
+          Request Pricing
           <ArrowRight className="h-4 w-4" />
         </Link>
+
         {ordering?.sampleAvailable && (
           <Link
             href={`/contact?product=${product.slug}&type=sample`}
-            className="flex flex-1 items-center justify-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:bg-secondary"
+            className="inline-flex flex-1 items-center justify-center rounded-full border px-8 py-4 text-sm font-medium transition-colors hover:bg-secondary"
           >
-            Request a sample
+            Order Sample
           </Link>
         )}
       </div>
 
+      {/* Meta */}
+      <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+        {product.sku && <span>SKU: {product.sku}</span>}
+        {pricing?.incoterm && <span>{pricing.incoterm}</span>}
+        {pricing?.port && <span>{pricing.port}</span>}
+      </div>
     </div>
   )
 }
