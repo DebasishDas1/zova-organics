@@ -9,6 +9,8 @@
 
   /* Zova Design System */
 
+  --zova-colour: #61391e;
+
   --background: oklch(98% 0.01 85);
   --foreground: oklch(18% 0.01 85);
 
@@ -95,6 +97,8 @@
 
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
+  --color-zova-colour: var(--zova-colour);
 
   --color-border: var(--border);
   --color-input: var(--input);

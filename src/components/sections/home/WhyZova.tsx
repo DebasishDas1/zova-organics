@@ -1,10 +1,12 @@
+import { BadgeCheck, Leaf, Globe2, ShieldCheck, Package, Handshake } from 'lucide-react'
+
 const features = [
-  'Ethical Production',
-  'Premium Materials',
-  'Reliable Manufacturing',
-  'Global Export Expertise',
-  'Quality Assurance',
-  'Long-Term Partnerships',
+  { title: 'Ethical Production', icon: Leaf },
+  { title: 'Premium Materials', icon: ShieldCheck },
+  { title: 'Reliable Manufacturing', icon: Package },
+  { title: 'Global Export Expertise', icon: Globe2 },
+  { title: 'Quality Assurance', icon: BadgeCheck },
+  { title: 'Long-Term Partnerships', icon: Handshake },
 ]
 
 export function WhyZova() {
@@ -21,11 +23,17 @@ export function WhyZova() {
           </div>
 
           <div className="space-y-6">
-            {features.map((feature) => (
-              <div key={feature} className="border-b pb-6 text-xl">
-                {feature}
-              </div>
-            ))}
+            {features.map((feature) => {
+              const Icon = feature.icon
+
+              return (
+                <div key={feature.title} className="flex items-center gap-4 border-b pb-6 text-2xl">
+                  <Icon className="h-5 w-5 text-primary" />
+
+                  <span>{feature.title}</span>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

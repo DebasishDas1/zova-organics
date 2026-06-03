@@ -81,7 +81,7 @@ export default async function ProductPage({ params }: Props) {
 
       <div className="pb-32">
         {/* Breadcrumb */}
-        <div className="container-zova pb-8">
+        <div className="container-zova py-8">
           <nav className="flex items-center gap-2 text-sm text-muted-foreground">
             <a href="/">Home</a>
             <span>/</span>

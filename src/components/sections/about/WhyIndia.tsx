@@ -1,8 +1,10 @@
+import { Leaf, Users, Factory, Globe2 } from 'lucide-react'
+
 const strengths = [
-  'Organic Textiles',
-  'Natural Fibers',
-  'Skilled Artisans',
-  'Scalable Manufacturing',
+  { title: 'Organic Textiles', icon: Leaf },
+  { title: 'Natural Fibers', icon: Leaf },
+  { title: 'Skilled Artisans', icon: Users },
+  { title: 'Scalable Manufacturing', icon: Factory },
 ]
 
 export function WhyIndia() {
@@ -26,11 +28,16 @@ export function WhyIndia() {
             </p>
 
             <div className="mt-12 grid gap-4 sm:grid-cols-2">
-              {strengths.map((item) => (
-                <div key={item} className="rounded-2xl border p-6">
-                  {item}
-                </div>
-              ))}
+              {strengths.map((item) => {
+                const Icon = item.icon
+
+                return (
+                  <div key={item.title} className="r p-6">
+                    <Icon className="size-10 text-primary" />
+                    <span className="text-xl font-semibold pt-4">{item.title}</span>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>

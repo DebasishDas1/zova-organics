@@ -1,4 +1,11 @@
-const values = ['Reliability', 'Responsibility', 'Consistency', 'Partnership']
+import { Handshake, ShieldCheck, Repeat, Users } from 'lucide-react'
+
+const values = [
+  { title: 'Reliability', icon: ShieldCheck },
+  { title: 'Responsibility', icon: Repeat },
+  { title: 'Consistency', icon: Handshake },
+  { title: 'Partnership', icon: Users },
+]
 
 export function Values() {
   return (
@@ -13,11 +20,18 @@ export function Values() {
         </div>
 
         <div className="mt-20 grid gap-6 md:grid-cols-2">
-          {values.map((value) => (
-            <div key={value} className="rounded-3xl border p-8 text-2xl">
-              {value}
-            </div>
-          ))}
+          {values.map((value) => {
+            const Icon = value.icon
+
+            return (
+              <div key={value.title} className="rounded-3xl border p-8 text-2xl">
+                <div className="flex items-center gap-4">
+                  <Icon className="h-6 w-6 text-primary" />
+                  <span>{value.title}</span>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

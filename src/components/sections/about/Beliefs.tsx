@@ -1,15 +1,20 @@
+import { Eye, ShieldCheck, Leaf } from 'lucide-react'
+
 const beliefs = [
   {
     title: 'Transparency',
     description: 'Clear communication and complete visibility throughout the sourcing journey.',
+    icon: Eye,
   },
   {
     title: 'Quality',
     description: 'Products crafted to meet global standards without compromise.',
+    icon: ShieldCheck,
   },
   {
     title: 'Sustainability',
     description: 'Responsible sourcing practices designed for long-term impact.',
+    icon: Leaf,
   },
 ]
 
@@ -26,13 +31,20 @@ export function Beliefs() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
-          {beliefs.map((belief) => (
-            <div key={belief.title} className="rounded-3xl bg-background p-8">
-              <h3>{belief.title}</h3>
+          {beliefs.map((belief) => {
+            const Icon = belief.icon
 
-              <p className="mt-4">{belief.description}</p>
-            </div>
-          ))}
+            return (
+              <div key={belief.title} className="rounded-3xl bg-background p-8">
+                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary/80">
+                  <Icon className="h-6 w-6 text-primary" />
+                </div>
+
+                <h3>{belief.title}</h3>
+                <p className="mt-4">{belief.description}</p>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

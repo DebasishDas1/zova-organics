@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import React from 'react'
-import Script from 'next/script'
 import { Navbar } from '@/components/layout/Navbar'
-
 import './styles.css'
 
 export const metadata: Metadata = {
@@ -10,10 +8,8 @@ export const metadata: Metadata = {
     default: 'Zova Organics',
     template: '%s | Zova Organics',
   },
-
   description:
     'Premium sustainable textile and lifestyle products sourced from India for global brands, retailers, and distributors.',
-
   keywords: [
     'organic textile exporter',
     'sustainable bags manufacturer',
@@ -22,20 +18,33 @@ export const metadata: Metadata = {
     'eco friendly products exporter',
     'zova organics',
   ],
-
   metadataBase: new URL('https://zovaorganics.com'),
-
   openGraph: {
     title: 'Zova Organics',
     description: 'Premium sustainable textile and lifestyle products sourced from India.',
     siteName: 'Zova Organics',
+    url: 'https://zovaorganics.com', // ← add this
     type: 'website',
+    images: [
+      // ← add OG image
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Zova Organics — sustainable textiles from India',
+      },
+    ],
   },
-
   twitter: {
     card: 'summary_large_image',
     title: 'Zova Organics',
     description: 'Premium sustainable textile and lifestyle products sourced from India.',
+    images: ['/og-image.jpg'], // ← add this
+  },
+  robots: {
+    // ← add this
+    index: true,
+    follow: true,
   },
 }
 
@@ -45,7 +54,11 @@ const organizationSchema = {
   '@id': 'https://zovaorganics.com/#organization',
   name: 'Zova Organics',
   url: 'https://zovaorganics.com',
-  logo: 'https://zovaorganics.com/logo.png',
+  logo: {
+    // ← use ImageObject, not a bare string
+    '@type': 'ImageObject',
+    url: 'https://zovaorganics.com/logo.png',
+  },
   sameAs: [
     'https://www.facebook.com/zovaorganics',
     'https://www.linkedin.com/company/zovaorganics',
@@ -60,21 +73,28 @@ const webSiteSchema = {
   publisher: {
     '@id': 'https://zovaorganics.com/#organization',
   },
+  potentialAction: {
+    // ← sitelinks searchbox (optional but useful)
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://zovaorganics.com/products?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
 }
 
-export default function FrontendLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function FrontendLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <Script id="organization-schema" type="application/ld+json">
-        {JSON.stringify(organizationSchema)}
-      </Script>
-      <Script id="website-schema" type="application/ld+json">
-        {JSON.stringify(webSiteSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+      />
       <Navbar />
       <main className="pt-24">{children}</main>
     </>
