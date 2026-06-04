@@ -16,6 +16,20 @@ const nextConfig: NextConfig = {
         pathname: '/**',
       },
     ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'media.zovaorganics.com',
+        pathname: '/**',
+      },
+      {
+        // fallback during dev before custom domain is set up
+        protocol: 'https',
+        hostname: '*.r2.cloudflarestorage.com',
+        pathname: '/**',
+      },
+    ],
+    formats: ['image/avif', 'image/webp'],
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {

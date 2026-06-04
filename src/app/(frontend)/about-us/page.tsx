@@ -7,11 +7,20 @@ import { AboutCTA } from '@/components/sections/about/AboutCTA'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { FeatureList } from '@/components/sections/sheared/FeatureList'
 import { Compass, Package, Factory, CheckCircle, Globe2 } from 'lucide-react'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: 'About Us - Zova Organics',
+export const metadata: Metadata = {
+  title: 'About Us - Zova Organics | Sustainable Textile Exporter from India',
   description:
-    'Learn how Zova Organics combines sustainable sourcing, craftsmanship, and global export expertise.',
+    'Zova Organics is a GOTS-certified organic textile exporter based in India, supplying sustainable bags and fabric products to brands in 25+ countries.',
+  alternates: { canonical: 'https://zovaorganics.com/about-us' },
+  openGraph: {
+    title: 'About Us - Zova Organics | Sustainable Textile Exporter from India',
+    description:
+      'Zova Organics is a GOTS-certified organic textile exporter based in India, supplying sustainable bags and fabric products to brands in 25+ countries.',
+    url: 'https://zovaorganics.com/about-us',
+    type: 'website',
+  },
 }
 
 const steps = [
@@ -23,8 +32,31 @@ const steps = [
 ]
 
 export default function AboutPage() {
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About Zova Organics',
+    url: 'https://zovaorganics.com/about-us',
+    description: 'Zova Organics is a GOTS-certified organic textile exporter...',
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': 'https://zovaorganics.com/#organization', // references your root org
+      foundingDate: '2024',
+      numberOfEmployees: { '@type': 'QuantitativeValue', value: 10 },
+      knowsAbout: [
+        'organic textiles',
+        'GOTS certification',
+        'textile export',
+        'sustainable fashion',
+      ],
+    },
+  }
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       <SectionHero
         eyebrow="About Zova Organics"
         title="Built on trust. Driven by craftsmanship."

@@ -1,10 +1,18 @@
-import Script from 'next/script'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Insights - Zova Organics',
+export const metadata: Metadata = {
+  title: 'Insights - Zova Organics | Sustainable Textile Exporter from India',
   description:
     'Read the latest insights on sustainable sourcing, textile trends, and responsible manufacturing.',
+  alternates: { canonical: 'https://zovaorganics.com/blogs' },
+  openGraph: {
+    title: 'Insights - Zova Organics | Sustainable Textile Exporter from India',
+    description:
+      'Read the latest insights on sustainable sourcing, textile trends, and responsible manufacturing.',
+    url: 'https://zovaorganics.com/blogs',
+    type: 'website',
+  },
 }
 
 export default async function BlogsPage() {
@@ -59,12 +67,14 @@ export default async function BlogsPage() {
 
   return (
     <>
-      <Script id="blog-schema" type="application/ld+json">
-        {JSON.stringify(blogSchema)}
-      </Script>
-      <Script id="blog-breadcrumb-schema" type="application/ld+json">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <SectionHero
         eyebrow="Insights"
         title="Latest updates from Zova Organics"

@@ -22,6 +22,53 @@ type Props = {
 
 export const revalidate = 60
 
+// 1. Static params — tells Next.js all possible slugs at build time
+export async function generateStaticParams() {
+  const payload = await getPayload({ config })
+  const products = await payload.find({
+    collection: 'products',
+    limit: 1000,
+    select: { slug: true },
+  })
+  return products.docs.map((p) => ({ slug: p.slug }))
+}
+
+// 2. Dynamic metadata from Payload
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const payload = await getPayload({ config })
+  const result = await payload.find({
+    collection: 'products',
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 1,
+  })
+
+  const product = result.docs[0]
+  if (!product) return {}
+
+  const featuredImage = typeof product.featuredImage === 'object' ? product.featuredImage : null
+
+  const title = product.seo?.metaTitle || product.title
+  const description = product.seo?.metaDescription || product.shortDescription
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://zovaorganics.com/products/${product.slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://zovaorganics.com/products/${product.slug}`,
+      images: featuredImage?.url
+        ? [{ url: featuredImage.url, width: 1200, height: 630, alt: product.title }]
+        : undefined,
+    },
+  }
+}
+
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params
 

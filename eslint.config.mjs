@@ -1,17 +1,15 @@
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
-import { FlatCompat } from '@eslint/eslintrc'
+import nextVitals from 'eslint-config-next/core-web-vitals'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
+const tsPlugin = nextVitals.find(
+  (config) => config.plugins && config.plugins['@typescript-eslint']
+)?.plugins['@typescript-eslint']
 
 const eslintConfig = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...nextVitals,
   {
+    plugins: {
+      '@typescript-eslint': tsPlugin,
+    },
     rules: {
       '@typescript-eslint/ban-ts-comment': 'warn',
       '@typescript-eslint/no-empty-object-type': 'warn',
@@ -36,3 +34,4 @@ const eslintConfig = [
 ]
 
 export default eslintConfig
+

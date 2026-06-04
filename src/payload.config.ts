@@ -1,9 +1,9 @@
-import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { s3Storage } from '@payloadcms/storage-s3'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
-import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -11,9 +11,17 @@ import { Products } from './collections/Products'
 import { Leads } from './collections/Leads'
 import { Certifications } from './collections/Certifications'
 import { Posts } from './collections/Posts'
+// import { userAgent } from 'next/server'
+import sharp from 'sharp'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const env = <T extends string>(key: string): T => {
+  const value = process.env[key]
+  if (!value) throw new Error(`Missing required env: ${key}`)
+  return value as T
+}
 
 export default buildConfig({
   admin: {
@@ -22,26 +30,52 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+
   collections: [Users, Media, Products, Leads, Certifications, Posts],
+
   editor: lexicalEditor(),
-  secret: (() => {
-    const s = process.env.PAYLOAD_SECRET
-    if (!s) throw new Error('Missing required env: PAYLOAD_SECRET')
-    return s
-  })(),
+
+  secret: env('PAYLOAD_SECRET'),
+
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: sqliteAdapter({
-    client: {
-      url: (() => {
-        const u = process.env.DATABASE_URL
-        if (!u) throw new Error('Missing required env: DATABASE_URL')
-        return u
-      })(),
+
+  // ─── Supabase Postgres ─────────────────────────────────────────────────────
+  db: postgresAdapter({
+    pool: {
+      connectionString: env('DATABASE_URL'),
     },
-    push: false,
+    migrationDir: path.resolve(dirname, 'migrations'),
   }),
+
+  // ─── Sharp ─────────────────────────────────────────────────────────────────
   sharp,
-  plugins: [],
+
+  // ─── Cloudflare R2 ─────────────────────────────────────────────────────────
+  plugins: [
+    s3Storage({
+      collections: {
+        media: {
+          prefix: 'media',
+          disableLocalStorage: true,
+          generateFileURL: ({ filename, prefix }) =>
+            `${env('R2_PUBLIC_URL')}/${prefix}/${filename}`,
+        },
+        // add product-images and blog-images collections when you create them
+      },
+      bucket: env('R2_BUCKET'),
+      config: {
+        endpoint: env('R2_ENDPOINT'),
+        region: 'auto',
+        credentials: {
+          accessKeyId: env('R2_ACCESS_KEY_ID'),
+          secretAccessKey: env('R2_SECRET_ACCESS_KEY'),
+        },
+        forcePathStyle: true,
+      },
+    }),
+  ],
+
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000',
 })

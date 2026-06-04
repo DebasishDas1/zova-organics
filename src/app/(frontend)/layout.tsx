@@ -2,6 +2,13 @@ import type { Metadata } from 'next'
 import React from 'react'
 import { Navbar } from '@/components/layout/Navbar'
 import './styles.css'
+import { Geist } from 'next/font/google'
+
+const geist = Geist({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -86,17 +93,24 @@ const webSiteSchema = {
 
 export default function FrontendLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
-      />
-      <Navbar />
-      <main className="pt-24">{children}</main>
-    </>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={geist.variable}
+      data-scroll-behavior="smooth"
+    >
+      <body suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+        />
+        <Navbar />
+        <main className="pt-24">{children}</main>
+      </body>
+    </html>
   )
 }

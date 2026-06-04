@@ -3,22 +3,29 @@ import { Hero } from '@/components/sections/home/Hero'
 import { Manifesto } from '@/components/sections/home/Manifesto'
 import { Collections } from '@/components/sections/home/Collections'
 import { WhyZova } from '@/components/sections/home/WhyZova'
-import { GlobalReach } from '@/components/sections/home/GlobalReach'
-import { CTA } from '@/components/sections/home/CTA'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { FeatureList } from '@/components/sections/sheared/FeatureList'
-import { Search, Package, Globe2 } from 'lucide-react'
+import { Search, Package, Globe2, Factory, ShieldCheck } from 'lucide-react'
+import dynamic from 'next/dynamic'
+
+const GlobalReach = dynamic(() =>
+  import('@/components/sections/home/GlobalReach').then((mod) => mod.GlobalReach),
+)
+const CTA = dynamic(() => import('@/components/sections/home/CTA').then((mod) => mod.CTA))
 
 export const metadata: Metadata = {
   title: 'Zova Organics | Sustainable Textiles & Private Label Manufacturing',
   description:
     'Zova Organics supplies premium organic textiles, sustainable bags, and ethical private-label manufacturing from India to global brands.',
   keywords: [
-    'organic textiles',
-    'sustainable bags supplier',
-    'private label manufacturing',
-    'ethical textile sourcing',
-    'Indian textile exporter',
+    'organic textile exporter',
+    'organic cotton bags manufacturer',
+    'private label textile manufacturing',
+    'sustainable textile supplier india',
+    'organic fabric exporter',
+    'eco friendly bags manufacturer',
+    'ethical sourcing india',
+    'custom textile manufacturing',
   ],
   openGraph: {
     title: 'Zova Organics | Sustainable Textiles & Private Label Manufacturing',
@@ -30,6 +37,35 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://zovaorganics.com/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Zova Organics',
+    description: 'Premium sustainable textiles and private label manufacturing from India.',
+  },
+}
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://zovaorganics.com/#business',
+  name: 'Zova Organics',
+  url: 'https://zovaorganics.com',
+  telephone: '+91-XXXXXXXXXX',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'IN',
+    addressRegion: 'Your State',
+  },
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '18:00',
   },
 }
 
@@ -51,8 +87,6 @@ const items = [
   },
 ]
 
-import { Factory, ShieldCheck } from 'lucide-react'
-
 const steps = [
   { title: 'Discovery', icon: Search },
   { title: 'Sampling', icon: Package },
@@ -64,6 +98,12 @@ const steps = [
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema),
+        }}
+      />
       <Hero />
       <Manifesto />
       <Collections />

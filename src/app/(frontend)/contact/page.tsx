@@ -9,6 +9,15 @@ export const metadata = {
   title: 'Contact - Zova Organics',
   description:
     'Contact Zova Organics to discuss sustainable sourcing, private label manufacturing, and global exports.',
+  alternates: { canonical: 'https://zovaorganics.com/contact' },
+  robots: { index: true, follow: true, 'max-snippet': -1 },
+  openGraph: {
+    title: 'Contact - Zova Organics',
+    description:
+      'Contact Zova Organics to discuss sustainable sourcing, private label manufacturing, and global exports.',
+    url: 'https://zovaorganics.com/contact',
+    type: 'website',
+  },
 }
 
 const faqs = [
@@ -31,9 +40,31 @@ const faqs = [
   },
 ]
 
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Zova Organics',
+  url: 'https://zovaorganics.com/contact',
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': 'https://zovaorganics.com/#organization',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      availableLanguage: ['English', 'Hindi'],
+      email: 'hello@zovaorganics.com',
+      contactOption: 'TollFree',
+    },
+  },
+}
+
 export default function ContactPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <SectionHero
         eyebrow="Contact"
         title="Let's build something meaningful together."
