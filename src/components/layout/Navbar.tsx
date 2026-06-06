@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { Menu, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -16,9 +15,9 @@ import {
   Sheet,
   SheetContent,
   SheetTrigger,
+  SheetHeader,
   SheetTitle,
   SheetDescription,
-  SheetHeader,
 } from '@/components/ui/sheet'
 import { usePathname } from 'next/navigation'
 import { useUIStore } from '@/store/ui-store'
@@ -98,20 +97,6 @@ const NavbarComponent = () => {
                         )}
                       >
                         {link.name}
-
-                        <motion.div
-                          layoutId="nav-indicator"
-                          className={cn(
-                            'absolute -bottom-1 left-1/2 h-[1.5px] -translate-x-1/2 rounded-full bg-black',
-                            isActive ? 'w-5' : 'w-0',
-                          )}
-                          transition={{
-                            type: 'spring',
-                            stiffness: 650,
-                            damping: 40,
-                            mass: 0.4,
-                          }}
-                        />
                       </Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
@@ -161,39 +146,23 @@ const NavbarComponent = () => {
                 'p-8 flex flex-col rounded-l-2xl',
               )}
             >
-              <SheetHeader className="hidden">
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>This action cannot be undone.</SheetDescription>
+              <SheetHeader>
+                <SheetTitle>ZOVA</SheetTitle>
+                <SheetDescription>Crafted in India. Trusted Worldwide.</SheetDescription>
               </SheetHeader>
 
-              {/* Mobile Header */}
-              <div className="pt-8 flex justify-between items-center">
-                <span className="text-lg font-semibold tracking-tighter">ZOVA</span>
-              </div>
-
-              <div className="grow flex flex-col justify-center gap-8">
-                <AnimatePresence>
-                  {navLinks.map((link, i) => (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        delay: i * 0.06,
-                        duration: 0.4,
-                      }}
-                    >
-                      <Link
-                        href={link.href}
-                        onClick={closeMobileMenu}
-                        aria-current={isActiveLink(link.href) ? 'page' : undefined}
-                        className="text-4xl hover:text-[#8C6B4A] transition-colors"
-                      >
-                        {link.name}
-                      </Link>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+              <div className="grow flex flex-col justify-center gap-8 pl-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={closeMobileMenu}
+                    aria-current={isActiveLink(link.href) ? 'page' : undefined}
+                    className="text-4xl hover:text-[#8C6B4A] transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </div>
 
               {/* Mobile Footer */}

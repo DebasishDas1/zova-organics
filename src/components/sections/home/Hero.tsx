@@ -59,14 +59,19 @@ export function Hero() {
               transition={{ delay: 0.3 }}
               className="mt-12 flex flex-wrap gap-4"
             >
-              <Button size="lg" className="h-14 w-auto rounded-full px-8" asChild>
+              <Button size="lg" className="h-14 rounded-full px-8 w-full md:w-auto" asChild>
                 <Link href="/products">
                   Explore Products
                   <ArrowRight className="ml-2 size-4" />
                 </Link>
               </Button>
 
-              <Button size="lg" variant="outline" className="h-14 rounded-full px-8" asChild>
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-14 rounded-full px-8 w-full md:w-auto"
+                asChild
+              >
                 <Link href="/contact">Request a Quote</Link>
               </Button>
             </motion.div>

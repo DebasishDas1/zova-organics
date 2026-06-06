@@ -26,8 +26,25 @@ const env = <T extends string>(key: string): T => {
 export default buildConfig({
   admin: {
     user: Users.slug,
+
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+
+    meta: {
+      titleSuffix: ' | Zova Organic CMS',
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          url: '/favicon.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          type: 'image/png',
+          url: '/apple-touch-icon.png',
+        },
+      ],
     },
   },
 
@@ -41,7 +58,6 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
 
-  // ─── Supabase Postgres ─────────────────────────────────────────────────────
   db: postgresAdapter({
     pool: {
       connectionString: env('DATABASE_URL'),
@@ -49,10 +65,8 @@ export default buildConfig({
     migrationDir: path.resolve(dirname, 'migrations'),
   }),
 
-  // ─── Sharp ─────────────────────────────────────────────────────────────────
   sharp,
 
-  // ─── Cloudflare R2 ─────────────────────────────────────────────────────────
   plugins: [
     s3Storage({
       collections: {
@@ -62,7 +76,6 @@ export default buildConfig({
           generateFileURL: ({ filename, prefix }) =>
             `${env('R2_PUBLIC_URL')}/${prefix}/${filename}`,
         },
-        // add product-images and blog-images collections when you create them
       },
       bucket: env('R2_BUCKET'),
       config: {
