@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
         hostname: '*.r2.cloudflarestorage.com',
         pathname: '/**',
       },
+      {
+        // allow images from R2 dev bucket URLs
+        protocol: 'https',
+        hostname: '*.r2.dev',
+        pathname: '/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

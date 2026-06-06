@@ -3,9 +3,9 @@ import { Beliefs } from '@/components/sections/about/Beliefs'
 import { WhyIndia } from '@/components/sections/about/WhyIndia'
 import { Values } from '@/components/sections/about/Values'
 import { Vision } from '@/components/sections/about/Vision'
-import { AboutCTA } from '@/components/sections/about/AboutCTA'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { FeatureList } from '@/components/sections/sheared/FeatureList'
+import { PageCTA } from '@/components/sections/sheared/PageCTA'
 import { Compass, Package, Factory, CheckCircle, Globe2 } from 'lucide-react'
 import { Metadata } from 'next'
 
@@ -75,7 +75,12 @@ export default function AboutPage() {
       </div>
       <Values />
       <Vision />
-      <AboutCTA />
+      <PageCTA
+        title="Ready to start your next project?"
+        description="Discover how Zova Organics can bring your brand vision to life with premium, sustainable materials."
+        buttonText="Contact Us"
+        buttonHref="/contact"
+      />
     </>
   )
 }

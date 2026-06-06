@@ -2,8 +2,8 @@ import { ContactInfo } from '@/components/sections/contact/ContactInfo'
 import { ContactForm } from '@/components/sections/contact/ContactForm'
 import { WhyContact } from '@/components/sections/contact/WhyContact'
 import { FAQ } from '@/components/sections/contact/FAQ'
-import { ContactCTA } from '@/components/sections/contact/ContactCTA'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
+import { PageCTA } from '@/components/sections/sheared/PageCTA'
 
 export const metadata = {
   title: 'Contact - Zova Organics',
@@ -79,7 +79,12 @@ export default function ContactPage() {
         description="Here are answers to some of our most commonly asked questions. If you have other inquiries, please don't hesitate to reach out directly."
         questionList={faqs}
       />
-      <ContactCTA />
+      <PageCTA
+        title="Every great partnership starts with a conversation."
+        description="Tell us about your sourcing goals and we’ll explore how Zova can support your business."
+        buttonText="Start a Conversation"
+        buttonHref="#contact-form"
+      />
     </>
   )
 }

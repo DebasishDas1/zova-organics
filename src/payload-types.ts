@@ -473,12 +473,12 @@ export interface Post {
   id: number;
   title: string;
   /**
-   * URL slug. e.g. what-is-gots-certification
+   * Auto-generated from title. Edit only if you need a custom URL.
    */
   slug: string;
   status: 'draft' | 'review' | 'published' | 'archived';
   /**
-   * Controls published date shown to readers. Defaults to now on first publish.
+   * Set automatically on first publish. Override if needed.
    */
   publishedAt?: string | null;
   author?: (number | null) | User;
@@ -490,6 +490,11 @@ export interface Post {
     | 'supply-chain'
     | 'buyer-resources'
     | 'company-news';
+  featured?: boolean | null;
+  /**
+   * Auto-calculated from content word count on save.
+   */
+  readingTime?: number | null;
   /**
    * e.g. GOTS, tote bags, EU export, organic cotton
    */
@@ -500,16 +505,16 @@ export interface Post {
       }[]
     | null;
   /**
-   * Short summary shown on blog listing cards and in search results (max 160 chars)
+   * Shown on blog cards and used as meta description. Max 160 characters.
    */
   excerpt: string;
   featuredImage: number | Media;
   /**
-   * Alt text for accessibility and SEO
+   * Describe the image for screen readers and search engines.
    */
   featuredImageAlt: string;
   /**
-   * Main post body. Use headings (H2, H3) to structure for SEO.
+   * Use H2/H3 headings, bullet lists, and images to structure for SEO.
    */
   content: {
     root: {
@@ -527,53 +532,56 @@ export interface Post {
     [k: string]: unknown;
   };
   /**
-   * Link relevant products — shown at the bottom of the post
+   * Shown in the sidebar. Link products relevant to this post.
    */
   relatedProducts?: (number | Product)[] | null;
   /**
-   * Suggested further reading — 2 or 3 posts max
+   * Further reading shown at the bottom. Max 2–3 posts.
    */
   relatedPosts?: (number | Post)[] | null;
   seo?: {
     /**
-     * Defaults to post title. Keep under 60 chars.
+     * Overrides post title in search results. Keep 10–60 chars.
      */
     metaTitle?: string | null;
     /**
-     * Defaults to excerpt. Keep under 160 chars.
+     * Overrides excerpt in search results. Keep under 160 chars.
      */
     metaDescription?: string | null;
     /**
-     * Only set if this post is syndicated from another URL
+     * Only set if this post is republished from another URL.
      */
     canonicalUrl?: string | null;
     /**
-     * Use for thin or duplicate content you do not want indexed
+     * Use for thin, duplicate, or temporary content only.
      */
     noIndex?: boolean | null;
     /**
-     * Primary keyword this post targets — for internal tracking only
+     * Primary keyword this post targets. Internal tracking only — not published.
      */
     focusKeyword?: string | null;
     /**
-     * Image shown when shared on LinkedIn, WhatsApp etc. (1200×630px ideal). Defaults to featured image.
+     * Shown on LinkedIn, WhatsApp, Twitter previews. 1200×630px. Falls back to featured image.
      */
     ogImage?: (number | null) | Media;
   };
   /**
-   * Structured data for Google rich results
+   * Controls the JSON-LD structured data injected in the page <head>.
    */
   schema?: {
     /**
-     * Affects the JSON-LD schema injected into the page <head>
+     * Article = standard post. HowTo / FAQPage unlock Google rich results.
      */
     articleType?: ('Article' | 'HowTo' | 'FAQPage') | null;
     /**
-     * Only used when Article type is "FAQ page". Renders FAQ rich results.
+     * Shown only when type is "FAQ page". Each item becomes a rich result in Google.
      */
     faqItems?:
       | {
           question: string;
+          /**
+           * Plain text only — no markdown. Keep answers concise.
+           */
           answer: string;
           id?: string | null;
         }[]
@@ -899,6 +907,8 @@ export interface PostsSelect<T extends boolean = true> {
   publishedAt?: T;
   author?: T;
   category?: T;
+  featured?: T;
+  readingTime?: T;
   tags?:
     | T
     | {

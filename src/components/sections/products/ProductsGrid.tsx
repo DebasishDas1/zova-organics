@@ -1,12 +1,12 @@
 'use client'
 
-import { useMemo, useRef, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Shirt, ShoppingBag, Package, Home, Leaf, Factory } from 'lucide-react'
 
 import type { Product } from '@/payload-types'
 import { ProductCard } from './ProductCard'
-import { CategoryRail } from './CategoryRail'
+import { CategoryRail } from '../sheared/CategoryRail'
 
 type ProductsGridProps = {
   products?: Product[]

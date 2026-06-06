@@ -1,7 +1,7 @@
-import { CertificationsCTA } from '@/components/sections/certifications/CertificationsCTA'
 import { CertificationsGrid } from '@/components/sections/certifications/CertificationsGrid'
 import { QualityCommitment } from '@/components/sections/certifications/QualityCommitment'
 import { SupplierVerification } from '@/components/sections/certifications/SupplierVerification'
+import { PageCTA } from '@/components/sections/sheared/PageCTA'
 
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { Section, SectionHeader } from '@/components/ui/section'
@@ -104,7 +104,12 @@ export default function CertificationsPage() {
 
       <SupplierVerification />
 
-      <CertificationsCTA />
+      <PageCTA
+        title="Ready to work with certified partners?"
+        description="Explore our range of GOTS-certified products and custom manufacturing solutions."
+        buttonText="View Products"
+        buttonHref="/products"
+      />
     </>
   )
 }

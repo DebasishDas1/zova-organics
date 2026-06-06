@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'motion/react'
 import { cn } from '@/lib/utils'
@@ -35,6 +35,17 @@ const NavbarComponent = () => {
   const pathname = usePathname()
   const { mobileMenuOpen, closeMobileMenu, setMobileMenuOpen } = useUIStore()
 
+  const [navScrolled, setNavScrolled] = useState(true)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setNavScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [setNavScrolled])
+
   const isActiveLink = useCallback(
     (href: string) => {
       if (href === '/') {
@@ -49,9 +60,10 @@ const NavbarComponent = () => {
   return (
     <nav
       className={cn(
+        navScrolled && 'bg-white/70',
         'fixed top-0 inset-x-0 z-50 px-6 transition-all duration-700 ease-out',
         'py-3',
-        'backdrop-blur-3xl',
+        'backdrop-blur-xl',
         'supports-backdrop-filter:bg-parchment/40',
       )}
     >

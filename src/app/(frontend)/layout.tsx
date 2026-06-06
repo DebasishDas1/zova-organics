@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import React from 'react'
 import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 import './styles.css'
 import { Geist } from 'next/font/google'
 
@@ -110,6 +111,7 @@ export default function FrontendLayout({ children }: Readonly<{ children: React.
         />
         <Navbar />
         <main className="pt-24">{children}</main>
+        <Footer />
       </body>
     </html>
   )

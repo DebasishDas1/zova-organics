@@ -2,6 +2,7 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
 import Script from 'next/script'
+import Link from 'next/link'
 
 import type { Media, Certification } from '@/payload-types'
 
@@ -130,9 +131,9 @@ export default async function ProductPage({ params }: Props) {
         {/* Breadcrumb */}
         <div className="container-zova py-8">
           <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
             <span>/</span>
-            <a href="/products">Products</a>
+            <Link href="/products">Products</Link>
             <span>/</span>
             <span className="text-foreground">{product.title}</span>
           </nav>
