@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getProducts } from '@/lib/payload/products'
 import { ProductsGrid } from '@/components/sections/products/ProductsGrid'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
+import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 export const dynamic = 'force-dynamic'
 
@@ -55,14 +56,8 @@ export default async function ProductsPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productListSchema) }}
-      />
+      <JsonLd schema={collectionSchema} />
+      <JsonLd schema={productListSchema} />
       <SectionHero
         eyebrow="Products"
         title="Our sustainable collection"

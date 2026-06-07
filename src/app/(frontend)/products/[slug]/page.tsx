@@ -14,6 +14,7 @@ import { ProductApplications } from '@/components/sections/products/detail/Produ
 import { ProductRFQ } from '@/components/sections/products/detail/ProductRFQ'
 import { ProductSampleCTA } from '@/components/sections/products/detail/ProductSampleCTA'
 import { RelatedProducts } from '@/components/sections/products/detail/RelatedProducts'
+import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 type Props = {
   params: Promise<{
@@ -112,10 +113,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
-      <Script id="product-schema" type="application/ld+json">
-        {JSON.stringify(productSchema)}
-      </Script>
-
+      <JsonLd schema={productSchema} />
       <div className="pb-32">
         {/* Breadcrumb */}
         <div className="container-zova py-8">

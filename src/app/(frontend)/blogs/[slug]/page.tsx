@@ -7,6 +7,7 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import { getPostBySlug } from '@/lib/payload/posts'
 import type { Media, Product, Post } from '@/payload-types'
 import { BlogCard } from '@/components/sections/blogs/BlogCard'
+import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 60
@@ -39,7 +40,8 @@ export async function generateMetadata({
         ? ((post.featuredImage as Media).url ?? null)
         : null
 
-  const ogImageUrl = ogMediaUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://zovaorganics.com'}/og-image.jpg`;
+  const ogImageUrl =
+    ogMediaUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://zovaorganics.com'}/og-image.jpg`
   return {
     title,
     description,
@@ -63,7 +65,7 @@ export async function generateMetadata({
       description,
       images: [ogImageUrl],
     },
-  };
+  }
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
@@ -149,20 +151,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <>
       {/* ── JSON-LD — was missing in your version ── */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd schema={articleSchema} />
+      {faqSchema && <JsonLd schema={faqSchema} />}
+      <JsonLd schema={breadcrumbSchema} />
 
       <article className="pb-32">
         {/* ── Hero ── */}

@@ -1,5 +1,7 @@
+// src/app/(frontend)/layout.tsx
 import type { Metadata } from 'next'
 import React from 'react'
+import { headers } from 'next/headers'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import './styles.css'
@@ -31,10 +33,9 @@ export const metadata: Metadata = {
     title: 'Zova Organics',
     description: 'Premium sustainable textile and lifestyle products sourced from India.',
     siteName: 'Zova Organics',
-    url: 'https://zovaorganics.com', // ← add this
+    url: 'https://zovaorganics.com',
     type: 'website',
     images: [
-      // ← add OG image
       {
         url: '/og-image.jpg',
         width: 1200,
@@ -47,13 +48,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Zova Organics',
     description: 'Premium sustainable textile and lifestyle products sourced from India.',
-    images: ['/og-image.jpg'], // ← add this
+    images: ['/og-image.jpg'],
   },
-  robots: {
-    // ← add this
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 }
 
 const organizationSchema = {
@@ -63,7 +60,6 @@ const organizationSchema = {
   name: 'Zova Organics',
   url: 'https://zovaorganics.com',
   logo: {
-    // ← use ImageObject, not a bare string
     '@type': 'ImageObject',
     url: 'https://zovaorganics.com/logo.png',
   },
@@ -78,11 +74,8 @@ const webSiteSchema = {
   '@type': 'WebSite',
   url: 'https://zovaorganics.com',
   name: 'Zova Organics',
-  publisher: {
-    '@id': 'https://zovaorganics.com/#organization',
-  },
+  publisher: { '@id': 'https://zovaorganics.com/#organization' },
   potentialAction: {
-    // ← sitelinks searchbox (optional but useful)
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
@@ -92,7 +85,13 @@ const webSiteSchema = {
   },
 }
 
-export default function FrontendLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function FrontendLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  // Read nonce injected by middleware
+  const headersList = await headers()
+  const nonce = headersList.get('x-nonce') ?? ''
+
   return (
     <html
       lang="en"
@@ -101,13 +100,18 @@ export default function FrontendLayout({ children }: Readonly<{ children: React.
       data-scroll-behavior="smooth"
     >
       <body suppressHydrationWarning>
+        {/* nonce= required on every inline script to satisfy CSP */}
         <script
+          nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          suppressHydrationWarning // ← make sure this is here
         />
         <script
+          nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+          suppressHydrationWarning // ← and here
         />
         <Navbar />
         <main className="pt-24">{children}</main>

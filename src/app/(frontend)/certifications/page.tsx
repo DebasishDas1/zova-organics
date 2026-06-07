@@ -6,6 +6,7 @@ import { PageCTA } from '@/components/sections/sheared/PageCTA'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { Section, SectionHeader } from '@/components/ui/section'
 import { Metadata } from 'next'
+import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 export const metadata: Metadata = {
   title: 'Our Certifications — GOTS, OEKO-TEX, Zova Organic',
@@ -70,17 +71,11 @@ const faqSchema = {
   ],
 }
 
-export default function CertificationsPage() {
+export default async function CertificationsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(certificationsSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <JsonLd schema={certificationsSchema} />
+      <JsonLd schema={faqSchema} />
       <SectionHero
         eyebrow="Certifications & Standards"
         title="Trust is built through transparency."

@@ -4,6 +4,7 @@ import { WhyContact } from '@/components/sections/contact/WhyContact'
 import { FAQ } from '@/components/sections/contact/FAQ'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { PageCTA } from '@/components/sections/sheared/PageCTA'
+import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 export const metadata = {
   title: 'Contact - Zova Organics',
@@ -58,13 +59,10 @@ const contactSchema = {
   },
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
-      />
+      <JsonLd schema={contactSchema} />
       <SectionHero
         eyebrow="Contact"
         title="Let's build something meaningful together."

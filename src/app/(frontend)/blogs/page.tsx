@@ -2,6 +2,7 @@ import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { Metadata } from 'next'
 import { BlogsGrid } from '@/components/sections/blogs/BlogsGrid'
 import { getPosts } from '@/lib/payload/posts'
+import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 export const dynamic = 'force-dynamic'
 
@@ -110,20 +111,9 @@ export default async function BlogsPage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(itemListSchema),
-        }}
-      />
+      <JsonLd schema={blogSchema} />
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={itemListSchema} />
       <SectionHero
         eyebrow="Insights"
         title="Perspectives on sustainable sourcing."

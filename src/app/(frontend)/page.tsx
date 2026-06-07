@@ -7,6 +7,7 @@ import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { FeatureList } from '@/components/sections/sheared/FeatureList'
 import { Search, Package, Globe2, Factory, ShieldCheck } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 const GlobalReach = dynamic(() =>
   import('@/components/sections/home/GlobalReach').then((mod) => mod.GlobalReach),
@@ -95,15 +96,10 @@ const steps = [
   { title: 'Global Delivery', icon: Globe2 },
 ]
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(localBusinessSchema),
-        }}
-      />
+      <JsonLd schema={localBusinessSchema} />
       <Hero />
       <Manifesto />
       <Collections />
