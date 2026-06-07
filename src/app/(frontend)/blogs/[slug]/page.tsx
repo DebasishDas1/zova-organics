@@ -4,16 +4,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { getAllPostSlugs, getPostBySlug } from '@/lib/payload/posts'
-import type { Media, User, Product, Post } from '@/payload-types'
+import { getPostBySlug } from '@/lib/payload/posts'
+import type { Media, Product, Post } from '@/payload-types'
 import { BlogCard } from '@/components/sections/blogs/BlogCard'
 
-// Tells Next.js: any slug not in generateStaticParams → 404, no dynamic fallback
-export const dynamicParams = false
-
-export async function generateStaticParams() {
-  return getAllPostSlugs() // { slug: string }[]
-}
+export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 // ── Metadata ───────────────────────────────────────────────────────────────
 export async function generateMetadata({

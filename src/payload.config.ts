@@ -17,13 +17,9 @@ import sharp from 'sharp'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const env = <T extends string>(key: string): T => {
-  const value = process.env[key]
-  if (!value) throw new Error(`Missing required env: ${key}`)
-  return value as T
+const env = (key: string, fallback = '') => {
+  return process.env[key] ?? fallback
 }
-
-console.log('PAYLOAD_SECRET?', Boolean(process.env.PAYLOAD_SECRET))
 
 export default buildConfig({
   admin: {
@@ -54,7 +50,7 @@ export default buildConfig({
 
   editor: lexicalEditor(),
 
-  secret: process.env.PAYLOAD_SECRET || 'build-secret',
+  secret: env('PAYLOAD_SECRET', 'build-secret'),
 
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -62,9 +58,8 @@ export default buildConfig({
 
   db: postgresAdapter({
     pool: {
-      connectionString: env('DATABASE_URL'),
+      connectionString: env('DATABASE_URL', 'postgres://placeholder'),
     },
-    migrationDir: path.resolve(dirname, 'migrations'),
   }),
 
   sharp,
