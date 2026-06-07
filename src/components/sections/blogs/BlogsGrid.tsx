@@ -1,7 +1,16 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { Sparkles, BookOpen, ShieldCheck, Leaf, Newspaper, Truck, Briefcase } from 'lucide-react'
+import {
+  Sparkles,
+  BookOpen,
+  ShieldCheck,
+  Leaf,
+  Newspaper,
+  Truck,
+  Briefcase,
+  Inbox,
+} from 'lucide-react'
 
 import type { Post } from '@/payload-types'
 import { CategoryRail } from '../sheared/CategoryRail'
@@ -60,6 +69,10 @@ export function BlogsGrid({ posts }: BlogsGridProps) {
     return posts.filter((post) => post.category === category)
   }, [posts, category])
 
+  const clearFilters = () => {
+    setCategory('all')
+  }
+
   return (
     <section className="pb-32">
       <div className="container-zova">
@@ -105,15 +118,18 @@ export function BlogsGrid({ posts }: BlogsGridProps) {
           </div>
         ) : (
           <div className="flex flex-col items-center py-32 text-center">
-            <div className="mb-6 rounded-full border border-border p-4">
-              <BookOpen className="size-6" />
-            </div>
-
+            <Inbox size={64} strokeWidth={1} className="mb-4" />
             <h3 className="text-2xl font-medium">No articles found</h3>
 
             <p className="mt-3 max-w-md text-muted-foreground">
               Try another category or explore all available insights.
             </p>
+            <button
+              onClick={clearFilters}
+              className="mt-8 rounded-full bg-foreground px-6 py-3 text-sm text-background"
+            >
+              View All Products
+            </button>
           </div>
         )}
       </div>

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { Shirt, ShoppingBag, Package, Home, Leaf, Factory } from 'lucide-react'
+import { Shirt, ShoppingBag, Package, Home, Leaf, Factory, Inbox } from 'lucide-react'
 
 import type { Product } from '@/payload-types'
 import { ProductCard } from './ProductCard'
@@ -140,6 +140,7 @@ export function ProductsGrid({ products = [] }: ProductsGridProps) {
               animate={{ opacity: 1 }}
               className="flex flex-col items-center py-24 text-center"
             >
+              <Inbox size={64} strokeWidth={1} className="mb-4" />
               <h3 className="text-2xl font-medium">No matching products</h3>
 
               <p className="mt-4 max-w-md text-muted-foreground">

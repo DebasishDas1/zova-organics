@@ -34,6 +34,11 @@ const nextConfig: NextConfig = {
         hostname: '*.r2.dev',
         pathname: '/**',
       },
+      {
+        // your Cloudflare R2 public URL
+        protocol: 'https',
+        hostname: process.env.R2_PUBLIC_HOSTNAME ?? '',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

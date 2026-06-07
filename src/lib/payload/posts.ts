@@ -52,18 +52,7 @@ export const getPosts = unstable_cache(
       limit,
       page,
       depth: 1,
-      select: {
-        title: true,
-        slug: true,
-        excerpt: true,
-        category: true,
-        featuredImage: true,
-        featuredImageAlt: true,
-        publishedAt: true,
-        readingTime: true,
-        featured: true,
-        tags: true,
-      },
+      // No select – fetch full post objects (includes all required fields)
     })
   },
   ['posts-list'],
