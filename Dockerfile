@@ -23,9 +23,6 @@ COPY . .
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-
-# Build-time placeholders so next build never throws on missing env vars.
-# Railway injects real values at runtime via the Variables tab.
 ENV PAYLOAD_SECRET=build-placeholder-32-char-secret!!
 ENV DATABASE_URL=postgres://placeholder:placeholder@localhost:5432/placeholder
 ENV NEXT_PUBLIC_SERVER_URL=https://zovaorganics.com
@@ -54,14 +51,20 @@ RUN adduser  --system --uid 1001 nextjs
 # Static assets
 COPY --from=builder /app/public ./public
 
-# Standalone build output (requires output: 'standalone' in next.config.ts)
+# Standalone output — this includes server.js + all server code including middleware
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static    ./.next/static
 
-# Payload migration files needed at runtime
+# Static files (css, js chunks) — must be copied separately after standalone
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Middleware manifest — required for middleware to run in standalone mode
+COPY --from=builder --chown=nextjs:nodejs /app/.next/server/middleware-manifest.json ./.next/server/middleware-manifest.json
+COPY --from=builder --chown=nextjs:nodejs /app/.next/server/middleware.js            ./.next/server/middleware.js
+
+# Payload migrations
 COPY --from=builder --chown=nextjs:nodejs /app/src/migrations ./src/migrations
 
-RUN mkdir -p .next && chown nextjs:nodejs .next
+RUN mkdir -p .next/server && chown -R nextjs:nodejs .next
 
 USER nextjs
 
