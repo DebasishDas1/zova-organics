@@ -44,27 +44,23 @@ ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 RUN apk add --no-cache libc6-compat
-
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser  --system --uid 1001 nextjs
 
 # Static assets
 COPY --from=builder /app/public ./public
 
-# Standalone output — this includes server.js + all server code including middleware
+# Standalone output — self-contained server including proxy (middleware)
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static    ./.next/static
 
-# Static files (css, js chunks) — must be copied separately after standalone
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# Middleware manifest — required for middleware to run in standalone mode
-COPY --from=builder --chown=nextjs:nodejs /app/.next/server/middleware-manifest.json ./.next/server/middleware-manifest.json
-COPY --from=builder --chown=nextjs:nodejs /app/.next/server/middleware.js            ./.next/server/middleware.js
+# Full .next/server dir — proxy.js, manifests, route chunks
+COPY --from=builder --chown=nextjs:nodejs /app/.next/server ./.next/server
 
 # Payload migrations
 COPY --from=builder --chown=nextjs:nodejs /app/src/migrations ./src/migrations
 
-RUN mkdir -p .next/server && chown -R nextjs:nodejs .next
+RUN mkdir -p .next && chown -R nextjs:nodejs .next
 
 USER nextjs
 
