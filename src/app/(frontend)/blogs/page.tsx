@@ -3,6 +3,8 @@ import { Metadata } from 'next'
 import { BlogsGrid } from '@/components/sections/blogs/BlogsGrid'
 import { getPosts } from '@/lib/payload/posts'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Sustainable Sourcing & Organic Textile Insights | Zova Organics',
 

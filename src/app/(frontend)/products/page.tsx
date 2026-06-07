@@ -3,6 +3,8 @@ import { getProducts } from '@/lib/payload/products'
 import { ProductsGrid } from '@/components/sections/products/ProductsGrid'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Organic Fabric Products — Wholesale Tote Bags, Pouches & More',
   description:

@@ -23,6 +23,8 @@ const env = <T extends string>(key: string): T => {
   return value as T
 }
 
+console.log('PAYLOAD_SECRET?', Boolean(process.env.PAYLOAD_SECRET))
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -52,7 +54,7 @@ export default buildConfig({
 
   editor: lexicalEditor(),
 
-  secret: env('PAYLOAD_SECRET'),
+  secret: process.env.PAYLOAD_SECRET || 'build-secret',
 
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
