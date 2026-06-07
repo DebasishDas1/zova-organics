@@ -14,12 +14,12 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "start": "node server.js",
+    "migrate": "cross-env DATABASE_URL=$DATABASE_URL_UNPOOLED payload migrate",
+    "migrate:create": "cross-env DATABASE_URL=$DATABASE_URL_UNPOOLED payload migrate:create",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test --config=playwright.config.ts",
-    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
-    "migrate": "cross-env DATABASE_URL=$DATABASE_URL_UNPOOLED payload migrate",
-    "migrate:create": "cross-env DATABASE_URL=$DATABASE_URL_UNPOOLED payload migrate:create"
+    "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1059.0",

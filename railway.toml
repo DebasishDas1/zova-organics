@@ -1,10 +1,9 @@
 [build]
-builder = "nixpacks"
-buildCommand = "pnpm run build"
+dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "pnpm run start"
+startCommand = "node server.js"
 healthcheckPath = "/api/health"
-healthcheckTimeout = 60
-restartPolicyType = "on_failure"
+healthcheckTimeout = 120
+restartPolicyType  = "on_failure"
 restartPolicyMaxRetries = 3
