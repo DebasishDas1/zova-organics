@@ -22,17 +22,7 @@ type Props = {
 }
 
 export const revalidate = 60
-
-// 1. Static params — tells Next.js all possible slugs at build time
-export async function generateStaticParams() {
-  const payload = await getPayload({ config })
-  const products = await payload.find({
-    collection: 'products',
-    limit: 1000,
-    select: { slug: true },
-  })
-  return products.docs.map((p) => ({ slug: p.slug }))
-}
+export const dynamic = 'force-dynamic'
 
 // 2. Dynamic metadata from Payload
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
