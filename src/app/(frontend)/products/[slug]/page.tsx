@@ -40,9 +40,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   const featuredImage = typeof product.featuredImage === 'object' ? product.featuredImage : null
 
-  const title = product.seo?.metaTitle || product.title
-  const description = product.seo?.metaDescription || product.shortDescription
-
+  const title = product.seo?.metaTitle ?? product.title ?? 'Untitled'
+  const description = product.seo?.metaDescription ?? product.shortDescription ?? ''
   return {
     title,
     description,

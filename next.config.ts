@@ -8,37 +8,29 @@ const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
   images: {
-    localPatterns: [
-      {
-        pathname: '/api/media/file/**',
-      },
-      {
-        pathname: '/**',
-      },
-    ],
+    localPatterns: [{ pathname: '/api/media/file/**' }, { pathname: '/**' }],
     remotePatterns: [
       {
+        // production custom domain
         protocol: 'https',
         hostname: 'media.zovaorganics.com',
         pathname: '/**',
       },
       {
-        // fallback during dev before custom domain is set up
+        // R2 direct bucket URLs (dev / staging)
         protocol: 'https',
         hostname: '*.r2.cloudflarestorage.com',
         pathname: '/**',
       },
       {
-        // allow images from R2 dev bucket URLs
+        // R2 public dev URLs
         protocol: 'https',
         hostname: '*.r2.dev',
         pathname: '/**',
       },
-      {
-        // your Cloudflare R2 public URL
-        protocol: 'https',
-        hostname: process.env.R2_PUBLIC_HOSTNAME ?? '',
-      },
+      // ← removed the process.env entry — it was the crash source
+      // All R2 URLs are already covered by the wildcards above.
+      // If you add a non-R2 CDN later, add it here as a static string.
     ],
     formats: ['image/avif', 'image/webp'],
   },
@@ -48,7 +40,6 @@ const nextConfig: NextConfig = {
       '.js': ['.ts', '.tsx', '.js', '.jsx'],
       '.mjs': ['.mts', '.mjs'],
     }
-
     return webpackConfig
   },
   turbopack: {

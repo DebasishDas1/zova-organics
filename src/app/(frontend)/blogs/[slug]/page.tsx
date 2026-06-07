@@ -19,7 +19,17 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const post = await getPostBySlug(slug)
-  if (!post) return {}
+  if (!post) {
+    // Return minimal metadata to avoid Next.js errors when post is missing
+    return {
+      title: 'Post Not Found',
+      description: 'The requested blog post does not exist.',
+    } as any
+  }
+
+  // Defensive defaults for required metadata fields
+  const title = post.seo?.metaTitle ?? post.title ?? 'Untitled'
+  const description = post.seo?.metaDescription ?? post.excerpt ?? ''
 
   // ogImage falls back to featuredImage — both are Media relationships
   const ogMediaUrl =
@@ -29,32 +39,31 @@ export async function generateMetadata({
         ? ((post.featuredImage as Media).url ?? null)
         : null
 
+  const ogImageUrl = ogMediaUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://zovaorganics.com'}/og-image.jpg`;
   return {
-    title: post.seo?.metaTitle ?? post.title,
-    description: post.seo?.metaDescription ?? post.excerpt,
+    title,
+    description,
     robots: post.seo?.noIndex ? { index: false, follow: false } : { index: true, follow: true },
     alternates: {
       canonical: post.seo?.canonicalUrl ?? `https://zovaorganics.com/blogs/${post.slug}`,
     },
     openGraph: {
-      title: post.seo?.metaTitle ?? post.title,
-      description: post.seo?.metaDescription ?? post.excerpt,
+      title,
+      description,
       type: 'article',
       url: `https://zovaorganics.com/blogs/${post.slug}`,
       publishedTime: post.publishedAt ?? undefined,
       modifiedTime: post.updatedAt,
       authors: ['https://zovaorganics.com/about-us'],
-      ...(ogMediaUrl && {
-        images: [{ url: ogMediaUrl, width: 1200, height: 630, alt: post.title }],
-      }),
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.seo?.metaTitle ?? post.title,
-      description: post.seo?.metaDescription ?? post.excerpt,
-      ...(ogMediaUrl && { images: [ogMediaUrl] }),
+      title,
+      description,
+      images: [ogImageUrl],
     },
-  }
+  };
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
