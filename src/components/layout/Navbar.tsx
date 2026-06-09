@@ -146,19 +146,19 @@ const NavbarComponent = () => {
                 'p-8 flex flex-col rounded-l-2xl',
               )}
             >
-              <SheetHeader>
+              <SheetHeader className="p-0">
                 <SheetTitle>ZOVA</SheetTitle>
                 <SheetDescription>Crafted in India. Trusted Worldwide.</SheetDescription>
               </SheetHeader>
 
-              <div className="grow flex flex-col justify-center gap-8 pl-4">
+              <div className="grow flex flex-col justify-center gap-8">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
                     onClick={closeMobileMenu}
                     aria-current={isActiveLink(link.href) ? 'page' : undefined}
-                    className="text-4xl hover:text-[#8C6B4A] transition-colors"
+                    className="text-3xl hover:text-[#8C6B4A] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -169,7 +169,7 @@ const NavbarComponent = () => {
               <div className="mt-auto">
                 <Button
                   onClick={closeMobileMenu}
-                  className="w-full rounded-full h-16 text-xs uppercase tracking-[0.3em] font-bold bg-[#2B1F14] text-white"
+                  className="w-full rounded-full h-16 text-xs uppercase tracking-[0.3em] font-bold bg-black text-white"
                 >
                   Join a journey
                 </Button>
