@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Media } from './collections/Media'
+import { Media, ProductImages, BlogImages } from './collections/Media'
 import { Products } from './collections/Products'
 import { Leads } from './collections/Leads'
 import { Certifications } from './collections/Certifications'
@@ -16,17 +16,20 @@ import { Posts } from './collections/Posts'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-// Safe env helper — returns fallback instead of throwing at build time
 const env = (key: string, fallback = '') => process.env[key] ?? fallback
-
 const isProduction = process.env.NODE_ENV === 'production'
+
+// Shared R2 URL generator — each collection gets its own prefix folder in the bucket
+const r2Base = env('R2_PUBLIC_URL', 'https://media.zovaorganics.com')
+const makeFileURL =
+  (prefix: string) =>
+  ({ filename }: { filename: string }) =>
+    `${r2Base}/${prefix}/${filename}`
 
 export default buildConfig({
   admin: {
     user: Users.slug,
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
+    importMap: { baseDir: path.resolve(dirname) },
     meta: {
       titleSuffix: ' | Zova Organics CMS',
       icons: [
@@ -36,7 +39,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, Products, Leads, Certifications, Posts],
+  collections: [Users, Media, ProductImages, BlogImages, Products, Leads, Certifications, Posts],
 
   editor: lexicalEditor(),
 
@@ -52,8 +55,12 @@ export default buildConfig({
         'DATABASE_URL',
         'postgres://placeholder:placeholder@localhost/placeholder',
       ),
+      // Railway Postgres requires SSL in production
+      ssl: isProduction ? { rejectUnauthorized: false } : false,
+      max: 10,
+      idleTimeoutMillis: 30_000,
+      connectionTimeoutMillis: 5_000,
     },
-    // Don't auto-push schema in production — use migrations
     push: !isProduction,
   }),
 
@@ -65,10 +72,17 @@ export default buildConfig({
         media: {
           prefix: 'media',
           disableLocalStorage: true,
-          generateFileURL: ({ filename, prefix }) => {
-            const base = env('R2_PUBLIC_URL', 'https://media.zovaorganics.com')
-            return `${base}/${prefix}/${filename}`
-          },
+          generateFileURL: makeFileURL('media'),
+        },
+        'product-images': {
+          prefix: 'product-images',
+          disableLocalStorage: true,
+          generateFileURL: makeFileURL('product-images'),
+        },
+        'blog-images': {
+          prefix: 'blog-images',
+          disableLocalStorage: true,
+          generateFileURL: makeFileURL('blog-images'),
         },
       },
       bucket: env('R2_BUCKET', 'placeholder-bucket'),
