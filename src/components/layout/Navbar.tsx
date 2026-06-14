@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/sheet'
 import { usePathname } from 'next/navigation'
 import { useUIStore } from '@/store/ui-store'
+import Image from 'next/image'
 
 const navLinks = [
   { name: 'Products', href: '/products' },
@@ -73,7 +74,14 @@ const NavbarComponent = () => {
           aria-label="Zova Organic home"
           className={cn('text-xl md:text-2xl font-bold tracking-tight transition-colors')}
         >
-          Zova Organic
+          <Image
+            src="/zova-logo-light.png"
+            alt="Zova Organic"
+            width={100}
+            height={100}
+            className="h-5 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -116,7 +124,7 @@ const NavbarComponent = () => {
               'transition-all duration-200',
             )}
           >
-            Become a Partner
+            <Link href="/contact">Become a Partner</Link>
             <ArrowRight className="ml-2 size-3.5" />
           </Button>
         </div>
@@ -147,8 +155,19 @@ const NavbarComponent = () => {
               )}
             >
               <SheetHeader className="p-0">
-                <SheetTitle>ZOVA</SheetTitle>
-                <SheetDescription>Crafted in India. Trusted Worldwide.</SheetDescription>
+                <SheetTitle>
+                  <Image
+                    src="/zova-logo-light.png"
+                    alt="Zova Organic"
+                    width={100}
+                    height={100}
+                    className="h-4 w-auto"
+                    priority
+                  />
+                </SheetTitle>
+                <SheetDescription className="hidden">
+                  Crafted in India. Trusted Worldwide.
+                </SheetDescription>
               </SheetHeader>
 
               <div className="grow flex flex-col justify-center gap-8">

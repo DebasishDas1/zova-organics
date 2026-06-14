@@ -11,9 +11,7 @@ RUN corepack enable && corepack prepare pnpm@10.17.1 --activate
 COPY package.json pnpm-lock.yaml ./
 COPY .npmrc* ./
 
-# Cache mount speeds up repeated builds — pnpm store is reused across builds
-RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
-    pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # ── Builder ───────────────────────────────────────────────────────────────────
 FROM base AS builder
@@ -78,3 +76,9 @@ EXPOSE 3000
 
 # JSON form so SIGTERM goes directly to node, not a shell
 CMD ["node", "server.js"]
+
+
+
+error log
+
+dockerfile invalid: flag '--mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store' is missing the cacheKey prefix from its id at Line 15

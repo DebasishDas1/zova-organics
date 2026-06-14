@@ -1,10 +1,19 @@
 import Loading from '@/components/ui/Loading'
+import Image from 'next/image'
 
 export default function LoadingPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-background">
       <div className="flex flex-col items-center gap-6">
         <Loading />
+        <Image
+          src="/zova-logo-light.png"
+          alt="Zova Logo"
+          width={100}
+          height={20}
+          priority
+          className="hidden h-6 w-auto lg:block"
+        />
 
         <div className="space-y-2 text-center">
           <p className="text-sm font-medium text-foreground">Preparing your experience</p>
