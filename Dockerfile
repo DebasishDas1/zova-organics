@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1.7
 FROM node:22.17.0-alpine AS base
 
 # ── Deps ──────────────────────────────────────────────────────────────────────
@@ -22,19 +21,16 @@ RUN corepack enable && corepack prepare pnpm@10.17.1 --activate
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build-time placeholders — Railway injects real values at runtime
-# NEXT_PUBLIC_* vars are inlined at build time so set the real value
-# in Railway dashboard as a build-time variable
-ENV NODE_ENV=production \
-    NEXT_TELEMETRY_DISABLED=1 \
-    PAYLOAD_SECRET=build-placeholder-32-char-secret!! \
-    DATABASE_URL=postgres://placeholder:placeholder@localhost:5432/placeholder \
-    NEXT_PUBLIC_SERVER_URL=https://zovaorganics.com \
-    R2_PUBLIC_URL=https://media.zovaorganics.com \
-    R2_BUCKET=placeholder \
-    R2_ENDPOINT=https://placeholder.r2.cloudflarestorage.com \
-    R2_ACCESS_KEY_ID=placeholder \
-    R2_SECRET_ACCESS_KEY=placeholder
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PAYLOAD_SECRET=build-placeholder-32-char-secret!!
+ENV DATABASE_URL=postgres://placeholder:placeholder@localhost:5432/placeholder
+ENV NEXT_PUBLIC_SERVER_URL=https://zovaorganics.com
+ENV R2_PUBLIC_URL=https://media.zovaorganics.com
+ENV R2_BUCKET=placeholder
+ENV R2_ENDPOINT=https://placeholder.r2.cloudflarestorage.com
+ENV R2_ACCESS_KEY_ID=placeholder
+ENV R2_SECRET_ACCESS_KEY=placeholder
 
 RUN pnpm run build
 
@@ -42,43 +38,32 @@ RUN pnpm run build
 FROM base AS runner
 WORKDIR /app
 
-# Combine apk, addgroup, adduser into one layer
-RUN apk add --no-cache libc6-compat \
-    && addgroup --system --gid 1001 nodejs \
-    && adduser  --system --uid 1001 nextjs
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 
-ENV NODE_ENV=production \
-    NEXT_TELEMETRY_DISABLED=1 \
-    PORT=3000 \
-    HOSTNAME=0.0.0.0
+RUN apk add --no-cache libc6-compat
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser  --system --uid 1001 nextjs
 
-# Public assets (no chown needed — read-only at runtime)
+# Static assets
 COPY --from=builder /app/public ./public
 
-# Standalone output — includes server.js + all SSR chunks + proxy
+# Standalone output — self-contained server including proxy (middleware)
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static    ./.next/static
 
-# Static files must be copied separately after standalone
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-# Full server dir — proxy manifest, route chunks, middleware
+# Full .next/server dir — proxy.js, manifests, route chunks
 COPY --from=builder --chown=nextjs:nodejs /app/.next/server ./.next/server
 
-# Payload migrations needed at container start
+# Payload migrations
 COPY --from=builder --chown=nextjs:nodejs /app/src/migrations ./src/migrations
 
-# Fix ownership of .next dir created by standalone copy
-RUN chown -R nextjs:nodejs .next
+RUN mkdir -p .next && chown -R nextjs:nodejs .next
 
 USER nextjs
 
 EXPOSE 3000
 
-# JSON form so SIGTERM goes directly to node, not a shell
 CMD ["node", "server.js"]
-
-
-
-error log
-
-dockerfile invalid: flag '--mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store' is missing the cacheKey prefix from its id at Line 15
