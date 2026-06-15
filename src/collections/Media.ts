@@ -18,3 +18,29 @@ export const Media: CollectionConfig = {
     { name: 'caption', type: 'text' },
   ],
 }
+
+export const ProductImages: CollectionConfig = {
+  slug: 'product-images',
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true
+      return {
+        status: {
+          equals: 'published',
+        },
+      }
+    },
+  },
+  upload: {
+    imageSizes: [
+      { name: 'thumbnail', width: 400, height: 400, position: 'center' },
+      { name: 'card', width: 800, height: 800, position: 'center' },
+    ],
+    adminThumbnail: 'thumbnail',
+    mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
+  },
+  fields: [
+    { name: 'alt', type: 'text', required: true },
+    { name: 'caption', type: 'text' },
+  ],
+}

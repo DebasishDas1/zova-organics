@@ -6,9 +6,9 @@ export const BlogImages: CollectionConfig = {
   access: { read: () => true },
   upload: {
     imageSizes: [
-      { name: 'thumbnail', width: 400, height: 225, position: 'centre' },
-      { name: 'hero', width: 1200, height: 675, position: 'centre' },
-      { name: 'og', width: 1200, height: 630, position: 'centre' },
+      { name: 'thumbnail', width: 400, height: 225, position: 'center' },
+      { name: 'hero', width: 1200, height: 675, position: 'center' },
+      { name: 'og', width: 1200, height: 630, position: 'center' },
     ],
     adminThumbnail: 'thumbnail',
     mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],

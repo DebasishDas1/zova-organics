@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 export const Leads: CollectionConfig = {
   slug: 'leads',
+  timestamps: true,
 
   admin: {
     useAsTitle: 'name',
@@ -45,6 +46,16 @@ export const Leads: CollectionConfig = {
     {
       name: 'website',
       type: 'text',
+      validate: (value: string | null | undefined) => {
+        if (!value) return true
+
+        try {
+          new URL(value)
+          return true
+        } catch {
+          return 'Invalid URL'
+        }
+      },
     },
 
     // ─── Inquiry details ──────────────────────────────────────────────

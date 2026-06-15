@@ -41,7 +41,7 @@ export async function generateMetadata({
         : null
 
   const ogImageUrl =
-    ogMediaUrl ?? `${process.env.NEXT_PUBLIC_SITE_URL ?? 'https://zovaorganics.com'}/og-image.jpg`
+    ogMediaUrl ?? `${process.env.NEXT_PUBLIC_SERVER_URL ?? 'https://zovaorganics.com'}/og-image.jpg`
   return {
     title,
     description,

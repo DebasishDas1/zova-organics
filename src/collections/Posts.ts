@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload';
+import type { CollectionConfig } from 'payload'
 import {
   lexicalEditor,
   HeadingFeature,
@@ -16,20 +16,30 @@ import {
   UnorderedListFeature,
   IndentFeature,
   AlignFeature,
-} from '@payloadcms/richtext-lexical';
+} from '@payloadcms/richtext-lexical'
 
 // Helper to trigger ISR revalidation via API route
 const triggerRevalidation = async (tag: string) => {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+  const base = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
   await fetch(`${base}/api/revalidate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ tag }),
-  });
-};
+  })
+}
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true
+      return {
+        status: {
+          equals: 'published',
+        },
+      }
+    },
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'author', 'status', 'publishedAt'],
@@ -46,33 +56,49 @@ export const Posts: CollectionConfig = {
     beforeChange: [
       ({ data }) => {
         if (data?.status === 'published' && !data?.publishedAt) {
-          data.publishedAt = new Date().toISOString();
+          data.publishedAt = new Date().toISOString()
         }
         if (data?.content) {
-          const raw = JSON.stringify(data.content);
+          const raw = JSON.stringify(data.content)
           const words = raw
             .replace(/\"[^\"]*\":/g, ' ') // remove keys
             .replace(/[{}[\\]\",]/g, ' ') // remove punctuation
             .trim()
             .split(/\s+/)
-            .filter(Boolean).length;
-          data.readingTime = Math.max(1, Math.round(words / 200));
+            .filter(Boolean).length
+          data.readingTime = Math.max(1, Math.round(words / 200))
         }
-        return data;
+        return data
       },
     ],
     afterChange: [
       async ({ doc }) => {
-        await triggerRevalidation('posts');
-        if (doc.slug) await triggerRevalidation(`post-${doc.slug}`);
-        return doc;
+        try {
+          await triggerRevalidation('posts')
+
+          if (doc.slug) {
+            await triggerRevalidation(`post-${doc.slug}`)
+          }
+        } catch (error) {
+          console.error('Revalidation failed:', error)
+        }
+
+        return doc
       },
     ],
     afterDelete: [
       async ({ doc }) => {
-        await triggerRevalidation('posts');
-        if (doc.slug) await triggerRevalidation(`post-${doc.slug}`);
-        return doc;
+        try {
+          await triggerRevalidation('posts')
+
+          if (doc.slug) {
+            await triggerRevalidation(`post-${doc.slug}`)
+          }
+        } catch (error) {
+          console.error(error)
+        }
+        if (doc.slug) await triggerRevalidation(`post-${doc.slug}`)
+        return doc
       },
     ],
   },
@@ -89,16 +115,17 @@ export const Posts: CollectionConfig = {
       hooks: {
         beforeValidate: [
           ({ value, data }) => {
-            const source = value || data?.title || '';
+            const source = value || data?.title || ''
             return source
               .toLowerCase()
               .normalize('NFD')
-              .replace(/[\\u0300-\\u036f]/g, '')
+              .replace(/[\u0300-\u036f]/g, '')
               .replace(/[^a-z0-9\\s-]/g, '')
               .trim()
               .replace(/\\s+/g, '-')
               .replace(/-+/g, '-')
-              .replace(/^-|-$/g, '');
+              .replace(/^-|-$/g, '')
+              .slice(0, 120)
           },
         ],
       },
@@ -145,16 +172,29 @@ export const Posts: CollectionConfig = {
       ],
       admin: { position: 'sidebar' },
     },
-    { name: 'featured', type: 'checkbox', defaultValue: false, index: true, admin: { position: 'sidebar' } },
+    {
+      name: 'featured',
+      type: 'checkbox',
+      defaultValue: false,
+      index: true,
+      admin: { position: 'sidebar' },
+    },
     {
       name: 'readingTime',
       type: 'number',
-      admin: { position: 'sidebar', readOnly: true, description: 'Auto-calculated from content word count on save.' },
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Auto-calculated from content word count on save.',
+      },
     },
     {
       name: 'tags',
       type: 'array',
-      admin: { position: 'sidebar', description: 'e.g. GOTS, tote bags, EU export, organic cotton' },
+      admin: {
+        position: 'sidebar',
+        description: 'e.g. GOTS, tote bags, EU export, organic cotton',
+      },
       fields: [{ name: 'tag', type: 'text', required: true }],
     },
     // ─── Content ───────────────────────────────────────────────────────────
@@ -163,10 +203,17 @@ export const Posts: CollectionConfig = {
       type: 'textarea',
       required: true,
       maxLength: 160,
-      admin: { description: 'Shown on blog cards and used as meta description. Max 160 characters.' },
+      admin: {
+        description: 'Shown on blog cards and used as meta description. Max 160 characters.',
+      },
     },
-    { name: 'featuredImage', type: 'upload', relationTo: 'media', required: true },
-    { name: 'featuredImageAlt', type: 'text', required: true, admin: { description: 'Describe the image for screen readers and search engines.' } },
+    { name: 'featuredImage', type: 'upload', relationTo: 'blog-images', required: true },
+    {
+      name: 'featuredImageAlt',
+      type: 'text',
+      required: true,
+      admin: { description: 'Describe the image for screen readers and search engines.' },
+    },
     {
       name: 'content',
       type: 'richText',
@@ -226,8 +273,22 @@ export const Posts: CollectionConfig = {
       admin: { description: 'Use H2/H3 headings, bullet lists, and images to structure for SEO.' },
     },
     // ─── Related content ───────────────────────────────────────────────────
-    { name: 'relatedProducts', type: 'relationship', relationTo: 'products', hasMany: true, maxDepth: 1, admin: { description: 'Shown in the sidebar. Link products relevant to this post.' } },
-    { name: 'relatedPosts', type: 'relationship', relationTo: 'posts', hasMany: true, maxDepth: 1, admin: { description: 'Further reading shown at the bottom. Max 2–3 posts.' } },
+    {
+      name: 'relatedProducts',
+      type: 'relationship',
+      relationTo: 'products',
+      hasMany: true,
+      maxDepth: 1,
+      admin: { description: 'Shown in the sidebar. Link products relevant to this post.' },
+    },
+    {
+      name: 'relatedPosts',
+      type: 'relationship',
+      relationTo: 'posts',
+      hasMany: true,
+      maxDepth: 1,
+      admin: { description: 'Further reading shown at the bottom. Max 2–3 posts.' },
+    },
     // ─── SEO ───────────────────────────────────────────────────────────────
     {
       type: 'group',
@@ -235,12 +296,49 @@ export const Posts: CollectionConfig = {
       label: 'SEO',
       admin: { position: 'sidebar' },
       fields: [
-        { name: 'metaTitle', type: 'text', minLength: 10, maxLength: 60, admin: { description: 'Overrides post title in search results. Keep 10–60 chars.' } },
-        { name: 'metaDescription', type: 'textarea', maxLength: 160, admin: { description: 'Overrides excerpt in search results. Keep under 160 chars.' } },
-        { name: 'canonicalUrl', type: 'text', admin: { description: 'Only set if this post is republished from another URL.' } },
-        { name: 'noIndex', type: 'checkbox', defaultValue: false, label: 'Hide from search engines (noindex)', admin: { description: 'Use for thin, duplicate, or temporary content only.' } },
-        { name: 'focusKeyword', type: 'text', admin: { description: 'Primary keyword this post targets. Internal tracking only — not published.' } },
-        { name: 'ogImage', type: 'upload', relationTo: 'media', label: 'Social share image', admin: { description: 'Shown on LinkedIn, WhatsApp, Twitter previews. 1200×630px. Falls back to featured image.' } },
+        {
+          name: 'metaTitle',
+          type: 'text',
+          minLength: 10,
+          maxLength: 60,
+          admin: { description: 'Overrides post title in search results. Keep 10–60 chars.' },
+        },
+        {
+          name: 'metaDescription',
+          type: 'textarea',
+          maxLength: 160,
+          admin: { description: 'Overrides excerpt in search results. Keep under 160 chars.' },
+        },
+        {
+          name: 'canonicalUrl',
+          type: 'text',
+          admin: { description: 'Only set if this post is republished from another URL.' },
+        },
+        {
+          name: 'noIndex',
+          type: 'checkbox',
+          defaultValue: false,
+          label: 'Hide from search engines (noindex)',
+          admin: { description: 'Use for thin, duplicate, or temporary content only.' },
+        },
+        {
+          name: 'focusKeyword',
+          type: 'text',
+          admin: {
+            description:
+              'Primary keyword this post targets. Internal tracking only — not published.',
+          },
+        },
+        {
+          name: 'ogImage',
+          type: 'upload',
+          relationTo: 'blog-images',
+          label: 'Social share image',
+          admin: {
+            description:
+              'Shown on LinkedIn, WhatsApp, Twitter previews. 1200×630px. Falls back to featured image.',
+          },
+        },
       ],
     },
     // ─── Schema markup ─────────────────────────────────────────────────────
@@ -259,22 +357,30 @@ export const Posts: CollectionConfig = {
             { label: 'How-to guide', value: 'HowTo' },
             { label: 'FAQ page', value: 'FAQPage' },
           ],
-          admin: { description: 'Article = standard post. HowTo / FAQPage unlock Google rich results.' },
+          admin: {
+            description: 'Article = standard post. HowTo / FAQPage unlock Google rich results.',
+          },
         },
         {
           name: 'faqItems',
           type: 'array',
           label: 'FAQ items',
           admin: {
-            description: 'Shown only when type is "FAQ page". Each item becomes a rich result in Google.',
+            description:
+              'Shown only when type is "FAQ page". Each item becomes a rich result in Google.',
             condition: (_, siblingData) => siblingData?.articleType === 'FAQPage',
           },
           fields: [
             { name: 'question', type: 'text', required: true },
-            { name: 'answer', type: 'textarea', required: true, admin: { description: 'Plain text only — no markdown. Keep answers concise.' } },
+            {
+              name: 'answer',
+              type: 'textarea',
+              required: true,
+              admin: { description: 'Plain text only — no markdown. Keep answers concise.' },
+            },
           ],
         },
       ],
     },
   ],
-};
+}
