@@ -1,7 +1,6 @@
 import config from '@payload-config'
 import { getPayload } from 'payload'
 import { notFound } from 'next/navigation'
-import Script from 'next/script'
 import Link from 'next/link'
 
 import type { Media, Certification } from '@/payload-types'
@@ -69,7 +68,6 @@ export default async function ProductPage({ params }: Props) {
     collection: 'products',
     where: {
       slug: { equals: slug },
-      status: { equals: 'active' },
     },
     depth: 2,
   })
@@ -105,7 +103,6 @@ export default async function ProductPage({ params }: Props) {
     where: {
       category: { equals: product.category },
       slug: { not_equals: slug },
-      status: { equals: 'active' },
     },
     limit: 4,
     depth: 2,

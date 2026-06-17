@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
         hostname: 'media.zovaorganics.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: '*.r2.dev',
+        pathname: '/**',
+      },
     ],
 
     formats: ['image/avif', 'image/webp'],
