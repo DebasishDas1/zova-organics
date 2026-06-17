@@ -567,7 +567,7 @@ export interface Post {
    * Auto-generated from title. Edit only if you need a custom URL.
    */
   slug: string;
-  status: 'draft' | 'review' | 'published' | 'archived';
+  status: 'draft' | 'published';
   /**
    * Set automatically on first publish. Override if needed.
    */

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef } from 'react'
 
 type SectionProps = ComponentPropsWithoutRef<'section'>
 

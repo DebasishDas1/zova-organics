@@ -109,6 +109,8 @@ export default async function BlogsPage() {
     ],
   }
 
+  // console.log({ postsResult })
+
   return (
     <>
       <JsonLd schema={blogSchema} />

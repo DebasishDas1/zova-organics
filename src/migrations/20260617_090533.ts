@@ -1,6 +1,6 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
-export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
    CREATE TYPE "public"."enum_products_stock_status" AS ENUM('draft', 'active', 'out-of-stock', 'discontinued');
   CREATE TYPE "public"."enum__products_v_version_stock_status" AS ENUM('draft', 'active', 'out-of-stock', 'discontinued');
@@ -10,7 +10,7 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "_products_v" DROP COLUMN "version_status";`)
 }
 
-export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
+export async function down({ db, payload: _payload, req: _req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    ALTER TABLE "products" ADD COLUMN "status" "enum_products_status" DEFAULT 'draft';
   ALTER TABLE "_products_v" ADD COLUMN "version_status" "enum__products_v_version_status" DEFAULT 'draft';

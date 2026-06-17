@@ -25,7 +25,7 @@ export async function generateMetadata({
     return {
       title: 'Post Not Found',
       description: 'The requested blog post does not exist.',
-    } as any
+    }
   }
 
   // Defensive defaults for required metadata fields
@@ -302,7 +302,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         href={`/products/${product.slug}`}
                         className="block rounded-xl border border-border p-4 transition-colors hover:bg-muted/40"
                       >
-                        <p className="font-medium">{(product as any).name}</p>
+                        <p className="font-medium">{product.title}</p>
                         <p className="mt-0.5 text-xs text-muted-foreground">View product →</p>
                       </Link>
                     ))}

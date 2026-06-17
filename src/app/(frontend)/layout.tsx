@@ -1,6 +1,6 @@
 // src/app/(frontend)/layout.tsx
 import type { Metadata } from 'next'
-import React from 'react'
+import Script from 'next/script'
 import { headers } from 'next/headers'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/logo.png',
         width: 1200,
         height: 630,
         alt: 'Zova Organics — sustainable textiles from India',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Zova Organics',
     description: 'Premium sustainable textile and lifestyle products sourced from India.',
-    images: ['/og-image.png'],
+    images: ['/logo.png'],
   },
   robots: { index: true, follow: true },
 }
@@ -102,17 +102,9 @@ export default async function FrontendLayout({
     >
       <head>
         {/* Google Tag Manager */}
-        <script
-          nonce={nonce}
-          suppressHydrationWarning
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-N75K7XZ2');`,
-          }}
-        />
+        <Script id="gtm" strategy="afterInteractive" nonce={nonce}>
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-N75K7XZ2');`}
+        </Script>
         {/* End Google Tag Manager */}
       </head>
       <body suppressHydrationWarning>
@@ -131,13 +123,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-          suppressHydrationWarning // ← make sure this is here
+          suppressHydrationWarning
         />
         <script
           nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
-          suppressHydrationWarning // ← and here
+          suppressHydrationWarning
         />
         <Navbar />
         <main className="pt-24">{children}</main>

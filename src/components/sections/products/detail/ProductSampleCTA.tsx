@@ -16,7 +16,7 @@ export function ProductSampleCTA({ product }: ProductSampleCTAProps) {
           <p className="mb-4 text-sm uppercase tracking-[0.25em] opacity-80">Request Samples</p>
 
           <h2 className="max-w-xl text-3xl font-medium md:text-5xl">
-            Evaluate quality before placing a bulk order.
+            Evaluate quality before placing a bulk order for {product.title}.
           </h2>
 
           <p className="mt-6 max-w-lg text-primary-foreground/80">

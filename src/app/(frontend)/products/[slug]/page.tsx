@@ -53,7 +53,28 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       description,
       url: `https://zovaorganics.com/products/${product.slug}`,
       images: featuredImage?.url
-        ? [{ url: featuredImage.url, width: 1200, height: 630, alt: product.title }]
+        ? [
+            {
+              url: featuredImage.url.startsWith('http')
+                ? featuredImage.url
+                : `https://zovaorganics.com${featuredImage.url}`,
+              width: featuredImage.width || 1200,
+              height: featuredImage.height || 630,
+              alt: product.title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: featuredImage?.url
+        ? [
+            featuredImage.url.startsWith('http')
+              ? featuredImage.url
+              : `https://zovaorganics.com${featuredImage.url}`,
+          ]
         : undefined,
     },
   }

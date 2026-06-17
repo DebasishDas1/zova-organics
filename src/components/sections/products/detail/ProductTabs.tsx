@@ -13,6 +13,7 @@ import {
   Ship,
   Tag,
   Stamp,
+  type LucideIcon,
 } from 'lucide-react'
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -207,7 +208,7 @@ function SpecCard({
   label,
   value,
 }: {
-  icon: any
+  icon: LucideIcon
   label: string
   value?: string | number | null
 }) {
@@ -227,7 +228,7 @@ function InfoCard({
   label,
   value,
 }: {
-  icon: any
+  icon: LucideIcon
   label: string
   value?: string | number | null
 }) {

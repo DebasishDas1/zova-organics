@@ -138,9 +138,7 @@ export const Posts: CollectionConfig = {
       index: true,
       options: [
         { label: 'Draft', value: 'draft' },
-        { label: 'Review', value: 'review' },
         { label: 'Published', value: 'published' },
-        { label: 'Archived', value: 'archived' },
       ],
       admin: { position: 'sidebar' },
     },

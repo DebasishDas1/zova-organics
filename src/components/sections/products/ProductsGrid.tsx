@@ -89,6 +89,10 @@ export function ProductsGrid({ products = [] }: ProductsGridProps) {
     setFilters([])
   }
 
+  const activeProducts = useMemo(() => {
+    return filteredProducts.filter((product) => product.stockStatus === 'active')
+  }, [filteredProducts])
+
   return (
     <section className="pb-32">
       <div className="container-zova">
@@ -101,17 +105,17 @@ export function ProductsGrid({ products = [] }: ProductsGridProps) {
             <p className="text-sm text-muted-foreground">Collection</p>
 
             <h2 className="mt-2 text-2xl font-medium md:text-3xl">
-              {filteredProducts.length} Product
-              {filteredProducts.length !== 1 ? 's' : ''}
+              {activeProducts.length} Product
+              {activeProducts.length !== 1 ? 's' : ''}
             </h2>
           </div>
         </div>
 
         {/* Products */}
         <AnimatePresence mode="wait">
-          {filteredProducts.length > 0 ? (
+          {activeProducts.length > 0 ? (
             <motion.div layout className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-              {filteredProducts.map((product) => (
+              {activeProducts.map((product) => (
                 <motion.div
                   key={product.id}
                   layout
