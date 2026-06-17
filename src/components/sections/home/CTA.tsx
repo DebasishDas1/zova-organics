@@ -6,7 +6,7 @@ export function CTA() {
   return (
     <section className="py-32 bg-primary text-primary-foreground">
       <div className="container-zova text-center">
-        <h2 className="max-w-4xl mx-auto">Let's build something global together.</h2>
+        <h2 className="max-w-4xl mx-auto">Let&apos;s build something global together.</h2>
 
         <p className="mx-auto mt-8 max-w-2xl text-primary-foreground/70">
           Partner with Zova Organics for sustainable sourcing, reliable manufacturing, and worldwide

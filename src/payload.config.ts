@@ -62,7 +62,7 @@ export default buildConfig({
       idleTimeoutMillis: 30_000,
       connectionTimeoutMillis: 5_000,
     },
-    push: false,
+    push: true,
   }),
 
   sharp,

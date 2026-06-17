@@ -21,9 +21,9 @@ export default function NotFound() {
             height={300}
             className="mx-auto mb-8"
           />
-          <h1 className="text-4xl font-bold mb-4">Let's get you back on track.</h1>
+          <h1 className="text-4xl font-bold mb-4">Let&apos;s get you back on track.</h1>
           <p className="mb-6 text-muted-foreground">
-            The page you're looking for isn't available. Explore our collection of sustainable
+            The page you&apos;re looking for isn&apos;t available. Explore our collection of sustainable
             products
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">

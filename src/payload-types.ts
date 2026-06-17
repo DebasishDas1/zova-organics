@@ -303,7 +303,7 @@ export interface Product {
    * Internal SKU code. e.g. ZO-TB-001
    */
   sku: string;
-  status: 'draft' | 'active' | 'out-of-stock' | 'discontinued';
+  stockStatus: 'draft' | 'active' | 'out-of-stock' | 'discontinued';
   /**
    * Show on homepage featured section
    */
@@ -340,13 +340,13 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
-  featuredImage: number | Media;
+  featuredImage: number | ProductImage;
   /**
    * Additional product images (packaging, close-ups, in-use)
    */
   gallery?:
     | {
-        image: number | Media;
+        image: number | ProductImage;
         caption?: string | null;
         id?: string | null;
       }[]
@@ -963,7 +963,7 @@ export interface ProductsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   sku?: T;
-  status?: T;
+  stockStatus?: T;
   featured?: T;
   category?: T;
   tags?:

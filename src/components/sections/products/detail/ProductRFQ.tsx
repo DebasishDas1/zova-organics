@@ -17,7 +17,7 @@ export function ProductRFQ({ product }: Props) {
             Request a quote or sample for {product.title}
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Fill in your requirements and we'll get back to you within 24 hours with pricing, lead times, and next steps.
+            Fill in your requirements and we&apos;ll get back to you within 24 hours with pricing, lead times, and next steps.
           </p>
         </div>
 

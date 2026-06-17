@@ -1,11 +1,50 @@
 import type { CollectionConfig } from 'payload'
+import type { FieldHook } from 'payload'
+
+const generateSlug = (text: string) =>
+  text
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+
+const slugHook: FieldHook = ({ data, value }) => {
+  if (value) return value
+
+  if (data?.title) {
+    return generateSlug(data.title)
+  }
+
+  return value
+}
+
+export const skuHook: FieldHook = ({ value, data }) => {
+  if (value) return value
+
+  const categoryMap: Record<string, string> = {
+    bags: 'BAG',
+    pouches: 'POU',
+    'organic-fabrics': 'FAB',
+    'home-textiles': 'HOME',
+    'yoga-wellness': 'YOGA',
+    'custom-oem': 'OEM',
+  }
+
+  const category =
+    categoryMap[data?.category] || data?.category?.toUpperCase()?.slice(0, 4) || 'GEN'
+
+  const slugPart = data?.slug?.split('-').slice(0, 2).join('').toUpperCase() || 'ITEM'
+
+  return `ZO-${category}-${slugPart}`
+}
 
 export const Products: CollectionConfig = {
   slug: 'products',
 
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'status', 'featured'],
+    defaultColumns: ['title', 'category', 'stockStatus', 'featured'],
     group: 'Catalogue',
   },
 
@@ -26,6 +65,9 @@ export const Products: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      hooks: {
+        beforeValidate: [slugHook],
+      },
       admin: {
         description: 'URL-safe identifier. e.g. natural-cotton-tote-bag',
       },
@@ -36,19 +78,22 @@ export const Products: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
+      hooks: {
+        beforeValidate: [skuHook],
+      },
       admin: {
         description: 'Internal SKU code. e.g. ZO-TB-001',
       },
     },
 
     {
-      name: 'status',
+      name: 'stockStatus',
       type: 'select',
       required: true,
       defaultValue: 'draft',
       options: [
-        { label: 'Draft',        value: 'draft' },
-        { label: 'Active',       value: 'active' },
+        { label: 'Draft', value: 'draft' },
+        { label: 'Active', value: 'active' },
         { label: 'Out of stock', value: 'out-of-stock' },
         { label: 'Discontinued', value: 'discontinued' },
       ],
@@ -74,11 +119,11 @@ export const Products: CollectionConfig = {
       required: true,
       options: [
         { label: 'Organic fabrics', value: 'organic-fabrics' },
-        { label: 'Bags',            value: 'bags' },
-        { label: 'Pouches',         value: 'pouches' },
-        { label: 'Home textiles',   value: 'home-textiles' },
+        { label: 'Bags', value: 'bags' },
+        { label: 'Pouches', value: 'pouches' },
+        { label: 'Home textiles', value: 'home-textiles' },
         { label: 'Yoga & wellness', value: 'yoga-wellness' },
-        { label: 'Custom / OEM',    value: 'custom-oem' },
+        { label: 'Custom / OEM', value: 'custom-oem' },
       ],
     },
 
@@ -119,7 +164,7 @@ export const Products: CollectionConfig = {
     {
       name: 'featuredImage',
       type: 'upload',
-      relationTo: 'media',
+      relationTo: 'product-images',
       required: true,
     },
 
@@ -133,7 +178,7 @@ export const Products: CollectionConfig = {
         {
           name: 'image',
           type: 'upload',
-          relationTo: 'media',
+          relationTo: 'product-images',
           required: true,
         },
         {
@@ -235,10 +280,10 @@ export const Products: CollectionConfig = {
           type: 'select',
           defaultValue: 'FOB',
           options: [
-            { label: 'FOB – Free on Board',             value: 'FOB' },
+            { label: 'FOB – Free on Board', value: 'FOB' },
             { label: 'CIF – Cost, Insurance & Freight', value: 'CIF' },
-            { label: 'DDP – Delivered Duty Paid',       value: 'DDP' },
-            { label: 'EXW – Ex Works',                  value: 'EXW' },
+            { label: 'DDP – Delivered Duty Paid', value: 'DDP' },
+            { label: 'EXW – Ex Works', value: 'EXW' },
           ],
         },
 
@@ -350,7 +395,8 @@ export const Products: CollectionConfig = {
       relationTo: 'certifications',
       hasMany: true,
       admin: {
-        description: 'Link applicable certifications. Manage them in the Certifications collection.',
+        description:
+          'Link applicable certifications. Manage them in the Certifications collection.',
       },
     },
 
@@ -427,7 +473,7 @@ export const Products: CollectionConfig = {
           options: [
             { label: 'Sea freight', value: 'sea' },
             { label: 'Air freight', value: 'air' },
-            { label: 'Courier',     value: 'courier' },
+            { label: 'Courier', value: 'courier' },
           ],
           defaultValue: ['sea', 'air'],
         },
@@ -438,12 +484,12 @@ export const Products: CollectionConfig = {
           hasMany: true,
           label: 'Documents provided',
           options: [
-            { label: 'Commercial invoice',     value: 'commercial-invoice' },
-            { label: 'Packing list',           value: 'packing-list' },
-            { label: 'Certificate of origin',  value: 'coo' },
-            { label: 'Phytosanitary cert',     value: 'phyto' },
-            { label: 'Test reports',           value: 'test-reports' },
-            { label: 'GOTS transaction cert',  value: 'gots-tc' },
+            { label: 'Commercial invoice', value: 'commercial-invoice' },
+            { label: 'Packing list', value: 'packing-list' },
+            { label: 'Certificate of origin', value: 'coo' },
+            { label: 'Phytosanitary cert', value: 'phyto' },
+            { label: 'Test reports', value: 'test-reports' },
+            { label: 'GOTS transaction cert', value: 'gots-tc' },
           ],
           defaultValue: ['commercial-invoice', 'packing-list', 'coo'],
         },

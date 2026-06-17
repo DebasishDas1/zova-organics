@@ -1,4 +1,4 @@
-import { Leaf, Users, Factory, Globe2 } from 'lucide-react'
+import { Leaf, Users, Factory } from 'lucide-react'
 
 const strengths = [
   { title: 'Organic Textiles', icon: Leaf },
@@ -22,8 +22,8 @@ export function WhyIndia() {
 
           <div>
             <p className="text-xl text-foreground">
-              India offers one of the world's most diverse manufacturing ecosystems. From organic
-              cotton farms to highly skilled textile artisans, it combines centuries of
+              India offers one of the world&apos;s most diverse manufacturing ecosystems. From
+              organic cotton farms to highly skilled textile artisans, it combines centuries of
               craftsmanship with modern production capabilities.
             </p>
 

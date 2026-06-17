@@ -16,12 +16,12 @@ type SectionHeroProps = Readonly<{
   className?: string
 }>
 
-const titleVariants = {
-  sm: 'max-w-3xl text-4xl md:text-5xl',
-  md: 'max-w-4xl text-5xl md:text-6xl',
-  lg: 'max-w-5xl text-6xl md:text-7xl',
-  xl: 'max-w-6xl text-7xl md:text-8xl',
-}
+// const titleVariants = {
+//   sm: 'max-w-3xl text-4xl md:text-5xl',
+//   md: 'max-w-4xl text-5xl md:text-6xl',
+//   lg: 'max-w-5xl text-6xl md:text-7xl',
+//   xl: 'max-w-6xl text-7xl md:text-8xl',
+// }
 
 export function SectionHero({
   eyebrow,
@@ -30,7 +30,7 @@ export function SectionHero({
   children,
   actions,
   align = 'left',
-  size = 'lg',
+  // size = 'lg',
   className,
 }: SectionHeroProps) {
   return (
@@ -42,7 +42,7 @@ export function SectionHero({
           <motion.span
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
             className="text-xs uppercase tracking-[0.3em] text-muted-foreground"
           >
             {eyebrow}
@@ -50,21 +50,21 @@ export function SectionHero({
         )}
 
         <motion.h1
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
           {title}
         </motion.h1>
 
         {description && (
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: 0.2,
-              duration: 0.6,
+              delay: 0.1,
+              duration: 0.4,
             }}
             className={cn(
               'mt-8 max-w-2xl text-lg md:text-xl text-muted-foreground',
@@ -77,11 +77,11 @@ export function SectionHero({
 
         {actions && (
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              delay: 0.3,
-              duration: 0.6,
+              delay: 0.15,
+              duration: 0.4,
             }}
             className={cn('mt-10 flex flex-wrap gap-4', align === 'center' && 'justify-center')}
           >
@@ -94,8 +94,8 @@ export function SectionHero({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{
-              delay: 0.4,
-              duration: 0.6,
+              delay: 0.2,
+              duration: 0.4,
             }}
             className="mt-12"
           >
