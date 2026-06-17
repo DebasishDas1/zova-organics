@@ -1,9 +1,16 @@
 // src/collections/BlogImages.ts
 import type { CollectionConfig } from 'payload'
 
+const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+
 export const BlogImages: CollectionConfig = {
   slug: 'blog-images',
-  access: { read: () => true },
+  access: {
+    read: () => true,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   upload: {
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 225, position: 'center' },

@@ -1,9 +1,16 @@
 // src/collections/ProductImages.ts
 import type { CollectionConfig } from 'payload'
 
+const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+
 export const ProductImages: CollectionConfig = {
   slug: 'product-images',
-  access: { read: () => true },
+  access: {
+    read: () => true,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   upload: {
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 400, position: 'centre' },

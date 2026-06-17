@@ -1,8 +1,17 @@
 import type { CollectionConfig } from 'payload'
 
+const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+
 export const Leads: CollectionConfig = {
   slug: 'leads',
   timestamps: true,
+
+  access: {
+    create: isAdmin,
+    read: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
 
   admin: {
     useAsTitle: 'name',

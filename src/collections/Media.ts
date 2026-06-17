@@ -1,9 +1,16 @@
 // src/collections/Media.ts
 import type { CollectionConfig } from 'payload'
 
+const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+
 export const Media: CollectionConfig = {
   slug: 'media',
-  access: { read: () => true },
+  access: {
+    read: () => true,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
   upload: {
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 400, position: 'center' },
@@ -22,14 +29,10 @@ export const Media: CollectionConfig = {
 export const ProductImages: CollectionConfig = {
   slug: 'product-images',
   access: {
-    read: ({ req }) => {
-      if (req.user) return true
-      return {
-        status: {
-          equals: 'published',
-        },
-      }
-    },
+    read: () => true,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
   upload: {
     imageSizes: [

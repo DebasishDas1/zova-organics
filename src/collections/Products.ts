@@ -39,8 +39,17 @@ export const skuHook: FieldHook = ({ value, data }) => {
   return `ZO-${category}-${slugPart}`
 }
 
+const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+
 export const Products: CollectionConfig = {
   slug: 'products',
+
+  access: {
+    create: isAdmin,
+    read: () => true,
+    update: isAdmin,
+    delete: isAdmin,
+  },
 
   admin: {
     useAsTitle: 'title',
