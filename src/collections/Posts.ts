@@ -36,7 +36,7 @@ export const Posts: CollectionConfig = {
     create: isAdmin,
     read: ({ req }) => {
       if (req.user?.role === 'admin') return true
-      if (req.user) return true
+      // Public: only published posts
       return { status: { equals: 'published' } }
     },
     update: isAdmin,
@@ -63,8 +63,8 @@ export const Posts: CollectionConfig = {
         if (data?.content) {
           const raw = JSON.stringify(data.content)
           const words = raw
-            .replace(/\"[^\"]*\":/g, ' ') // remove keys
-            .replace(/[{}[\\]\",]/g, ' ') // remove punctuation
+            .replace(/\"[^\"]*\":/g, ' ')
+            .replace(/[{}[\]",]/g, ' ')
             .trim()
             .split(/\s+/)
             .filter(Boolean).length
@@ -77,14 +77,10 @@ export const Posts: CollectionConfig = {
       async ({ doc }) => {
         try {
           await triggerRevalidation('posts')
-
-          if (doc.slug) {
-            await triggerRevalidation(`post-${doc.slug}`)
-          }
+          if (doc.slug) await triggerRevalidation(`post-${doc.slug}`)
         } catch (error) {
           console.error('Revalidation failed:', error)
         }
-
         return doc
       },
     ],
@@ -92,14 +88,10 @@ export const Posts: CollectionConfig = {
       async ({ doc }) => {
         try {
           await triggerRevalidation('posts')
-
-          if (doc.slug) {
-            await triggerRevalidation(`post-${doc.slug}`)
-          }
+          if (doc.slug) await triggerRevalidation(`post-${doc.slug}`)
         } catch (error) {
           console.error(error)
         }
-        if (doc.slug) await triggerRevalidation(`post-${doc.slug}`)
         return doc
       },
     ],
@@ -122,9 +114,9 @@ export const Posts: CollectionConfig = {
               .toLowerCase()
               .normalize('NFD')
               .replace(/[\u0300-\u036f]/g, '')
-              .replace(/[^a-z0-9\\s-]/g, '')
+              .replace(/[^a-z0-9\s-]/g, '')
               .trim()
-              .replace(/\\s+/g, '-')
+              .replace(/\s+/g, '-')
               .replace(/-+/g, '-')
               .replace(/^-|-$/g, '')
               .slice(0, 120)
