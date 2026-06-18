@@ -3,6 +3,8 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { exportMarkets } from '@/lib/export-markets'
 
+export const dynamic = 'force-dynamic'
+
 const BASE_URL = 'https://zovaorganics.com'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
