@@ -14,12 +14,15 @@ import { Certifications } from './collections/Certifications'
 import { Posts } from './collections/Posts'
 import { BlogImages } from './collections/BlogImages'
 import { ProductImages } from './collections/ProductImages'
+import { getServerURL, getTrustedOrigins } from './lib/server-url'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const env = (key: string, fallback = '') => process.env[key] ?? fallback
 const isProduction = process.env.NODE_ENV === 'production'
+const serverURL = getServerURL()
+const trustedOrigins = getTrustedOrigins(serverURL)
 
 // Shared R2 URL generator — each collection gets its own prefix folder in the bucket
 const r2Base = env('R2_PUBLIC_URL', 'https://media.zovaorganics.com')
@@ -100,5 +103,7 @@ export default buildConfig({
     }),
   ],
 
-  serverURL: env('NEXT_PUBLIC_SERVER_URL', 'http://localhost:3000'),
+  serverURL,
+  csrf: trustedOrigins,
+  cors: trustedOrigins,
 })

@@ -3,6 +3,8 @@ import type { NextConfig } from 'next'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import { getAllowedActionOrigins } from './src/lib/server-url'
+
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
@@ -11,6 +13,12 @@ const nextConfig: NextConfig = {
 
   compress: true,
   poweredByHeader: false,
+
+  experimental: {
+    serverActions: {
+      allowedOrigins: getAllowedActionOrigins(),
+    },
+  },
 
   images: {
     localPatterns: [{ pathname: '/api/media/file/**' }, { pathname: '/**' }],

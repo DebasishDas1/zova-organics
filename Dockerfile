@@ -25,6 +25,7 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PAYLOAD_SECRET=build-placeholder-32-char-secret!!
 ENV DATABASE_URL=postgres://placeholder:placeholder@localhost:5432/placeholder
+ENV SERVER_URL=https://zovaorganics.com
 ENV NEXT_PUBLIC_SERVER_URL=https://zovaorganics.com
 ENV R2_PUBLIC_URL=https://media.zovaorganics.com
 ENV R2_BUCKET=placeholder
