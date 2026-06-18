@@ -10,7 +10,16 @@ const BASE_URL = 'https://zovaorganics.com'
 
 const getSitemapEntries = unstable_cache(
   async (): Promise<MetadataRoute.Sitemap> => {
-    const [productSlugs, postSlugs] = await Promise.all([getAllProductSlugs(), getAllPostSlugs()])
+    let productSlugs: Array<{ slug: string }> = []
+    let postSlugs: Array<{ slug: string }> = []
+
+    try {
+      ;[productSlugs, postSlugs] = await Promise.all([getAllProductSlugs(), getAllPostSlugs()])
+    } catch {
+      // During build, a DB connection may be unavailable. Generate a minimal sitemap instead.
+      productSlugs = []
+      postSlugs = []
+    }
 
     const exportUrls = Object.keys(exportMarkets).map((country) => ({
       url: `${BASE_URL}/export/${country}`,
