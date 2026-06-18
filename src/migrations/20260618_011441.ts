@@ -1,20 +1,22 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
-export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): Promise<void> {
+export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   CREATE TYPE "public"."enum_users_role" AS ENUM('user', 'partner', 'admin');
+   CREATE TYPE "public"."enum_users_role" AS ENUM('user', 'admin');
   CREATE TYPE "public"."enum_products_shipping_shipping_modes" AS ENUM('sea', 'air', 'courier');
   CREATE TYPE "public"."enum_products_shipping_documents_provided" AS ENUM('commercial-invoice', 'packing-list', 'coo', 'phyto', 'test-reports', 'gots-tc');
-  CREATE TYPE "public"."enum_products_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum_products_stock_status" AS ENUM('draft', 'active', 'out-of-stock', 'discontinued');
   CREATE TYPE "public"."enum_products_category" AS ENUM('organic-fabrics', 'bags', 'pouches', 'home-textiles', 'yoga-wellness', 'custom-oem');
   CREATE TYPE "public"."enum_products_pricing_currency" AS ENUM('USD', 'EUR', 'GBP');
   CREATE TYPE "public"."enum_products_pricing_incoterm" AS ENUM('FOB', 'CIF', 'DDP', 'EXW');
+  CREATE TYPE "public"."enum_products_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum__products_v_version_shipping_shipping_modes" AS ENUM('sea', 'air', 'courier');
   CREATE TYPE "public"."enum__products_v_version_shipping_documents_provided" AS ENUM('commercial-invoice', 'packing-list', 'coo', 'phyto', 'test-reports', 'gots-tc');
-  CREATE TYPE "public"."enum__products_v_version_status" AS ENUM('draft', 'published');
+  CREATE TYPE "public"."enum__products_v_version_stock_status" AS ENUM('draft', 'active', 'out-of-stock', 'discontinued');
   CREATE TYPE "public"."enum__products_v_version_category" AS ENUM('organic-fabrics', 'bags', 'pouches', 'home-textiles', 'yoga-wellness', 'custom-oem');
   CREATE TYPE "public"."enum__products_v_version_pricing_currency" AS ENUM('USD', 'EUR', 'GBP');
   CREATE TYPE "public"."enum__products_v_version_pricing_incoterm" AS ENUM('FOB', 'CIF', 'DDP', 'EXW');
+  CREATE TYPE "public"."enum__products_v_version_status" AS ENUM('draft', 'published');
   CREATE TYPE "public"."enum_leads_category" AS ENUM('organic-fabrics', 'bags', 'pouches', 'home-textiles', 'yoga-wellness', 'custom-oem', 'other');
   CREATE TYPE "public"."enum_leads_inquiry_type" AS ENUM('rfq', 'sample', 'catalogue', 'private-label', 'partnership', 'general');
   CREATE TYPE "public"."enum_leads_source" AS ENUM('website', 'indiamart', 'alibaba', 'trade-show', 'linkedin', 'referral', 'email-campaign', 'other');
@@ -111,7 +113,19 @@ export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): P
   	"sizes_card_height" numeric,
   	"sizes_card_mime_type" varchar,
   	"sizes_card_filesize" numeric,
-  	"sizes_card_filename" varchar
+  	"sizes_card_filename" varchar,
+  	"sizes_zoom_url" varchar,
+  	"sizes_zoom_width" numeric,
+  	"sizes_zoom_height" numeric,
+  	"sizes_zoom_mime_type" varchar,
+  	"sizes_zoom_filesize" numeric,
+  	"sizes_zoom_filename" varchar,
+  	"sizes_og_url" varchar,
+  	"sizes_og_width" numeric,
+  	"sizes_og_height" numeric,
+  	"sizes_og_mime_type" varchar,
+  	"sizes_og_filesize" numeric,
+  	"sizes_og_filename" varchar
   );
   
   CREATE TABLE "blog_images" (
@@ -202,7 +216,7 @@ export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): P
   	"title" varchar,
   	"slug" varchar,
   	"sku" varchar,
-  	"status" "enum_products_status" DEFAULT 'draft',
+  	"stock_status" "enum_products_stock_status" DEFAULT 'draft',
   	"featured" boolean DEFAULT false,
   	"category" "enum_products_category",
   	"short_description" varchar,
@@ -300,7 +314,7 @@ export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): P
   	"version_title" varchar,
   	"version_slug" varchar,
   	"version_sku" varchar,
-  	"version_status" "enum__products_v_version_status" DEFAULT 'draft',
+  	"version_stock_status" "enum__products_v_version_stock_status" DEFAULT 'draft',
   	"version_featured" boolean DEFAULT false,
   	"version_category" "enum__products_v_version_category",
   	"version_short_description" varchar,
@@ -626,6 +640,8 @@ export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): P
   CREATE UNIQUE INDEX "product_images_filename_idx" ON "product_images" USING btree ("filename");
   CREATE INDEX "product_images_sizes_thumbnail_sizes_thumbnail_filename_idx" ON "product_images" USING btree ("sizes_thumbnail_filename");
   CREATE INDEX "product_images_sizes_card_sizes_card_filename_idx" ON "product_images" USING btree ("sizes_card_filename");
+  CREATE INDEX "product_images_sizes_zoom_sizes_zoom_filename_idx" ON "product_images" USING btree ("sizes_zoom_filename");
+  CREATE INDEX "product_images_sizes_og_sizes_og_filename_idx" ON "product_images" USING btree ("sizes_og_filename");
   CREATE INDEX "blog_images_updated_at_idx" ON "blog_images" USING btree ("updated_at");
   CREATE INDEX "blog_images_created_at_idx" ON "blog_images" USING btree ("created_at");
   CREATE UNIQUE INDEX "blog_images_filename_idx" ON "blog_images" USING btree ("filename");
@@ -765,7 +781,7 @@ export async function up({ db, payload: _payload, req: _req }: MigrateUpArgs): P
   CREATE INDEX "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");`)
 }
 
-export async function down({ db, payload: _payload, req: _req }: MigrateDownArgs): Promise<void> {
+export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    DROP TABLE "users_sessions" CASCADE;
   DROP TABLE "users" CASCADE;
@@ -809,16 +825,18 @@ export async function down({ db, payload: _payload, req: _req }: MigrateDownArgs
   DROP TYPE "public"."enum_users_role";
   DROP TYPE "public"."enum_products_shipping_shipping_modes";
   DROP TYPE "public"."enum_products_shipping_documents_provided";
-  DROP TYPE "public"."enum_products_status";
+  DROP TYPE "public"."enum_products_stock_status";
   DROP TYPE "public"."enum_products_category";
   DROP TYPE "public"."enum_products_pricing_currency";
   DROP TYPE "public"."enum_products_pricing_incoterm";
+  DROP TYPE "public"."enum_products_status";
   DROP TYPE "public"."enum__products_v_version_shipping_shipping_modes";
   DROP TYPE "public"."enum__products_v_version_shipping_documents_provided";
-  DROP TYPE "public"."enum__products_v_version_status";
+  DROP TYPE "public"."enum__products_v_version_stock_status";
   DROP TYPE "public"."enum__products_v_version_category";
   DROP TYPE "public"."enum__products_v_version_pricing_currency";
   DROP TYPE "public"."enum__products_v_version_pricing_incoterm";
+  DROP TYPE "public"."enum__products_v_version_status";
   DROP TYPE "public"."enum_leads_category";
   DROP TYPE "public"."enum_leads_inquiry_type";
   DROP TYPE "public"."enum_leads_source";

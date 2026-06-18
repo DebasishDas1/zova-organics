@@ -1,6 +1,6 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 
-const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -33,10 +33,6 @@ export const Users: CollectionConfig = {
         { label: 'Admin', value: 'admin' },
       ],
       required: true,
-      // Only admins can change roles
-      access: {
-        update: isAdmin,
-      },
     },
   ],
 }

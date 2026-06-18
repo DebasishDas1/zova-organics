@@ -1,6 +1,6 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 
-const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
 
 export const Leads: CollectionConfig = {
   slug: 'leads',

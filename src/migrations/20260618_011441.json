@@ -693,6 +693,78 @@
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
+        },
+        "sizes_zoom_url": {
+          "name": "sizes_zoom_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_zoom_width": {
+          "name": "sizes_zoom_width",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_zoom_height": {
+          "name": "sizes_zoom_height",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_zoom_mime_type": {
+          "name": "sizes_zoom_mime_type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_zoom_filesize": {
+          "name": "sizes_zoom_filesize",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_zoom_filename": {
+          "name": "sizes_zoom_filename",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_og_url": {
+          "name": "sizes_og_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_og_width": {
+          "name": "sizes_og_width",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_og_height": {
+          "name": "sizes_og_height",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_og_mime_type": {
+          "name": "sizes_og_mime_type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_og_filesize": {
+          "name": "sizes_og_filesize",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sizes_og_filename": {
+          "name": "sizes_og_filename",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {
@@ -761,6 +833,36 @@
           "columns": [
             {
               "expression": "sizes_card_filename",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "product_images_sizes_zoom_sizes_zoom_filename_idx": {
+          "name": "product_images_sizes_zoom_sizes_zoom_filename_idx",
+          "columns": [
+            {
+              "expression": "sizes_zoom_filename",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "product_images_sizes_og_sizes_og_filename_idx": {
+          "name": "product_images_sizes_og_sizes_og_filename_idx",
+          "columns": [
+            {
+              "expression": "sizes_og_filename",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -6169,7 +6271,6 @@
       "schema": "public",
       "values": [
         "user",
-        "partner",
         "admin"
       ]
     },
@@ -6445,6 +6546,6 @@
     "tables": {},
     "columns": {}
   },
-  "id": "412763eb-accb-43ef-9991-9857f993b2e8",
+  "id": "80ea712b-095e-425c-b309-8896d923fba5",
   "prevId": "00000000-0000-0000-0000-000000000000"
 }

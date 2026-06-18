@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 import {
   lexicalEditor,
   HeadingFeature,
@@ -18,7 +18,7 @@ import {
   AlignFeature,
 } from '@payloadcms/richtext-lexical'
 
-const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
 
 // Helper to trigger ISR revalidation via API route
 const triggerRevalidation = async (tag: string) => {

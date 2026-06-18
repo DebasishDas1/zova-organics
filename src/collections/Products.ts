@@ -1,5 +1,7 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 import type { FieldHook } from 'payload'
+
+const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
 
 const generateSlug = (text: string) =>
   text
@@ -39,7 +41,6 @@ export const skuHook: FieldHook = ({ value, data }) => {
   return `ZO-${category}-${slugPart}`
 }
 
-const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
 
 export const Products: CollectionConfig = {
   slug: 'products',

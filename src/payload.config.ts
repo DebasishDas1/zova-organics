@@ -7,12 +7,13 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
 import { Users } from './collections/Users'
-import { Media, ProductImages } from './collections/Media'
+import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Leads } from './collections/Leads'
 import { Certifications } from './collections/Certifications'
 import { Posts } from './collections/Posts'
 import { BlogImages } from './collections/BlogImages'
+import { ProductImages } from './collections/ProductImages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)

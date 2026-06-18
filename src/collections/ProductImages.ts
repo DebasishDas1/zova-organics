@@ -1,7 +1,7 @@
 // src/collections/ProductImages.ts
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 
-const isAdmin = ({ req: { user } }: any) => user?.role === 'admin'
+const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
 
 export const ProductImages: CollectionConfig = {
   slug: 'product-images',
@@ -20,16 +20,10 @@ export const ProductImages: CollectionConfig = {
     ],
     adminThumbnail: 'thumbnail',
     focalPoint: true,
-    mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+    mimeTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/avif'],
   },
   fields: [
     { name: 'alt', type: 'text', required: true },
     { name: 'caption', type: 'text' },
-    {
-      name: 'product',
-      type: 'relationship',
-      relationTo: 'products',
-      hasMany: false,
-    },
   ],
 }

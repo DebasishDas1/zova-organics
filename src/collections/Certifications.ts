@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+// const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
+
 export const Certifications: CollectionConfig = {
   slug: 'certifications',
 
