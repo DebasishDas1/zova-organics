@@ -1,41 +1,24 @@
+import type { Metadata } from 'next'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
-import { Metadata } from 'next'
 import { BlogsGrid } from '@/components/sections/blogs/BlogsGrid'
 import { getPosts } from '@/lib/payload/posts'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 export const revalidate = 60
 
+const BASE_URL = 'https://zovaorganics.com'
+
 export const metadata: Metadata = {
   title: 'Sustainable Sourcing & Organic Textile Insights | Zova Organics',
-
   description:
     'Expert insights on organic textiles, sustainable sourcing, GOTS certification, private label manufacturing, and global export best practices.',
-
-  keywords: [
-    'organic textile exporter',
-    'organic cotton fabrics',
-    'GOTS certification',
-    'private label textiles',
-    'sustainable sourcing',
-    'organic fabric manufacturer',
-    'textile export India',
-    'organic cotton bags',
-    'sustainable supply chain',
-    'textile industry insights',
-  ],
-
-  alternates: {
-    canonical: 'https://zovaorganics.com/blogs',
-  },
-
+  alternates: { canonical: `${BASE_URL}/blogs` },
   openGraph: {
     title: 'Sustainable Sourcing & Organic Textile Insights | Zova Organics',
     description: 'Industry insights for importers, distributors, and sustainable brands.',
-    url: 'https://zovaorganics.com/blogs',
+    url: `${BASE_URL}/blogs`,
     type: 'website',
   },
-
   twitter: {
     card: 'summary_large_image',
     title: 'Sustainable Sourcing & Organic Textile Insights',
@@ -44,31 +27,26 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogsPage() {
-  const postsResult = await getPosts({
-    limit: 24,
-  })
+  // Guard: DB may be unavailable during Docker build
+  const postsResult = await getPosts({ limit: 24 }).catch(() => ({ docs: [] }))
+  const posts = postsResult.docs
 
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-
     name: 'Zova Organics Insights',
-
     description:
       'Insights on sustainable sourcing, organic textiles, certifications, and global exports.',
-
-    url: 'https://zovaorganics.com/blogs',
-
+    url: `${BASE_URL}/blogs`,
     publisher: {
       '@type': 'Organization',
       name: 'Zova Organics',
-      url: 'https://zovaorganics.com',
+      url: BASE_URL,
     },
-
-    blogPost: postsResult.docs.map((post) => ({
+    blogPost: posts.map((post) => ({
       '@type': 'BlogPosting',
       headline: post.title,
-      url: `https://zovaorganics.com/blogs/${post.slug}`,
+      url: `${BASE_URL}/blogs/${post.slug}`,
       datePublished: post.publishedAt,
       description: post.excerpt,
     })),
@@ -76,16 +54,11 @@ export default async function BlogsPage() {
 
   const itemListSchema = {
     '@context': 'https://schema.org',
-
     '@type': 'ItemList',
-
-    itemListElement: postsResult.docs.map((post, index) => ({
+    itemListElement: posts.map((post, index) => ({
       '@type': 'ListItem',
-
       position: index + 1,
-
-      url: `https://zovaorganics.com/blogs/${post.slug}`,
-
+      url: `${BASE_URL}/blogs/${post.slug}`,
       name: post.title,
     })),
   }
@@ -94,22 +67,10 @@ export default async function BlogsPage() {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://zovaorganics.com',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Insights',
-        item: 'https://zovaorganics.com/blogs',
-      },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: `${BASE_URL}/blogs` },
     ],
   }
-
-  // console.log({ postsResult })
 
   return (
     <>
@@ -121,7 +82,7 @@ export default async function BlogsPage() {
         title="Perspectives on sustainable sourcing."
         description="Export guidance, organic textile trends, certification expertise, and supply chain insights for global buyers."
       />
-      <BlogsGrid posts={postsResult.docs} />
+      <BlogsGrid posts={posts} />
     </>
   )
 }

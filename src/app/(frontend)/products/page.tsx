@@ -6,24 +6,39 @@ import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
 export const revalidate = 60
 
+const BASE_URL = 'https://zovaorganics.com'
+
 export const metadata: Metadata = {
   title: 'Organic Fabric Products — Wholesale Tote Bags, Pouches & More',
   description:
     'Browse GOTS-certified organic cotton tote bags, drawstring pouches, and fabric rolls. Wholesale pricing from 100 units, shipped worldwide from India.',
-  alternates: {
-    canonical: 'https://zovaorganics.com/products',
-  },
+  alternates: { canonical: `${BASE_URL}/products` },
   openGraph: {
     title: 'Organic Fabric Products — Wholesale Tote Bags, Pouches & More',
     description:
       'Browse GOTS-certified organic cotton tote bags, drawstring pouches, and fabric rolls. Wholesale pricing from 100 units, shipped worldwide from India.',
-    url: 'https://zovaorganics.com/products',
+    url: `${BASE_URL}/products`,
     type: 'website',
   },
 }
 
 export default async function ProductsPage() {
-  const products = (await getProducts()) ?? []
+  // Guard: DB may be unavailable during Docker build
+  const products = (await getProducts().catch(() => [])) ?? []
+
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Organic fabric products',
+    url: `${BASE_URL}/products`,
+    breadcrumb: {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+        { '@type': 'ListItem', position: 2, name: 'Products', item: `${BASE_URL}/products` },
+      ],
+    },
+  }
 
   const productListSchema = {
     '@context': 'https://schema.org',
@@ -35,23 +50,9 @@ export default async function ProductsPage() {
     itemListElement: products.map((product, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      url: `https://zovaorganics.com/products/${product.slug}`,
+      url: `${BASE_URL}/products/${product.slug}`,
       name: product.title,
     })),
-  }
-
-  const collectionSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: 'Organic fabric products',
-    url: 'https://zovaorganics.com/products',
-    breadcrumb: {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://zovaorganics.com' },
-        { '@type': 'ListItem', position: 2, name: 'Products' },
-      ],
-    },
   }
 
   return (

@@ -2,11 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 
 import type { Media, Certification } from '@/payload-types'
-import {
-  getProductBySlug,
-  getRelatedProducts,
-  getAllProductSlugs,
-} from '@/lib/payload/products'
+import { getProductBySlug, getRelatedProducts, getAllProductSlugs } from '@/lib/payload/products'
 
 import { ProductGallery } from '@/components/sections/products/detail/ProductGallery'
 import { ProductInfo } from '@/components/sections/products/detail/ProductInfo'
@@ -27,56 +23,63 @@ type Props = {
 
 export const revalidate = 60
 
+// Fail gracefully if DB is unavailable at build time (e.g. in Docker)
 export async function generateStaticParams() {
-  return getAllProductSlugs()
+  try {
+    return await getAllProductSlugs()
+  } catch {
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const product = await getProductBySlug(slug)
-  if (!product) return {}
 
-  const featuredImage = typeof product.featuredImage === 'object' ? product.featuredImage : null
-  const baseUrl = getServerURL()
+  try {
+    const product = await getProductBySlug(slug)
+    if (!product) return {}
 
-  const title = product.seo?.metaTitle ?? product.title ?? 'Untitled'
-  const description = product.seo?.metaDescription ?? product.shortDescription ?? ''
+    const featuredImage = typeof product.featuredImage === 'object' ? product.featuredImage : null
+    const baseUrl = getServerURL()
 
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: `${baseUrl}/products/${product.slug}`,
-    },
-    openGraph: {
+    const title = product.seo?.metaTitle ?? product.title ?? 'Untitled'
+    const description = product.seo?.metaDescription ?? product.shortDescription ?? ''
+    const imageUrl = featuredImage?.url
+      ? featuredImage.url.startsWith('http')
+        ? featuredImage.url
+        : `${baseUrl}${featuredImage.url}`
+      : undefined
+
+    return {
       title,
       description,
-      url: `${baseUrl}/products/${product.slug}`,
-      images: featuredImage?.url
-        ? [
-            {
-              url: featuredImage.url.startsWith('http')
-                ? featuredImage.url
-                : `${baseUrl}${featuredImage.url}`,
-              width: featuredImage.width || 1200,
-              height: featuredImage.height || 630,
-              alt: product.title,
-            },
-          ]
-        : undefined,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: featuredImage?.url
-        ? [
-            featuredImage.url.startsWith('http')
-              ? featuredImage.url
-              : `${baseUrl}${featuredImage.url}`,
-          ]
-        : undefined,
-    },
+      alternates: {
+        canonical: `${baseUrl}/products/${product.slug}`,
+      },
+      openGraph: {
+        title,
+        description,
+        url: `${baseUrl}/products/${product.slug}`,
+        images: imageUrl
+          ? [
+              {
+                url: imageUrl,
+                width: featuredImage?.width || 1200,
+                height: featuredImage?.height || 630,
+                alt: product.title,
+              },
+            ]
+          : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: imageUrl ? [imageUrl] : undefined,
+      },
+    }
+  } catch {
+    return {}
   }
 }
 
@@ -97,13 +100,20 @@ export default async function ProductPage({ params }: Props) {
 
   const relatedProducts = await getRelatedProducts(product.category, slug)
 
+  const baseUrl = getServerURL()
+  const imageUrl = featuredImage?.url
+    ? featuredImage.url.startsWith('http')
+      ? featuredImage.url
+      : `${baseUrl}${featuredImage.url}`
+    : undefined
+
   const productSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title,
     description: product.shortDescription,
     sku: product.sku,
-    image: featuredImage?.url ? [featuredImage.url] : undefined,
+    image: imageUrl ? [imageUrl] : undefined,
     brand: {
       '@type': 'Brand',
       name: 'Zova Organics',
