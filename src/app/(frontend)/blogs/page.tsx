@@ -4,7 +4,7 @@ import { BlogsGrid } from '@/components/sections/blogs/BlogsGrid'
 import { getPosts } from '@/lib/payload/posts'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 const BASE_URL = 'https://zovaorganics.com'
 

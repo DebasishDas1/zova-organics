@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { motion } from 'motion/react'
+import { LazyMotion, domAnimation, m } from 'motion/react'
+import { cn } from '@/lib/utils'
 
 type Category = {
   label: string
@@ -20,26 +21,24 @@ export function CategoryRail({ categories, active, onChange }: CategoryRailProps
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const [showLeft, setShowLeft] = useState(false)
-  const [showRight, setShowRight] = useState(true)
-
-  const updateArrows = () => {
-    const el = scrollRef.current
-
-    if (!el) return
-
-    setShowLeft(el.scrollLeft > 10)
-
-    setShowRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 10)
-  }
+  const [showRight, setShowRight] = useState(false)
 
   useEffect(() => {
-    updateArrows()
-
     const el = scrollRef.current
 
     if (!el) return
 
-    el.addEventListener('scroll', updateArrows)
+    const updateArrows = () => {
+      setShowLeft(el.scrollLeft > 10)
+
+      setShowRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 10)
+    }
+
+    updateArrows()
+
+    el.addEventListener('scroll', updateArrows, {
+      passive: true,
+    })
 
     window.addEventListener('resize', updateArrows)
 
@@ -50,126 +49,94 @@ export function CategoryRail({ categories, active, onChange }: CategoryRailProps
   }, [])
 
   const scroll = (direction: 'left' | 'right') => {
-    const el = scrollRef.current
-
-    if (!el) return
-
-    el.scrollBy({
-      left: direction === 'right' ? 300 : -300,
+    scrollRef.current?.scrollBy({
+      left: direction === 'right' ? 320 : -320,
       behavior: 'smooth',
     })
   }
 
   return (
-    <div className="relative mb-12">
-      {/* Left Fade */}
-      {showLeft && (
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-linear-to-r from-background to-transparent" />
-      )}
-
-      {/* Right Fade */}
-      {showRight && (
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-linear-to-l from-background to-transparent" />
-      )}
-
-      {/* Left Button */}
-      {showLeft && (
-        <button
-          onClick={() => scroll('left')}
+    <LazyMotion features={domAnimation}>
+      <div className="relative mb-10 md:mb-12">
+        <div
+          ref={scrollRef}
           className="
-            absolute
-            left-2
-            top-1/2
-            z-20
-            -translate-y-1/2
-            rounded-full
-            border
-            bg-background/90
-            p-2
-            backdrop-blur
-            shadow-sm
+            flex
+            gap-6 sm:gap-8 md:gap-10
+            overflow-x-auto
+            scroll-smooth
+            snap-x snap-mandatory
+            overscroll-x-contain
+            scrollbar-none
           "
         >
-          <ChevronLeft className="size-4" />
-        </button>
-      )}
+          {categories.map((item) => {
+            const Icon = item.icon
+            const isActive = active === item.value
 
-      {/* Right Button */}
-      {showRight && (
-        <button
-          onClick={() => scroll('right')}
-          className="
-            absolute
-            right-2
-            top-1/2
-            z-20
-            -translate-y-1/2
-            rounded-full
-            border
-            bg-background/90
-            p-2
-            backdrop-blur
-            shadow-sm
-          "
-        >
-          <ChevronRight className="size-4" />
-        </button>
-      )}
+            return (
+              <m.button
+                key={item.value}
+                type="button"
+                whileTap={{ scale: 0.97 }}
+                onClick={() => onChange(item.value)}
+                className="
+                  group
+                  relative
+                  snap-start
+                  shrink-0
+                  min-w-22
+                  sm:min-w-25
+                  md:min-w-28
+                  flex flex-col items-center
+                  gap-2 sm:gap-3
+                  pb-4
+                "
+              >
+                <div className={cn('rounded-2xl p-3 transition-colors duration-200')}>
+                  <Icon
+                    className={cn(
+                      'size-6 sm:size-7 md:size-8 transition-colors duration-200',
+                      isActive ? 'text-foreground' : 'text-muted-foreground',
+                    )}
+                  />
+                </div>
 
-      {/* Categories */}
-      <div
-        ref={scrollRef}
-        className="
-          flex
-          gap-10
-          overflow-x-auto
-          scrollbar-none
-          pb-6
-          px-4
-        "
-      >
-        {categories.map((item) => {
-          const Icon = item.icon
-          const isActive = active === item.value
+                <span
+                  className={cn(
+                    'text-xs sm:text-sm transition-colors duration-200',
+                    isActive ? 'font-medium text-foreground' : 'text-muted-foreground',
+                  )}
+                >
+                  {item.label}
+                </span>
 
-          return (
-            <button
-              key={item.value}
-              onClick={() => onChange(item.value)}
-              className="
-                relative
-                flex
-                min-w-27.5
-                shrink-0
-                flex-col
-                items-center
-                gap-3
-                pb-4
-              "
-            >
-              <Icon className={isActive ? 'size-8' : 'size-8 text-muted-foreground'} />
-
-              <span className={isActive ? 'text-sm' : 'text-sm text-muted-foreground'}>
-                {item.label}
-              </span>
-
-              {isActive && (
-                <motion.div
-                  layoutId="category-indicator"
-                  className="
-                    absolute
-                    bottom-0
-                    h-0.5
-                    w-10
-                    rounded-full
-                    bg-foreground
-                  "
-                />
-              )}
-            </button>
-          )
-        })}
+                {isActive && (
+                  <m.div
+                    layoutId="category-indicator"
+                    transition={{
+                      type: 'spring',
+                      stiffness: 400,
+                      damping: 35,
+                      mass: 0.5,
+                    }}
+                    className="
+                      absolute
+                      bottom-0
+                      left-1/2
+                      h-0.5
+                      w-8
+                      -translate-x-1/2
+                      rounded-full
+                      bg-primary
+                    "
+                  />
+                )}
+              </m.button>
+            )
+          })}
+        </div>
       </div>
-    </div>
+    </LazyMotion>
   )
 }

@@ -1,6 +1,8 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { getProducts } from '@/lib/payload/products'
 import { ProductsGrid } from '@/components/sections/products/ProductsGrid'
+import { ProductsGridSkeleton } from '@/components/sections/products/ProductsGridSkeleton'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
@@ -22,8 +24,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default async function ProductsPage() {
-  // Guard: DB may be unavailable during Docker build
+// ─── Async data component (runs on the server, streams in) ────────────────────
+async function ProductsSection() {
   const products = (await getProducts().catch(() => [])) ?? []
 
   const collectionSchema = {
@@ -59,12 +61,23 @@ export default async function ProductsPage() {
     <>
       <JsonLd schema={collectionSchema} />
       <JsonLd schema={productListSchema} />
+      <ProductsGrid products={products} />
+    </>
+  )
+}
+
+// ─── Page shell renders instantly; ProductsSection streams in ─────────────────
+export default function ProductsPage() {
+  return (
+    <>
       <SectionHero
         eyebrow="Products"
         title="Our sustainable collection"
         description="GOTS-certified organic cotton bags, pouches, and fabric products. Wholesale from 100 units."
       />
-      <ProductsGrid products={products} />
+      <Suspense fallback={<ProductsGridSkeleton />}>
+        <ProductsSection />
+      </Suspense>
     </>
   )
 }

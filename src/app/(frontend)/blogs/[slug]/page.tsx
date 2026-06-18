@@ -4,79 +4,73 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { getPostBySlug, getAllPostSlugs } from '@/lib/payload/posts'
+import { getPostBySlug } from '@/lib/payload/posts'
 import type { Media, Product, Post } from '@/payload-types'
 import { BlogCard } from '@/components/sections/blogs/BlogCard'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
+export const dynamic = 'force-dynamic'
 export const revalidate = 60
 
-const BASE_URL = 'https://zovaorganics.com'
-
-// Guard: DB unavailable at Docker build time → fall back to on-demand rendering
-export async function generateStaticParams() {
-  try {
-    return await getAllPostSlugs()
-  } catch {
-    return []
-  }
-}
-
+// ── Metadata ───────────────────────────────────────────────────────────────
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>
 }): Promise<Metadata> {
   const { slug } = await params
-
-  try {
-    const post = await getPostBySlug(slug)
-    if (!post)
-      return { title: 'Post Not Found', description: 'The requested blog post does not exist.' }
-
-    const title = post.seo?.metaTitle ?? post.title ?? 'Untitled'
-    const description = post.seo?.metaDescription ?? post.excerpt ?? ''
-
-    const ogMediaUrl =
-      post.seo?.ogImage && typeof post.seo.ogImage === 'object'
-        ? ((post.seo.ogImage as Media).url ?? null)
-        : post.featuredImage && typeof post.featuredImage === 'object'
-          ? ((post.featuredImage as Media).url ?? null)
-          : null
-
-    const ogImageUrl = ogMediaUrl ?? `${BASE_URL}/og-image.jpg`
-
+  const post = await getPostBySlug(slug)
+  if (!post) {
+    // Return minimal metadata to avoid Next.js errors when post is missing
     return {
+      title: 'Post Not Found',
+      description: 'The requested blog post does not exist.',
+    }
+  }
+
+  // Defensive defaults for required metadata fields
+  const title = post.seo?.metaTitle ?? post.title ?? 'Untitled'
+  const description = post.seo?.metaDescription ?? post.excerpt ?? ''
+
+  // ogImage falls back to featuredImage — both are Media relationships
+  const ogMediaUrl =
+    post.seo?.ogImage && typeof post.seo.ogImage === 'object'
+      ? ((post.seo.ogImage as Media).url ?? null)
+      : post.featuredImage && typeof post.featuredImage === 'object'
+        ? ((post.featuredImage as Media).url ?? null)
+        : null
+
+  const ogImageUrl =
+    ogMediaUrl ?? `${process.env.NEXT_PUBLIC_SERVER_URL ?? 'https://zovaorganics.com'}/og-image.jpg`
+  return {
+    title,
+    description,
+    robots: post.seo?.noIndex ? { index: false, follow: false } : { index: true, follow: true },
+    alternates: {
+      canonical: post.seo?.canonicalUrl ?? `https://zovaorganics.com/blogs/${post.slug}`,
+    },
+    openGraph: {
       title,
       description,
-      robots: post.seo?.noIndex ? { index: false, follow: false } : { index: true, follow: true },
-      alternates: {
-        canonical: post.seo?.canonicalUrl ?? `${BASE_URL}/blogs/${post.slug}`,
-      },
-      openGraph: {
-        title,
-        description,
-        type: 'article',
-        url: `${BASE_URL}/blogs/${post.slug}`,
-        publishedTime: post.publishedAt ?? undefined,
-        modifiedTime: post.updatedAt,
-        authors: [`${BASE_URL}/about-us`],
-        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title,
-        description,
-        images: [ogImageUrl],
-      },
-    }
-  } catch {
-    return {}
+      type: 'article',
+      url: `https://zovaorganics.com/blogs/${post.slug}`,
+      publishedTime: post.publishedAt ?? undefined,
+      modifiedTime: post.updatedAt,
+      authors: ['https://zovaorganics.com/about-us'],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImageUrl],
+    },
   }
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+// Safe cast — Payload returns number | PopulatedDoc depending on depth
 function isPopulatedPost(v: unknown): v is Post {
   return typeof v === 'object' && v !== null && 'slug' in v
 }
@@ -91,13 +85,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = await getPostBySlug(slug)
   if (!post) notFound()
 
+  // Safe relationship casts after depth:2 population
   const featuredImage =
     typeof post.featuredImage === 'object' ? (post.featuredImage as Media) : null
 
   const relatedPosts = (post.relatedPosts ?? []).filter(isPopulatedPost)
   const relatedProducts = (post.relatedProducts ?? []).filter(isPopulatedProduct)
 
-  const canonicalUrl = `${BASE_URL}/blogs/${post.slug}`
+  const canonicalUrl = `https://zovaorganics.com/blogs/${post.slug}`
 
   // ── JSON-LD ──────────────────────────────────────────────────────────────
   const articleSchema = {
@@ -111,14 +106,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ...(featuredImage?.url && { image: featuredImage.url }),
     author: {
       '@type': 'Organization',
-      '@id': `${BASE_URL}/#organization`,
+      '@id': 'https://zovaorganics.com/#organization',
     },
     publisher: {
       '@type': 'Organization',
-      '@id': `${BASE_URL}/#organization`,
+      '@id': 'https://zovaorganics.com/#organization',
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
-    ...(post.tags?.length && { keywords: post.tags.map((t) => t.tag).join(', ') }),
+    ...(post.tags?.length && {
+      keywords: post.tags.map((t) => t.tag).join(', '),
+    }),
   }
 
   const faqSchema =
@@ -140,14 +137,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: `${BASE_URL}/blogs` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://zovaorganics.com' },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Insights',
+        item: 'https://zovaorganics.com/blogs',
+      },
       { '@type': 'ListItem', position: 3, name: post.title, item: canonicalUrl },
     ],
   }
 
   return (
     <>
+      {/* ── JSON-LD — was missing in your version ── */}
       <JsonLd schema={articleSchema} />
       {faqSchema && <JsonLd schema={faqSchema} />}
       <JsonLd schema={breadcrumbSchema} />
@@ -168,6 +171,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 Insights
               </Link>
               <span aria-hidden="true">/</span>
+              {/* current page — not a link, not interactive */}
               <span className="text-foreground line-clamp-1">{post.title}</span>
             </nav>
 
@@ -241,6 +245,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <RichText data={post.content} />
               </div>
 
+              {/* Tags */}
               {post.tags && post.tags.length > 0 && (
                 <div className="mt-16 border-t border-border pt-8">
                   <div className="flex flex-wrap gap-2">
@@ -256,6 +261,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </div>
               )}
 
+              {/* Author */}
               <div className="mt-24 rounded-[28px] border border-border p-8">
                 <h3 className="text-lg font-semibold">Zova Organics Editorial Team</h3>
                 <p className="mt-3 text-muted-foreground">
@@ -264,6 +270,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 </p>
               </div>
 
+              {/* Related posts */}
               {relatedPosts.length > 0 && (
                 <section className="mt-32" aria-labelledby="further-reading-heading">
                   <h2

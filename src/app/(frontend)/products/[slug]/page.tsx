@@ -22,15 +22,7 @@ type Props = {
 }
 
 export const revalidate = 60
-
-// Fail gracefully if DB is unavailable at build time (e.g. in Docker)
-export async function generateStaticParams() {
-  try {
-    return await getAllProductSlugs()
-  } catch {
-    return []
-  }
-}
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

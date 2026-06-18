@@ -1,6 +1,3 @@
-'use client'
-
-import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
 type SectionHeroProps = Readonly<{
@@ -16,13 +13,6 @@ type SectionHeroProps = Readonly<{
   className?: string
 }>
 
-// const titleVariants = {
-//   sm: 'max-w-3xl text-4xl md:text-5xl',
-//   md: 'max-w-4xl text-5xl md:text-6xl',
-//   lg: 'max-w-5xl text-6xl md:text-7xl',
-//   xl: 'max-w-6xl text-7xl md:text-8xl',
-// }
-
 export function SectionHero({
   eyebrow,
   title,
@@ -30,78 +20,68 @@ export function SectionHero({
   children,
   actions,
   align = 'left',
-  // size = 'lg',
+  size = 'lg',
   className,
 }: SectionHeroProps) {
+  const titleSizes = {
+    sm: 'text-4xl sm:text-5xl md:text-6xl',
+    md: 'text-5xl sm:text-6xl md:text-7xl',
+    lg: 'text-5xl sm:text-6xl md:text-7xl xl:text-8xl',
+    xl: 'text-6xl sm:text-7xl md:text-8xl xl:text-[6rem]',
+  }
+
   return (
     <section
-      className={cn('container-zova flex min-h-[60vh] items-center py-24 md:py-32', className)}
+      className={cn('container-zova', 'flex items-center', 'py-8', 'min-h-[20vh]', className)}
     >
-      <div className={cn('w-full', align === 'center' && 'mx-auto text-center')}>
+      <div className={cn('w-full', 'max-w-5xl', align === 'center' && 'mx-auto text-center')}>
         {eyebrow && (
-          <motion.span
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="text-xs uppercase tracking-[0.3em] text-muted-foreground"
-          >
+          <p className="mb-4 sm:mb-6 text-[11px] sm:text-xs font-medium uppercase tracking-[0.25em] sm:tracking-[0.3em] text-muted-foreground">
             {eyebrow}
-          </motion.span>
+          </p>
         )}
 
-        <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+        <h1
+          className={cn(
+            titleSizes[size],
+            'text-balance',
+            'font-semibold',
+            'tracking-tight',
+            'leading-[0.95]',
+            'text-foreground',
+          )}
         >
           {title}
-        </motion.h1>
+        </h1>
 
         {description && (
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.1,
-              duration: 0.4,
-            }}
+          <p
             className={cn(
-              'mt-8 max-w-2xl text-lg md:text-xl text-muted-foreground',
+              'mt-6 md:mt-8',
+              'max-w-xl md:max-w-2xl',
+              'text-base sm:text-lg md:text-xl',
+              'leading-relaxed',
+              'text-muted-foreground',
               align === 'center' && 'mx-auto',
             )}
           >
             {description}
-          </motion.p>
+          </p>
         )}
 
         {actions && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 0.15,
-              duration: 0.4,
-            }}
-            className={cn('mt-10 flex flex-wrap gap-4', align === 'center' && 'justify-center')}
+          <div
+            className={cn(
+              'mt-8 md:mt-10',
+              'flex flex-wrap gap-3 md:gap-4',
+              align === 'center' && 'justify-center',
+            )}
           >
             {actions}
-          </motion.div>
+          </div>
         )}
 
-        {children && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              delay: 0.2,
-              duration: 0.4,
-            }}
-            className="mt-12"
-          >
-            {children}
-          </motion.div>
-        )}
+        {children && <div className="mt-12 md:mt-16 lg:mt-20">{children}</div>}
       </div>
     </section>
   )
