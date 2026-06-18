@@ -4,13 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { getPostBySlug } from '@/lib/payload/posts'
+import { getPostBySlug, getAllPostSlugs } from '@/lib/payload/posts'
 import type { Media, Product, Post } from '@/payload-types'
 import { BlogCard } from '@/components/sections/blogs/BlogCard'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
-export const dynamic = 'force-dynamic'
 export const revalidate = 60
+
+export async function generateStaticParams() {
+  return getAllPostSlugs()
+}
 
 // ── Metadata ───────────────────────────────────────────────────────────────
 export async function generateMetadata({

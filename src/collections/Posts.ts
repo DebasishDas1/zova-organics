@@ -17,18 +17,9 @@ import {
   IndentFeature,
   AlignFeature,
 } from '@payloadcms/richtext-lexical'
+import { triggerRevalidation } from '../lib/revalidate'
 
 const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
-
-// Helper to trigger ISR revalidation via API route
-const triggerRevalidation = async (tag: string) => {
-  const base = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
-  await fetch(`${base}/api/revalidate`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tag }),
-  })
-}
 
 export const Posts: CollectionConfig = {
   slug: 'posts',

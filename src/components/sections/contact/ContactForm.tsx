@@ -90,7 +90,7 @@ export function ContactForm() {
   }
 
   return (
-    <Section className="pb-32">
+    <Section id="contact-form" className="pb-32">
       <div className="container-zova">
         <div className="grid gap-20 lg:grid-cols-12">
           {/* Left Content */}

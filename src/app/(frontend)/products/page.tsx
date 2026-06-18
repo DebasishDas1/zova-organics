@@ -4,7 +4,7 @@ import { ProductsGrid } from '@/components/sections/products/ProductsGrid'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Organic Fabric Products — Wholesale Tote Bags, Pouches & More',

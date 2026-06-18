@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 
 import type { Product, Media } from '@/payload-types'
+import { getImageUrl } from '@/lib/payload/image-url'
 
 type ProductCardProps = {
   product: Product
@@ -26,10 +27,11 @@ export function ProductCard({ product }: ProductCardProps) {
           "
         >
           <Image
-            src={image?.url ?? '/placeholder.jpg'}
+            src={getImageUrl(image, 'card') ?? '/placeholder.jpg'}
             alt={image?.alt || product.title}
-            width={1200}
-            height={1200}
+            width={800}
+            height={800}
+            sizes="(max-width: 768px) 50vw, 33vw"
             className="
               aspect-square
               w-full

@@ -1,9 +1,16 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 
-// const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
+const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
 
 export const Certifications: CollectionConfig = {
   slug: 'certifications',
+
+  access: {
+    read: () => true,
+    create: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
+  },
 
   admin: {
     useAsTitle: 'name',

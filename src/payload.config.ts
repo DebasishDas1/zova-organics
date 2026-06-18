@@ -24,6 +24,18 @@ const isProduction = process.env.NODE_ENV === 'production'
 const serverURL = getServerURL()
 const trustedOrigins = getTrustedOrigins(serverURL)
 
+const payloadSecret = env('PAYLOAD_SECRET', 'build-time-placeholder-secret')
+const isBuildTime =
+  process.env.NEXT_PHASE === 'phase-production-build' || process.env.npm_lifecycle_event === 'build'
+
+if (
+  isProduction &&
+  !isBuildTime &&
+  (!process.env.PAYLOAD_SECRET || payloadSecret.toLowerCase().includes('placeholder'))
+) {
+  throw new Error('PAYLOAD_SECRET must be set to a secure value in production')
+}
+
 // Shared R2 URL generator — each collection gets its own prefix folder in the bucket
 const r2Base = env('R2_PUBLIC_URL', 'https://media.zovaorganics.com')
 const makeFileURL =
@@ -48,7 +60,7 @@ export default buildConfig({
 
   editor: lexicalEditor(),
 
-  secret: env('PAYLOAD_SECRET', 'build-time-placeholder-secret'),
+  secret: payloadSecret,
 
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -66,7 +78,7 @@ export default buildConfig({
       idleTimeoutMillis: 30_000,
       connectionTimeoutMillis: 5_000,
     },
-    push: true,
+    push: !isProduction,
   }),
 
   sharp,

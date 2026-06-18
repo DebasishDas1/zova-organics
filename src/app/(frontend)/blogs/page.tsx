@@ -4,7 +4,7 @@ import { BlogsGrid } from '@/components/sections/blogs/BlogsGrid'
 import { getPosts } from '@/lib/payload/posts'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Sustainable Sourcing & Organic Textile Insights | Zova Organics',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 
 export default async function BlogsPage() {
   const postsResult = await getPosts({
-    limit: 100,
+    limit: 24,
   })
 
   const blogSchema = {

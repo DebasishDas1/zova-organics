@@ -1,5 +1,6 @@
 import type { Access, CollectionConfig } from 'payload'
 import type { FieldHook } from 'payload'
+import { triggerRevalidation } from '../lib/revalidate'
 
 const isAdmin: Access = ({ req: { user } }) => user?.role === 'admin'
 
@@ -60,6 +61,23 @@ export const Products: CollectionConfig = {
 
   versions: {
     drafts: true,
+  },
+
+  hooks: {
+    afterChange: [
+      async ({ doc }) => {
+        await triggerRevalidation('products')
+        if (doc.slug) await triggerRevalidation(`product-${doc.slug}`)
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc }) => {
+        await triggerRevalidation('products')
+        if (doc.slug) await triggerRevalidation(`product-${doc.slug}`)
+        return doc
+      },
+    ],
   },
 
   fields: [

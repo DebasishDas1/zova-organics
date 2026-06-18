@@ -2,10 +2,19 @@ import { NextResponse } from 'next/server'
 
 import { contactSchema } from '@/lib/validations/contact'
 import { checkRateLimit } from '@/lib/rate-limit'
+import { getPayloadClient } from '@/lib/payload/client'
+import type { Lead } from '@/payload-types'
+
+const categoryMap: Record<string, Lead['category'] extends (infer U)[] | null | undefined ? U : never> = {
+  'organic-fabrics': 'organic-fabrics',
+  bags: 'bags',
+  'private-label': 'custom-oem',
+  'custom-product': 'custom-oem',
+  other: 'other',
+}
 
 export async function POST(req: Request) {
   try {
-    // basic rate-limit by IP (in-memory); replace with Redis in production
     const forwarded = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip')
     const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown'
 
@@ -14,7 +23,26 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json()
-    contactSchema.parse(body)
+    const data = contactSchema.parse(body)
+
+    const payload = await getPayloadClient()
+    const mappedCategory = categoryMap[data.category] ?? 'other'
+
+    await payload.create({
+      collection: 'leads',
+      overrideAccess: true,
+      data: {
+        name: data.name,
+        company: data.company,
+        email: data.email,
+        phone: data.phone,
+        message: data.message,
+        inquiryType: 'general',
+        category: [mappedCategory],
+        source: 'website',
+        status: 'new',
+      },
+    })
 
     return NextResponse.json({
       success: true,

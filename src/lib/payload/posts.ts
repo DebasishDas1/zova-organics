@@ -2,6 +2,7 @@
 import { unstable_cache } from 'next/cache'
 import { getPayloadClient } from './client'
 import type { Where } from 'payload'
+import type { Post } from '@/payload-types'
 
 // Wrap each query — Next.js deduplicates and caches across requests
 export const getPostBySlug = unstable_cache(
@@ -45,15 +46,29 @@ export const getPosts = unstable_cache(
       ...(featured !== undefined && { featured: { equals: featured } }),
     }
 
-    return payload.find({
+    const result = await payload.find({
       collection: 'posts',
       where,
       sort: '-publishedAt',
       limit,
       page,
       depth: 1,
-      // No select – fetch full post objects (includes all required fields)
+      select: {
+        title: true,
+        slug: true,
+        excerpt: true,
+        category: true,
+        publishedAt: true,
+        readingTime: true,
+        featuredImage: true,
+        featuredImageAlt: true,
+      },
     })
+
+    return {
+      ...result,
+      docs: result.docs as Post[],
+    }
   },
   ['posts-list'],
   { revalidate: 60, tags: ['posts'] },
