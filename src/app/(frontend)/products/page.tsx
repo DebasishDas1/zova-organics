@@ -72,7 +72,7 @@ export default function ProductsPage() {
     <>
       <SectionHero
         eyebrow="Products"
-        title="Our sustainable collection"
+        title="Our sustainable collection."
         description="GOTS-certified organic cotton bags, pouches, and fabric products. Wholesale from 100 units."
       />
       <Suspense fallback={<ProductsGridSkeleton />}>

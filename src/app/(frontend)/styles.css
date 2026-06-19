@@ -1,40 +1,40 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-mono: "Roboto Mono", monospace;
+  --font-mono: 'Roboto Mono', monospace;
 
-  /* Zova Design System */
+  --zova-colour: oklch(66.41% 0.08313 77.404);
+  --zova-green: oklch(43.86% 0.04413 147.091);
+  --zova-forest: oklch(29.06% 0.02436 149.604);
 
-  --zova-colour: #61391e;
+  --background: oklch(94.7% 0.01559 86.426);
+  --foreground: oklch(15% 0.012 85);
 
-  --background: oklch(98% 0.01 85);
-  --foreground: oklch(18% 0.01 85);
+  --card: oklch(98% 0.008 86);
+  --card-foreground: var(--foreground);
 
-  --card: oklch(100% 0 0);
-  --card-foreground: oklch(18% 0.01 85);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
 
-  --popover: oklch(100% 0 0);
-  --popover-foreground: oklch(18% 0.01 85);
+  --primary: var(--zova-green);
+  --primary-foreground: oklch(98% 0.006 86);
 
-  --primary: oklch(18% 0.01 85);
-  --primary-foreground: oklch(100% 0 0);
+  --secondary: oklch(90% 0.014 86);
+  --secondary-foreground: var(--foreground);
 
-  --secondary: oklch(94% 0.01 85);
-  --secondary-foreground: oklch(18% 0.01 85);
+  --muted: oklch(91.5% 0.013 86);
+  --muted-foreground: oklch(71.38% 0.01842 84.593);
 
-  --muted: oklch(95% 0.01 85);
-  --muted-foreground: oklch(45% 0.01 85);
+  --accent: var(--zova-colour);
+  --accent-foreground: var(--foreground);
 
-  --accent: oklch(65% 0.09 55);
-  --accent-foreground: oklch(100% 0 0);
-
-  --border: oklch(90% 0.01 85);
-  --input: oklch(90% 0.01 85);
-  --ring: oklch(65% 0.09 55);
+  --border: oklch(86% 0.013 86);
+  --input: oklch(86% 0.013 86);
+  --ring: var(--accent);
 
   --destructive: oklch(0.577 0.245 27.325);
 
@@ -51,26 +51,26 @@
 }
 
 .dark {
-  --background: oklch(18% 0.01 85);
-  --foreground: oklch(98% 0.01 85);
+  --background: oklch(16% 0.018 149);
+  --foreground: oklch(95% 0.014 86);
 
-  --card: oklch(22% 0.01 85);
-  --card-foreground: oklch(98% 0.01 85);
+  --card: oklch(20% 0.02 149);
+  --card-foreground: var(--foreground);
 
-  --popover: oklch(22% 0.01 85);
-  --popover-foreground: oklch(98% 0.01 85);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
 
-  --primary: oklch(98% 0.01 85);
-  --primary-foreground: oklch(18% 0.01 85);
+  --primary: oklch(95% 0.014 86);
+  --primary-foreground: oklch(16% 0.018 149);
 
-  --secondary: oklch(28% 0.01 85);
-  --secondary-foreground: oklch(98% 0.01 85);
+  --secondary: oklch(26% 0.02 149);
+  --secondary-foreground: var(--foreground);
 
-  --muted: oklch(25% 0.01 85);
-  --muted-foreground: oklch(75% 0.01 85);
+  --muted: oklch(23% 0.018 149);
+  --muted-foreground: oklch(75% 0.014 86);
 
-  --border: oklch(28% 0.01 85);
-  --input: oklch(28% 0.01 85);
+  --border: oklch(28% 0.02 149);
+  --input: oklch(28% 0.02 149);
 }
 
 @theme inline {
@@ -99,6 +99,8 @@
   --color-accent-foreground: var(--accent-foreground);
 
   --color-zova-colour: var(--zova-colour);
+  --color-zova-green: var(--zova-green);
+  --color-zova-forest: var(--zova-forest);
 
   --color-border: var(--border);
   --color-input: var(--input);
@@ -176,15 +178,15 @@
   }
 
   ::selection {
-    background: oklch(65% 0.09 55);
-    color: white;
+    background: var(--accent);
+    color: var(--foreground);
   }
 }
 
 @utility container-zova {
   max-width: 1440px;
   margin-inline: auto;
-  padding-inline: 2rem;
+  padding-inline: 1.5rem;
 }
 
 @utility section-padding {
@@ -200,3 +202,15 @@
 @utility text-balance {
   text-wrap: balance;
 }
+
+/* --zova-green (forest green #425944): primary buttons, nav bar, active links, primary headings/logo
+--zova-colour (antique gold #B08D57): CTA buttons, hover states, certification/quality badges, focus rings, text selection highlight
+--zova-forest (deep forest #232F25): dark mode background, dark mode cards, dark footer sections
+--background (parchment #F2EDE2): page background
+--foreground (ink): body copy, headings
+--card: card and panel surfaces (slightly lighter than page bg)
+--secondary: secondary/outline buttons, subtle UI surfaces
+--muted: disabled states, subtle section backgrounds
+--muted-foreground (stone gray #A8A296): captions, helper text, placeholders, fine print
+--border / --input: dividers, input outlines, table borders
+--destructive: error states, validation messages, delete actions */

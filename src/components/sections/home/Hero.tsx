@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'motion/react'
-import { ArrowRight, ShieldCheck, Globe2, Leaf, Handshake } from 'lucide-react'
+import { ShieldCheck, Globe2, Leaf, Handshake } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
@@ -57,19 +57,20 @@ export function Hero() {
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mt-12 flex flex-wrap gap-4"
+              className="mt-8 md:mb-14 flex gap-4"
             >
-              <Button size="lg" className="h-14 rounded-full px-8 w-full md:w-auto" asChild>
-                <Link href="/products">
-                  Explore Products
-                  <ArrowRight className="ml-2 size-4" />
-                </Link>
+              <Button
+                size="lg"
+                className="h-14 flex-1 rounded-full px-4 sm:flex-none sm:px-8"
+                asChild
+              >
+                <Link href="/products">Explore Products</Link>
               </Button>
 
               <Button
                 size="lg"
                 variant="outline"
-                className="h-14 rounded-full px-8 w-full md:w-auto"
+                className="h-14 flex-1 rounded-full border-zova-green px-4 font-bold text-zova-green sm:flex-none sm:px-8"
                 asChild
               >
                 <Link href="/contact">Request a Quote</Link>
@@ -81,14 +82,16 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.45 }}
-              className="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4"
+              className="grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 hidden md:grid"
             >
-              {features.map((feature) => (
-                <div key={feature.label} className="flex flex-col items-start">
-                  <feature.icon className="mb-4 h-6 w-6 text-primary" />
-
-                  <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                    {feature.label}
+              {features.map(({ label, icon: Icon }) => (
+                <div
+                  key={label}
+                  className="flex flex-col items-center text-center sm:items-start sm:text-left"
+                >
+                  <Icon className="size-8 text-primary" />
+                  <span className="text-xs font-medium pt-4 uppercase tracking-[0.12em] text-muted-foreground">
+                    {label}
                   </span>
                 </div>
               ))}
@@ -112,6 +115,25 @@ export function Hero() {
                 className="h-full w-full object-cover"
               />
             </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45 }}
+            className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4 md:hidden"
+          >
+            {features.map(({ label, icon: Icon }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center text-center sm:items-start sm:text-left"
+              >
+                <Icon className="size-8 text-primary" />
+                <span className="text-xs font-medium pt-4 uppercase tracking-[0.12em] text-muted-foreground">
+                  {label}
+                </span>
+              </div>
+            ))}
           </motion.div>
         </div>
       </div>

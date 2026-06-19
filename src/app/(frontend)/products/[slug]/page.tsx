@@ -1,12 +1,10 @@
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 
 import type { Media, Certification } from '@/payload-types'
-import { getProductBySlug, getRelatedProducts, getAllProductSlugs } from '@/lib/payload/products'
+import { getProductBySlug, getRelatedProducts } from '@/lib/payload/products'
 
 import { ProductGallery } from '@/components/sections/products/detail/ProductGallery'
 import { ProductInfo } from '@/components/sections/products/detail/ProductInfo'
-import { ProductTabs } from '@/components/sections/products/detail/ProductTabs'
 import { ProductTrustStrip } from '@/components/sections/products/detail/ProductTrustStrip'
 import { ProductApplications } from '@/components/sections/products/detail/ProductApplications'
 import { ProductRFQ } from '@/components/sections/products/detail/ProductRFQ'
@@ -14,6 +12,19 @@ import { ProductSampleCTA } from '@/components/sections/products/detail/ProductS
 import { RelatedProducts } from '@/components/sections/products/detail/RelatedProducts'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 import { getServerURL } from '@/lib/server-url'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import { PricingSection } from '@/components/sections/products/detail/PricingSection'
+import { BrandingSection } from '@/components/sections/products/detail/BrandingSection'
+import { ComplianceSection } from '@/components/sections/products/detail/ComplianceSection'
+import { SpecificationsSection } from '@/components/sections/products/detail/SpecificationsSection'
+import { ExportSection } from '@/components/sections/products/detail/ExportSection'
 
 type Props = {
   params: Promise<{
@@ -116,17 +127,19 @@ export default async function ProductPage({ params }: Props) {
     <>
       <JsonLd schema={productSchema} />
       <div className="pb-32">
-        <div className="container-zova py-8">
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/">Home</Link>
-            <span>/</span>
-            <Link href="/products">Products</Link>
-            <span>/</span>
-            <span className="text-foreground">{product.title}</span>
-          </nav>
-        </div>
+        <Breadcrumb className="container-zova pb-4 hidden md:block">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/products">Products</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{product.title}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
 
-        <section className="container-zova">
+        <section className="container-zova pt-8 md:pt-0">
           <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
             <ProductGallery product={product} />
 
@@ -140,8 +153,12 @@ export default async function ProductPage({ params }: Props) {
           <ProductTrustStrip certs={certs} />
         </div>
 
-        <section className="container-zova mt-20">
-          <ProductTabs product={product} certs={certs} />
+        <section className="container-zova mt-20 space-y-12">
+          <SpecificationsSection product={product} />
+          <PricingSection product={product} />
+          <BrandingSection />
+          <ComplianceSection certs={certs} />
+          <ExportSection product={product} />
         </section>
 
         <section className="container-zova mt-20">

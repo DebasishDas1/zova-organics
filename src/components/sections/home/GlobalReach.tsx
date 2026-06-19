@@ -1,6 +1,6 @@
 export function GlobalReach() {
   return (
-    <section className="section-padding bg-[#445b47] text-white">
+    <section className="section-padding bg-zova-green text-white">
       <div className="container-zova text-center">
         <span className="text-xs uppercase tracking-[0.3em]">Global Reach</span>
 

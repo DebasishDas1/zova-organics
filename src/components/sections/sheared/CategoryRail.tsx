@@ -58,6 +58,55 @@ export function CategoryRail({ categories, active, onChange }: CategoryRailProps
   return (
     <LazyMotion features={domAnimation}>
       <div className="relative mb-10 md:mb-12">
+        {/* Left Fade */}
+        {showLeft && (
+          <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16 bg-linear-to-r from-background to-transparent" />
+        )}
+        {/* Right Fade */}
+        {showRight && (
+          <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-16 bg-linear-to-l from-background to-transparent" />
+        )}
+        {/* Left Button */}
+        {showLeft && (
+          <button
+            onClick={() => scroll('left')}
+            className="
+            absolute
+            left-2
+            top-1/2
+            z-20
+            -translate-y-1/2
+            rounded-full
+            bg-black/20
+            p-2
+            backdrop-blur
+            shadow-sm
+          "
+          >
+            <ChevronLeft className="size-4" />
+          </button>
+        )}
+        {/* Right Button */}
+        {showRight && (
+          <button
+            onClick={() => scroll('right')}
+            className="
+            absolute
+            right-2
+            top-1/2
+            z-20
+            -translate-y-1/2
+            rounded-full
+            bg-black/20
+            p-2
+            backdrop-blur
+            shadow-sm
+          "
+          >
+            <ChevronRight className="size-4" />
+          </button>
+        )}
+
         <div
           ref={scrollRef}
           className="
@@ -97,7 +146,7 @@ export function CategoryRail({ categories, active, onChange }: CategoryRailProps
                   <Icon
                     className={cn(
                       'size-6 sm:size-7 md:size-8 transition-colors duration-200',
-                      isActive ? 'text-foreground' : 'text-muted-foreground',
+                      isActive ? 'text-zova-green' : 'text-muted-foreground',
                     )}
                   />
                 </div>
@@ -105,7 +154,7 @@ export function CategoryRail({ categories, active, onChange }: CategoryRailProps
                 <span
                   className={cn(
                     'text-xs sm:text-sm transition-colors duration-200',
-                    isActive ? 'font-medium text-foreground' : 'text-muted-foreground',
+                    isActive ? 'font-medium text-zova-green' : 'text-muted-foreground',
                   )}
                 >
                   {item.label}

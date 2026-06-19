@@ -1,13 +1,25 @@
-import { Globe2, ShieldCheck, Leaf, BadgeCheck } from 'lucide-react'
+import { BadgeCheck, Globe2, Leaf, ShieldCheck, type LucideIcon } from 'lucide-react'
 
 import type { Certification } from '@/payload-types'
+
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
 
 type ProductTrustStripProps = {
   certs?: Certification[]
 }
 
+type TrustItem = {
+  icon: LucideIcon
+  label: string
+}
+
 export function ProductTrustStrip({ certs = [] }: ProductTrustStripProps) {
-  const defaultItems = [
+  const items: TrustItem[] = [
+    ...certs.slice(0, 4).map((cert) => ({
+      icon: Leaf,
+      label: cert.shortCode,
+    })),
     {
       icon: ShieldCheck,
       label: 'Export Ready',
@@ -16,34 +28,34 @@ export function ProductTrustStrip({ certs = [] }: ProductTrustStripProps) {
       icon: Globe2,
       label: 'Worldwide Shipping',
     },
+    {
+      icon: BadgeCheck,
+      label: 'Quality Assured',
+    },
   ]
 
-  const certItems = certs.slice(0, 4).map((cert) => ({
-    icon: Leaf,
-    label: cert.shortCode,
-  }))
-
-  const items = [...certItems, ...defaultItems]
-
   return (
-    <section className="border-y bg-background">
-      <div className="container-zova py-6">
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-          {items.map((item) => (
-            <div
-              key={item.label}
-              className="flex items-center gap-2 text-sm font-medium text-muted-foreground"
-            >
-              <item.icon className="h-4 w-4 text-primary" />
-              <span>{item.label}</span>
-            </div>
-          ))}
+    <section className="py-8">
+      <div className="flex flex-wrap items-center justify-center gap-3">
+        {items.map((item, index) => {
+          const Icon = item.icon
 
-          <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-            <BadgeCheck className="h-4 w-4 text-primary" />
-            <span>Quality Assured</span>
-          </div>
-        </div>
+          return (
+            <div key={`${item.label}-${index}`} className="flex items-center">
+              <Badge
+                variant="secondary"
+                className="h-10 gap-2 rounded-full px-4 text-sm font-medium"
+              >
+                <Icon className="size-4 text-primary" />
+                {item.label}
+              </Badge>
+
+              {index < items.length - 1 && (
+                <Separator orientation="vertical" className="mx-3 hidden h-5 md:block" />
+              )}
+            </div>
+          )
+        })}
       </div>
     </section>
   )

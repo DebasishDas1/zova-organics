@@ -1,4 +1,8 @@
-import { ShoppingBag, Gift, Building2, Flower2, Hotel, Store } from 'lucide-react'
+import { Building2, Flower2, Gift, Hotel, ShoppingBag, Store } from 'lucide-react'
+
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+
+import { SectionHeader } from '@/components/ui/section'
 
 const applications = [
   {
@@ -35,28 +39,36 @@ const applications = [
 
 export function ProductApplications() {
   return (
-    <section>
-      <div className="mb-10">
-        <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">Applications</p>
+    <section className="space-y-8">
+      <SectionHeader
+        label="Applications"
+        title="Built for modern sustainable brands."
+        description="Designed for a wide range of industries, retail programs and private-label manufacturing partnerships."
+      />
 
-        <h2 className="mt-3 text-3xl font-medium md:text-4xl">
-          Built for modern sustainable brands.
-        </h2>
-      </div>
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {applications.map((item) => {
+          const Icon = item.icon
 
-      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {applications.map((item) => (
-          <div
-            key={item.title}
-            className="group rounded-3xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-          >
-            <item.icon className="mb-5 h-6 w-6 text-primary" />
+          return (
+            <Card
+              key={item.title}
+              className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <CardHeader>
+                <div className="mb-2 flex size-12 items-center justify-center rounded-xl bg-primary/10 transition-colors group-hover:bg-primary/15">
+                  <Icon className="size-5 text-primary" />
+                </div>
 
-            <h3 className="mb-2 text-lg font-medium">{item.title}</h3>
+                <CardTitle>{item.title}</CardTitle>
 
-            <p className="text-sm text-muted-foreground">{item.description}</p>
-          </div>
-        ))}
+                <CardDescription>{item.description}</CardDescription>
+              </CardHeader>
+
+              <CardContent />
+            </Card>
+          )
+        })}
       </div>
     </section>
   )

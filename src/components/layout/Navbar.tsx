@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { Menu, ArrowRight } from 'lucide-react'
+import { ArrowRight, Equal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
@@ -60,7 +60,7 @@ const NavbarComponent = () => {
   return (
     <nav
       className={cn(
-        navScrolled && 'bg-white/70',
+        navScrolled && 'bg-white/60',
         'fixed top-0 inset-x-0 z-50 px-6 transition-all duration-700 ease-out',
         'py-3',
         'backdrop-blur-xl',
@@ -101,7 +101,7 @@ const NavbarComponent = () => {
                           'group relative py-2',
                           'text-[13px] font-medium tracking-[-0.01em]',
                           'transition-all duration-200 ease-out',
-                          isActive ? 'text-black' : 'text-black/55 hover:text-black',
+                          isActive ? 'text-zova-green font-bold' : 'text-black/60',
                         )}
                       >
                         {link.name}
@@ -116,11 +116,8 @@ const NavbarComponent = () => {
           <Button
             className={cn(
               'h-10 rounded-full px-5',
-              'bg-black text-white',
               'text-[12px] font-medium',
-              'shadow-[0_1px_2px_rgba(0,0,0,0.08)]',
               'hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
-              'hover:-translate-y-px',
               'transition-all duration-200',
             )}
           >
@@ -139,7 +136,7 @@ const NavbarComponent = () => {
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
               >
-                <Menu className="size-6" />
+                <Equal className="size-6" />
               </button>
             </SheetTrigger>
 
@@ -177,7 +174,10 @@ const NavbarComponent = () => {
                     href={link.href}
                     onClick={closeMobileMenu}
                     aria-current={isActiveLink(link.href) ? 'page' : undefined}
-                    className="text-3xl hover:text-[#8C6B4A] transition-colors"
+                    className={cn(
+                      'text-3xl transition-colors',
+                      isActiveLink(link.href) ? 'text-zova-green font-bold' : 'text-black/60',
+                    )}
                   >
                     {link.name}
                   </Link>
@@ -185,14 +185,15 @@ const NavbarComponent = () => {
               </div>
 
               {/* Mobile Footer */}
-              <div className="mt-auto">
-                <Button
-                  onClick={closeMobileMenu}
-                  className="w-full rounded-full h-16 text-xs uppercase tracking-[0.3em] font-bold bg-black text-white"
-                >
-                  Join a journey
-                </Button>
-              </div>
+              <Button
+                className={cn(
+                  'h-12 rounded-full px-5',
+                  'text-[12px] font-medium',
+                  'transition-all duration-200',
+                )}
+              >
+                <Link href="/contact">Become a Partner</Link>
+              </Button>
             </SheetContent>
           </Sheet>
         </div>

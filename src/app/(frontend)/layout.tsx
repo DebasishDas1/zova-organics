@@ -132,7 +132,7 @@ export default async function FrontendLayout({
           suppressHydrationWarning
         />
         <Navbar />
-        <main className="pt-24">{children}</main>
+        <main className="pt-14 md:pt-24">{children}</main>
         <Footer />
       </body>
     </html>

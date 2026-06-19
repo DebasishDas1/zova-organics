@@ -1,47 +1,61 @@
 import Link from 'next/link'
 import { ArrowRight, Mail, Package } from 'lucide-react'
+
 import type { Product } from '@/payload-types'
+
+import { Button } from '@/components/ui/button'
 
 type Props = { product: Product }
 
 export function ProductRFQ({ product }: Props) {
   return (
-    <div className="overflow-hidden rounded-3xl bg-secondary">
-      <div className="grid gap-8 p-8 sm:p-12 lg:grid-cols-2 lg:items-center">
-
+    <section className="relative overflow-hidden px-8 py-16 sm:px-12 lg:px-16">
+      <div className="relative grid gap-12 lg:grid-cols-2 lg:items-center">
+        {/* LEFT */}
         <div>
-          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-            Ready to order?
-          </span>
-          <h2 className="mt-3 text-2xl font-medium leading-snug">
-            Request a quote or sample for {product.title}
+          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Ready to order</p>
+
+          <h2 className="mt-5 text-3xl font-medium tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+            Request pricing or samples for {product.title}
           </h2>
-          <p className="mt-3 text-muted-foreground">
-            Fill in your requirements and we&apos;ll get back to you within 24 hours with pricing, lead times, and next steps.
+
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
+            Share your requirements and receive detailed pricing, lead times, and production
+            guidance within 24 hours.
           </p>
         </div>
 
+        {/* RIGHT ACTIONS */}
         <div className="flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-          <Link
-            href={`/contact?product=${product.slug}&type=rfq`}
-            className="flex flex-1 items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3.5 text-sm font-medium text-background transition-opacity hover:opacity-80"
+          {/* Primary */}
+          <Button
+            size="lg"
+            className="h-12 rounded-full px-6 text-sm font-medium sm:flex-none sm:px-8"
+            asChild
           >
-            <Mail className="h-4 w-4" />
-            Request a quote
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          {product.ordering?.sampleAvailable && (
-            <Link
-              href={`/contact?product=${product.slug}&type=sample`}
-              className="flex flex-1 items-center justify-center gap-2 rounded-full border border-border bg-background px-6 py-3.5 text-sm font-medium transition-colors hover:bg-background/80"
-            >
-              <Package className="h-4 w-4" />
-              Request a sample
+            <Link href={`/contact?product=${product.slug}&type=rfq`}>
+              <Mail className="size-4" />
+              Request pricing
+              <ArrowRight className="size-4 opacity-70" />
             </Link>
+          </Button>
+
+          {/* Secondary */}
+          {product.ordering?.sampleAvailable && (
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-12 rounded-full text-zova-green border border-zova-green px-4 sm:flex-none sm:px-8"
+              asChild
+            >
+              <Link href={`/contact?product=${product.slug}&type=sample`}>
+                <Package className="size-4" />
+                Request sample
+              </Link>
+            </Button>
           )}
         </div>
-
       </div>
-    </div>
+    </section>
   )
 }
