@@ -7,7 +7,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'General Inquiries',
-    value: 'hello@zovaorganics.com',
+    value: 'info@zovaorganics.com',
     description: 'Questions about products, sourcing, or partnerships.',
   },
   {

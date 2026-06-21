@@ -54,6 +54,23 @@ export function ProductGallery({ product }: Props) {
 
   const prev = () => setActive((i) => (i - 1 + total) % total)
 
+  const swipePower = (offset: number, velocity: number) => Math.abs(offset) * velocity
+
+  const confidenceThreshold = 10000
+
+  const handleDragEnd = (
+    _: MouseEvent | TouchEvent | PointerEvent,
+    info: { offset: { x: number }; velocity: { x: number } },
+  ) => {
+    const power = swipePower(info.offset.x, info.velocity.x)
+
+    if (power < -confidenceThreshold) {
+      next()
+    } else if (power > confidenceThreshold) {
+      prev()
+    }
+  }
+
   const controlButton =
     'absolute z-20 flex items-center justify-center rounded-full bg-white/90 backdrop-blur transition-all duration-300 hover:scale-105 active:scale-95'
 
@@ -72,6 +89,12 @@ export function ProductGallery({ product }: Props) {
                 duration: 0.35,
                 ease: 'easeOut',
               }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.15}
+              onDragEnd={handleDragEnd}
+              whileDrag={{ cursor: 'grabbing' }}
+              className="touch-pan-y"
             >
               <Image
                 src={current?.url ?? '/placeholder.jpg'}

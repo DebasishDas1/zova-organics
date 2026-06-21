@@ -53,7 +53,7 @@ const contactSchema = {
       '@type': 'ContactPoint',
       contactType: 'sales',
       availableLanguage: ['English', 'Hindi'],
-      email: 'hello@zovaorganics.com',
+      email: 'info@zovaorganics.com',
       contactOption: 'TollFree',
     },
   },

@@ -1,26 +1,18 @@
 import Link from 'next/link'
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
 
-const productLinks = [
+const socialLinks = [
   {
-    name: 'Organic Cotton Bags',
-    href: '/products/organic-cotton-bags',
+    name: 'Instagram',
+    href: 'https://www.instagram.com/zovaorganicsindia/',
   },
   {
-    name: 'Organic Tote Bags',
-    href: '/products/organic-tote-bags',
+    name: 'Facebook',
+    href: 'https://www.facebook.com/profile.php?id=61590585130123',
   },
   {
-    name: 'Organic Pouches',
-    href: '/products/organic-pouches',
-  },
-  {
-    name: 'Fabric Rolls',
-    href: '/products/fabric-rolls',
-  },
-  {
-    name: 'Textile Accessories',
-    href: '/products/textile-accessories',
+    name: 'Linkedin',
+    href: 'https://www.linkedin.com/company/zova-organics',
   },
 ]
 
@@ -78,11 +70,11 @@ export function Footer() {
           {/* Products */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wide text-foreground">
-              Products
+              Social Links
             </h4>
 
             <ul className="space-y-3">
-              {productLinks.map((item) => (
+              {socialLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
@@ -124,7 +116,7 @@ export function Footer() {
             <ul className="space-y-4 text-sm text-muted-foreground">
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0" />
-                <span>hello@zovaorganics.com</span>
+                <span>info@zovaorganics.com</span>
               </li>
 
               <li className="flex items-start gap-3">
