@@ -62,8 +62,8 @@ export function Footer() {
             <h3 className="text-xl font-semibold">Zova Organics</h3>
 
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Exporting sustainable and organic products from India to international buyers,
-              distributors, and private-label brands.
+              Exporting sustainable and organic Jute Bags & Eco-friendly packaging from India to
+              international buyers, distributors, and private-label brands.
             </p>
           </div>
 

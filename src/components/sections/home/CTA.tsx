@@ -6,16 +6,18 @@ export function CTA() {
   return (
     <section className="py-32 bg-primary text-primary-foreground">
       <div className="container-zova text-center">
-        <h2 className="max-w-4xl mx-auto">Let&apos;s build something global together.</h2>
+        <h2 className="max-w-4xl mx-auto">
+          Ready to Source Jute Bags and eco-friendly products from India?
+        </h2>
 
         <p className="mx-auto mt-8 max-w-2xl text-primary-foreground/70">
-          Partner with Zova Organics for sustainable sourcing, reliable manufacturing, and worldwide
-          delivery.
+          Partner with Zova Organics for wholesale jute bags, eco-friendly packaging, custom
+          branding, and reliable export from Kolkata, India.
         </p>
 
         <Button asChild size="lg" variant="secondary" className="mt-10 rounded-full px-8">
           <Link href="/contact">
-            Become a Partner
+            Get a Free Quote
             <ArrowRight className="ml-2 size-4" />
           </Link>
         </Button>

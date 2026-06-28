@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { Shirt, ShoppingBag, Package, Home, Leaf, Factory, Inbox } from 'lucide-react'
+import { ShoppingBag, Package, Inbox, CirclePile } from 'lucide-react'
 
 import type { Product } from '@/payload-types'
 import { ProductCard } from './ProductCard'
@@ -21,7 +21,7 @@ const CATEGORIES = [
   {
     label: 'Organic Fabrics',
     value: 'organic-fabrics',
-    icon: Shirt,
+    icon: CirclePile,
   },
   {
     label: 'Tote Bags',
@@ -33,21 +33,21 @@ const CATEGORIES = [
     value: 'pouches',
     icon: Package,
   },
-  {
-    label: 'Home Textiles',
-    value: 'home-textiles',
-    icon: Home,
-  },
-  {
-    label: 'Yoga & Wellness',
-    value: 'yoga-wellness',
-    icon: Leaf,
-  },
-  {
-    label: 'Custom OEM',
-    value: 'custom-oem',
-    icon: Factory,
-  },
+  // {
+  //   label: 'Home Textiles',
+  //   value: 'home-textiles',
+  //   icon: Home,
+  // },
+  // {
+  //   label: 'Yoga & Wellness',
+  //   value: 'yoga-wellness',
+  //   icon: Leaf,
+  // },
+  // {
+  //   label: 'Custom OEM',
+  //   value: 'custom-oem',
+  //   icon: Factory,
+  // },
 ]
 
 export function ProductsGrid({ products = [] }: ProductsGridProps) {

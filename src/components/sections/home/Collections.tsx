@@ -1,20 +1,23 @@
 'use client'
 
-import { ArrowRight } from 'lucide-react'
+// import { ArrowRight } from 'lucide-react'
 import { motion } from 'motion/react'
 
 const collections = [
   {
-    title: 'Organic Fabrics',
-    description: 'Premium natural fabrics crafted for fashion, retail, and private-label brands.',
+    title: 'Organic & Natural Fabrics (Jute, Cotton, Linen)',
+    description:
+      'Our jute bags collection includes jute tote bags, jute shopping bags, jute gift bags, jute wine bags, jute drawstring bags, and custom printed promotional jute bags. All available in bulk, with private label and custom logo printing. MOQ available for all product types. Exported to USA, UK, Germany, France, Australia, UAE, and 25+ more countries.',
   },
   {
-    title: 'Sustainable Bags',
-    description: 'Thoughtfully produced bags designed for conscious businesses worldwide.',
+    title: 'Jute Bags & Eco Tote Bags — Wholesale & Private Label',
+    description:
+      'Our jute bags collection includes jute tote bags, jute shopping bags, jute gift bags, jute wine bags, jute drawstring bags, and custom printed promotional jute bags. All available in bulk, with private label and custom logo printing. MOQ available for all product types. Exported to USA, UK, Germany, France, Australia, UAE, and 25+ more countries.',
   },
   {
-    title: 'Lifestyle Products',
-    description: 'Curated sustainable products expanding beyond textiles.',
+    title: 'Sustainable Lifestyle Products for Retail Brands',
+    description:
+      'Sustainable lifestyle products including jute home décor, organic cotton accessories, and eco-friendly retail packaging. Designed for global retail chains, subscription box brands, and eco-conscious lifestyle brands.',
   },
 ]
 
@@ -38,7 +41,7 @@ export function Collections() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group rounded-3xl border p-8 lg:p-12"
+              className="group rounded-3xl border p-8 lg:p-12 bg-card"
             >
               <div className="grid gap-8 lg:grid-cols-12">
                 <div className="lg:col-span-5">
@@ -49,9 +52,9 @@ export function Collections() {
                   <p>{item.description}</p>
                 </div>
 
-                <div className="lg:col-span-2 flex lg:justify-end">
+                {/* <div className="lg:col-span-2 flex lg:justify-end">
                   <ArrowRight className="transition-transform group-hover:translate-x-2" />
-                </div>
+                </div> */}
               </div>
             </motion.div>
           ))}

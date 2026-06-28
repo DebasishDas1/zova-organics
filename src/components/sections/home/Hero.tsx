@@ -48,8 +48,10 @@ export function Hero() {
               transition={{ delay: 0.2 }}
               className="mt-10 max-w-xl text-xl leading-relaxed text-muted-foreground"
             >
-              Premium organic textiles, bags, fabrics, and sustainable lifestyle products sourced
-              from India for global brands, retailers, and distributors.
+              Zova Organics is a premier exporter based in Kolkata, India, helping global brands
+              source high-quality jute bags, juco bags, organic fabrics, and eco-friendly packaging
+              through audited manufacturing partners, strict quality control, and reliable export
+              logistics.
             </motion.p>
 
             {/* CTA */}
@@ -64,7 +66,7 @@ export function Hero() {
                 className="h-14 flex-1 rounded-full px-4 sm:flex-none sm:px-8"
                 asChild
               >
-                <Link href="/products">Explore Products</Link>
+                <Link href="/products">Explore our Collections</Link>
               </Button>
 
               <Button

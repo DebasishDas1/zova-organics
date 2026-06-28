@@ -8,6 +8,7 @@ import { FeatureList } from '@/components/sections/sheared/FeatureList'
 import { Search, Package, Globe2, Factory, ShieldCheck } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
+import { MarketFlags } from '@/components/sections/home/MarketFlags'
 
 const GlobalReach = dynamic(() =>
   import('@/components/sections/home/GlobalReach').then((mod) => mod.GlobalReach),
@@ -15,9 +16,9 @@ const GlobalReach = dynamic(() =>
 const CTA = dynamic(() => import('@/components/sections/home/CTA').then((mod) => mod.CTA))
 
 export const metadata: Metadata = {
-  title: 'Zova Organics | Sustainable Textiles & Private Label Manufacturing',
+  title: 'Zova Organics | Wholesale Jute Bags & Eco Packaging Exporter from India',
   description:
-    'Zova Organics supplies premium organic textiles, sustainable bags, and ethical private-label manufacturing from India to global brands.',
+    'Zova Organics is a Kolkata-based exporter of wholesale jute bags, juco bags, eco packaging, and private label sustainable products, serving brands and distributors in 30+ countries.',
   keywords: [
     'organic textile exporter',
     'organic cotton bags manufacturer',
@@ -29,9 +30,9 @@ export const metadata: Metadata = {
     'custom textile manufacturing',
   ],
   openGraph: {
-    title: 'Zova Organics | Sustainable Textiles & Private Label Manufacturing',
+    title: 'Zova Organics | Wholesale Jute Bags & Eco Packaging Exporter from India',
     description:
-      'Zova Organics supplies premium organic textiles, sustainable bags, and ethical private-label manufacturing from India to global brands.',
+      'Zova Organics is a Kolkata-based exporter of wholesale jute bags, juco bags, eco packaging, and private label sustainable products, serving brands and distributors in 30+ countries.',
     url: 'https://zovaorganics.com/',
     siteName: 'Zova Organics',
     type: 'website',
@@ -72,28 +73,52 @@ const localBusinessSchema = {
 
 const items = [
   {
-    title: 'Sourcing',
-    description: 'Carefully selected manufacturing partners and materials.',
+    title: 'Jute & Fabric Sourcing from Kolkata',
+    description:
+      'We source jute, cotton, and natural fibers from certified mills across West Bengal and India',
     icon: Search,
   },
   {
-    title: 'Production',
-    description: 'Scalable manufacturing with rigorous quality standards.',
+    title: 'Quality Production at Indian Factories',
+    description:
+      'Strict Quality-controlled production with factory audits and sample approval process.',
     icon: Package,
   },
   {
-    title: 'Export Logistics',
-    description: 'Reliable delivery and documentation for global markets.',
+    title: 'Global Export Logistics from India',
+    description: 'Reliable delivery and documentation for global markets',
     icon: Globe2,
   },
 ]
 
 const steps = [
-  { title: 'Discovery', icon: Search },
-  { title: 'Sampling', icon: Package },
-  { title: 'Production', icon: Factory },
-  { title: 'Quality Check', icon: ShieldCheck },
-  { title: 'Global Delivery', icon: Globe2 },
+  {
+    title: 'Discovery',
+    description:
+      'Share your product requirements — type, quantity, customization, timeline. Sampling',
+    icon: Search,
+  },
+  {
+    title: 'Sampling',
+    description:
+      'We send physical samples of jute bags, fabrics, or lifestyle products for approval.',
+    icon: Package,
+  },
+  {
+    title: 'Production',
+    description: 'Bulk production begins at our vetted Indian manufacturing partners.',
+    icon: Factory,
+  },
+  {
+    title: 'Quality Check',
+    description: 'Pre-shipment inspection and QC report before goods leave India.',
+    icon: ShieldCheck,
+  },
+  {
+    title: 'Global Delivery',
+    description: 'FOB/CIF shipping from Indian Port to your country.',
+    icon: Globe2,
+  },
 ]
 
 export default async function HomePage() {
@@ -107,7 +132,7 @@ export default async function HomePage() {
       <div className="container-zova">
         <SectionHero
           eyebrow="Capabilities"
-          title="Everything needed to move from concept to delivery."
+          title="Everything You Need to Source & Export Jute Bags from India"
           description="From sourcing to production and export, we provide end-to-end solutions for your manufacturing needs."
         />
 
@@ -116,11 +141,12 @@ export default async function HomePage() {
 
       <WhyZova />
       <GlobalReach />
+      <MarketFlags />
       <div className="container-zova section-padding">
         <SectionHero
           eyebrow="Process"
-          title="A simple path from inquiry to delivery."
-          description="Our streamlined process ensures a seamless experience from your initial inquiry to the delivery of your products, with clear communication and dedicated support at every step."
+          title="How to Order Jute Bags from Zova Organics — Simple. Fast. Reliabl"
+          description="From your first inquiry about wholesale jute bags to delivery at your warehouse : here's how we work with global buyers and brands."
         />
 
         <FeatureList items={steps} />

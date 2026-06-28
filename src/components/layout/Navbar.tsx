@@ -163,7 +163,8 @@ const NavbarComponent = () => {
                   />
                 </SheetTitle>
                 <SheetDescription className="hidden">
-                  Crafted in India. Trusted Worldwide.
+                  Crafted in India. Trusted by Global Brands. Premium Jute Bags, Juco Bags &
+                  Sustainable Packaging Exported Worldwide.
                 </SheetDescription>
               </SheetHeader>
 

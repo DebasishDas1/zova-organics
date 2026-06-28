@@ -41,7 +41,7 @@ export function SectionHero({
           </p>
         )}
 
-        <h1
+        <h2
           className={cn(
             titleSizes[size],
             'text-balance',
@@ -52,7 +52,7 @@ export function SectionHero({
           )}
         >
           {title}
-        </h1>
+        </h2>
 
         {description && (
           <p

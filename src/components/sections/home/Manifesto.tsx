@@ -23,7 +23,7 @@ export function Manifesto() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            Sourcing should be transparent, sustainable, and beautifully executed.
+            Sourcing should be transparent, sustainable, and beautifully executed
           </motion.h2>
 
           <motion.div
@@ -39,14 +39,15 @@ export function Manifesto() {
 
             <div className="lg:col-span-8">
               <p className="max-w-3xl text-xl leading-relaxed text-foreground">
-                We believe exceptional products begin long before they reach a shelf. They begin
+                We believe exceptional products begin long before they reach a shelf — they begin
                 with responsible sourcing, skilled craftsmanship, and partnerships built on trust.
               </p>
 
               <p className="mt-8 max-w-3xl text-xl leading-relaxed text-foreground">
-                Zova Organics connects global brands with carefully crafted textile and lifestyle
-                products rooted in India’s manufacturing heritage and guided by modern standards of
-                quality, sustainability, and reliability.
+                Zova Organics connects global brands with premium jute bags, organic fabrics, and
+                eco-lifestyle products rooted in kolkata&apos;s jute manufacturing heritage. As a
+                premier exporter, we work with India&apos;s finest mills to bring you export-quality
+                products with modern standards of quality, sustainability, and reliability.
               </p>
             </div>
           </motion.div>
