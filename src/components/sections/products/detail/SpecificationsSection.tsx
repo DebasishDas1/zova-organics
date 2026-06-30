@@ -1,4 +1,4 @@
-import { Layers3, Package, Palette, Ruler } from 'lucide-react'
+import { Layers3, Package, Ruler } from 'lucide-react'
 
 import type { Product } from '@/payload-types'
 
@@ -18,14 +18,12 @@ export function SpecificationsSection({ product }: SpecificationsSectionProps) {
         description="Technical details and product characteristics."
       />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3">
         <DataCard icon={Package} label="Material" value={product.specifications?.material} />
 
         <DataCard icon={Layers3} label="GSM" value={product.specifications?.gsm} />
 
         <DataCard icon={Ruler} label="Dimensions" value={product.specifications?.dimensions} />
-
-        <DataCard icon={Palette} label="Colours" value={product.specifications?.colours} />
       </div>
     </section>
   )

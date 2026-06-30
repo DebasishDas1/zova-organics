@@ -8,15 +8,9 @@ import type { Certification, Product } from '@/payload-types'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
+import { Card, CardContent } from '@/components/ui/card'
+
+import { DataCard } from './DataCard'
 
 type Props = {
   product: Product
@@ -38,37 +32,8 @@ const CATEGORY_LABELS: Record<string, string> = {
   'custom-oem': 'Custom OEM',
 }
 
-function InfoCard({
-  icon: Icon,
-  label,
-  value,
-}: {
-  icon: LucideIcon
-  label: string
-  value: string
-}) {
-  return (
-    <Card>
-      <CardContent className="flex items-center gap-3 p-4">
-        <div className="flex size-10 items-center justify-center rounded-full bg-primary/10">
-          <Icon className="size-5 text-primary" />
-        </div>
-
-        <div>
-          <p className="text-xs text-muted-foreground">{label}</p>
-          <p className="font-medium">{value}</p>
-        </div>
-      </CardContent>
-    </Card>
-  )
-}
-
 export function ProductInfo({ product, certs }: Props) {
-  const { pricing, ordering } = product
-
-  const lowestPrice = pricing?.tiers?.length
-    ? Math.min(...pricing.tiers.map((tier) => tier.pricePerUnit))
-    : null
+  const { ordering } = product
 
   const highlights = useMemo<Highlight[]>(() => {
     const items: Highlight[] = []
@@ -98,6 +63,12 @@ export function ProductInfo({ product, certs }: Props) {
     return items
   }, [ordering])
 
+  const whatsappUrl = useMemo(() => {
+    const productUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/products/${product.slug}`
+
+    return `https://wa.me/?text=${encodeURIComponent(`Check out ${product.title}: ${productUrl}`)}`
+  }, [product.slug, product.title])
+
   return (
     <div className="flex flex-col">
       <Badge
@@ -107,7 +78,7 @@ export function ProductInfo({ product, certs }: Props) {
         {CATEGORY_LABELS[product.category] ?? product.category}
       </Badge>
 
-      <h1 className="mt-4 text-3xl font-semibold tracking-tight leading-tight sm:text-4xl lg:text-6xl">
+      <h1 className="mt-4 text-3xl font-semibold tracking-tight leading-tight md:text-5xl">
         {product.title}
       </h1>
 
@@ -124,7 +95,9 @@ export function ProductInfo({ product, certs }: Props) {
 
       <div className="my-8 flex gap-3">
         <Button size="lg" className="h-14 flex-1 rounded-full px-4 sm:flex-none sm:px-8" asChild>
-          <Link href="/products">Explore Products</Link>
+          <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+            Enquire on WhatsApp
+          </Link>
         </Button>
 
         <Button
@@ -137,32 +110,11 @@ export function ProductInfo({ product, certs }: Props) {
         </Button>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 grid-cols-2">
         {highlights.map((item) => (
-          <InfoCard key={item.label} {...item} />
+          <DataCard key={item.label} {...item} />
         ))}
       </div>
-
-      {lowestPrice && (
-        <>
-          <Separator className="my-8" />
-
-          <Card>
-            <CardHeader>
-              <CardDescription>Starting From</CardDescription>
-
-              <CardTitle className="text-4xl md:text-5xl">
-                ${lowestPrice.toFixed(2)}
-                <span className="ml-2 text-lg font-normal text-muted-foreground">/ unit</span>
-              </CardTitle>
-            </CardHeader>
-
-            <CardFooter className="text-sm text-muted-foreground">
-              FOB India • Bulk export pricing • Volume discounts available
-            </CardFooter>
-          </Card>
-        </>
-      )}
 
       <Card className="mt-8">
         <CardContent className="flex gap-4 p-6">
@@ -184,8 +136,6 @@ export function ProductInfo({ product, certs }: Props) {
 
       <div className="flex flex-wrap gap-4 text-sm text-muted-foreground pt-8">
         {product.sku && <Badge variant="ghost">SKU {product.sku}</Badge>}
-        {pricing?.incoterm && <Badge variant="ghost">{pricing.incoterm}</Badge>}
-        {pricing?.port && <Badge variant="ghost">{pricing.port}</Badge>}
       </div>
     </div>
   )

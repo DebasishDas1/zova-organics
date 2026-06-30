@@ -20,24 +20,24 @@ export function ProductSampleCTA({ product }: ProductSampleCTAProps) {
               Samples & Documentation
             </p>
 
-            <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-tight md:text-5xl">
-              Evaluate {product.title} before committing to a bulk order.
+            <h2 className="mt-6 max-w-3xl text-3xl font-bold leading-tight tracking-tight md:text-5xl">
+              Evaluate <span className="text-zova-colour">{product.title}</span> before placing a
+              production order.
             </h2>
 
-            <p className="mt-5 max-w-2xl text-primary-foreground/80">
-              Request samples, technical specifications, certifications, customization options and
-              export documentation for internal review and sourcing approval.
+            <p className="mt-6 max-w-2xl text-base leading-8 text-primary-foreground/80">
+              Receive product samples, technical specifications, certifications, customization
+              options, and export documentation to confidently approve your sourcing decision.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Button
                 size="lg"
-                variant="secondary"
                 asChild
                 className="bg-zova-colour h-14 flex-1 rounded-full px-4 sm:flex-none sm:px-8"
               >
                 <Link href={`/contact?product=${product.slug}&type=sample`}>
-                  Request Sample
+                  Request Sample Kit
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
@@ -48,9 +48,7 @@ export function ProductSampleCTA({ product }: ProductSampleCTAProps) {
                 className="text-black h-14 flex-1 rounded-full px-4 sm:flex-none sm:px-8"
                 asChild
               >
-                <Link href={`/contact?product=${product.slug}&type=rfq`}>
-                  Request Specifications
-                </Link>
+                <Link href={`/contact?product=${product.slug}&type=quote`}>Request Quote</Link>
               </Button>
             </div>
           </div>

@@ -319,7 +319,7 @@ export interface Product {
    * Auto-generated from category and slug. e.g. ZO-TOT-NATURALCOTTON-A3F2
    */
   sku?: string | null;
-  stockStatus: 'draft' | 'active' | 'out-of-stock' | 'discontinued';
+  stockStatus: 'draft' | 'active' | 'out-of-stock';
   /**
    * Show on homepage featured section
    */
@@ -378,6 +378,10 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Certifications linked to this product
+   */
+  certifications?: (number | Certification)[] | null;
   specifications: {
     /**
      * e.g. 100% GOTS organic cotton
@@ -461,6 +465,38 @@ export interface Product {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certifications".
+ */
+export interface Certification {
+  id: number;
+  /**
+   * e.g. GOTS 6.0, OEKO-TEX Standard 100
+   */
+  name: string;
+  /**
+   * Badge label shown on product cards. e.g. GOTS, OEKO-TEX
+   */
+  shortCode: string;
+  /**
+   * e.g. Control Union, Intertek
+   */
+  issuingBody?: string | null;
+  certificateNumber?: string | null;
+  validFrom?: string | null;
+  validUntil?: string | null;
+  /**
+   * PDF of the certificate — downloadable from the product page
+   */
+  certificateFile?: (number | null) | Media;
+  /**
+   * One-sentence explanation shown in certification tooltips
+   */
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leads".
  */
 export interface Lead {
@@ -518,38 +554,6 @@ export interface Lead {
    * Internal notes — not visible to the buyer
    */
   internalNotes?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "certifications".
- */
-export interface Certification {
-  id: number;
-  /**
-   * e.g. GOTS 6.0, OEKO-TEX Standard 100
-   */
-  name: string;
-  /**
-   * Badge label shown on product cards. e.g. GOTS, OEKO-TEX
-   */
-  shortCode: string;
-  /**
-   * e.g. Control Union, Intertek
-   */
-  issuingBody?: string | null;
-  certificateNumber?: string | null;
-  validFrom?: string | null;
-  validUntil?: string | null;
-  /**
-   * PDF of the certificate — downloadable from the product page
-   */
-  certificateFile?: (number | null) | Media;
-  /**
-   * One-sentence explanation shown in certification tooltips
-   */
-  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -999,6 +1003,7 @@ export interface ProductsSelect<T extends boolean = true> {
         caption?: T;
         id?: T;
       };
+  certifications?: T;
   specifications?:
     | T
     | {

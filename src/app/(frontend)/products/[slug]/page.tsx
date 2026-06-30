@@ -4,10 +4,8 @@ import type { Media, Certification } from '@/payload-types'
 import { getProductBySlug, getRelatedProducts } from '@/lib/payload/products'
 
 import { ProductGallery } from '@/components/sections/products/detail/ProductGallery'
-import { ProductInfo } from '@/components/sections/products/detail/ProductInfo'
 import { ProductTrustStrip } from '@/components/sections/products/detail/ProductTrustStrip'
 import { ProductApplications } from '@/components/sections/products/detail/ProductApplications'
-import { ProductRFQ } from '@/components/sections/products/detail/ProductRFQ'
 import { ProductSampleCTA } from '@/components/sections/products/detail/ProductSampleCTA'
 import { RelatedProducts } from '@/components/sections/products/detail/RelatedProducts'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
@@ -20,11 +18,11 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { PricingSection } from '@/components/sections/products/detail/PricingSection'
 import { BrandingSection } from '@/components/sections/products/detail/BrandingSection'
-import { ComplianceSection } from '@/components/sections/products/detail/ComplianceSection'
+// import { ComplianceSection } from '@/components/sections/products/detail/ComplianceSection'
 import { SpecificationsSection } from '@/components/sections/products/detail/SpecificationsSection'
 import { ExportSection } from '@/components/sections/products/detail/ExportSection'
+import { ProductInfo } from '@/components/sections/products/detail/ProductInfo'
 
 type Props = {
   params: Promise<{
@@ -149,28 +147,17 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </section>
 
-        <div className="mt-16">
-          <ProductTrustStrip certs={certs} />
-        </div>
-
         <section className="container-zova mt-20 space-y-12">
+          <ProductTrustStrip certs={certs} />
           <SpecificationsSection product={product} />
-          <PricingSection product={product} />
           <BrandingSection />
-          <ComplianceSection certs={certs} />
+          {/* <ComplianceSection certs={certs} /> */}
           <ExportSection product={product} />
         </section>
 
-        <section className="container-zova mt-20">
+        <section className="container-zova space-y-20 mt-12">
           <ProductApplications />
-        </section>
-
-        <section className="container-zova mt-20">
           <ProductSampleCTA product={product} />
-        </section>
-
-        <section className="container-zova mt-20">
-          <ProductRFQ product={product} />
         </section>
 
         {relatedProducts.length > 0 && (

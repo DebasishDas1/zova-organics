@@ -1,6 +1,6 @@
 import { SectionHeader } from '@/components/ui/section'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Palette, Package, Tag, Stamp } from 'lucide-react'
+import { DataCard } from './DataCard'
 
 const BRANDING_OPTIONS = [
   {
@@ -36,21 +36,13 @@ export function BrandingSection() {
 
       <div className="grid gap-4 md:grid-cols-4 grid-cols-2">
         {BRANDING_OPTIONS.map((item) => {
-          const Icon = item.icon
-
           return (
-            <Card key={item.title}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3">
-                  <Icon className="size-5 text-primary" />
-                  {item.title}
-                </CardTitle>
-              </CardHeader>
-
-              <CardContent>
-                <p className="text-muted-foreground">{item.description}</p>
-              </CardContent>
-            </Card>
+            <DataCard
+              key={item.title}
+              icon={item.icon}
+              label={item.title}
+              value={item.description}
+            />
           )
         })}
       </div>

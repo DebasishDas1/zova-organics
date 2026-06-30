@@ -125,7 +125,6 @@ export const Products: CollectionConfig = {
         { label: 'Draft', value: 'draft' },
         { label: 'Active', value: 'active' },
         { label: 'Out of stock', value: 'out-of-stock' },
-        { label: 'Discontinued', value: 'discontinued' },
       ],
       admin: {
         position: 'sidebar',
@@ -223,6 +222,15 @@ export const Products: CollectionConfig = {
       ],
     },
 
+    {
+      name: 'certifications',
+      type: 'relationship',
+      relationTo: 'certifications',
+      hasMany: true,
+      admin: {
+        description: 'Certifications linked to this product',
+      },
+    },
     // ─── Physical specifications ──────────────────────────────────────
     {
       type: 'group',

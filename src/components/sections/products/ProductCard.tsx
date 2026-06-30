@@ -10,7 +10,7 @@ type ProductCardProps = {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { slug, title, shortDescription, featuredImage, ordering } = product
+  const { slug, title, featuredImage, ordering } = product
 
   const image = featuredImage && typeof featuredImage === 'object' ? featuredImage : null
 
@@ -32,12 +32,6 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Content */}
         <div className="px-4 py-8 text-center md:py-10">
           <h3 className="text-2xl font-medium tracking-tight md:text-3xl">{title}</h3>
-
-          {shortDescription && (
-            <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted-foreground md:mt-5 md:text-lg">
-              {shortDescription}
-            </p>
-          )}
 
           {ordering?.moq && (
             <p className="mt-6 text-base font-medium md:mt-8 md:text-lg">
