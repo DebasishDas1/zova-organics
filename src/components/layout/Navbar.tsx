@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { ArrowRight, Equal } from 'lucide-react'
+import { ArrowRight, Menu } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   NavigationMenu,
@@ -136,7 +136,7 @@ const NavbarComponent = () => {
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
               >
-                <Equal className="size-6" />
+                <Menu className="size-6" />
               </button>
             </SheetTrigger>
 

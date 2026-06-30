@@ -5,10 +5,11 @@ import { Collections } from '@/components/sections/home/Collections'
 import { WhyZova } from '@/components/sections/home/WhyZova'
 import { SectionHero } from '@/components/sections/sheared/SectionHero'
 import { FeatureList } from '@/components/sections/sheared/FeatureList'
-import { Search, Package, Globe2, Factory, ShieldCheck } from 'lucide-react'
+import { Search, Package, Globe2, Factory, ShieldCheck, ChevronDownIcon } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 import { MarketFlags } from '@/components/sections/home/MarketFlags'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 
 const GlobalReach = dynamic(() =>
   import('@/components/sections/home/GlobalReach').then((mod) => mod.GlobalReach),
@@ -121,6 +122,39 @@ const steps = [
   },
 ]
 
+const home_faq = [
+  {
+    question: 'What types of jute bags does Zova Organics export?',
+    answer:
+      'We export a wide range of jute bags including jute tote bags, jute shopping bags, jute gift bags, jute wine bags, jute drawstring bags, jute beach bags, and custom printed promotional jute bags. All products are available in bulk with full customization options including size, color, print, and packaging. If you have a specific design in mind, we can work from your brief.',
+  },
+  {
+    question: ' What is the minimum order quantity (MOQ) for jute bags?',
+    answer:
+      "Our standard MOQ is [500] pieces per design for plain jute bags. For custom printed or private label jute bags, the MOQ is [300–500] pieces depending on the product type. We understand that new buyers sometimes need smaller trial orders — reach out and we'll do our best to accommodate you.",
+  },
+  {
+    question: 'Do you offer custom logo printing and private label services?',
+    answer:
+      'Yes. Private label and custom branding is one of our core services. We offer screen printing, jute patch branding, heat transfer printing, and embroidery on all jute bag products. You can customize the bag size, fabric weight, handles, inner lining, and packaging. We work directly from your logo files and provide a pre-production sample for approval before bulk production begins.',
+  },
+  {
+    question: 'Which countries do you export jute bags to?',
+    answer:
+      "We currently export to 30+ countries across North America, Europe, the Middle East, and Asia Pacific. Our key markets include the USA, UK, Germany, France, Australia, UAE, Canada, Netherlands, Japan, and New Zealand. If your country isn't listed, contact us — we ship globally via sea freight and air freight from Kolkata, India.",
+  },
+  {
+    question: 'How long does production and shipping take?',
+    answer:
+      'Standard production time is 3–4 weeks after order confirmation and sample approval. Shipping from Kolkata by sea freight takes 3–5 weeks to Europe and the USA, and 1–2 weeks to the Middle East. Air freight is also available for urgent orders. We provide full shipment tracking and pre-shipment quality inspection reports with every order.',
+  },
+  {
+    question: 'Can I get samples before placing a bulk order?',
+    answer:
+      'Yes. We strongly encourage sampling before bulk orders. Sample sets are available upon request. Sampling charges apply but are fully adjustable against your bulk order value. Standard sample lead time is 7–10 working days. WhatsApp us or fill out our inquiry form to request samples.',
+  },
+]
+
 export default async function HomePage() {
   return (
     <>
@@ -128,15 +162,13 @@ export default async function HomePage() {
       <Hero />
       <Manifesto />
       <Collections />
-
-      <div className="container-zova">
-        <SectionHero
-          eyebrow="Capabilities"
-          title="Everything You Need to Source & Export Jute Bags from India"
-          description="From sourcing to production and export, we provide end-to-end solutions for your manufacturing needs."
-        />
-
-        <FeatureList items={items} />
+      <div className="section-padding bg-black">
+        <div className="container-zova">
+          <h2 className="text-white mb-10">
+            Everything You Need to Source & Export Jute Bags from India
+          </h2>
+          <FeatureList items={items} />
+        </div>
       </div>
 
       <WhyZova />
@@ -152,6 +184,28 @@ export default async function HomePage() {
         <FeatureList items={steps} />
       </div>
       <CTA />
+
+      <section className="my-10">
+        <SectionHero
+          title="Common Questions from Global Buyers"
+          description="Everything you need to know before reaching out."
+        />
+
+        <div className="container-zova space-y-4 py-10">
+          {home_faq.map((faq, index) => (
+            <Collapsible key={index} className="rounded-2xl border bg-card p-4">
+              <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between text-lg font-medium">
+                <span>{faq.question}</span>
+                <ChevronDownIcon className="h-4 w-4 shrink-0" />
+              </CollapsibleTrigger>
+
+              <CollapsibleContent className="space-y-4 pt-4">
+                <p>{faq.answer}</p>
+              </CollapsibleContent>
+            </Collapsible>
+          ))}
+        </div>
+      </section>
     </>
   )
 }

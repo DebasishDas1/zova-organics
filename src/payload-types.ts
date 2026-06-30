@@ -316,15 +316,26 @@ export interface Product {
    */
   slug: string;
   /**
-   * Internal SKU code. e.g. ZO-TB-001
+   * Auto-generated from category and slug. e.g. ZO-TOT-NATURALCOTTON-A3F2
    */
-  sku: string;
+  sku?: string | null;
   stockStatus: 'draft' | 'active' | 'out-of-stock' | 'discontinued';
   /**
    * Show on homepage featured section
    */
   featured?: boolean | null;
-  category: 'organic-fabrics' | 'bags' | 'pouches' | 'home-textiles' | 'yoga-wellness' | 'custom-oem';
+  category:
+    | 'bags'
+    | 'shopping-grocery-bags'
+    | 'lunch-tiffin-bags'
+    | 'tote-bags'
+    | 'fashion-designer-handbags'
+    | 'gifting-bags'
+    | 'promotional-event-bags'
+    | 'wine-bottle-bags'
+    | 'conference-folders-file-bags'
+    | 'planter-bags'
+    | 'gunny-sacks';
   /**
    * e.g. "natural dye", "unbleached", "bulk"
    */
@@ -399,32 +410,6 @@ export interface Product {
         }[]
       | null;
   };
-  pricing?: {
-    currency?: ('USD' | 'EUR' | 'GBP') | null;
-    incoterm?: ('FOB' | 'CIF' | 'DDP' | 'EXW') | null;
-    /**
-     * Port of origin for FOB/CIF pricing
-     */
-    port?: string | null;
-    /**
-     * Volume-based pricing. Add tiers from lowest to highest quantity.
-     */
-    tiers?:
-      | {
-          minQty: number;
-          /**
-           * Leave blank for "and above"
-           */
-          maxQty?: number | null;
-          pricePerUnit: number;
-          /**
-           * e.g. unit, metre, kg
-           */
-          unit?: string | null;
-          id?: string | null;
-        }[]
-      | null;
-  };
   ordering: {
     moq: number;
     /**
@@ -441,10 +426,6 @@ export interface Product {
      */
     sampleLeadTime?: string | null;
   };
-  /**
-   * Link applicable certifications. Manage them in the Certifications collection.
-   */
-  certifications?: (number | Certification)[] | null;
   customisation?: {
     customLogoAvailable?: boolean | null;
     customSizeAvailable?: boolean | null;
@@ -477,38 +458,6 @@ export interface Product {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "certifications".
- */
-export interface Certification {
-  id: number;
-  /**
-   * e.g. GOTS 6.0, OEKO-TEX Standard 100
-   */
-  name: string;
-  /**
-   * Badge label shown on product cards. e.g. GOTS, OEKO-TEX
-   */
-  shortCode: string;
-  /**
-   * e.g. Control Union, Intertek
-   */
-  issuingBody?: string | null;
-  certificateNumber?: string | null;
-  validFrom?: string | null;
-  validUntil?: string | null;
-  /**
-   * PDF of the certificate — downloadable from the product page
-   */
-  certificateFile?: (number | null) | Media;
-  /**
-   * One-sentence explanation shown in certification tooltips
-   */
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -569,6 +518,38 @@ export interface Lead {
    * Internal notes — not visible to the buyer
    */
   internalNotes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "certifications".
+ */
+export interface Certification {
+  id: number;
+  /**
+   * e.g. GOTS 6.0, OEKO-TEX Standard 100
+   */
+  name: string;
+  /**
+   * Badge label shown on product cards. e.g. GOTS, OEKO-TEX
+   */
+  shortCode: string;
+  /**
+   * e.g. Control Union, Intertek
+   */
+  issuingBody?: string | null;
+  certificateNumber?: string | null;
+  validFrom?: string | null;
+  validUntil?: string | null;
+  /**
+   * PDF of the certificate — downloadable from the product page
+   */
+  certificateFile?: (number | null) | Media;
+  /**
+   * One-sentence explanation shown in certification tooltips
+   */
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1034,22 +1015,6 @@ export interface ProductsSelect<T extends boolean = true> {
               id?: T;
             };
       };
-  pricing?:
-    | T
-    | {
-        currency?: T;
-        incoterm?: T;
-        port?: T;
-        tiers?:
-          | T
-          | {
-              minQty?: T;
-              maxQty?: T;
-              pricePerUnit?: T;
-              unit?: T;
-              id?: T;
-            };
-      };
   ordering?:
     | T
     | {
@@ -1059,7 +1024,6 @@ export interface ProductsSelect<T extends boolean = true> {
         sampleAvailable?: T;
         sampleLeadTime?: T;
       };
-  certifications?: T;
   customisation?:
     | T
     | {

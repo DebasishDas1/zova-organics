@@ -32,7 +32,7 @@ export function SectionHero({
 
   return (
     <section
-      className={cn('container-zova', 'flex items-center', 'py-8', 'min-h-[20vh]', className)}
+      className={cn('container-zova', 'flex items-center', 'py-4', 'min-h-[15vh]', className)}
     >
       <div className={cn('w-full', 'max-w-5xl', align === 'center' && 'mx-auto text-center')}>
         {eyebrow && (

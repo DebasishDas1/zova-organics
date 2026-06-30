@@ -137,16 +137,16 @@ export function Footer() {
           <p>© {new Date().getFullYear()} Zova Organics. All rights reserved.</p>
 
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="transition-colors hover:text-foreground">
-              Privacy
+            <Link href="/privacy-policy" className="transition-colors hover:text-foreground">
+              Privacy Policy
             </Link>
 
-            <Link href="/terms" className="transition-colors hover:text-foreground">
-              Terms
+            <Link href="/tac" className="transition-colors hover:text-foreground">
+              Terms and Conditions
             </Link>
 
-            <Link href="/cookies" className="transition-colors hover:text-foreground">
-              Cookies
+            <Link href="/faq" className="transition-colors hover:text-foreground">
+              FAQ
             </Link>
           </div>
         </div>

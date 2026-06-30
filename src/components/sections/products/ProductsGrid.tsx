@@ -2,7 +2,17 @@
 
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { ShoppingBag, Package, Inbox, CirclePile } from 'lucide-react'
+import {
+  ShoppingBag,
+  Package,
+  Inbox,
+  ShoppingBasket,
+  BriefcaseBusiness,
+  Gift,
+  Wine,
+  FileText,
+  Sprout,
+} from 'lucide-react'
 
 import type { Product } from '@/payload-types'
 import { ProductCard } from './ProductCard'
@@ -19,35 +29,55 @@ const CATEGORIES = [
     icon: Package,
   },
   {
-    label: 'Organic Fabrics',
-    value: 'organic-fabrics',
-    icon: CirclePile,
+    label: 'Shopping & Grocery Bags',
+    value: 'shopping-grocery-bags',
+    icon: ShoppingBasket,
+  },
+  {
+    label: 'Lunch & Tiffin Bags',
+    value: 'lunch-tiffin-bags',
+    icon: Package,
   },
   {
     label: 'Tote Bags',
-    value: 'bags',
+    value: 'tote-bags',
     icon: ShoppingBag,
   },
   {
-    label: 'Pouches',
-    value: 'pouches',
+    label: 'Fashion & Designer Handbags',
+    value: 'fashion-designer-handbags',
+    icon: BriefcaseBusiness,
+  },
+  {
+    label: 'Gifting Bags',
+    value: 'gifting-bags',
+    icon: Gift,
+  },
+  {
+    label: 'Promotional & Event Bags',
+    value: 'promotional-event-bags',
+    icon: ShoppingBag,
+  },
+  {
+    label: 'Wine & Bottle Bags',
+    value: 'wine-bottle-bags',
+    icon: Wine,
+  },
+  {
+    label: 'Conference Folders & File Bags',
+    value: 'conference-folders-file-bags',
+    icon: FileText,
+  },
+  {
+    label: 'Planter Bags',
+    value: 'planter-bags',
+    icon: Sprout,
+  },
+  {
+    label: 'Gunny Sacks',
+    value: 'gunny-sacks',
     icon: Package,
   },
-  // {
-  //   label: 'Home Textiles',
-  //   value: 'home-textiles',
-  //   icon: Home,
-  // },
-  // {
-  //   label: 'Yoga & Wellness',
-  //   value: 'yoga-wellness',
-  //   icon: Leaf,
-  // },
-  // {
-  //   label: 'Custom OEM',
-  //   value: 'custom-oem',
-  //   icon: Factory,
-  // },
 ]
 
 export function ProductsGrid({ products = [] }: ProductsGridProps) {
@@ -63,22 +93,6 @@ export function ProductsGrid({ products = [] }: ProductsGridProps) {
 
     if (filters.includes('Sample Available')) {
       list = list.filter((product) => product.ordering?.sampleAvailable)
-    }
-
-    if (filters.includes('GOTS')) {
-      list = list.filter((product) =>
-        product.certifications?.some(
-          (cert) => typeof cert === 'object' && cert.shortCode === 'GOTS',
-        ),
-      )
-    }
-
-    if (filters.includes('OEKO-TEX')) {
-      list = list.filter((product) =>
-        product.certifications?.some(
-          (cert) => typeof cert === 'object' && cert.shortCode === 'OEKO-TEX',
-        ),
-      )
     }
 
     return list

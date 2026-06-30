@@ -22,16 +22,18 @@ const slugHook: FieldHook = ({ data, value }) => {
   return value
 }
 
-export const skuHook: FieldHook = ({ value, data }) => {
-  if (value) return value
-
+export const skuHook: FieldHook = ({ data }) => {
   const categoryMap: Record<string, string> = {
-    bags: 'BAG',
-    pouches: 'POU',
-    'organic-fabrics': 'FAB',
-    'home-textiles': 'HOME',
-    'yoga-wellness': 'YOGA',
-    'custom-oem': 'OEM',
+    'shopping-grocery-bags': 'SGB',
+    'lunch-tiffin-bags': 'LTB',
+    'tote-bags': 'TOT',
+    'fashion-designer-handbags': 'FDH',
+    'gifting-bags': 'GFT',
+    'promotional-event-bags': 'PEB',
+    'wine-bottle-bags': 'WBB',
+    'conference-folders-file-bags': 'CFB',
+    'planter-bags': 'PLB',
+    'gunny-sacks': 'GUN',
   }
 
   const category =
@@ -39,9 +41,10 @@ export const skuHook: FieldHook = ({ value, data }) => {
 
   const slugPart = data?.slug?.split('-').slice(0, 2).join('').toUpperCase() || 'ITEM'
 
-  return `ZO-${category}-${slugPart}`
-}
+  const rand = Math.random().toString(36).slice(2, 6).toUpperCase()
 
+  return `ZO-${category}-${slugPart}-${rand}`
+}
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -104,13 +107,12 @@ export const Products: CollectionConfig = {
     {
       name: 'sku',
       type: 'text',
-      required: true,
-      unique: true,
       hooks: {
         beforeValidate: [skuHook],
       },
       admin: {
-        description: 'Internal SKU code. e.g. ZO-TB-001',
+        readOnly: true,
+        description: 'Auto-generated from category and slug. e.g. ZO-TOT-NATURALCOTTON-A3F2',
       },
     },
 
@@ -146,12 +148,17 @@ export const Products: CollectionConfig = {
       type: 'select',
       required: true,
       options: [
-        { label: 'Organic fabrics', value: 'organic-fabrics' },
         { label: 'Bags', value: 'bags' },
-        { label: 'Pouches', value: 'pouches' },
-        { label: 'Home textiles', value: 'home-textiles' },
-        { label: 'Yoga & wellness', value: 'yoga-wellness' },
-        { label: 'Custom / OEM', value: 'custom-oem' },
+        { label: 'Shopping & Grocery Bags', value: 'shopping-grocery-bags' },
+        { label: 'Lunch & Tiffin Bags', value: 'lunch-tiffin-bags' },
+        { label: 'Tote Bags', value: 'tote-bags' },
+        { label: 'Fashion & Designer Handbags', value: 'fashion-designer-handbags' },
+        { label: 'Gifting Bags', value: 'gifting-bags' },
+        { label: 'Promotional & Event Bags', value: 'promotional-event-bags' },
+        { label: 'Wine & Bottle Bags', value: 'wine-bottle-bags' },
+        { label: 'Conference Folders & File Bags', value: 'conference-folders-file-bags' },
+        { label: 'Planter Bags', value: 'planter-bags' },
+        { label: 'Gunny Sacks', value: 'gunny-sacks' },
       ],
     },
 
@@ -286,88 +293,6 @@ export const Products: CollectionConfig = {
       ],
     },
 
-    // ─── Pricing ──────────────────────────────────────────────────────
-    {
-      type: 'group',
-      name: 'pricing',
-      label: 'Pricing',
-      fields: [
-        {
-          name: 'currency',
-          type: 'select',
-          defaultValue: 'USD',
-          options: [
-            { label: 'USD', value: 'USD' },
-            { label: 'EUR', value: 'EUR' },
-            { label: 'GBP', value: 'GBP' },
-          ],
-        },
-
-        {
-          name: 'incoterm',
-          type: 'select',
-          defaultValue: 'FOB',
-          options: [
-            { label: 'FOB – Free on Board', value: 'FOB' },
-            { label: 'CIF – Cost, Insurance & Freight', value: 'CIF' },
-            { label: 'DDP – Delivered Duty Paid', value: 'DDP' },
-            { label: 'EXW – Ex Works', value: 'EXW' },
-          ],
-        },
-
-        {
-          name: 'port',
-          type: 'text',
-          defaultValue: 'Mumbai, India',
-          admin: {
-            description: 'Port of origin for FOB/CIF pricing',
-          },
-        },
-
-        {
-          name: 'tiers',
-          type: 'array',
-          label: 'Price tiers',
-          minRows: 1,
-          admin: {
-            description: 'Volume-based pricing. Add tiers from lowest to highest quantity.',
-          },
-          fields: [
-            {
-              name: 'minQty',
-              type: 'number',
-              required: true,
-              min: 1,
-              admin: { width: '25%' },
-            },
-            {
-              name: 'maxQty',
-              type: 'number',
-              admin: {
-                width: '25%',
-                description: 'Leave blank for "and above"',
-              },
-            },
-            {
-              name: 'pricePerUnit',
-              type: 'number',
-              required: true,
-              admin: { width: '25%' },
-            },
-            {
-              name: 'unit',
-              type: 'text',
-              defaultValue: 'unit',
-              admin: {
-                width: '25%',
-                description: 'e.g. unit, metre, kg',
-              },
-            },
-          ],
-        },
-      ],
-    },
-
     // ─── Order & lead time ────────────────────────────────────────────
     {
       type: 'group',
@@ -414,18 +339,6 @@ export const Products: CollectionConfig = {
           },
         },
       ],
-    },
-
-    // ─── Certifications ───────────────────────────────────────────────
-    {
-      name: 'certifications',
-      type: 'relationship',
-      relationTo: 'certifications',
-      hasMany: true,
-      admin: {
-        description:
-          'Link applicable certifications. Manage them in the Certifications collection.',
-      },
     },
 
     // ─── Customisation ────────────────────────────────────────────────

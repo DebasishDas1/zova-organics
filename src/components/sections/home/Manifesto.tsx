@@ -1,14 +1,29 @@
 'use client'
 
 import { motion } from 'motion/react'
+import Image from 'next/image'
 
 export function Manifesto() {
   return (
-    <section className="section-padding">
-      <div className="container-zova">
-        <div className="max-w-6xl">
+    <section className="relative isolate overflow-hidden mt-6 md:mt-0">
+      {/* Background Image */}
+      <Image
+        src="/page/home/Sourcing_img.png"
+        alt="Zova Organics sourcing"
+        width={1800}
+        height={1200}
+        priority
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      {/* Optional dark overlay */}
+      <div className="absolute inset-0 bg-black/40" />
+
+      {/* Content */}
+      <div className="relative z-10 container-zova flex min-h-[70vh] items-center py-20 md:min-h-[80vh] lg:min-h-screen">
+        <div className="max-w-5xl text-white">
           <motion.p
-            className="mb-8 text-xs uppercase tracking-[0.3em] text-muted-foreground"
+            className="mb-6 text-xs uppercase tracking-[0.3em] text-white/70"
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -27,29 +42,27 @@ export function Manifesto() {
           </motion.h2>
 
           <motion.div
-            className="mt-16 grid gap-12 lg:grid-cols-12"
+            className="mt-10 max-w-3xl space-y-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <div className="lg:col-span-4">
-              <span className="text-sm text-muted-foreground">Zova Organics</span>
-            </div>
+            <span className="block text-sm uppercase tracking-wider text-white/60">
+              Zova Organics
+            </span>
 
-            <div className="lg:col-span-8">
-              <p className="max-w-3xl text-xl leading-relaxed text-foreground">
-                We believe exceptional products begin long before they reach a shelf — they begin
-                with responsible sourcing, skilled craftsmanship, and partnerships built on trust.
-              </p>
+            <p className="text-lg leading-relaxed md:text-xl">
+              We believe exceptional products begin long before they reach a shelf. They begin with
+              responsible sourcing, skilled craftsmanship, and partnerships built on trust.
+            </p>
 
-              <p className="mt-8 max-w-3xl text-xl leading-relaxed text-foreground">
-                Zova Organics connects global brands with premium jute bags, organic fabrics, and
-                eco-lifestyle products rooted in kolkata&apos;s jute manufacturing heritage. As a
-                premier exporter, we work with India&apos;s finest mills to bring you export-quality
-                products with modern standards of quality, sustainability, and reliability.
-              </p>
-            </div>
+            <p className="text-base leading-8 text-white/80 md:text-lg">
+              Zova Organics connects global brands with premium jute bags, organic fabrics, and
+              eco-lifestyle products rooted in Kolkata&apos;s jute manufacturing heritage. We work
+              with India&apos;s finest mills to deliver export-quality products with modern
+              standards of quality, sustainability, and reliability.
+            </p>
           </motion.div>
         </div>
       </div>
