@@ -194,7 +194,7 @@ export default async function HomePage() {
         <div className="container-zova space-y-4 py-10">
           {home_faq.map((faq, index) => (
             <Collapsible key={index} className="rounded-2xl border bg-card p-4">
-              <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between text-lg font-medium">
+              <CollapsibleTrigger className="flex w-full cursor-pointer items-center justify-between text-lg font-medium text-start">
                 <span>{faq.question}</span>
                 <ChevronDownIcon className="h-4 w-4 shrink-0" />
               </CollapsibleTrigger>

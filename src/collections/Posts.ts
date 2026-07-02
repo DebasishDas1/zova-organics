@@ -16,6 +16,7 @@ import {
   UnorderedListFeature,
   IndentFeature,
   AlignFeature,
+  EXPERIMENTAL_TableFeature,
 } from '@payloadcms/richtext-lexical'
 import { triggerRevalidation } from '../lib/revalidate'
 
@@ -184,7 +185,6 @@ export const Posts: CollectionConfig = {
     {
       name: 'excerpt',
       type: 'textarea',
-      required: true,
       maxLength: 160,
       admin: {
         description: 'Shown on blog cards and used as meta description. Max 160 characters.',
@@ -216,6 +216,7 @@ export const Posts: CollectionConfig = {
           AlignFeature(),
           BlockquoteFeature(),
           HorizontalRuleFeature(),
+          EXPERIMENTAL_TableFeature(),
           LinkFeature({
             enabledCollections: ['posts', 'products'],
             fields: ({ defaultFields }) => [
@@ -255,6 +256,7 @@ export const Posts: CollectionConfig = {
       }),
       admin: { description: 'Use H2/H3 headings, bullet lists, and images to structure for SEO.' },
     },
+
     // ─── Related content ───────────────────────────────────────────────────
     {
       name: 'relatedProducts',
