@@ -13,7 +13,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Export & Wholesale',
-    value: '+91 XXXXX XXXXX',
+    value: '+91 9073896612',
     description: 'Discuss MOQ, customization, logistics, and pricing.',
   },
   {

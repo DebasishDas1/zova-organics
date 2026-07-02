@@ -58,7 +58,7 @@ const localBusinessSchema = {
   '@id': 'https://zovaorganics.com/#business',
   name: 'Zova Organics',
   url: 'https://zovaorganics.com',
-  telephone: '+91-XXXXXXXXXX',
+  telephone: '+91-9073896612',
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'IN',
