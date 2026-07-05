@@ -6,7 +6,6 @@ import type { Media } from '@/payload-types'
 import { JsonLd } from '@/components/sections/sheared/JsonLd'
 import { BlogHero } from '@/components/sections/blogs/BlogHero'
 import { BlogFeaturedImage } from '@/components/sections/blogs/BlogFeaturedImage'
-import { BlogMetadata } from '@/components/sections/blogs/BlogMetadata'
 import { AuthorCard } from '@/components/sections/blogs/AuthorCard'
 import { RelatedProducts } from '@/components/sections/blogs/RelatedProducts'
 import { RelatedPosts } from '@/components/sections/blogs/RelatedPosts'
@@ -155,15 +154,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           readingTime={post.readingTime}
         />
 
-        {featuredImage?.url && (
+        {/* {featuredImage?.url && (
           <BlogFeaturedImage src={featuredImage.url} alt={post.featuredImageAlt ?? post.title} />
-        )}
+        )} */}
 
-        <BlogMetadata
-          publishedAt={post.publishedAt}
-          readingTime={post.readingTime}
-          // tags={post.tags}
-        />
         <BlogContent content={post.content} />
         <BlogTags />
         <AuthorCard />

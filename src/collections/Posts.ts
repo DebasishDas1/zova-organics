@@ -40,8 +40,10 @@ export const Posts: CollectionConfig = {
     group: 'Content',
     livePreview: {
       url: ({ data }) =>
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/blogs/${data?.slug ?? ''}?preview=true`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/preview?secret=${process.env.PAYLOAD_PREVIEW_SECRET}&slug=${data?.slug ?? ''}`,
     },
+    preview: (data) =>
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/preview?secret=${process.env.PAYLOAD_PREVIEW_SECRET}&slug=${data?.slug ?? ''}`,
   },
   versions: {
     drafts: { autosave: { interval: 800 } },
@@ -235,7 +237,7 @@ export const Posts: CollectionConfig = {
           }),
           UploadFeature({
             collections: {
-              media: {
+              'blog-images': {
                 fields: [
                   { name: 'caption', type: 'text' },
                   {
@@ -255,6 +257,15 @@ export const Posts: CollectionConfig = {
         ],
       }),
       admin: { description: 'Use H2/H3 headings, bullet lists, and images to structure for SEO.' },
+    },
+    {
+      name: 'contentPreview',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/ContentPreview/ContentPreviewField#ContentPreviewField',
+        },
+      },
     },
 
     // ─── Related content ───────────────────────────────────────────────────

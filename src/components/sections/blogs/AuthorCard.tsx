@@ -14,16 +14,14 @@ export function AuthorCard({
   description = 'Experts in organic textiles, ethical manufacturing, sustainable sourcing and international exports.',
 }: AuthorCardProps) {
   return (
-    <section className="mt-32">
+    <section className="mt-32 container mx-auto max-w-6xl ">
       <Card
         className="
           overflow-hidden
           rounded-[36px]
-          border
-          bg-linear-to-br
+          bg-white
           from-background
           to-muted/30
-          shadow-sm
         "
       >
         <CardContent className="p-10 lg:p-12">

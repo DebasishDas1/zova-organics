@@ -599,7 +599,7 @@ export interface Post {
   /**
    * Shown on blog cards and used as meta description. Max 160 characters.
    */
-  excerpt: string;
+  excerpt?: string | null;
   featuredImage: number | BlogImage;
   /**
    * Describe the image for screen readers and search engines.
