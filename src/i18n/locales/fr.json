@@ -1,0 +1,268 @@
+{
+  "language": {
+    "name": "Français",
+    "selectorLabel": "Choisir la langue",
+    "selectorAria": "Choisissez votre langue préférée"
+  },
+  "nav": {
+    "products": "Produits",
+    "blogs": "Articles",
+    "certifications": "Certifications",
+    "aboutUs": "À propos",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "becomePartner": "Devenir partenaire",
+    "exploreCollections": "Découvrir nos collections",
+    "requestQuote": "Demander un devis",
+    "requestSampleKit": "Demander un échantillon",
+    "requestQuoteShort": "Demander un devis",
+    "enquireWhatsApp": "Demander sur WhatsApp",
+    "backToHome": "Retour à l'accueil",
+    "exploreProducts": "Découvrir les produits",
+    "tryAgain": "Réessayer",
+    "sendInquiry": "Demander un devis",
+    "sendingInquiry": "Envoi de la demande...",
+    "quoteContact": "Contactez-nous"
+  },
+  "home": {
+    "hero": {
+      "headline": "Fabriqué en Inde. Fiable dans le monde entier.",
+      "description": "Zova Organics est un exportateur de premier plan basé à Kolkata, en Inde, aidant les marques mondiales à s'approvisionner en sacs de jute, sacs juco, tissus biologiques et emballages écologiques de haute qualité, via des partenaires de fabrication audités, un contrôle qualité strict et une logistique d'exportation fiable.",
+      "ctaCollections": "Découvrir nos collections",
+      "ctaQuote": "Demander un devis",
+      "featureSustainable": "Matériaux durables",
+      "featureCertified": "Qualité certifiée",
+      "featureExport": "Exportation mondiale",
+      "featureEthical": "Partenariats éthiques"
+    },
+    "collections": {
+      "sectionLabel": "Collections",
+      "title": "Conçu pour les marques et les détaillants mondiaux.",
+      "cards": {
+        "fabricsTitle": "Tissus organiques et naturels (jute, coton, lin)",
+        "fabricsDescription": "Notre collection comprend des sacs en jute, des sacs fourre-tout, des sacs cadeaux, des sacs à vin, des sacs à cordon et des sacs promotionnels imprimés sur mesure. Disponibles en gros, avec marques privées et impression personnalisée. MOQ disponible pour tous les types de produits. Exportés vers les États-Unis, le Royaume-Uni, l'Allemagne, la France, l'Australie, les Émirats et plus de 25 pays.",
+        "bagsTitle": "Sacs en jute et sacs écologiques — vente en gros et marque privée",
+        "bagsDescription": "Notre collection comprend des sacs en jute, des sacs fourre-tout, des sacs cadeaux, des sacs à vin, des sacs à cordon et des sacs promotionnels imprimés sur mesure. Disponibles en gros, avec marques privées et impression personnalisée. MOQ disponible pour tous les types de produits. Exportés vers les États-Unis, le Royaume-Uni, l'Allemagne, la France, l'Australie, les Émirats et plus de 25 pays.",
+        "lifestyleTitle": "Produits de style de vie durables pour les marques de détail",
+        "lifestyleDescription": "Produits de style de vie durables, y compris la décoration en jute, les accessoires en coton biologique et les emballages de détail écologiques. Conçus pour les chaînes de magasins mondiales, les marques d'abonnement et les marques éco-responsables."
+      }
+    },
+    "whyZova": {
+      "sectionLabel": "Pourquoi Zova",
+      "title": "Pourquoi les acheteurs mondiaux choisissent Zova Organics pour l'approvisionnement en sacs de jute",
+      "items": {
+        "ethicalProduction": {
+          "title": "Production éthique",
+          "description": "Fabrication socialement responsable par des fournisseurs indiens audités."
+        },
+        "premiumMaterials": {
+          "title": "Jute et matériaux organiques de qualité",
+          "description": "Jute 100 % naturel, biodégradable et coton biologique — qualité export."
+        },
+        "reliablePartners": {
+          "title": "Partenaires de fabrication fiables",
+          "description": "Relations à long terme avec les meilleures usines de jute de Kolkata."
+        },
+        "globalExpertise": {
+          "title": "Expertise en exportation mondiale",
+          "description": "Expérience de l'expédition vers les États-Unis, le Royaume-Uni, l'UE, le Moyen-Orient et l'Asie-Pacifique."
+        },
+        "qualityAssurance": {
+          "title": "Assurance qualité",
+          "description": "Inspection avant expédition, approbation des échantillons et contrôle qualité à chaque étape."
+        },
+        "longTerm": {
+          "title": "Partenariats à long terme",
+          "description": "Nous grandissons avec votre marque — de l'échantillon initial aux commandes répétées."
+        }
+      }
+    },
+    "globalReach": {
+      "sectionLabel": "Portée mondiale",
+      "title": "Exporter des sacs de jute et des produits durables vers plus de 30 pays",
+      "subtitle": "Approuvé par des marques et des distributeurs en Amérique du Nord, en Europe, au Moyen-Orient et en Asie-Pacifique. De Kolkata vers le monde."
+    },
+    "cta": {
+      "title": "Prêt à vous approvisionner en sacs de jute et produits écologiques depuis l'Inde ?",
+      "description": "Travaillez avec Zova Organics pour des sacs de jute en gros, des emballages écologiques, un branding sur mesure et une exportation fiable depuis Kolkata, Inde.",
+      "button": "Obtenir un devis gratuit"
+    },
+    "manifesto": {
+      "label": "Notre philosophie",
+      "headline": "L'approvisionnement doit être transparent, durable et magnifiquement exécuté",
+      "line1": "Nous croyons que des produits exceptionnels commencent bien avant d'atteindre un rayon. Ils commencent par un approvisionnement responsable, un artisanat de qualité et des partenariats basés sur la confiance.",
+      "line2": "Zova Organics relie les marques mondiales à des sacs de jute de qualité, des tissus biologiques et des produits de style de vie écologiques enracinés dans l'héritage de la fabrication de jute de Kolkata. Nous travaillons avec les meilleures usines d'Inde pour livrer des produits de qualité export avec des normes modernes de qualité, de durabilité et de fiabilité."
+    }
+  },
+  "footer": {
+    "topLabel": "Exportations biologiques mondiales",
+    "headline": "Créer des chaînes d'approvisionnement biologiques fiables pour les marques mondiales.",
+    "description": "Travaillez avec Zova Organics pour des produits provenant de sources responsables, une exportation fiable et une croissance à long terme.",
+    "requestQuote": "Demander un devis",
+    "socialLabel": "Réseaux sociaux",
+    "companyLabel": "Entreprise",
+    "contactLabel": "Contact",
+    "privacyPolicy": "Politique de confidentialité",
+    "terms": "Conditions générales",
+    "faq": "FAQ",
+    "copyright": "© {{year}} Zova Organics. Tous droits réservés.",
+    "brandDescription": "Exporting sustainable and organic Jute Bags & Eco-friendly packaging from India to international buyers, distributors, and private-label brands."
+  },
+  "contact": {
+    "page": {
+      "eyebrow": "Contact",
+      "title": "Construisons quelque chose de significatif ensemble.",
+      "description": "Que vous recherchiez des textiles durables, le lancement d'une collection sous marque blanche ou un partenaire de fabrication fiable, nous serions ravis de connaître votre projet.",
+      "faqSection": {
+        "eyebrow": "FAQ",
+        "title": "Questions fréquemment posées.",
+        "description": "Voici les réponses à certaines de nos questions les plus fréquemment posées. Si vous ne trouvez pas ce que vous recherchez, contactez-nous directement."
+      }
+    },
+    "form": {
+      "labelInquiry": "Formulaire de contact",
+      "headline": "Parlez-nous de vos besoins d'approvisionnement.",
+      "description": "Que vous recherchiez des tissus biologiques, des sacs sur mesure, une fabrication sous marque blanche ou des partenariats d'approvisionnement à long terme, nous aimerions en savoir plus sur votre projet.",
+      "responseTimeTitle": "Délai de réponse",
+      "responseTimeValue": "Sous 24 heures ouvrées",
+      "moqSupportTitle": "Support MOQ",
+      "moqSupportValue": "Solutions flexibles pour marques en croissance et importateurs",
+      "shippingTitle": "Expédition mondiale",
+      "shippingValue": "Air et fret maritime disponibles dans le monde entier",
+      "nameLabel": "Votre nom",
+      "companyLabel": "Société",
+      "emailLabel": "Email professionnel",
+      "phoneLabel": "Numéro de téléphone",
+      "categoryLabel": "Catégorie de produit",
+      "projectDetailsLabel": "Détails du projet",
+      "namePlaceholder": "Jean Dupont",
+      "companyPlaceholder": "Nom de l'entreprise",
+      "emailPlaceholder": "jean@entreprise.com",
+      "phonePlaceholder": "+33 1 23 45 67 89",
+      "messagePlaceholder": "Parlez-nous de vos besoins en produits, personnalisations, quantités prévues, certifications et marchés cibles...",
+      "categoryOptions": {
+        "organicFabrics": "Tissus biologiques",
+        "bags": "Sacs fourre-tout et pochettes",
+        "privateLabel": "Marque privée",
+        "customProduct": "Produit personnalisé",
+        "other": "Autre"
+      },
+      "success": "Merci pour votre message. Notre équipe examinera votre demande et vous répondra dans un délai de 24 heures ouvrables.",
+      "error": "Une erreur s'est produite. Veuillez réessayer.",
+      "validation": {
+        "nameMin": "Le nom doit comporter au moins 2 caractères",
+        "companyMin": "Le nom de l'entreprise est requis",
+        "email": "Veuillez saisir une adresse e-mail valide",
+        "phoneMin": "Le numéro de téléphone est trop court",
+        "messageMin": "Veuillez fournir plus de détails"
+      }
+    },
+    "info": {
+      "label": "Informations de contact",
+      "headline": "Plusieurs façons de nous contacter.",
+      "items": {
+        "general": {
+          "title": "Demandes générales",
+          "value": "info@zovaorganics.com",
+          "description": "Questions sur les produits, l'approvisionnement ou les partenariats."
+        },
+        "export": {
+          "title": "Exportation & Vente en gros",
+          "value": "+91 9073896612",
+          "description": "Discutez des MOQ, des personnalisations, de la logistique et des tarifs."
+        },
+        "basedIn": {
+          "title": "Basé en Inde",
+          "value": "Opérations d'exportation mondiales",
+          "description": "Relier les acheteurs internationaux à des fabricants de confiance."
+        }
+      }
+    },
+    "whyContact": {
+      "label": "Comment nous pouvons aider",
+      "title": "Plus qu'un fournisseur. Un partenaire d'approvisionnement.",
+      "items": {
+        "privateLabel": {
+          "title": "Fabrication sous marque privée",
+          "description": "Lancez des produits sous votre propre marque avec des partenaires de fabrication de confiance."
+        },
+        "customProduct": {
+          "title": "Développement de produits personnalisés",
+          "description": "Développez des produits adaptés aux besoins de votre entreprise."
+        },
+        "sustainableSourcing": {
+          "title": "Approvisionnement durable",
+          "description": "Accédez à des textiles et produits de style de vie éthiques en provenance d'Inde."
+        },
+        "globalSupport": {
+          "title": "Support à l'exportation mondiale",
+          "description": "De la documentation à la logistique, nous aidons à simplifier le commerce international."
+        }
+      }
+    }
+  },
+  "faq": {
+    "page": {
+      "title": "Questions fréquentes | Zova Organics",
+      "description": "Vous avez des questions sur l'approvisionnement en sacs de jute depuis l'Inde ? Nous avons répondu à tout ci-dessous. Si vous ne trouvez pas ce que vous cherchez, contactez-nous directement."
+    },
+    "sections": []
+  },
+  "products": {
+    "page": {
+      "eyebrow": "Produits",
+      "title": "Notre collection durable.",
+      "description": "Sacs en coton biologique certifiés GOTS, pochettes et tissus. Vente en gros à partir de 100 unités."
+    },
+    "noProducts": {
+      "headline": "Aucun produit trouvé",
+      "description": "Nous n'avons trouvé aucun produit correspondant à vos filtres. Veuillez essayer une autre recherche ou nous contacter pour obtenir de l'aide."
+    }
+  },
+  "blogs": {
+    "page": {
+      "eyebrow": "Perspectives",
+      "title": "Perspectives sur l'approvisionnement durable.",
+      "description": "Conseils d'exportation, tendances des textiles organiques, expertise sur les certifications et aperçu de la chaîne d'approvisionnement pour les acheteurs mondiaux."
+    },
+    "minRead": "{{count}} min de lecture"
+  },
+  "product": {
+    "category": {
+      "organic-fabrics": "Tissus biologiques",
+      "bags": "Sacs",
+      "pouches": "Pochettes",
+      "home-textiles": "Textiles pour la maison",
+      "yoga-wellness": "Yoga & Bien-être",
+      "custom-oem": "OEM personnalisé"
+    },
+    "highlights": {
+      "moq": "MOQ",
+      "leadTime": "Délai de production",
+      "shipping": "Expédition",
+      "worldwide": "Dans le monde entier"
+    },
+    "sustainablySourcedTitle": "Approvisionnement durable",
+    "sustainablySourcedDescription": "Fabriqué en Inde avec des matériaux certifiés biologiques et des pratiques éthiques. Idéal pour les marques recherchant des chaînes d'approvisionnement durables et des partenariats sous marque privée.",
+    "requestSample": "Demander un échantillon",
+    "requestQuote": "Demander un devis",
+    "sampleCtaHeadline": "Évaluez {{productTitle}} avant de passer une commande de production.",
+    "sampleCtaDescription": "Recevez des échantillons de produits, des spécifications techniques, des certifications, des options de personnalisation et une documentation d'exportation pour approuver votre décision d'approvisionnement en toute confiance.",
+    "productSamples": "Échantillons de produits",
+    "productSamplesDescription": "Évaluez la qualité des matériaux, la couture, la durabilité et la finition.",
+    "technicalDocumentation": "Documentation technique",
+    "technicalDocumentationDescription": "Détails GSM, dimensions, certifications, options de personnalisation et spécifications d'exportation.",
+    "shippingComplianceTitle": "Expédition et conformité",
+    "hsCode": "Code HS",
+    "reachEu": "REACH (UE)",
+    "compliant": "Conforme",
+    "documentsProvided": "Documents fournis"
+  },
+  "errors": {
+    "somethingWentWrong": "Une erreur s'est produite",
+    "unexpectedError": "Une erreur inattendue est survenue. Veuillez réessayer.",
+    "openMobileMenu": "Ouvrir le menu mobile",
+    "homeAriaLabel": "Accueil Zova Organics"
+  }
+}

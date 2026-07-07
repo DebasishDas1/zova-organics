@@ -154,9 +154,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           readingTime={post.readingTime}
         />
 
-        {/* {featuredImage?.url && (
+        {featuredImage?.url && (
           <BlogFeaturedImage src={featuredImage.url} alt={post.featuredImageAlt ?? post.title} />
-        )} */}
+        )}
 
         <BlogContent content={post.content} />
         <BlogTags />
