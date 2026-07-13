@@ -19,22 +19,20 @@ const DOC_LABELS: Record<string, string> = {
 }
 
 export function ProductShipping({ product }: Props) {
-  const s = product.shipping
-  if (!s) return null
 
   return (
     <div className="rounded-2xl border border-border p-6">
       <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider">Shipping & Compliance</h2>
 
       <dl className="space-y-3">
-        {s.hsCode && (
+        {product.hsCode && (
           <div className="flex justify-between gap-4 border-b border-border pb-3">
             <dt className="text-sm text-muted-foreground">HS code</dt>
-            <dd className="text-sm font-medium font-mono">{s.hsCode}</dd>
+            <dd className="text-sm font-medium font-mono">{product.hsCode}</dd>
           </div>
         )}
 
-        {s.reachCompliant && (
+        {product.reachCompliant && (
           <div className="flex justify-between gap-4 border-b border-border pb-3">
             <dt className="text-sm text-muted-foreground">REACH (EU)</dt>
             <dd className="flex items-center gap-1 text-sm font-medium">
@@ -43,20 +41,20 @@ export function ProductShipping({ product }: Props) {
           </div>
         )}
 
-        {(s.shippingModes ?? []).length > 0 && (
+        {(product.shippingModes ?? []).length > 0 && (
           <div className="flex justify-between gap-4 border-b border-border pb-3">
             <dt className="text-sm text-muted-foreground">Shipping</dt>
             <dd className="text-sm font-medium text-right">
-              {(s.shippingModes as string[]).map((m) => SHIPPING_LABELS[m] ?? m).join(', ')}
+              {(product.shippingModes as string[]).map((m) => SHIPPING_LABELS[m] ?? m).join(', ')}
             </dd>
           </div>
         )}
 
-        {(s.documentsProvided ?? []).length > 0 && (
+        {(product.documentsProvided ?? []).length > 0 && (
           <div className="border-b border-border pb-3 last:border-0 last:pb-0">
             <dt className="mb-2 text-sm text-muted-foreground">Documents provided</dt>
             <dd className="space-y-1">
-              {(s.documentsProvided as string[]).map((d) => (
+              {(product.documentsProvided as string[]).map((d) => (
                 <div key={d} className="flex items-center gap-2 text-sm">
                   <Check className="h-3.5 w-3.5 shrink-0 text-green-600" />
                   {DOC_LABELS[d] ?? d}

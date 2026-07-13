@@ -12,8 +12,6 @@ import { Products } from './collections/Products'
 import { Leads } from './collections/Leads'
 import { Certifications } from './collections/Certifications'
 import { Posts } from './collections/Posts'
-import { BlogImages } from './collections/BlogImages'
-import { ProductImages } from './collections/ProductImages'
 import { getServerURL, getTrustedOrigins } from './lib/server-url'
 
 const filename = fileURLToPath(import.meta.url)
@@ -36,7 +34,7 @@ if (
   throw new Error('PAYLOAD_SECRET must be set to a secure value in production')
 }
 
-// Shared R2 URL generator — each collection gets its own prefix folder in the bucket
+// Single R2 folder for all media now that there's one Media collection.
 const r2Base = env('R2_PUBLIC_URL', 'https://media.zovaorganics.com')
 const makeFileURL =
   (prefix: string) =>
@@ -44,6 +42,23 @@ const makeFileURL =
     `${r2Base}/${prefix}/${filename}`
 
 export default buildConfig({
+  // Multi-language buyer-facing content for an export business.
+  // Only fields marked `localized: true` (product/post copy, SEO) get a
+  // row per locale — internal fields like SKU, HS code, and CRM notes
+  // stay single-row since they're never translated.
+  localization: {
+    locales: [
+      { label: 'English', code: 'en' },
+      { label: 'French', code: 'fr' },
+      { label: 'German', code: 'de' },
+      { label: 'Spanish', code: 'es' },
+      { label: 'Italian', code: 'it' },
+      { label: 'Arabic', code: 'ar' },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
+
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
@@ -56,7 +71,8 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, ProductImages, BlogImages, Products, Leads, Certifications, Posts],
+  // 5 collections instead of 7 — Media replaces Media/ProductImages/BlogImages.
+  collections: [Users, Media, Products, Leads, Certifications, Posts],
 
   editor: lexicalEditor(),
 
@@ -72,13 +88,16 @@ export default buildConfig({
         'DATABASE_URL',
         'postgres://placeholder:placeholder@localhost/placeholder',
       ),
-      // Railway Postgres requires SSL in production
       ssl: isProduction ? { rejectUnauthorized: false } : false,
       max: 10,
       idleTimeoutMillis: 30_000,
       connectionTimeoutMillis: 5_000,
     },
-    push: !isProduction,
+    // This database holds real production data (Supabase), not disposable
+    // local dev data. `push` mode auto-applies schema changes on every
+    // server start with no review and no migration history — that's how
+    // we nearly lost data here. Always false; use `payload migrate` instead.
+    push: false,
   }),
 
   sharp,
@@ -90,16 +109,6 @@ export default buildConfig({
           prefix: 'media',
           disableLocalStorage: true,
           generateFileURL: makeFileURL('media'),
-        },
-        'product-images': {
-          prefix: 'product-images',
-          disableLocalStorage: true,
-          generateFileURL: makeFileURL('product-images'),
-        },
-        'blog-images': {
-          prefix: 'blog-images',
-          disableLocalStorage: true,
-          generateFileURL: makeFileURL('blog-images'),
         },
       },
       bucket: env('R2_BUCKET', 'placeholder-bucket'),

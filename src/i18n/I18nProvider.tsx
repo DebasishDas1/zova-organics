@@ -66,25 +66,26 @@ export function LanguageProvider({
   defaultLocale: Locale
   children: React.ReactNode
 }) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale)
-  const [messages, setMessages] = useState(() => getMessages(defaultLocale))
+  const getInitialLocale = (): Locale => {
+    if (typeof window === 'undefined') {
+      return defaultLocale
+    }
 
-  useEffect(() => {
     const storedLocale = getStoredLocale()
     const browserLocale = getBrowserLocale()
-    const resolvedLocale = storedLocale ?? browserLocale ?? defaultLocale
 
-    if (resolvedLocale !== locale) {
-      setLocaleState(resolvedLocale)
-      setMessages(getMessages(resolvedLocale))
-      writeLocaleToCookie(resolvedLocale)
-    }
+    return storedLocale ?? browserLocale ?? defaultLocale
+  }
 
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = resolvedLocale
-      document.documentElement.dir = isRtl(resolvedLocale) ? 'rtl' : 'ltr'
-    }
-  }, [defaultLocale, locale])
+  const [locale, setLocaleState] = useState<Locale>(getInitialLocale)
+  const [messages, setMessages] = useState(() => getMessages(getInitialLocale()))
+
+  useEffect(() => {
+    document.documentElement.lang = locale
+    document.documentElement.dir = isRtl(locale) ? 'rtl' : 'ltr'
+
+    writeLocaleToCookie(locale)
+  }, [locale])
 
   const setLocale = useCallback((selectedLocale: Locale) => {
     const nextLocale = SUPPORTED_LOCALES.includes(selectedLocale) ? selectedLocale : DEFAULT_LOCALE

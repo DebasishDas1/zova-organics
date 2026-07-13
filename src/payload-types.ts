@@ -69,8 +69,6 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    'product-images': ProductImage;
-    'blog-images': BlogImage;
     products: Product;
     leads: Lead;
     certifications: Certification;
@@ -84,8 +82,6 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    'product-images': ProductImagesSelect<false> | ProductImagesSelect<true>;
-    'blog-images': BlogImagesSelect<false> | BlogImagesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     leads: LeadsSelect<false> | LeadsSelect<true>;
     certifications: CertificationsSelect<false> | CertificationsSelect<true>;
@@ -98,10 +94,15 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale:
+    | ('false' | 'none' | 'null')
+    | false
+    | null
+    | ('en' | 'fr' | 'de' | 'es' | 'it' | 'ar')
+    | ('en' | 'fr' | 'de' | 'es' | 'it' | 'ar')[];
   globals: {};
   globalsSelect: {};
-  locale: null;
+  locale: 'en' | 'fr' | 'de' | 'es' | 'it' | 'ar';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -156,6 +157,8 @@ export interface User {
   collection: 'users';
 }
 /**
+ * All site images — product photos, blog images, and general media.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -192,46 +195,7 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-images".
- */
-export interface ProductImage {
-  id: number;
-  alt: string;
-  caption?: string | null;
-  prefix?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    card?: {
+    hero?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -240,53 +204,6 @@ export interface ProductImage {
       filename?: string | null;
     };
     zoom?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-images".
- */
-export interface BlogImage {
-  id: number;
-  alt: string;
-  caption?: string | null;
-  prefix?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    hero?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -316,7 +233,7 @@ export interface Product {
    */
   slug: string;
   /**
-   * Auto-generated from category and slug. e.g. ZO-TOT-NATURALCOTTON-A3F2
+   * Auto-generated from category and slug.
    */
   sku?: string | null;
   stockStatus: 'draft' | 'active' | 'out-of-stock';
@@ -337,21 +254,13 @@ export interface Product {
     | 'planter-bags'
     | 'gunny-sacks';
   /**
-   * e.g. "natural dye", "unbleached", "bulk"
+   * Comma-separated. e.g. natural dye, unbleached, bulk
    */
-  tags?:
-    | {
-        tag: string;
-        id?: string | null;
-      }[]
-    | null;
+  tags?: string | null;
   /**
    * One-line shown on product cards (max 160 chars)
    */
   shortDescription: string;
-  /**
-   * Full product story shown on detail page
-   */
   fullDescription?: {
     root: {
       type: string;
@@ -367,101 +276,75 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
-  featuredImage: number | ProductImage;
+  featuredImage: number | Media;
   /**
    * Additional product images (packaging, close-ups, in-use)
    */
   gallery?:
     | {
-        image: number | ProductImage;
+        image: number | Media;
         caption?: string | null;
         id?: string | null;
       }[]
     | null;
-  /**
-   * Certifications linked to this product
-   */
   certifications?: (number | Certification)[] | null;
-  specifications: {
-    /**
-     * e.g. 100% GOTS organic cotton
-     */
-    material: string;
-    /**
-     * e.g. 140–180 GSM (or range for customisable)
-     */
-    gsm?: string | null;
-    /**
-     * e.g. 38×42 cm
-     */
-    dimensions?: string | null;
-    /**
-     * e.g. Natural, Black, custom azo-free dye
-     */
-    colours?: string | null;
-    /**
-     * e.g. Unbleached, enzyme-washed, stonewashed
-     */
-    finish?: string | null;
-    /**
-     * Any extra spec key-value pairs for the detail table
-     */
-    additionalSpecs?:
-      | {
-          label: string;
-          value: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
-  ordering: {
-    moq: number;
-    /**
-     * e.g. units, metres, kg
-     */
-    moqUnit?: string | null;
-    /**
-     * e.g. 21–28 days after artwork approval
-     */
-    leadTimeDays?: string | null;
-    sampleAvailable?: boolean | null;
-    /**
-     * e.g. 5–7 business days
-     */
-    sampleLeadTime?: string | null;
-  };
-  customisation?: {
-    customLogoAvailable?: boolean | null;
-    customSizeAvailable?: boolean | null;
-    privateLabelAvailable?: boolean | null;
-    customDyeAvailable?: boolean | null;
-    /**
-     * Any extra details about customisation (shown on detail page)
-     */
-    customisationNotes?: string | null;
-  };
-  shipping?: {
-    /**
-     * Harmonised System code for customs. e.g. 6305.20
-     */
-    hsCode?: string | null;
-    reachCompliant?: boolean | null;
-    shippingModes?: ('sea' | 'air' | 'courier')[] | null;
-    documentsProvided?: ('commercial-invoice' | 'packing-list' | 'coo' | 'phyto' | 'test-reports' | 'gots-tc')[] | null;
-  };
-  seo?: {
-    /**
-     * Defaults to product title if empty
-     */
-    metaTitle?: string | null;
-    /**
-     * Max 160 chars. Defaults to shortDescription if empty.
-     */
-    metaDescription?: string | null;
-  };
+  /**
+   * e.g. 100% GOTS organic cotton
+   */
+  material: string;
+  /**
+   * e.g. 140–180 GSM
+   */
+  gsm?: string | null;
+  /**
+   * e.g. 38×42 cm
+   */
+  dimensions?: string | null;
+  colours?: string | null;
+  /**
+   * e.g. Unbleached, enzyme-washed
+   */
+  finish?: string | null;
+  additionalSpecs?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  moq: number;
+  moqUnit?: string | null;
+  /**
+   * e.g. 21–28 days after artwork approval
+   */
+  leadTimeDays?: string | null;
+  sampleAvailable?: boolean | null;
+  /**
+   * e.g. 5–7 business days
+   */
+  sampleLeadTime?: string | null;
+  customLogoAvailable?: boolean | null;
+  customSizeAvailable?: boolean | null;
+  privateLabelAvailable?: boolean | null;
+  customDyeAvailable?: boolean | null;
+  customisationNotes?: string | null;
+  /**
+   * e.g. 6305.20
+   */
+  hsCode?: string | null;
+  reachCompliant?: boolean | null;
+  shippingModes?: ('sea' | 'air' | 'courier')[] | null;
+  documentsProvided?: ('commercial-invoice' | 'packing-list' | 'coo' | 'phyto' | 'test-reports' | 'gots-tc')[] | null;
+  /**
+   * Defaults to product title if empty
+   */
+  metaTitle?: string | null;
+  /**
+   * Max 160 chars. Defaults to shortDescription if empty.
+   */
+  metaDescription?: string | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -584,23 +467,18 @@ export interface Post {
     | 'company-news';
   featured?: boolean | null;
   /**
-   * Auto-calculated from content word count on save.
+   * Auto-calculated on save.
    */
   readingTime?: number | null;
   /**
-   * e.g. GOTS, tote bags, EU export, organic cotton
+   * Comma-separated. e.g. GOTS, tote bags, EU export
    */
-  tags?:
-    | {
-        tag: string;
-        id?: string | null;
-      }[]
-    | null;
+  tags?: string | null;
   /**
    * Shown on blog cards and used as meta description. Max 160 characters.
    */
   excerpt?: string | null;
-  featuredImage: number | BlogImage;
+  featuredImage: number | Media;
   /**
    * Describe the image for screen readers and search engines.
    */
@@ -624,6 +502,16 @@ export interface Post {
     [k: string]: unknown;
   };
   /**
+   * Frequently Asked Questions for this post.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * Shown in the sidebar. Link products relevant to this post.
    */
   relatedProducts?: (number | Product)[] | null;
@@ -631,57 +519,40 @@ export interface Post {
    * Further reading shown at the bottom. Max 2–3 posts.
    */
   relatedPosts?: (number | Post)[] | null;
-  seo?: {
-    /**
-     * Overrides post title in search results. Keep 10–60 chars.
-     */
-    metaTitle?: string | null;
-    /**
-     * Overrides excerpt in search results. Keep under 160 chars.
-     */
-    metaDescription?: string | null;
-    /**
-     * Only set if this post is republished from another URL.
-     */
-    canonicalUrl?: string | null;
-    /**
-     * Use for thin, duplicate, or temporary content only.
-     */
-    noIndex?: boolean | null;
-    /**
-     * Primary keyword this post targets. Internal tracking only — not published.
-     */
-    focusKeyword?: string | null;
-    /**
-     * Shown on LinkedIn, WhatsApp, Twitter previews. 1200×630px. Falls back to featured image.
-     */
-    ogImage?: (number | null) | BlogImage;
-  };
   /**
-   * Controls the JSON-LD structured data injected in the page <head>.
+   * Overrides post title in search results. Keep 10–60 chars.
    */
-  schema?: {
-    /**
-     * Article = standard post. HowTo / FAQPage unlock Google rich results.
-     */
-    articleType?: ('Article' | 'HowTo' | 'FAQPage') | null;
-    /**
-     * Shown only when type is "FAQ page". Each item becomes a rich result in Google.
-     */
-    faqItems?:
-      | {
-          question: string;
-          /**
-           * Plain text only — no markdown. Keep answers concise.
-           */
-          answer: string;
-          id?: string | null;
-        }[]
-      | null;
-  };
+  metaTitle?: string | null;
+  /**
+   * Overrides excerpt in search results. Keep under 160 chars.
+   */
+  metaDescription?: string | null;
+  /**
+   * Only set if this post is republished from another URL.
+   */
+  canonicalUrl?: string | null;
+  noIndex?: boolean | null;
+  /**
+   * Primary keyword this post targets. Internal tracking only.
+   */
+  focusKeyword?: string | null;
+  /**
+   * Shown on LinkedIn, WhatsApp, Twitter previews. 1200×630px.
+   */
+  ogImage?: (number | null) | Media;
+  articleType?: ('Article' | 'HowTo' | 'FAQPage') | null;
+  /**
+   * Shown only when type is "FAQ page".
+   */
+  faqItems?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -714,14 +585,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
-      } | null)
-    | ({
-        relationTo: 'product-images';
-        value: number | ProductImage;
-      } | null)
-    | ({
-        relationTo: 'blog-images';
-        value: number | BlogImage;
       } | null)
     | ({
         relationTo: 'products';
@@ -846,51 +709,7 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        og?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-images_select".
- */
-export interface ProductImagesSelect<T extends boolean = true> {
-  alt?: T;
-  caption?: T;
-  prefix?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        card?:
+        hero?:
           | T
           | {
               url?: T;
@@ -924,60 +743,6 @@ export interface ProductImagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blog-images_select".
- */
-export interface BlogImagesSelect<T extends boolean = true> {
-  alt?: T;
-  caption?: T;
-  prefix?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        hero?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        og?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
@@ -987,12 +752,7 @@ export interface ProductsSelect<T extends boolean = true> {
   stockStatus?: T;
   featured?: T;
   category?: T;
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
+  tags?: T;
   shortDescription?: T;
   fullDescription?: T;
   featuredImage?: T;
@@ -1004,57 +764,36 @@ export interface ProductsSelect<T extends boolean = true> {
         id?: T;
       };
   certifications?: T;
-  specifications?:
+  material?: T;
+  gsm?: T;
+  dimensions?: T;
+  colours?: T;
+  finish?: T;
+  additionalSpecs?:
     | T
     | {
-        material?: T;
-        gsm?: T;
-        dimensions?: T;
-        colours?: T;
-        finish?: T;
-        additionalSpecs?:
-          | T
-          | {
-              label?: T;
-              value?: T;
-              id?: T;
-            };
+        label?: T;
+        value?: T;
+        id?: T;
       };
-  ordering?:
-    | T
-    | {
-        moq?: T;
-        moqUnit?: T;
-        leadTimeDays?: T;
-        sampleAvailable?: T;
-        sampleLeadTime?: T;
-      };
-  customisation?:
-    | T
-    | {
-        customLogoAvailable?: T;
-        customSizeAvailable?: T;
-        privateLabelAvailable?: T;
-        customDyeAvailable?: T;
-        customisationNotes?: T;
-      };
-  shipping?:
-    | T
-    | {
-        hsCode?: T;
-        reachCompliant?: T;
-        shippingModes?: T;
-        documentsProvided?: T;
-      };
-  seo?:
-    | T
-    | {
-        metaTitle?: T;
-        metaDescription?: T;
-      };
+  moq?: T;
+  moqUnit?: T;
+  leadTimeDays?: T;
+  sampleAvailable?: T;
+  sampleLeadTime?: T;
+  customLogoAvailable?: T;
+  customSizeAvailable?: T;
+  privateLabelAvailable?: T;
+  customDyeAvailable?: T;
+  customisationNotes?: T;
+  hsCode?: T;
+  reachCompliant?: T;
+  shippingModes?: T;
+  documentsProvided?: T;
+  metaTitle?: T;
+  metaDescription?: T;
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1112,43 +851,36 @@ export interface PostsSelect<T extends boolean = true> {
   category?: T;
   featured?: T;
   readingTime?: T;
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
+  tags?: T;
   excerpt?: T;
   featuredImage?: T;
   featuredImageAlt?: T;
   content?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
   relatedProducts?: T;
   relatedPosts?: T;
-  seo?:
+  metaTitle?: T;
+  metaDescription?: T;
+  canonicalUrl?: T;
+  noIndex?: T;
+  focusKeyword?: T;
+  ogImage?: T;
+  articleType?: T;
+  faqItems?:
     | T
     | {
-        metaTitle?: T;
-        metaDescription?: T;
-        canonicalUrl?: T;
-        noIndex?: T;
-        focusKeyword?: T;
-        ogImage?: T;
-      };
-  schema?:
-    | T
-    | {
-        articleType?: T;
-        faqItems?:
-          | T
-          | {
-              question?: T;
-              answer?: T;
-              id?: T;
-            };
+        question?: T;
+        answer?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
-  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

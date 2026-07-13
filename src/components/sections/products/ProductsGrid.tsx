@@ -92,7 +92,7 @@ export function ProductsGrid({ products = [] }: ProductsGridProps) {
     }
 
     if (filters.includes('Sample Available')) {
-      list = list.filter((product) => product.ordering?.sampleAvailable)
+      list = list.filter((product) => product.sampleAvailable)
     }
 
     return list

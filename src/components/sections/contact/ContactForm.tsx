@@ -227,7 +227,7 @@ export function ContactForm() {
               rows={8}
               placeholder={t('contact.form.messagePlaceholder')}
               {...register('message')}
-              className="min-h-[180px] rounded-2xl border-border/60 bg-background/80 px-5 py-4 shadow-none"
+              className="min-h-45 rounded-2xl border-border/60 bg-background/80 px-5 py-4 shadow-none"
             />
           </FormField>
 

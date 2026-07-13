@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev --webpack",
     "dev:safe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev --webpack",
-    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=4096\" next build",
     "start": "node server.js",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation eslint .",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
@@ -20,7 +20,10 @@
     "migrate:fresh": "payload migrate:fresh",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts",
-    "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test --config=playwright.config.ts"
+    "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" playwright test --config=playwright.config.ts",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1059.0",
@@ -39,6 +42,7 @@
     "lucide-react": "^1.17.0",
     "motion": "^12.40.0",
     "next": "16.2.6",
+    "next-intl": "^4.13.1",
     "payload": "3.85.0",
     "pg": "^8.21.0",
     "radix-ui": "^1.4.3",

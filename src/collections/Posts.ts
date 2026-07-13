@@ -28,7 +28,6 @@ export const Posts: CollectionConfig = {
     create: isAdmin,
     read: ({ req }) => {
       if (req.user?.role === 'admin') return true
-      // Public: only published posts
       return { status: { equals: 'published' } }
     },
     update: isAdmin,
@@ -38,16 +37,11 @@ export const Posts: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'category', 'author', 'status', 'publishedAt'],
     group: 'Content',
-    livePreview: {
-      url: ({ data }) =>
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/api/preview?secret=${process.env.PAYLOAD_PREVIEW_SECRET}&slug=${data?.slug ?? ''}`,
-    },
     preview: (data) =>
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/preview?secret=${process.env.PAYLOAD_PREVIEW_SECRET}&slug=${data?.slug ?? ''}`,
   },
-  versions: {
-    drafts: { autosave: { interval: 800 } },
-  },
+  // No versions/drafts/autosave — `status` (draft/published) is the
+  // workflow, same as Products. Cuts the _v shadow tables entirely.
   hooks: {
     beforeChange: [
       ({ data }) => {
@@ -91,8 +85,8 @@ export const Posts: CollectionConfig = {
     ],
   },
   fields: [
-    // ─── Core ──────────────────────────────────────────────────────────────
-    { name: 'title', type: 'text', required: true },
+    // ─── Core ──────────────────────────────────────────────────────────
+    { name: 'title', type: 'text', required: true, localized: true },
     {
       name: 'slug',
       type: 'text',
@@ -141,12 +135,12 @@ export const Posts: CollectionConfig = {
       },
     },
     { name: 'author', type: 'relationship', relationTo: 'users', admin: { position: 'sidebar' } },
-    // ─── Classification ────────────────────────────────────────────────────
     {
       name: 'category',
       type: 'select',
       required: true,
       index: true,
+      admin: { position: 'sidebar' },
       options: [
         { label: 'Export guides', value: 'export-guides' },
         { label: 'Organic certifications', value: 'certifications' },
@@ -156,7 +150,6 @@ export const Posts: CollectionConfig = {
         { label: 'Buyer resources', value: 'buyer-resources' },
         { label: 'Company news', value: 'company-news' },
       ],
-      admin: { position: 'sidebar' },
     },
     {
       name: 'featured',
@@ -168,41 +161,41 @@ export const Posts: CollectionConfig = {
     {
       name: 'readingTime',
       type: 'number',
-      admin: {
-        position: 'sidebar',
-        readOnly: true,
-        description: 'Auto-calculated from content word count on save.',
-      },
+      admin: { position: 'sidebar', readOnly: true, description: 'Auto-calculated on save.' },
     },
     {
+      // Was an array of {tag} objects — flattened to comma-separated text, no extra table.
       name: 'tags',
-      type: 'array',
+      type: 'text',
       admin: {
         position: 'sidebar',
-        description: 'e.g. GOTS, tote bags, EU export, organic cotton',
+        description: 'Comma-separated. e.g. GOTS, tote bags, EU export',
       },
-      fields: [{ name: 'tag', type: 'text', required: true }],
     },
-    // ─── Content ───────────────────────────────────────────────────────────
+
+    // ─── Content ───────────────────────────────────────────────────────
     {
       name: 'excerpt',
       type: 'textarea',
+      localized: true,
       maxLength: 160,
       admin: {
         description: 'Shown on blog cards and used as meta description. Max 160 characters.',
       },
     },
-    { name: 'featuredImage', type: 'upload', relationTo: 'blog-images', required: true },
+    { name: 'featuredImage', type: 'upload', relationTo: 'media', required: true },
     {
       name: 'featuredImageAlt',
       type: 'text',
       required: true,
+      localized: true,
       admin: { description: 'Describe the image for screen readers and search engines.' },
     },
     {
       name: 'content',
       type: 'richText',
       required: true,
+      localized: true,
       editor: lexicalEditor({
         features: () => [
           FixedToolbarFeature(),
@@ -237,7 +230,7 @@ export const Posts: CollectionConfig = {
           }),
           UploadFeature({
             collections: {
-              'blog-images': {
+              media: {
                 fields: [
                   { name: 'caption', type: 'text' },
                   {
@@ -267,8 +260,17 @@ export const Posts: CollectionConfig = {
         },
       },
     },
-
-    // ─── Related content ───────────────────────────────────────────────────
+    {
+      name: 'faqs',
+      type: 'array',
+      label: 'FAQs',
+      localized: true,
+      admin: { description: 'Frequently Asked Questions for this post.' },
+      fields: [
+        { name: 'question', type: 'text', required: true },
+        { name: 'answer', type: 'textarea', required: true },
+      ],
+    },
     {
       name: 'relatedProducts',
       type: 'relationship',
@@ -285,94 +287,81 @@ export const Posts: CollectionConfig = {
       maxDepth: 1,
       admin: { description: 'Further reading shown at the bottom. Max 2–3 posts.' },
     },
-    // ─── SEO ───────────────────────────────────────────────────────────────
+
+    // ─── SEO / Schema (tabbed, no separate group tables) ────────────────
     {
-      type: 'group',
-      name: 'seo',
-      label: 'SEO',
-      admin: { position: 'sidebar' },
-      fields: [
+      type: 'tabs',
+      tabs: [
         {
-          name: 'metaTitle',
-          type: 'text',
-          minLength: 10,
-          maxLength: 60,
-          admin: { description: 'Overrides post title in search results. Keep 10–60 chars.' },
-        },
-        {
-          name: 'metaDescription',
-          type: 'textarea',
-          maxLength: 160,
-          admin: { description: 'Overrides excerpt in search results. Keep under 160 chars.' },
-        },
-        {
-          name: 'canonicalUrl',
-          type: 'text',
-          admin: { description: 'Only set if this post is republished from another URL.' },
-        },
-        {
-          name: 'noIndex',
-          type: 'checkbox',
-          defaultValue: false,
-          label: 'Hide from search engines (noindex)',
-          admin: { description: 'Use for thin, duplicate, or temporary content only.' },
-        },
-        {
-          name: 'focusKeyword',
-          type: 'text',
-          admin: {
-            description:
-              'Primary keyword this post targets. Internal tracking only — not published.',
-          },
-        },
-        {
-          name: 'ogImage',
-          type: 'upload',
-          relationTo: 'blog-images',
-          label: 'Social share image',
-          admin: {
-            description:
-              'Shown on LinkedIn, WhatsApp, Twitter previews. 1200×630px. Falls back to featured image.',
-          },
-        },
-      ],
-    },
-    // ─── Schema markup ─────────────────────────────────────────────────────
-    {
-      type: 'group',
-      name: 'schema',
-      label: 'Schema markup',
-      admin: { description: 'Controls the JSON-LD structured data injected in the page <head>.' },
-      fields: [
-        {
-          name: 'articleType',
-          type: 'select',
-          defaultValue: 'Article',
-          options: [
-            { label: 'Article', value: 'Article' },
-            { label: 'How-to guide', value: 'HowTo' },
-            { label: 'FAQ page', value: 'FAQPage' },
-          ],
-          admin: {
-            description: 'Article = standard post. HowTo / FAQPage unlock Google rich results.',
-          },
-        },
-        {
-          name: 'faqItems',
-          type: 'array',
-          label: 'FAQ items',
-          admin: {
-            description:
-              'Shown only when type is "FAQ page". Each item becomes a rich result in Google.',
-            condition: (_, siblingData) => siblingData?.articleType === 'FAQPage',
-          },
+          label: 'SEO',
           fields: [
-            { name: 'question', type: 'text', required: true },
             {
-              name: 'answer',
+              name: 'metaTitle',
+              type: 'text',
+              localized: true,
+              minLength: 10,
+              maxLength: 60,
+              admin: { description: 'Overrides post title in search results. Keep 10–60 chars.' },
+            },
+            {
+              name: 'metaDescription',
               type: 'textarea',
-              required: true,
-              admin: { description: 'Plain text only — no markdown. Keep answers concise.' },
+              localized: true,
+              maxLength: 160,
+              admin: { description: 'Overrides excerpt in search results. Keep under 160 chars.' },
+            },
+            {
+              name: 'canonicalUrl',
+              type: 'text',
+              localized: true,
+              admin: { description: 'Only set if this post is republished from another URL.' },
+            },
+            {
+              name: 'noIndex',
+              type: 'checkbox',
+              defaultValue: false,
+              label: 'Hide from search engines (noindex)',
+            },
+            {
+              name: 'focusKeyword',
+              type: 'text',
+              admin: { description: 'Primary keyword this post targets. Internal tracking only.' },
+            },
+            {
+              name: 'ogImage',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Social share image',
+              admin: { description: 'Shown on LinkedIn, WhatsApp, Twitter previews. 1200×630px.' },
+            },
+          ],
+        },
+        {
+          label: 'Schema markup',
+          description: 'Controls the JSON-LD structured data injected in the page <head>.',
+          fields: [
+            {
+              name: 'articleType',
+              type: 'select',
+              defaultValue: 'Article',
+              options: [
+                { label: 'Article', value: 'Article' },
+                { label: 'How-to guide', value: 'HowTo' },
+                { label: 'FAQ page', value: 'FAQPage' },
+              ],
+            },
+            {
+              name: 'faqItems',
+              type: 'array',
+              label: 'FAQ items',
+              admin: {
+                description: 'Shown only when type is "FAQ page".',
+                condition: (_, siblingData) => siblingData?.articleType === 'FAQPage',
+              },
+              fields: [
+                { name: 'question', type: 'text', required: true },
+                { name: 'answer', type: 'textarea', required: true },
+              ],
             },
           ],
         },

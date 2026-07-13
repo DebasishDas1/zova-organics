@@ -34,13 +34,13 @@ export async function generateMetadata({
   }
 
   // Defensive defaults for required metadata fields
-  const title = post.seo?.metaTitle ?? post.title ?? 'Untitled'
-  const description = post.seo?.metaDescription ?? post.excerpt ?? ''
+  const title = post.metaTitle ?? post.title ?? 'Untitled'
+  const description = post.metaDescription ?? post.excerpt ?? ''
 
   // ogImage falls back to featuredImage — both are Media relationships
   const ogMediaUrl =
-    post.seo?.ogImage && typeof post.seo.ogImage === 'object'
-      ? ((post.seo.ogImage as Media).url ?? null)
+    post.ogImage && typeof post.ogImage === 'object'
+      ? ((post.ogImage as Media).url ?? null)
       : post.featuredImage && typeof post.featuredImage === 'object'
         ? ((post.featuredImage as Media).url ?? null)
         : null
@@ -50,9 +50,9 @@ export async function generateMetadata({
   return {
     title,
     description,
-    robots: post.seo?.noIndex ? { index: false, follow: false } : { index: true, follow: true },
+    robots: post.noIndex ? { index: false, follow: false } : { index: true, follow: true },
     alternates: {
-      canonical: post.seo?.canonicalUrl ?? `https://zovaorganics.com/blogs/${post.slug}`,
+      canonical: post.canonicalUrl ?? `https://zovaorganics.com/blogs/${post.slug}`,
     },
     openGraph: {
       title,
@@ -88,7 +88,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   // ── JSON-LD ──────────────────────────────────────────────────────────────
   const articleSchema = {
     '@context': 'https://schema.org',
-    '@type': post.schema?.articleType ?? 'Article',
+    '@type': post.articleType ?? 'Article',
     headline: post.title,
     description: post.excerpt,
     url: canonicalUrl,
@@ -104,19 +104,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       '@id': 'https://zovaorganics.com/#organization',
     },
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl },
-    ...(post.tags?.length && {
-      keywords: post.tags.map((t) => t.tag).join(', '),
+    ...(post.tags?.trim() && {
+      keywords: post.tags,
     }),
   }
 
   const faqSchema =
-    post.schema?.articleType === 'FAQPage' &&
-    Array.isArray(post.schema.faqItems) &&
-    post.schema.faqItems.length > 0
+    post.articleType === 'FAQPage' &&
+    Array.isArray(post.faqItems) &&
+    post.faqItems.length > 0
       ? {
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
-          mainEntity: post.schema.faqItems.map((item) => ({
+          mainEntity: post.faqItems.map((item) => ({
             '@type': 'Question',
             name: item.question,
             acceptedAnswer: { '@type': 'Answer', text: item.answer },
