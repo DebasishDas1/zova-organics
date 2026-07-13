@@ -46,7 +46,7 @@ export const LOCALE_NAMES: Record<Locale, string> = {
 
 export type Messages = typeof en
 
-const localeData: Record<Locale, Messages> = {
+const localeData = {
   en,
   fr,
   de,
@@ -58,7 +58,7 @@ const localeData: Record<Locale, Messages> = {
   ru,
   tr,
   ar,
-}
+} as unknown as Record<Locale, Messages>
 
 function getObjectValue(object: any, path: string) {
   return path.split('.').reduce((value, segment) => {

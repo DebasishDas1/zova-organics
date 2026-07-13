@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     'zova organics',
   ],
   metadataBase: new URL('https://zovaorganics.com'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Zova Organics',
     description: 'Premium sustainable textile and lifestyle products sourced from India.',

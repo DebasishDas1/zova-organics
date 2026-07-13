@@ -1,415 +1,278 @@
 {
   "language": {
-    "name": "English",
-    "selectorLabel": "Select language",
-    "selectorAria": "Choose your preferred language"
+    "name": "polski",
+    "selectorLabel": "Wybierz język",
+    "selectorAria": "Wybierz preferowany język"
   },
   "nav": {
-    "products": "Products",
-    "blogs": "Blogs",
-    "certifications": "Certifications",
-    "aboutUs": "About Us",
-    "contact": "Contact"
+    "products": "Produkty",
+    "blogs": "Blogi",
+    "certifications": "Certyfikaty",
+    "aboutUs": "O nas",
+    "contact": "Kontakt"
   },
   "buttons": {
-    "becomePartner": "Become a Partner",
-    "exploreCollections": "Explore our Collections",
-    "requestQuote": "Request a Quote",
-    "requestSampleKit": "Request Sample Kit",
-    "requestQuoteShort": "Request Quote",
-    "enquireWhatsApp": "Enquire on WhatsApp",
-    "backToHome": "Back to Home",
-    "exploreProducts": "Explore Products",
-    "tryAgain": "Try again",
-    "sendInquiry": "Request Quote",
-    "sendingInquiry": "Sending Inquiry...",
-    "quoteContact": "Contact Us"
+    "becomePartner": "Zostań partnerem",
+    "exploreCollections": "Poznaj nasze kolekcje",
+    "requestQuote": "Poproś o wycenę",
+    "requestSampleKit": "Poproś o zestaw próbek",
+    "requestQuoteShort": "Poproś o wycenę",
+    "enquireWhatsApp": "Zapytaj na WhatsAppie",
+    "backToHome": "Powrót do strony głównej",
+    "exploreProducts": "Przeglądaj produkty",
+    "tryAgain": "Spróbuj ponownie",
+    "sendInquiry": "Wyślij zapytanie",
+    "sendingInquiry": "Wysyłanie zapytania...",
+    "quoteContact": "Skontaktuj się z nami"
   },
   "home": {
     "hero": {
-      "headline": "Crafted in India. Trusted Worldwide.",
-      "description": "Zova Organics is a premier exporter based in Kolkata, India, helping global brands source high-quality jute bags, juco bags, organic fabrics, and eco-friendly packaging through audited manufacturing partners, strict quality control, and reliable export logistics.",
-      "ctaCollections": "Explore our Collections",
-      "ctaQuote": "Request a Quote",
-      "featureSustainable": "Sustainable Materials",
-      "featureCertified": "Certified Quality",
-      "featureExport": "Global Export",
-      "featureEthical": "Ethical Partnerships"
+      "headline": "Wykonane w Indiach. Zaufane na całym świecie.",
+      "description": "Zova Organics jest głównym eksporterem z siedzibą w Kalkucie w Indiach, pomagającym światowym markom w pozyskiwaniu wysokiej jakości toreb jutowych, toreb juco, tkanin organicznych i ekologicznych opakowań za pośrednictwem audytowanych partnerów produkcyjnych, ścisłej kontroli jakości i niezawodnej logistyki eksportowej.",
+      "ctaCollections": "Poznaj nasze kolekcje",
+      "ctaQuote": "Poproś o wycenę",
+      "featureSustainable": "Zrównoważone materiały",
+      "featureCertified": "Certyfikowana jakość",
+      "featureExport": "Globalny eksport",
+      "featureEthical": "Partnerstwa etyczne"
     },
     "collections": {
-      "sectionLabel": "Collections",
-      "title": "Crafted for global brands and retailers.",
+      "sectionLabel": "Kolekcje",
+      "title": "Stworzone dla światowych marek i sprzedawców detalicznych.",
       "cards": {
-        "fabricsTitle": "Organic & Natural Fabrics (Jute, Cotton, Linen)",
-        "fabricsDescription": "Our jute bags collection includes jute tote bags, jute shopping bags, jute gift bags, jute wine bags, jute drawstring bags, and custom printed promotional jute bags. All available in bulk, with private label and custom logo printing. MOQ available for all product types. Exported to USA, UK, Germany, France, Australia, UAE, and 25+ more countries.",
-        "bagsTitle": "Jute Bags & Eco Tote Bags — Wholesale & Private Label",
-        "bagsDescription": "Our jute bags collection includes jute tote bags, jute shopping bags, jute gift bags, jute wine bags, jute drawstring bags, and custom printed promotional jute bags. All available in bulk, with private label and custom logo printing. MOQ available for all product types. Exported to USA, UK, Germany, France, Australia, UAE, and 25+ more countries.",
-        "lifestyleTitle": "Sustainable Lifestyle Products for Retail Brands",
-        "lifestyleDescription": "Sustainable lifestyle products including jute home décor, organic cotton accessories, and eco-friendly retail packaging. Designed for global retail chains, subscription box brands, and eco-conscious lifestyle brands."
+        "fabricsTitle": "Tkaniny organiczne i naturalne (juta, bawełna, len)",
+        "fabricsDescription": "Nasza kolekcja toreb jutowych obejmuje torby jutowe, torby na zakupy jutowe, torby jutowe na prezenty, torby jutowe na wino, torby jutowe ze sznurkiem oraz promocyjne torby jutowe z nadrukiem na zamówienie. Wszystko dostępne hurtowo, z własną marką i niestandardowym nadrukiem logo. MOQ dostępne dla wszystkich typów produktów. Eksportowane do USA, Wielkiej Brytanii, Niemiec, Francji, Australii, ZEA i ponad 25 innych krajów.",
+        "bagsTitle": "Torby jutowe i torby ekologiczne — hurt oraz marka własna",
+        "bagsDescription": "Nasza kolekcja toreb jutowych obejmuje torby jutowe, torby na zakupy jutowe, torby jutowe na prezenty, torby jutowe na wino, torby jutowe ze sznurkiem oraz promocyjne torby jutowe z nadrukiem na zamówienie. Wszystko dostępne hurtowo, z własną marką i niestandardowym nadrukiem logo. MOQ dostępne dla wszystkich typów produktów. Eksportowane do USA, Wielkiej Brytanii, Niemiec, Francji, Australii, ZEA i ponad 25 innych krajów.",
+        "lifestyleTitle": "Produkty zrównoważonego stylu życia dla marek detalicznych",
+        "lifestyleDescription": "Produkty związane ze zrównoważonym stylem życia, w tym artykuły dekoracyjne do domu z juty, akcesoria z bawełny organicznej i przyjazne dla środowiska opakowania detaliczne. Zaprojektowane dla globalnych sieci handlowych, marek subskrypcyjnych i marek lifestylowych dbających o środowisko."
       }
     },
     "whyZova": {
-      "sectionLabel": "Why Zova",
-      "title": "Why Global Buyers Choose Zova Organics for Jute Bag Sourcing",
+      "sectionLabel": "Dlaczego Zova",
+      "title": "Dlaczego globalni nabywcy wybierają firmę Zova Organics do pozyskiwania toreb jutowych",
       "items": {
         "ethicalProduction": {
-          "title": "Ethical Production",
-          "description": "Socially responsible manufacturing from audited Indian suppliers."
+          "title": "Produkcja etyczna",
+          "description": "Społecznie odpowiedzialna produkcja od kontrolowanych indyjskich dostawców."
         },
         "premiumMaterials": {
-          "title": "Premium Jute & Organic Materials",
-          "description": "100% natural, biodegradable jute and organic cotton — export quality."
+          "title": "Wysokiej jakości juta i materiały organiczne",
+          "description": "100% naturalna, biodegradowalna juta i bawełna organiczna — jakość eksportowa."
         },
         "reliablePartners": {
-          "title": "Reliable Manufacturing Partners",
-          "description": "Long-term relationships with Kolkata's top jute mills."
+          "title": "Niezawodni partnerzy produkcyjni",
+          "description": "Długoterminowe relacje z najlepszymi fabrykami juty w Kalkucie."
         },
         "globalExpertise": {
-          "title": "Global Export Expertise",
-          "description": "Experienced in shipping to USA, UK, EU, Middle East & Asia Pacific."
+          "title": "Ekspertyza w eksportowaniu globalnym",
+          "description": "Doświadczenie w wysyłce do USA, Wielkiej Brytanii, UE, Bliskiego Wschodu i Azji i Pacyfiku."
         },
         "qualityAssurance": {
-          "title": "Quality Assurance",
-          "description": "Pre-shipment inspection, sample approval, and QC at every stage."
+          "title": "Gwarancja jakości",
+          "description": "Inspekcja przedwysyłkowa, zatwierdzanie próbek i kontrola jakości na każdym etapie."
         },
         "longTerm": {
-          "title": "Long-Term Partnerships",
-          "description": "We grow with your brand — from first sample to repeat container orders."
+          "title": "Długoterminowe partnerstwo",
+          "description": "Rozwijamy się razem z Twoją marką — od pierwszej próbki po powtarzalne zamówienia kontenerowe."
         }
       }
     },
     "globalReach": {
-      "sectionLabel": "Global Reach",
-      "title": "Exporting Jute Bags & Sustainable Products to 30+ Countries",
-      "subtitle": "Trusted by brands and distributors across North America, Europe, the Middle East, and Asia Pacific. From Kolkata to the world."
+      "sectionLabel": "Zasięg globalny",
+      "title": "Eksport toreb jutowych i produktów ekologicznych do ponad 30 krajów",
+      "subtitle": "Zaufali nam dystrybutorzy i marki w Ameryce Północnej, Europie, Bliskim Wschodzie oraz Azji i Pacyfiku. Z Kalkuty na cały świat."
     },
     "cta": {
-      "title": "Ready to Source Jute Bags and eco-friendly products from India?",
-      "description": "Partner with Zova Organics for wholesale jute bags, eco-friendly packaging, custom branding, and reliable export from Kolkata, India.",
-      "button": "Get a Free Quote"
+      "title": "Gotowy do pozyskiwania toreb jutowych i ekologicznych produktów z Indii?",
+      "description": "Nawiąż współpracę z Zova Organics w zakresie hurtowych toreb jutowych, ekologicznych opakowań, spersonalizowanego brandingu i niezawodnego eksportu z Kalkuty w Indiach.",
+      "button": "Uzyskaj bezpłatną wycenę"
     },
     "manifesto": {
-      "label": "Our Philosophy",
-      "headline": "Sourcing should be transparent, sustainable, and beautifully executed",
-      "line1": "We believe exceptional products begin long before they reach a shelf. They begin with responsible sourcing, skilled craftsmanship, and partnerships built on trust.",
-      "line2": "Zova Organics connects global brands with premium jute bags, organic fabrics, and eco-lifestyle products rooted in Kolkata's jute manufacturing heritage. We work with India's finest mills to deliver export-quality products with modern standards of quality, sustainability, and reliability."
+      "label": "Nasza filozofia",
+      "headline": "Pozyskiwanie powinno być przejrzyste, zrównoważone i doskonale wykonane",
+      "line1": "Wierzymy, że wyjątkowe produkty zaczynają się na długo przed trafieniem na półkę. Zaczynają się od odpowiedzialnego pozyskiwania, wykwalifikowanego rzemiosła i partnerstwa opartego na zaufaniu.",
+      "line2": "Zova Organics łączy globalne marki z najwyższej jakości torbami jutowymi, tkaninami organicznymi i ekologicznymi produktami zakorzenionymi w dziedzictwie produkcji juty w Kalkucie. Współpracujemy z najlepszymi zakładami w Indiach, dostarczając produkty o jakości eksportowej z nowoczesnymi standardami jakości, zrównoważonego rozwoju i niezawodności."
     }
   },
   "footer": {
-    "topLabel": "Global Organic Exports",
-    "headline": "Building trusted organic supply chains for global brands.",
-    "description": "Partner with Zova Organics for responsibly sourced products, reliable export operations, and long-term growth.",
-    "requestQuote": "Request a Quote",
-    "socialLabel": "Social Links",
-    "companyLabel": "Company",
-    "contactLabel": "Contact",
-    "privacyPolicy": "Privacy Policy",
-    "terms": "Terms and Conditions",
-    "faq": "FAQ",
-    "copyright": "© {{year}} Zova Organics. All rights reserved.",
-    "brandDescription": "Exporting sustainable and organic Jute Bags & Eco-friendly packaging from India to international buyers, distributors, and private-label brands."
+    "topLabel": "Globalny Eksport Organiczny",
+    "headline": "Budowanie zaufanych organicznych łańcuchów dostaw dla globalnych marek.",
+    "description": "Nawiąż współpracę z Zova Organics, aby uzyskać produkty ze sprawdzonych źródeł, niezawodne operacje eksportowe i długoterminowy rozwój.",
+    "requestQuote": "Poproś o wycenę",
+    "socialLabel": "Social Media",
+    "companyLabel": "Firma",
+    "contactLabel": "Kontakt",
+    "privacyPolicy": "Polityka prywatności",
+    "terms": "Regulamin",
+    "faq": "Często zadawane pytania",
+    "copyright": "© {{year}} Zova Organics. Wszelkie prawa zastrzeżone.",
+    "brandDescription": "Eksport zrównoważonych i organicznych toreb jutowych oraz ekologicznych opakowań z Indii do międzynarodowych nabywców, dystrybutorów i marek własnych."
   },
   "contact": {
     "page": {
-      "eyebrow": "Contact",
-      "title": "Let's build something meaningful together.",
-      "description": "Whether you're sourcing sustainable textiles, launching a private-label collection, or looking for a reliable manufacturing partner, we'd love to hear about your project.",
+      "eyebrow": "Kontakt",
+      "title": "Zbudujmy razem coś wartościowego.",
+      "description": "Niezależnie od tego, czy pozyskujesz tekstylia ekologiczne, wprowadzasz kolekcję marki własnej, czy szukasz niezawodnego partnera produkcyjnego, chętnie posłuchamy o Twoim projekcie.",
       "faqSection": {
         "eyebrow": "FAQ",
-        "title": "Frequently asked questions.",
-        "description": "Here are answers to some of our most commonly asked questions. If you have other inquiries, please don't hesitate to reach out directly."
+        "title": "Często zadawane pytania.",
+        "description": "Oto odpowiedzi na niektóre z najczęściej zadawanych pytań. Jeśli masz inne zapytania, skontaktuj się z nami bezpośrednio."
       }
     },
     "form": {
-      "labelInquiry": "Inquiry Form",
-      "headline": "Tell us about your sourcing requirements.",
-      "description": "Whether you're looking for organic fabrics, custom bags, private-label manufacturing, or long-term sourcing partnerships, we'd love to hear about your project.",
-      "responseTimeTitle": "Response Time",
-      "responseTimeValue": "Within 24 business hours",
-      "moqSupportTitle": "MOQ Support",
-      "moqSupportValue": "Flexible solutions for growing brands and importers",
-      "shippingTitle": "Global Shipping",
-      "shippingValue": "Air and sea freight available worldwide",
-      "nameLabel": "Your Name",
-      "companyLabel": "Company",
-      "emailLabel": "Work Email",
-      "phoneLabel": "Phone Number",
-      "categoryLabel": "Product Category",
-      "projectDetailsLabel": "Project Details",
-      "namePlaceholder": "John Doe",
-      "companyPlaceholder": "Company Name",
-      "emailPlaceholder": "john@company.com",
-      "phonePlaceholder": "+1 234 567 890",
-      "messagePlaceholder": "Tell us about your product requirements, customization needs, expected quantities, certifications, and target markets...",
+      "labelInquiry": "Formularz zapytania",
+      "headline": "Powiedz nam o swoich wymaganiach dotyczących pozyskiwania.",
+      "description": "Niezależnie od tego, czy szukasz tkanin organicznych, toreb na zamówienie, produkcji pod marką własną czy długoterminowego partnerstwa, chętnie poznamy szczegóły.",
+      "responseTimeTitle": "Czas odpowiedzi",
+      "responseTimeValue": "W ciągu 24 godzin roboczych",
+      "moqSupportTitle": "Wsparcie MOQ",
+      "moqSupportValue": "Elastyczne rozwiązania dla rozwijających się marek i importerów",
+      "shippingTitle": "Wysyłka globalna",
+      "shippingValue": "Transport lotniczy i morski dostępny na całym świecie",
+      "nameLabel": "Twoje imię i nazwisko",
+      "companyLabel": "Firma",
+      "emailLabel": "Służbowy e-mail",
+      "phoneLabel": "Numer telefonu",
+      "categoryLabel": "Kategoria produktu",
+      "projectDetailsLabel": "Szczegóły projektu",
+      "namePlaceholder": "Jan Kowalski",
+      "companyPlaceholder": "Nazwa firmy",
+      "emailPlaceholder": "jan@firma.pl",
+      "phonePlaceholder": "+48 123 456 789",
+      "messagePlaceholder": "Opowiedz nam o swoich wymaganiach dotyczących produktów, potrzebach w zakresie personalizacji, przewidywanych ilościach, certyfikatach i rynkach docelowych...",
       "categoryOptions": {
-        "organicFabrics": "Organic Fabrics",
-        "bags": "Tote Bags & Pouches",
-        "privateLabel": "Private Label",
-        "customProduct": "Custom Product",
-        "other": "Other"
+        "organicFabrics": "Tkaniny organiczne",
+        "bags": "Torby i saszetki",
+        "privateLabel": "Marka własna",
+        "customProduct": "Produkt na zamówienie",
+        "other": "Inne"
       },
-      "success": "Thank you for reaching out. Our team will review your inquiry and get back to you within 24 business hours.",
-      "error": "Something went wrong. Please try again.",
+      "success": "Dziękujemy za kontakt. Nasz zespół przeanalizuje Twoje zapytanie i odpowie w ciągu 24 godzin roboczych.",
+      "error": "Coś poszło nie tak. Spróbuj ponownie.",
       "validation": {
-        "nameMin": "Name must be at least 2 characters",
-        "companyMin": "Company name is required",
-        "email": "Please enter a valid email address",
-        "phoneMin": "Phone number is too short",
-        "messageMin": "Please provide more details"
+        "nameMin": "Imię musi mieć co najmniej 2 znaki",
+        "companyMin": "Nazwa firmy jest wymagana",
+        "email": "Wprowadź prawidłowy adres e-mail",
+        "phoneMin": "Numer telefonu jest za krótki",
+        "messageMin": "Podaj więcej szczegółów"
       }
     },
     "info": {
-      "label": "Contact Information",
-      "headline": "Multiple ways to connect.",
+      "label": "Informacje kontaktowe",
+      "headline": "Wiele sposobów na kontakt.",
       "items": {
         "general": {
-          "title": "General Inquiries",
+          "title": "Zapytania ogólne",
           "value": "info@zovaorganics.com",
-          "description": "Questions about products, sourcing, or partnerships."
+          "description": "Pytania dotyczące produktów, pozyskiwania lub partnerstwa."
         },
         "export": {
-          "title": "Export & Wholesale",
+          "title": "Eksport i hurt",
           "value": "+91 9073896612",
-          "description": "Discuss MOQ, customization, logistics, and pricing."
+          "description": "Omówienie MOQ, personalizacji, logistyki i cen."
         },
         "basedIn": {
-          "title": "Based in India",
-          "value": "Global Export Operations",
-          "description": "Connecting international buyers with trusted manufacturers."
+          "title": "Siedziba w Indiach",
+          "value": "Globalne Operacje Eksportowe",
+          "description": "Łączenie międzynarodowych nabywców z zaufanymi producentami."
         }
       }
     },
     "whyContact": {
-      "label": "How We Can Help",
-      "title": "More than a supplier. A sourcing partner.",
+      "label": "Jak możemy pomóc",
+      "title": "Więcej niż dostawca. Partner w pozyskiwaniu.",
       "items": {
         "privateLabel": {
-          "title": "Private Label Manufacturing",
-          "description": "Launch products under your own brand with trusted manufacturing partners."
+          "title": "Produkcja pod marką własną",
+          "description": "Wprowadzaj produkty pod własną marką z zaufanymi partnerami produkcyjnymi."
         },
         "customProduct": {
-          "title": "Custom Product Development",
-          "description": "Develop tailored products designed around your business needs."
+          "title": "Tworzenie produktów spersonalizowanych",
+          "description": "Twórz dostosowane produkty zaprojektowane wokół potrzeb Twojego biznesu."
         },
         "sustainableSourcing": {
-          "title": "Sustainable Sourcing",
-          "description": "Access ethically sourced textiles and lifestyle products from India."
+          "title": "Zrównoważone pozyskiwanie",
+          "description": "Dostęp do etycznie pozyskiwanych tekstyliów i produktów z Indii."
         },
         "globalSupport": {
-          "title": "Global Export Support",
-          "description": "From documentation to logistics, we help simplify international trade."
+          "title": "Wsparcie eksportu globalnego",
+          "description": "Od dokumentacji po logistykę, pomagamy uprościć handel międzynarodowy."
         }
       }
     }
   },
   "faq": {
     "page": {
-      "title": "Frequently Asked Questions | Zova Organics",
-      "description": "Have questions about sourcing jute bags from India? We've answered everything below. If you don't find what you're looking for, WhatsApp us directly."
+      "title": "Często zadawane pytania | Zova Organics",
+      "description": "Masz pytania dotyczące pozyskiwania toreb jutowych z Indii? Odpowiedzieliśmy na wszystko poniżej. Jeśli nie znajdziesz tego, czego szukasz, napisz do nas bezpośrednio na WhatsApp."
     },
-    "sections": [
-      {
-        "title": "About Zova Organics",
-        "items": [
-          {
-            "question": "What is Zova Organics?",
-            "answer": "Zova Organics is a premier exporter of premium jute bags, Jute products, Cotton Bags, organic fabrics, and sustainable lifestyle products based in Kolkata, West Bengal, India. We connect global brands, retailers, and distributors with high-quality, ethically sourced jute and textile products. Unlike a manufacturer, as a merchant exporter we work with a curated network of India's best jute mills and production partners, giving you access to a broader product range, better flexibility, and faster turnaround."
-          },
-          {
-            "question": "Where is Zova Organics located?",
-            "answer": "We are based in Kolkata, West Bengal, India - the heart of the global jute industry. Kolkata is the world's largest hub for jute production and processing, which gives us unmatched access to premium raw jute, skilled manufacturing partners, and competitive pricing."
-          },
-          {
-            "question": "What is the difference between a merchant exporter and a manufacturer?",
-            "answer": "A manufacturer produces goods in their own factory. A merchant exporter like Zova Organics sources from multiple specialized manufacturers and mills, quality checks the products, and exports them to global buyers. This means you get access to a wider range of products, better quality control across multiple production units, and the flexibility to mix products from different specialists — all through a single trusted export partner."
-          },
-          {
-            "question": "Is Zova Organics a registered export company?",
-            "answer": "Yes. Zova Organics is a registered merchant exporter with all required Indian export documentation including IEC (Import Export Code), GST registration, and JPDEPC, etc. We provide all standard export documentation including commercial invoice, packing list, bill of lading, certificate of origin, and phytosanitary certificates where required."
+    "sections": {
+      "0": {
+        "title": "O Zova Organics",
+        "items": {
+          "0": {
+            "question": "Czym jest Zova Organics?",
+            "answer": "Zova Organics to wiodący eksporter wysokiej jakości toreb jutowych z siedzibą w Kalkucie w Indiach."
           }
-        ]
-      },
-      {
-        "title": "Products",
-        "items": [
-          {
-            "question": "What jute bag products does Zova Organics export?",
-            "answer": "We export a comprehensive range of jute bags and jute products: Jute Tote Bags (plain, printed, laminated), Jute Shopping Bags (with and without gusset), Jute Gift Bags (with ribbon handles, tissue paper), Jute Wine Bags (single bottle, double bottle), Jute Drawstring Bags (small to large), Jute Beach Bags (large format, open top), Jute Promotional Bags (custom logo, bulk branding), Jute Lunch Bags (insulated lining options), Jute Grocery Bags (reinforced handles), Jute Cosmetic/Toiletry Bags, Jute Backpacks, Jute Pouches and Coin Bags, Cotton Bags, JUCO Bags, Jute Sacs. If you need a product type not listed above, contact us with your specifications and we'll source it for you."
-          },
-          {
-            "question": "Do you sell only jute bags or other products too?",
-            "answer": "In addition to jute bags, we export organic cotton bags and tote bags, Juco bags (jute-cotton blend), organic and natural fabrics (jute fabric, organic cotton fabric, linen), sustainable lifestyle products (home décor, accessories), eco-friendly retail packaging and gifting products. We are a one-stop source for brands looking to build a sustainable product range."
-          },
-          {
-            "question": "What fabric weights and jute grades do you offer?",
-            "answer": "We offer jute bags in fabric weights ranging from 200 GSM (lightweight) to 500 GSM (heavy-duty) depending on the application. Standard export grade is 350 GSM for shopping and tote bags. We use Hessian (plain weave) and sacking jute, and can source specific grades based on buyer requirements. All jute is natural, biodegradable, and free from harmful chemicals."
-          },
-          {
-            "question": "Can I get jute bags in custom colors?",
-            "answer": "Natural jute comes in its characteristic golden-brown color. We offer natural undyed jute (most popular for eco brands), bleached jute (off-white / cream), dyed jute in custom colors (subject to MOQ for dyeing), colored cotton webbing or rope handles on natural jute bags, colored inner lining in cotton or non-woven fabric. Custom dyeing has a higher MOQ and lead time. Contact us with your Pantone color reference for a feasibility check."
-          },
-          {
-            "question": "Do your jute bags have any certifications?",
-            "answer": "Yes. Zova Organics is working with all Highly Efficient and Globally Certified Manufacturers. GOTS (Global Organic Textile Standard) sourcing available on request, Oeko-Tex Standard 100 compliant materials available, products meet EU eco-labeling standards for import, all products are 100% natural, biodegradable, and free from AZO dyes. We provide test reports and material safety documentation for buyers importing into the EU, USA, and Australia where compliance standards apply. Contact us for certification requirements specific to your market."
-          },
-          {
-            "question": "Are your jute bags food-safe or suitable for grocery retail?",
-            "answer": "Yes. Our natural jute grocery bags are suitable for dry food products and general grocery retail use. For food-contact applications, we can provide laminated jute bags with a food-safe inner lining. Please specify your intended use when requesting a quote so we can recommend the appropriate product specification."
-          },
-          {
-            "question": "Can you create a completely new jute bag design from scratch?",
-            "answer": "Yes. If you have a design idea, reference image, or technical specification, our product development team can create samples from scratch. We handle design consultation, prototype creation, fabric selection, handle options, print placement, and packaging — all before bulk production begins. Development sampling lead time is 2–3 weeks."
-          }
-        ]
-      },
-      {
-        "title": "Ordering, Samples & MOQ",
-        "items": [
-          {
-            "question": "What is the minimum order quantity (MOQ)?",
-            "answer": "Our standard MOQs are: Plain jute tote bags (standard sizes): 3000–5000 pieces, Custom printed jute bags: 3000–5000 pieces, Custom sized / new design jute bags: 5000–10000 pieces, Organic cotton bags: 3000–5000 pieces. MOQs may vary based on design complexity and product type. First-time buyers can discuss trial order quantities with our team."
-          },
-          {
-            "question": "How do I place an order with Zova Organics?",
-            "answer": "Our ordering process is simple: Inquiry — Contact us via WhatsApp, email, or our inquiry form with your product requirements; Quotation — We send a detailed quote within 24–48 hours; Sampling — We send physical samples for your approval; Order Confirmation — You confirm the order with a purchase order and advance payment; Production — Bulk production begins at our partner mills; Quality Check — Pre-shipment inspection and QC report; Shipment — Goods dispatched from Kolkata with full documentation; Delivery — Tracking provided until goods arrive at your destination."
-          },
-          {
-            "question": "What payment terms do you offer?",
-            "answer": "Standard payment terms are 30–50% advance payment against order confirmation, with the balance due before shipment. For long-term clients with established relationships, we can discuss extended payment terms. We accept bank wire transfer (TT), LC (Letter of Credit), and other standard trade payment methods."
-          },
-          {
-            "question": "Do you work with new buyers or only established companies?",
-            "answer": "We welcome new buyers. Many of our long-term clients started with a single sample request. We understand that trust is built over time and we make the process as easy as possible for first-time importers — including detailed documentation, clear communication at every step, and flexible sampling."
-          },
-          {
-            "question": "Can I mix different products in one container?",
-            "answer": "Yes. We regularly handle mixed container shipments with multiple product types, for example, a mix of jute tote bags, jute gift bags, and organic cotton bags in one container. This is one of the key advantages of working with a merchant exporter - you get product variety from multiple specialists, consolidated into a single shipment."
-          }
-        ]
-      },
-      {
-        "title": "Customization & Private Label",
-        "items": [
-          {
-            "question": "What customization options are available for jute bags?",
-            "answer": "We offer end-to-end customization: Size — Custom width, height, gusset dimensions; Fabric weight — 200 GSM to 500 GSM; Color — Natural, bleached, or dyed jute; Handles — Jute rope, cotton webbing, leather-look, ribbon; Printing — Screen print, digital print, heat transfer, embroidery, jute patch; Lining — Unlined, cotton lining, laminated, insulated; Closure — Open top, zip, button, drawstring, magnetic snap; Packaging — Individual poly bags, custom boxes, hang tags, tissue paper; Branding — Your logo, brand name, tagline, website URL, care instructions."
-          },
-          {
-            "question": "What file formats do you need for logo/artwork printing?",
-            "answer": "For best print quality, please provide artwork in vector formats (preferred): .AI, .EPS, .PDF (vector) or high-resolution raster: .PNG or .TIFF at minimum 300 DPI at print size. Please also specify Pantone (PMS) color codes for brand-accurate color matching. We provide a digital artwork proof for approval before printing begins."
-          },
-          {
-            "question": "Do you offer white label / private label packaging?",
-            "answer": "Yes. We offer complete white label and private label services. Your products can be delivered with your brand's hang tags, stickers, custom inner tissue paper, branded polybag, custom box, and care label — with zero Zova Organics branding visible. Many of our clients sell these products under their own brand to retail chains and e-commerce platforms."
-          },
-          {
-            "question": "Can you match a sample or reference product I send you?",
-            "answer": "Yes. If you have an existing product you want us to replicate or improve upon, send us a physical sample or detailed photos and specifications. We will match fabric, construction, dimensions, print placement, and finish as closely as possible and send you a counter-sample for approval."
-          },
-          {
-            "question": "Do you provide product development consultation?",
-            "answer": "Yes. If you are building a new eco-product line and need guidance on materials, design direction, market-appropriate specifications, or pricing tiers, our team can consult with you before sampling begins. We've helped brands develop jute bag collections from concept to container."
-          }
-        ]
-      },
-      {
-        "title": "Shipping & Logistics",
-        "items": [
-          {
-            "question": "What are your shipping terms (Incoterms)?",
-            "answer": "We offer the following Incoterms: FOB Kolkata — Most common. You arrange freight from Kolkata Port. CIF (Cost, Insurance, Freight) — We arrange and pay for freight + insurance to destination port. Ex-Works — You collect from our warehouse in Kolkata. DDP (Delivered Duty Paid) — Available for select destinations on request. We work with reliable freight forwarders for both sea freight (FCL and LCL) and air freight."
-          },
-          {
-            "question": "How long does shipping take to my country?",
-            "answer": "Approximate sea freight transit times from Kolkata: UK / Germany / Netherlands: 20–28 days; USA (East Coast): 25–35 days; USA (West Coast): 30–40 days; Australia: 18–25 days; UAE / Middle East: 10–14 days; Japan / Singapore: 12–18 days; Canada: 28–38 days. Air freight is 5–10 days to most destinations. Transit times are estimates and may vary by shipping line and season."
-          },
-          {
-            "question": "Do you handle all export documentation?",
-            "answer": "Yes. We provide complete export documentation including Commercial Invoice, Packing List, Bill of Lading (Sea) / Airway Bill (Air), Certificate of Origin (COO), Phytosanitary Certificate (where required for natural fiber products), GSP (Generalized System of Preferences) Form A for duty benefits, test reports and material certificates on request. We ensure all documentation complies with the import requirements of your country."
-          },
-          {
-            "question": "Do you offer FCL (Full Container Load) and LCL (Less than Container Load) shipments?",
-            "answer": "Yes. We handle both: LCL — Ideal for smaller orders or new buyers testing a product range. Your goods share container space with other exporters. FCL — For larger orders. We fill a 20-foot or 40-foot container entirely with your goods. More cost-effective per unit. We can advise on the most cost-efficient shipping option based on your order volume."
-          },
-          {
-            "question": "Can you ship samples by courier (DHL / FedEx)?",
-            "answer": "Yes. Sample sets are shipped via DHL, FedEx, or UPS with full tracking. Courier charges are billed to the buyer or can be shipped on your courier account. Typical sample courier time is 3–7 business days to most countries."
-          }
-        ]
-      },
-      {
-        "title": "Quality & Sustainability",
-        "items": [
-          {
-            "question": "What quality control processes do you follow?",
-            "answer": "Our quality control process includes raw material inspection, in-line production checks, pre-shipment inspection, QC report, and third-party inspection (SGS, Bureau Veritas, Intertek) on buyer request."
-          },
-          {
-            "question": "Are your jute bags genuinely eco-friendly and biodegradable?",
-            "answer": "Yes. Jute is one of the most sustainable natural fibers in the world. It is 100% natural, plant-based, and biodegradable, grown without pesticides or irrigation in India's climate, carbon-negative, durable and reusable, and processed without harmful chemicals. We can provide AZO-free and formaldehyde-free certifications on request."
-          },
-          {
-            "question": "Do you support fair trade or ethical production practices?",
-            "answer": "All our manufacturing partners are audited for basic social compliance standards including fair wages, safe working conditions, and no child labor. We prioritize long-term relationships with partners who share our values and can provide factory audit reports for buyers who require ethical sourcing documentation."
-          }
-        ]
+        }
       }
-    ]
+    }
   },
   "products": {
     "page": {
-      "eyebrow": "Products",
-      "title": "Our sustainable collection.",
-      "description": "GOTS-certified organic cotton bags, pouches, and fabric products. Wholesale from 100 units."
+      "eyebrow": "Produkty",
+      "title": "Nasza zrównoważona kolekcja.",
+      "description": "Torby, woreczki i produkty z bawełny organicznej z certyfikatem GOTS. Hurtowo od 100 sztuk."
     },
     "noProducts": {
-      "headline": "No products found",
-      "description": "We couldn't find any products matching your filters. Please try a different search or contact us for help."
+      "headline": "Nie znaleziono produktów",
+      "description": "Nie mogliśmy znaleźć żadnych produktów pasujących do Twoich filtrów. Spróbuj innego wyszukiwania lub skontaktuj się z nami w celu uzyskania pomocy."
     }
   },
   "blogs": {
     "page": {
-      "eyebrow": "Insights",
-      "title": "Perspectives on sustainable sourcing.",
-      "description": "Export guidance, organic textile trends, certification expertise, and supply chain insights for global buyers."
+      "eyebrow": "Wiedza i Wgląd",
+      "title": "Perspektywy na zrównoważone pozyskiwanie.",
+      "description": "Wskazówki eksportowe, trendy w tekstyliach organicznych, wiedza o certyfikatach i analizy łańcucha dostaw dla globalnych nabywców."
     },
-    "minRead": "{{count}} min read"
+    "minRead": "{{count}} min czytania"
   },
   "product": {
     "category": {
-      "organic-fabrics": "Organic Fabrics",
-      "bags": "Bags",
-      "pouches": "Pouches",
-      "home-textiles": "Home Textiles",
-      "yoga-wellness": "Yoga & Wellness",
-      "custom-oem": "Custom OEM"
+      "organic-fabrics": "Tkaniny organiczne",
+      "bags": "Torby",
+      "pouches": "Woreczki / Saszetki",
+      "home-textiles": "Tekstylia domowe",
+      "yoga-wellness": "Joga i Wellness",
+      "custom-oem": "Dostosowany OEM"
     },
     "highlights": {
       "moq": "MOQ",
-      "leadTime": "Lead Time",
-      "shipping": "Shipping",
-      "worldwide": "Worldwide"
+      "leadTime": "Czas realizacji",
+      "shipping": "Wysyłka",
+      "worldwide": "Na całym świecie"
     },
-    "sustainablySourcedTitle": "Sustainably sourced",
-    "sustainablySourcedDescription": "Manufactured in India using certified organic materials and ethical production practices. Perfect for brands seeking sustainable supply chains and private-label partnerships.",
-    "requestSample": "Request Sample Kit",
-    "requestQuote": "Request Quote",
-    "sampleCtaHeadline": "Evaluate {{productTitle}} before placing a production order.",
-    "sampleCtaDescription": "Receive product samples, technical specifications, certifications, customization options, and export documentation to confidently approve your sourcing decision.",
-    "productSamples": "Product Samples",
-    "productSamplesDescription": "Evaluate material quality, stitching, durability and finishing.",
-    "technicalDocumentation": "Technical Documentation",
-    "technicalDocumentationDescription": "GSM details, dimensions, certifications, customization options and export specifications.",
-    "shippingComplianceTitle": "Shipping & Compliance",
-    "hsCode": "HS code",
-    "reachEu": "REACH (EU)",
-    "compliant": "Compliant",
-    "documentsProvided": "Documents provided"
+    "sustainablySourcedTitle": "Pozyskiwane w sposób zrównoważony",
+    "sustainablySourcedDescription": "Wyprodukowane w Indiach z użyciem certyfikowanych materiałów organicznych i etycznych praktyk produkcyjnych. Idealne dla marek poszukujących zrównoważonych łańcuchów dostaw i partnerstw w zakresie marek własnych.",
+    "requestSample": "Poproś o zestaw próbek",
+    "requestQuote": "Poproś o wycenę",
+    "sampleCtaHeadline": "Oceń {{productTitle}} przed złożeniem zamówienia produkcyjnego.",
+    "sampleCtaDescription": "Otrzymaj próbki produktów, specyfikacje techniczne, certyfikaty, opcje personalizacji i dokumentację eksportową, aby pewnie zatwierdzić decyzję zakupową.",
+    "productSamples": "Próbki produktów",
+    "productSamplesDescription": "Oceń jakość materiału, szycie, trwałość i wykończenie.",
+    "technicalDocumentation": "Dokumentacja techniczna",
+    "technicalDocumentationDescription": "Szczegóły gramatury (GSM), wymiary, certyfikaty, opcje personalizacji i specyfikacje eksportowe.",
+    "shippingComplianceTitle": "Wysyłka i zgodność",
+    "hsCode": "Kod HS",
+    "reachEu": "REACH (UE)",
+    "compliant": "Zgodny",
+    "documentsProvided": "Dostarczone dokumenty"
   },
   "errors": {
-    "somethingWentWrong": "Something went wrong",
-    "unexpectedError": "An unexpected error occurred. Please try again.",
-    "openMobileMenu": "Open mobile menu",
-    "homeAriaLabel": "Zova Organics home"
+    "somethingWentWrong": "Coś poszło nie tak",
+    "unexpectedError": "Wystąpił nieoczekiwany błąd. Spróbuj ponownie.",
+    "openMobileMenu": "Otwórz menu mobilne",
+    "homeAriaLabel": "Strona główna Zova Organics"
   }
 }
