@@ -4,6 +4,8 @@ import Script from 'next/script'
 import { headers } from 'next/headers'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
+import { Providers } from '@/components/Providers'
+import { getLocaleFromCookie, getLocaleFromHeader, isRtl } from '@/i18n/i18n'
 import './styles.css'
 import { Geist } from 'next/font/google'
 
@@ -30,6 +32,9 @@ export const metadata: Metadata = {
     'zova organics',
   ],
   metadataBase: new URL('https://zovaorganics.com'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Zova Organics',
     description: 'Premium sustainable textile and lifestyle products sourced from India.',
@@ -92,10 +97,14 @@ export default async function FrontendLayout({
   // Read nonce injected by middleware
   const headersList = await headers()
   const nonce = headersList.get('x-nonce') ?? ''
+  const cookieLocale = getLocaleFromCookie(headersList.get('cookie'))
+  const headerLocale = getLocaleFromHeader(headersList.get('accept-language'))
+  const locale = cookieLocale ?? headerLocale
 
   return (
     <html
-      lang="en"
+      lang={locale}
+      dir={isRtl(locale) ? 'rtl' : 'ltr'}
       suppressHydrationWarning
       className={geist.variable}
       data-scroll-behavior="smooth"
@@ -131,9 +140,11 @@ export default async function FrontendLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
           suppressHydrationWarning
         />
-        <Navbar />
-        <main className="pt-14 md:pt-24">{children}</main>
-        <Footer />
+        <Providers defaultLocale={locale}>
+          <Navbar />
+          <main className="pt-14 md:pt-24">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   )

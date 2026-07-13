@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { ArrowRight, Menu } from 'lucide-react'
@@ -21,17 +21,24 @@ import {
 } from '@/components/ui/sheet'
 import { usePathname } from 'next/navigation'
 import { useUIStore } from '@/store/ui-store'
+import { useI18n } from '@/i18n/I18nProvider'
+import { LanguageSelector } from '@/components/layout/LanguageSelector'
 import Image from 'next/image'
 
-const navLinks = [
-  { name: 'Products', href: '/products' },
-  { name: 'Blogs', href: '/blogs' },
-  { name: 'Certifications', href: '/certifications' },
-  { name: 'About Us', href: '/about-us' },
-  { name: 'Contact', href: '/contact' },
-]
-
 const NavbarComponent = () => {
+  const { t } = useI18n()
+
+  const navLinks = useMemo(
+    () => [
+      { name: t('nav.products'), href: '/products' },
+      { name: t('nav.blogs'), href: '/blogs' },
+      { name: t('nav.certifications'), href: '/certifications' },
+      { name: t('nav.aboutUs'), href: '/about-us' },
+      { name: t('nav.contact'), href: '/contact' },
+    ],
+    [t],
+  )
+
   const pathname = usePathname()
   const { mobileMenuOpen, closeMobileMenu, setMobileMenuOpen } = useUIStore()
 
@@ -71,7 +78,7 @@ const NavbarComponent = () => {
         {/* Logo */}
         <Link
           href="/"
-          aria-label="Zova Organic home"
+          aria-label={t('errors.homeAriaLabel')}
           className={cn('text-xl md:text-2xl font-bold tracking-tight transition-colors')}
         >
           <Image
@@ -113,17 +120,23 @@ const NavbarComponent = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <Button
-            className={cn(
-              'h-10 rounded-full px-5',
-              'text-[12px] font-medium',
-              'hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
-              'transition-all duration-200',
-            )}
-          >
-            <Link href="/contact">Become a Partner</Link>
-            <ArrowRight className="ml-2 size-3.5" />
-          </Button>
+          <div className="flex items-center gap-4">
+            <LanguageSelector />
+            <Button
+              asChild
+              className={cn(
+                'h-10 rounded-full px-5',
+                'text-[12px] font-medium',
+                'hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)]',
+                'transition-all duration-200',
+              )}
+            >
+              <Link href="/contact">
+                {t('buttons.becomePartner')}
+                <ArrowRight className="ml-2 size-3.5" />
+              </Link>
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Toggle */}
@@ -132,7 +145,7 @@ const NavbarComponent = () => {
             <SheetTrigger asChild>
               <button
                 className="p-2"
-                aria-label="Open mobile menu"
+                aria-label={t('nav.openMobileMenu')}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-menu"
               >
@@ -169,6 +182,7 @@ const NavbarComponent = () => {
               </SheetHeader>
 
               <div className="grow flex flex-col justify-center gap-8">
+                <LanguageSelector />
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
@@ -187,13 +201,14 @@ const NavbarComponent = () => {
 
               {/* Mobile Footer */}
               <Button
+                asChild
                 className={cn(
                   'h-12 rounded-full px-5',
                   'text-[12px] font-medium',
                   'transition-all duration-200',
                 )}
               >
-                <Link href="/contact">Become a Partner</Link>
+                <Link href="/contact">{t('buttons.becomePartner')}</Link>
               </Button>
             </SheetContent>
           </Sheet>

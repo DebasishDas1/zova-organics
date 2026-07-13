@@ -18,8 +18,8 @@ export function ExportSection({ product }: ExportSectionProps) {
     {
       icon: Package,
       label: 'Minimum Order Quantity',
-      value: product.ordering?.moq
-        ? `${product.ordering.moq.toLocaleString()} ${product.ordering.moqUnit ?? ''}`
+      value: product.moq
+        ? `${product.moq.toLocaleString()} ${product.moqUnit ?? ''}`
         : '-',
     },
   ]

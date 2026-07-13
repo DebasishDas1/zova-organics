@@ -4,17 +4,15 @@ import type { Product } from '@/payload-types'
 type Props = { product: Product }
 
 export function ProductCustomisation({ product }: Props) {
-  const c = product.customisation
-  if (!c) return null
 
   const options: { label: string; enabled: boolean | null | undefined }[] = [
-    { label: 'Custom logo / branding',         enabled: c.customLogoAvailable },
-    { label: 'Custom sizing',                  enabled: c.customSizeAvailable },
-    { label: 'Private label (hang tag, inner label)', enabled: c.privateLabelAvailable },
-    { label: 'Custom / natural dye colour',    enabled: c.customDyeAvailable },
+    { label: 'Custom logo / branding',         enabled: product.customLogoAvailable },
+    { label: 'Custom sizing',                  enabled: product.customSizeAvailable },
+    { label: 'Private label (hang tag, inner label)', enabled: product.privateLabelAvailable },
+    { label: 'Custom / natural dye colour',    enabled: product.customDyeAvailable },
   ].filter((o) => o.enabled)
 
-  if (!options.length && !c.customisationNotes) return null
+  if (!options.length && !product.customisationNotes) return null
 
   return (
     <div className="rounded-2xl border border-border p-6">
@@ -30,9 +28,9 @@ export function ProductCustomisation({ product }: Props) {
             ))}
           </ul>
         )}
-        {c.customisationNotes && (
+        {product.customisationNotes && (
           <p className="text-sm text-muted-foreground leading-relaxed">
-            {c.customisationNotes}
+            {product.customisationNotes}
           </p>
         )}
       </div>

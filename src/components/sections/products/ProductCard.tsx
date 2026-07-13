@@ -10,7 +10,7 @@ type ProductCardProps = {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { slug, title, featuredImage, ordering } = product
+  const { slug, title, featuredImage, moq } = product
 
   const image = featuredImage && typeof featuredImage === 'object' ? featuredImage : null
 
@@ -33,9 +33,9 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="px-4 py-8 text-center md:py-10">
           <h3 className="text-2xl font-medium tracking-tight md:text-3xl">{title}</h3>
 
-          {ordering?.moq && (
+          {moq && (
             <p className="mt-6 text-base font-medium md:mt-8 md:text-lg">
-              MOQ from {ordering.moq.toLocaleString()} units
+              MOQ from {moq.toLocaleString()} units
             </p>
           )}
 

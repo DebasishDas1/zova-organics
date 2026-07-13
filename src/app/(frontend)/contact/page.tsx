@@ -68,8 +68,11 @@ export default async function ContactPage() {
         title="Let's build something meaningful together."
         description="Whether you're sourcing sustainable textiles, launching a private-label collection, or looking for a reliable manufacturing partner, we'd love to hear about your project."
       />
-      <ContactInfo />
-      <ContactForm />
+      <div className="container-zova">
+        <ContactInfo />
+        <ContactForm />
+      </div>
+
       <WhyContact />
       <FAQ
         eyebrow="FAQ"

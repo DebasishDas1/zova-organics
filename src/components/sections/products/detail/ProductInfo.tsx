@@ -33,24 +33,24 @@ const CATEGORY_LABELS: Record<string, string> = {
 }
 
 export function ProductInfo({ product, certs }: Props) {
-  const { ordering } = product
+  const { moq, leadTimeDays } = product
 
   const highlights = useMemo<Highlight[]>(() => {
     const items: Highlight[] = []
 
-    if (ordering?.moq) {
+    if (moq) {
       items.push({
         icon: Package,
         label: 'MOQ',
-        value: ordering.moq.toLocaleString(),
+        value: moq.toLocaleString(),
       })
     }
 
-    if (ordering?.leadTimeDays) {
+    if (leadTimeDays) {
       items.push({
         icon: Clock3,
         label: 'Lead Time',
-        value: `${ordering.leadTimeDays} Days`,
+        value: `${leadTimeDays} Days`,
       })
     }
 
@@ -61,7 +61,7 @@ export function ProductInfo({ product, certs }: Props) {
     })
 
     return items
-  }, [ordering])
+  }, [moq, leadTimeDays])
 
   const whatsappUrl = useMemo(() => {
     const productUrl = `${process.env.NEXT_PUBLIC_SERVER_URL}/products/${product.slug}`

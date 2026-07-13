@@ -109,7 +109,7 @@ export function Hero() {
           >
             <div className="relative overflow-hidden rounded-[3rem]">
               <Image
-                src="/hero-product.jpg"
+                src="/hero-image-2.png"
                 alt="Zova Organics products"
                 width={1400}
                 height={1400}

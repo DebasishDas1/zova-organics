@@ -1,0 +1,278 @@
+{
+  "language": {
+    "name": "Español",
+    "selectorLabel": "Seleccionar idioma",
+    "selectorAria": "Seleccione su idioma preferido"
+  },
+  "nav": {
+    "products": "Productos",
+    "blogs": "Blogs",
+    "certifications": "Certificaciones",
+    "aboutUs": "Sobre nosotros",
+    "contact": "Contacto"
+  },
+  "buttons": {
+    "becomePartner": "Hágase socio",
+    "exploreCollections": "Explorar colecciones",
+    "requestQuote": "Solicitar presupuesto",
+    "requestSampleKit": "Solicitar kit de muestras",
+    "requestQuoteShort": "Cotizar",
+    "enquireWhatsApp": "Consultar por WhatsApp",
+    "backToHome": "Volver al inicio",
+    "exploreProducts": "Explorar productos",
+    "tryAgain": "Intentar de nuevo",
+    "sendInquiry": "Enviar consulta",
+    "sendingInquiry": "Enviando consulta...",
+    "quoteContact": "Contáctenos"
+  },
+  "home": {
+    "hero": {
+      "headline": "Hecho en India. De confianza en todo el mundo.",
+      "description": "Zova Organics es un exportador comercial con sede en Calcuta, India, que ayuda a marcas internacionales a adquirir bolsas de yute, bolsas de juco, telas orgánicas y embalajes ecológicos de alta calidad mediante socios fabricantes auditados, un estricto control de calidad y una logística de exportación fiable.",
+      "ctaCollections": "Explorar colecciones",
+      "ctaQuote": "Solicitar presupuesto",
+      "featureSustainable": "Materiales sostenibles",
+      "featureCertified": "Calidad certificada",
+      "featureExport": "Exportación global",
+      "featureEthical": "Asociaciones éticas"
+    },
+    "collections": {
+      "sectionLabel": "Colecciones",
+      "title": "Diseñado para marcas globales y minoristas.",
+      "cards": {
+        "fabricsTitle": "Telas orgánicas y naturales (yute, algodón, lino)",
+        "fabricsDescription": "Telas de algodón orgánico con certificación GOTS, lino y yute para confección, textiles para el hogar y fabricación personalizada. Suministradas directamente desde fábricas certificadas de toda la India.",
+        "bagsTitle": "Bolsas de yute y bolsas ecológicas — Mayorista y marca blanca",
+        "bagsDescription": "Nuestra colección de bolsas de yute incluye bolsas de compras, bolsas de regalo, bolsas para vino, bolsas con cordón y bolsas publicitarias impresas a medida. Disponibles al por mayor, con marca blanca e impresión de logotipo personalizado. Cantidad mínima de pedido disponible para todos los productos. Exportado a EE. UU., Reino Unido, Alemania, Francia, Australia, EAU y más de 25 países.",
+        "lifestyleTitle": "Productos de estilo de vida sostenible para marcas minoristas",
+        "lifestyleDescription": "Productos de estilo de vida sostenible que incluyen decoración para el hogar de yute, accesorios de algodón orgánico y embalajes ecológicos. Diseñado para cadenas minoristas internacionales, marcas de cajas de suscripción y marcas ecológicas."
+      }
+    },
+    "whyZova": {
+      "sectionLabel": "Por qué Zova",
+      "title": "Por qué los compradores internacionales eligen Zova Organics para abastecerse de bolsas de yute",
+      "items": {
+        "ethicalProduction": {
+          "title": "Producción ética",
+          "description": "Fabricación socialmente responsable con proveedores indios auditados."
+        },
+        "premiumMaterials": {
+          "title": "Yute de calidad superior y materiales orgánicos",
+          "description": "100% yute natural, biodegradable y algodón orgánico — calidad de exportación."
+        },
+        "reliablePartners": {
+          "title": "SOCIOS DE FABRICACIÓN FIABLES",
+          "description": "Relaciones a largo plazo con las mejores fábricas de yute de Calcuta."
+        },
+        "globalExpertise": {
+          "title": "Experiencia en exportación global",
+          "description": "Experiencia en envíos a EE. UU., Reino Unido, Unión Europea, Oriente Medio y Asia-Pacífico."
+        },
+        "qualityAssurance": {
+          "title": "Garantía de calidad",
+          "description": "Inspección previa al envío, aprobación de muestras y control de calidad en cada etapa."
+        },
+        "longTerm": {
+          "title": "Asociaciones a largo plazo",
+          "description": "Crecemos con su marca: desde la primera muestra hasta pedidos recurrentes de contenedores."
+        }
+      }
+    },
+    "globalReach": {
+      "sectionLabel": "Alcance global",
+      "title": "Exportación de bolsas de yute y productos sostenibles a más de 30 países",
+      "subtitle": "Marcas, distribuidores y cadenas minoristas de América del Norte, Europa, Oriente Medio y Asia-Pacífico confían en nosotros. De Calcuta al mundo."
+    },
+    "cta": {
+      "title": "¿Listo para comprar bolsas de yute y productos ecológicos de la India?",
+      "description": "Asóciese con Zova Organics para la venta al por mayor de bolsas de yute, embalajes ecológicos, personalización de marca y exportación fiable desde Calcuta, India.",
+      "button": "Obtener un presupuesto gratuito"
+    },
+    "manifesto": {
+      "label": "Nuestra filosofía",
+      "headline": "El abastecimiento debe ser transparente, sostenible y ejecutado a la perfección",
+      "line1": "Creemos que los productos excepcionales comienzan mucho antes de llegar al escaparate. Comienzan con un abastecimiento responsable, una artesanía cualificada y asociaciones basadas en la confianza.",
+      "line2": "Zova Organics conecta marcas internacionales con bolsas de yute de primera calidad, telas orgánicas y productos de estilo de vida ecológico arraigados en la tradición papelera y textil de Calcuta. Trabajamos con las mejores fábricas de la India para ofrecer productos de calidad de exportación con estándares modernos."
+    }
+  },
+  "footer": {
+    "topLabel": "Exportación Orgánica Global",
+    "headline": "Creando cadenas de suministro orgánicas de confianza para marcas globales.",
+    "description": "Asóciese con Zova Organics para obtener productos de origen responsable, operaciones de exportación fiables y un crecimiento a largo plazo.",
+    "requestQuote": "Solicitar presupuesto",
+    "socialLabel": "Redes Sociales",
+    "companyLabel": "Empresa",
+    "contactLabel": "Contacto",
+    "privacyPolicy": "Política de Privacidad",
+    "terms": "Términos y Condiciones",
+    "faq": "Preguntas Frecuentes",
+    "copyright": "© {{year}} Zova Organics. Todos los derechos reservados.",
+    "brandDescription": "Exportación de bolsas de yute sostenibles y orgánicas y embalajes ecológicos desde la India a compradores internacionales, distribuidores y marcas blancas."
+  },
+  "contact": {
+    "page": {
+      "eyebrow": "Contacto",
+      "title": "Construyamos algo significativo juntos.",
+      "description": "Tanto si busca textiles sostenibles, como si va a lanzar una colección de marca blanca o busca un socio de fabricación fiable, nos encantaría conocer su proyecto.",
+      "faqSection": {
+        "eyebrow": "FAQ",
+        "title": "Preguntas frecuentes.",
+        "description": "A continuación encontrará las respuestas a algunas de nuestras consultas más habituales. Si tiene más dudas, no dude en contactarnos directamente."
+      }
+    },
+    "form": {
+      "labelInquiry": "Formulario de consulta",
+      "headline": "Cuéntenos sus necesidades de abastecimiento.",
+      "description": "Ya sea que busque telas orgánicas, bolsas personalizadas, fabricación para marca blanca o alianzas de abastecimiento a largo plazo, nos encantará conocer su proyecto.",
+      "responseTimeTitle": "Tiempo de respuesta",
+      "responseTimeValue": "En un plazo de 24 horas laborables",
+      "moqSupportTitle": "Soporte de pedido mínimo (MOQ)",
+      "moqSupportValue": "Soluciones flexibles para marcas en crecimiento e importadores",
+      "shippingTitle": "Envío global",
+      "shippingValue": "Transporte aéreo y marítimo disponible a nivel mundial",
+      "nameLabel": "Su nombre",
+      "companyLabel": "Empresa",
+      "emailLabel": "Correo electrónico corporativo",
+      "phoneLabel": "Número de teléfono",
+      "categoryLabel": "Categoría de producto",
+      "projectDetailsLabel": "Detalles del proyecto",
+      "namePlaceholder": "Juan Pérez",
+      "companyPlaceholder": "Nombre de la empresa",
+      "emailPlaceholder": "juan@empresa.com",
+      "phonePlaceholder": "+34 600 000 000",
+      "messagePlaceholder": "Cuéntenos sobre sus requisitos de productos, necesidades de personalización, cantidades estimadas, certificaciones requeridas y mercados de destino...",
+      "categoryOptions": {
+        "organicFabrics": "Telas orgánicas",
+        "bags": "Bolsas y fundas",
+        "privateLabel": "Marca blanca",
+        "customProduct": "Producto personalizado",
+        "other": "Otro"
+      },
+      "success": "Gracias por ponerse en contacto. Nuestro equipo revisará su consulta y le responderá en un plazo de 24 horas laborables.",
+      "error": "Ocurrió un error. Por favor, inténtelo de nuevo.",
+      "validation": {
+        "nameMin": "El nombre debe tener al menos 2 caracteres",
+        "companyMin": "El nombre de la empresa es obligatorio",
+        "email": "Introduzca una dirección de correo electrónico válida",
+        "phoneMin": "El número de teléfono es demasiado corto",
+        "messageMin": "Por favor, proporcione más detalles"
+      }
+    },
+    "info": {
+      "label": "Información de contacto",
+      "headline": "Múltiples formas de contactarnos.",
+      "items": {
+        "general": {
+          "title": "Consultas generales",
+          "value": "info@zovaorganics.com",
+          "description": "Preguntas sobre productos, abastecimiento o alianzas."
+        },
+        "export": {
+          "title": "Exportación y Venta al por Mayor",
+          "value": "+91 9073896612",
+          "description": "Consulte cantidades mínimas, personalizaciones, logística y precios."
+        },
+        "basedIn": {
+          "title": "Sede en India",
+          "value": "Operaciones de exportación global",
+          "description": "Conectamos compradores internacionales con fabricantes indios de confianza."
+        }
+      }
+    },
+    "whyContact": {
+      "label": "Cómo ayudamos",
+      "title": "Más que un proveedor. Su socio de compras.",
+      "items": {
+        "privateLabel": {
+          "title": "Fabricación de marca blanca",
+          "description": "Lance productos con su propia marca colaborando con fabricantes de confianza."
+        },
+        "customProduct": {
+          "title": "Desarrollo de productos a medida",
+          "description": "Desarrolle productos adaptados a las necesidades exactas de su negocio."
+        },
+        "sustainableSourcing": {
+          "title": "Abastecimiento sostenible",
+          "description": "Acceda a textiles y productos de estilo de vida éticos procedentes de la India."
+        },
+        "globalSupport": {
+          "title": "Soporte de exportación global",
+          "description": "Desde la documentación hasta la logística, le ayudamos a agilizar el comercio internacional."
+        }
+      }
+    }
+  },
+  "faq": {
+    "page": {
+      "title": "Preguntas Frecuentes | Zova Organics",
+      "description": "¿Tiene preguntas sobre la compra de bolsas de yute de la India? Respondemos a todas sus dudas a continuación. Si no encuentra lo que busca, escríbanos directamente por WhatsApp."
+    },
+    "sections": {
+      "0": {
+        "title": "Sobre Zova Organics",
+        "items": {
+          "0": {
+            "question": "¿Qué es Zova Organics?",
+            "answer": "Zova Organics es un exportador comercial de bolsas de yute de primera calidad con sede en Calcuta, India."
+          }
+        }
+      }
+    }
+  },
+  "products": {
+    "page": {
+      "eyebrow": "Productos",
+      "title": "Nuestra colección sostenible.",
+      "description": "Algodón orgánico certificado GOTS, bolsas de yute y productos ecológicos. Venta al por mayor desde 100 unidades."
+    },
+    "noProducts": {
+      "headline": "No se encontraron productos",
+      "description": "No se encontraron productos que coincidan con sus filtros. Ajuste sus criterios de búsqueda o contáctenos para abastecimiento personalizado."
+    }
+  },
+  "blogs": {
+    "page": {
+      "eyebrow": "Conocimientos e Ideas",
+      "title": "Perspectivas sobre abastecimiento sostenible.",
+      "description": "Guías de exportación, tendencias en textiles orgánicos, información de certificaciones y análisis de la cadena de suministro para compradores internacionales."
+    },
+    "minRead": "{{count}} min de lectura"
+  },
+  "product": {
+    "category": {
+      "organic-fabrics": "Telas orgánicas",
+      "bags": "Bolsas",
+      "pouches": "Fundas y saquitos",
+      "home-textiles": "Textiles para el hogar",
+      "yoga-wellness": "Yoga y Bienestar",
+      "custom-oem": "Fabricación OEM a medida"
+    },
+    "highlights": {
+      "moq": "Cantidad mínima (MOQ)",
+      "leadTime": "Tiempo de entrega",
+      "shipping": "Envío",
+      "worldwide": "A todo el mundo"
+    },
+    "sustainablySourcedTitle": "Origen Sostenible",
+    "sustainablySourcedDescription": "Fabricado en India con materiales orgánicos certificados y prácticas de producción éticas. Ideal para marcas que buscan cadenas de suministro sostenibles y colaboraciones de marca blanca.",
+    "requestSample": "Solicitar kit de muestras",
+    "requestQuote": "Solicitar presupuesto",
+    "sampleCtaHeadline": "Evalúe {{productTitle}} antes de realizar un pedido de producción.",
+    "sampleCtaDescription": "Obtenga muestras de productos, especificaciones técnicas, certificaciones, opciones de personalización y documentación de exportación para aprobar con seguridad su decisión de compra.",
+    "productSamples": "Muestras de producto",
+    "productSamplesDescription": "Evalúe la calidad del material, el cosido, la durabilidad y los acabados.",
+    "technicalDocumentation": "Documentación técnica",
+    "technicalDocumentationDescription": "Detalles sobre el gramaje del tejido (GSM), dimensiones, certificaciones, opciones de personalización y especificaciones de exportación.",
+    "shippingComplianceTitle": "Envío y Cumplimiento Normativo",
+    "hsCode": "Código Arancelario (HS)",
+    "reachEu": "Normativa REACH (UE)",
+    "compliant": "Conforme",
+    "documentsProvided": "Documentos proporcionados"
+  },
+  "errors": {
+    "somethingWentWrong": "Ocurrió un problema",
+    "unexpectedError": "Ocurrió un error inesperado. Por favor, inténtelo de nuevo.",
+    "openMobileMenu": "Abrir menú móvil",
+    "homeAriaLabel": "Página principal de Zova Organics"
+  }
+}

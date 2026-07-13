@@ -23,6 +23,7 @@ const getSitemapEntries = unstable_cache(
 
     const exportUrls = Object.keys(exportMarkets).map((country) => ({
       url: `${BASE_URL}/export/${country}`,
+      lastModified: new Date(),
       priority: 0.9,
       changeFrequency: 'weekly' as const,
     }))
@@ -66,12 +67,8 @@ const getSitemapEntries = unstable_cache(
       },
       {
         url: `${BASE_URL}/export`,
-        priority: 1,
-        changeFrequency: 'weekly',
-      },
-      {
-        url: `${BASE_URL}/about-zova-organics`,
-        priority: 1,
+        lastModified: new Date(),
+        priority: 0.8,
         changeFrequency: 'weekly',
       },
     ]

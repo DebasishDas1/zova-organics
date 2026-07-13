@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react'
+import { useI18n } from '@/i18n/I18nProvider'
 
 const socialLinks = [
   {
@@ -16,38 +19,37 @@ const socialLinks = [
   },
 ]
 
-const companyLinks = [
-  { name: 'Products', href: '/products' },
-  { name: 'Blogs', href: '/blogs' },
-  { name: 'Certifications', href: '/certifications' },
-  { name: 'About Us', href: '/about-us' },
-  { name: 'Contact', href: '/contact' },
-]
-
 export function Footer() {
+  const { t } = useI18n()
+
+  const companyLinks = [
+    { name: t('nav.products'), href: '/products' },
+    { name: t('nav.blogs'), href: '/blogs' },
+    { name: t('nav.certifications'), href: '/certifications' },
+    { name: t('nav.aboutUs'), href: '/about-us' },
+    { name: t('nav.contact'), href: '/contact' },
+  ]
+
   return (
     <footer className="bg-background">
       <div className="container-zova">
         {/* Top CTA */}
         <div className="py-20 text-center">
           <span className="inline-flex rounded-full border border-border bg-card px-4 py-2 text-sm text-muted-foreground">
-            Global Organic Exports
+            {t('footer.topLabel')}
           </span>
 
           <h2 className="mx-auto mt-6 max-w-4xl text-4xl font-semibold tracking-tight md:text-5xl">
-            Building trusted organic supply chains for global brands.
+            {t('footer.headline')}
           </h2>
 
-          <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">
-            Partner with Zova Organics for responsibly sourced products, reliable export operations,
-            and long-term growth.
-          </p>
+          <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">{t('footer.description')}</p>
 
           <Link
             href="/contact"
             className="group mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-white transition-all hover:opacity-90"
           >
-            Request a Quote
+            {t('buttons.requestQuote')}
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
@@ -62,8 +64,7 @@ export function Footer() {
             <h3 className="text-xl font-semibold">Zova Organics</h3>
 
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Exporting sustainable and organic Jute Bags & Eco-friendly packaging from India to
-              international buyers, distributors, and private-label brands.
+              {t('footer.brandDescription')}
             </p>
           </div>
 
@@ -90,7 +91,7 @@ export function Footer() {
           {/* Company */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wide text-foreground">
-              Company
+              {t('footer.companyLabel')}
             </h4>
 
             <ul className="space-y-3">
@@ -110,7 +111,7 @@ export function Footer() {
           {/* Contact */}
           <div>
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wide text-foreground">
-              Contact
+              {t('footer.contactLabel')}
             </h4>
 
             <ul className="space-y-4 text-sm text-muted-foreground">
@@ -134,19 +135,19 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col gap-4 border-t border-border py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} Zova Organics. All rights reserved.</p>
+          <p>{t('footer.copyright', { year: new Date().getFullYear() })}</p>
 
           <div className="flex items-center gap-6">
             <Link href="/privacy-policy" className="transition-colors hover:text-foreground">
-              Privacy Policy
+              {t('footer.privacyPolicy')}
             </Link>
 
             <Link href="/tac" className="transition-colors hover:text-foreground">
-              Terms and Conditions
+              {t('footer.terms')}
             </Link>
 
             <Link href="/faq" className="transition-colors hover:text-foreground">
-              FAQ
+              {t('footer.faq')}
             </Link>
           </div>
         </div>

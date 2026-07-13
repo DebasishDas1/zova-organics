@@ -1,17 +1,34 @@
 import { z } from 'zod'
 
-export const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters').max(100),
+export type ContactValidationMessages = {
+  nameMin: string
+  companyMin: string
+  email: string
+  phoneMin: string
+  messageMin: string
+}
 
-  company: z.string().min(2, 'Company name is required').max(150),
+export const createContactSchema = (messages: ContactValidationMessages) =>
+  z.object({
+    name: z.string().min(2, messages.nameMin).max(100),
 
-  email: z.email('Please enter a valid email address'),
+    company: z.string().min(2, messages.companyMin).max(150),
 
-  phone: z.string().min(8, 'Phone number is too short').max(20),
+    email: z.string().email(messages.email),
 
-  category: z.enum(['organic-fabrics', 'bags', 'private-label', 'custom-product', 'other']),
+    phone: z.string().min(8, messages.phoneMin).max(20),
 
-  message: z.string().min(20, 'Please provide more details').max(2000),
+    category: z.enum(['organic-fabrics', 'bags', 'private-label', 'custom-product', 'other']),
+
+    message: z.string().min(20, messages.messageMin).max(2000),
+  })
+
+export const contactSchema = createContactSchema({
+  nameMin: 'Name must be at least 2 characters',
+  companyMin: 'Company name is required',
+  email: 'Please enter a valid email address',
+  phoneMin: 'Phone number is too short',
+  messageMin: 'Please provide more details',
 })
 
-export type ContactFormData = z.infer<typeof contactSchema>
+export type ContactFormData = z.infer<ReturnType<typeof createContactSchema>>

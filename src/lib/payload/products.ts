@@ -7,7 +7,6 @@ import { getPayloadClient } from './client'
 /** Only products visible on the public storefront. */
 export const activeProductWhere: Where = {
   stockStatus: { equals: 'active' },
-  _status: { equals: 'published' },
 }
 
 const listSelect = {
@@ -18,7 +17,9 @@ const listSelect = {
   stockStatus: true,
   featured: true,
   featuredImage: true,
-  ordering: true,
+  moq: true,
+  moqUnit: true,
+  sampleAvailable: true,
   certifications: true,
 } as const
 

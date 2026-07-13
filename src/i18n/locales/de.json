@@ -1,0 +1,278 @@
+{
+  "language": {
+    "name": "Deutsch",
+    "selectorLabel": "Sprache wählen",
+    "selectorAria": "Wählen Sie Ihre bevorzugte Sprache"
+  },
+  "nav": {
+    "products": "Produkte",
+    "blogs": "Blogs",
+    "certifications": "Zertifizierungen",
+    "aboutUs": "Über uns",
+    "contact": "Kontakt"
+  },
+  "buttons": {
+    "becomePartner": "Partner werden",
+    "exploreCollections": "Kollektionen entdecken",
+    "requestQuote": "Angebot anfordern",
+    "requestSampleKit": "Musterkit anfordern",
+    "requestQuoteShort": "Angebot einholen",
+    "enquireWhatsApp": "Per WhatsApp anfragen",
+    "backToHome": "Zurück zur Startseite",
+    "exploreProducts": "Produkte durchsuchen",
+    "tryAgain": "Erneut versuchen",
+    "sendInquiry": "Anfrage senden",
+    "sendingInquiry": "Anfrage wird gesendet...",
+    "quoteContact": "Kontaktieren Sie uns"
+  },
+  "home": {
+    "hero": {
+      "headline": "Hergestellt in Indien. Weltweit geschätzt.",
+      "description": "Zova Organics ist ein führender Händler-Exporteur mit Sitz in Kalkutta, Indien. Wir helfen globalen Marken beim Bezug von hochwertigen Jutetaschen, Jucotaschen, Bio-Stoffen und umweltfreundlichen Verpackungen durch geprüfte Herstellungspartner, strenge Qualitätskontrollen und zuverlässige Exportlogistik.",
+      "ctaCollections": "Kollektionen entdecken",
+      "ctaQuote": "Angebot anfordern",
+      "featureSustainable": "Nachhaltige Materialien",
+      "featureCertified": "Zertifizierte Qualität",
+      "featureExport": "Globaler Export",
+      "featureEthical": "Ethische Partnerschaften"
+    },
+    "collections": {
+      "sectionLabel": "Kollektionen",
+      "title": "Entwickelt für globale Marken und Einzelhändler.",
+      "cards": {
+        "fabricsTitle": "Bio- & Naturstoffe (Jute, Baumwolle, Leinen)",
+        "fabricsDescription": "GOTS-zertifizierte Bio-Baumwolle, Leinen- und Jutestoffe für Bekleidung, Heimtextilien und Sonderanfertigungen. Direkt von zertifizierten Webereien aus ganz Indien bezogen.",
+        "bagsTitle": "Jutetaschen & Öko-Tragetaschen — Großhandel & Eigenmarke",
+        "bagsDescription": "Unsere Jutetaschen-Kollektion umfasst Jute-Tragetaschen, Jute-Einkaufstaschen, Jute-Geschenktaschen, Jute-Weintaschen, Jute-Zugbandbeutel und individuell bedruckte Werbe-Jutetaschen. Alle in großen Mengen mit Eigenmarke und individuellem Logo-Druck erhältlich. Mindestbestellmengen für alle Produkttypen verfügbar. Exportiert in die USA, nach Großbritannien, Deutschland, Frankreich, Australien, in die VAE und über 25 weitere Länder.",
+        "lifestyleTitle": "Nachhaltige Lifestyle-Produkte für Einzelhandelsmarken",
+        "lifestyleDescription": "Nachhaltige Lifestyle-Produkte einschließlich Jute-Wohndekor, Bio-Baumwoll-Accessoires und umweltfreundliche Einzelhandelsverpackungen. Entwickelt für globale Einzelhandelsketten, Abo-Box-Marken und umweltbewusste Lifestyleseitige Unternehmen."
+      }
+    },
+    "whyZova": {
+      "sectionLabel": "Warum Zova",
+      "title": "Warum weltweite Käufer Zova Organics für den Bezug von Jutetaschen wählen",
+      "items": {
+        "ethicalProduction": {
+          "title": "Ethische Produktion",
+          "description": "Sozial verantwortliche Herstellung von geprüften indischen Lieferanten."
+        },
+        "premiumMaterials": {
+          "title": "Erstklassige Jute- & Bio-Materialien",
+          "description": "100% natürliche, biologisch abbaubare Jute und Bio-Baumwolle — Exportqualität."
+        },
+        "reliablePartners": {
+          "title": "Zuverlässige Herstellungspartner",
+          "description": "Langjährige Beziehungen zu den besten Jutefabriken in Kalkutta."
+        },
+        "globalExpertise": {
+          "title": "Globale Exportkompetenz",
+          "description": "Erfahrung im Versand in die USA, nach Großbritannien, in die EU, den Nahen Osten und Asien-Pazifik."
+        },
+        "qualityAssurance": {
+          "title": "Qualitätssicherung",
+          "description": "Inspektion vor dem Versand, Mustergenehmigung und Qualitätskontrolle auf jeder Stufe."
+        },
+        "longTerm": {
+          "title": "Langfristige Partnerschaften",
+          "description": "Wir wachsen mit Ihrer Marke — vom ersten Muster bis zu wiederholten Containerbestellungen."
+        }
+      }
+    },
+    "globalReach": {
+      "sectionLabel": "Globale Reichweite",
+      "title": "Export von Jutetaschen & nachhaltigen Produkten in über 30 Länder",
+      "subtitle": "Vertraut von Marken, Händlern und Einzelhandelsketten in Nordamerika, Europa, dem Nahen Osten und Asien-Pazifik. Von Kalkutta in die ganze Welt."
+    },
+    "cta": {
+      "title": "Bereit, Jutetaschen & Öko-Produkte aus Indien zu beziehen?",
+      "description": "Werden Sie Partner von Zova Organics für Großhandels-Jutetaschen, umweltfreundliche Verpackungen, individuelles Branding und zuverlässigen Export aus Kalkutta, Indien.",
+      "button": "Kostenloses Angebot einholen"
+    },
+    "manifesto": {
+      "label": "Unsere Philosophie",
+      "headline": "Beschaffung sollte transparent, nachhaltig und perfekt ausgeführt sein",
+      "line1": "Wir glauben, dass außergewöhnliche Produkte lange bevor sie das Regal erreichen beginnen. Sie beginnen mit verantwortungsvoller Beschaffung, fachkundiger Handwerkskunst und auf Vertrauen aufgebauten Partnerschaften.",
+      "line2": "Zova Organics verbindet globale Marken mit erstklassigen Jutetaschen, Bio-Stoffen und Öko-Lifestyle-Produkten, die in der Tradition der Juteherstellung in Kalkutta verwurzelt sind. Wir arbeiten mit den feinsten Webereien Indiens zusammen, um Exportqualität mit modernen Standards für Qualität, Nachhaltigkeit und Zuverlässigkeit zu liefern."
+    }
+  },
+  "footer": {
+    "topLabel": "Globaler Bio-Export",
+    "headline": "Aufbau vertrauenswürdiger biologischer Lieferketten für globale Marken.",
+    "description": "Werden Sie Partner von Zova Organics für verantwortungsvoll bezogene Produkte, zuverlässige Exportabwicklungen und langfristiges Wachstum.",
+    "requestQuote": "Angebot anfordern",
+    "socialLabel": "Soziale Medien",
+    "companyLabel": "Unternehmen",
+    "contactLabel": "Kontakt",
+    "privacyPolicy": "Datenschutz-Bestimmungen",
+    "terms": "Allgemeine Geschäftsbedingungen",
+    "faq": "Häufig gestellte Fragen (FAQ)",
+    "copyright": "© {{year}} Zova Organics. Alle Rechte vorbehalten.",
+    "brandDescription": "Export von nachhaltigen, biologischen Jutetaschen und umweltfreundlichen Verpackungen aus Indien an internationale Käufer, Händler und Eigenmarken."
+  },
+  "contact": {
+    "page": {
+      "eyebrow": "Kontakt",
+      "title": "Lassen Sie uns gemeinsam etwas Bedeutungsvolles aufbauen.",
+      "description": "Egal, ob Sie nachhaltige Textilien beziehen, eine Eigenmarken-Kollektion aufbauen oder einen zuverlässigen Herstellungspartner suchen — wir freuen uns darauf, von Ihrem Projekt zu hören.",
+      "faqSection": {
+        "eyebrow": "FAQ",
+        "title": "Häufig gestellte Fragen.",
+        "description": "Hier finden Sie Antworten auf einige unserer häufigsten Anfragen. Wenn Sie weitere Fragen haben, können Sie sich gerne direkt an uns wenden."
+      }
+    },
+    "form": {
+      "labelInquiry": "Anfrageformular",
+      "headline": "Teilen Sie uns Ihre Beschaffungsanforderungen mit.",
+      "description": "Egal, ob Sie Bio-Stoffe, individuelle Taschen, Eigenmarkenherstellung oder langfristige Beschaffungspartnerschaften suchen — wir freuen uns auf Ihr Projekt.",
+      "responseTimeTitle": "Antwortzeit",
+      "responseTimeValue": "Innerhalb von 24 Werktagstunden",
+      "moqSupportTitle": "Unterstützung bei Mindestbestellmengen",
+      "moqSupportValue": "Flexible Lösungen für wachsende Marken und Importeure",
+      "shippingTitle": "Weltweiter Versand",
+      "shippingValue": "Luft- und Seefracht weltweit verfügbar",
+      "nameLabel": "Ihr Name",
+      "companyLabel": "Firma",
+      "emailLabel": "Geschäftliche E-Mail",
+      "phoneLabel": "Telefonnummer",
+      "categoryLabel": "Produktkategorie",
+      "projectDetailsLabel": "Projektdetails",
+      "namePlaceholder": "Max Mustermann",
+      "companyPlaceholder": "Firmenname",
+      "emailPlaceholder": "max@firma.de",
+      "phonePlaceholder": "+49 123 456 789",
+      "messagePlaceholder": "Teilen Sie uns Ihre Produktanforderungen, Personalisierungswünsche, geschätzten Mengen, benötigten Zertifizierungen und Zielmärkte mit...",
+      "categoryOptions": {
+        "organicFabrics": "Bio-Stoffe",
+        "bags": "Taschen & Beutel",
+        "privateLabel": "Eigenmarke (Private Label)",
+        "customProduct": "Sonderanfertigung",
+        "other": "Sonstiges"
+      },
+      "success": "Vielen Dank für Ihre Nachricht. Unser Team wird Ihre Anfrage prüfen und sich innerhalb von 24 Werktagstunden bei Ihnen melden.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "validation": {
+        "nameMin": "Der Name muss mindestens 2 Zeichen lang sein",
+        "companyMin": "Firmenname ist erforderlich",
+        "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "phoneMin": "Telefonnummer ist zu kurz",
+        "messageMin": "Bitte geben Sie weitere Details an"
+      }
+    },
+    "info": {
+      "label": "Kontaktinformationen",
+      "headline": "Verschiedene Wege, uns zu erreichen.",
+      "items": {
+        "general": {
+          "title": "Allgemeine Anfragen",
+          "value": "info@zovaorganics.com",
+          "description": "Fragen zu Produkten, Beschaffung oder Partnerschaften."
+        },
+        "export": {
+          "title": "Export & Großhandel",
+          "value": "+91 9073896612",
+          "description": "Besprechen Sie Mindestbestellmengen, Anpassungen, Logistik und Preise."
+        },
+        "basedIn": {
+          "title": "Sitz in Indien",
+          "value": "Globale Exportabwicklung",
+          "description": "Verbindung internationaler Käufer mit vertrauenswürdigen indischen Herstellern."
+        }
+      }
+    },
+    "whyContact": {
+      "label": "Wie wir helfen",
+      "title": "Mehr als ein Lieferant. Ihr Partner bei der Beschaffung.",
+      "items": {
+        "privateLabel": {
+          "title": "Eigenmarkenherstellung",
+          "description": "Bringen Sie Produkte unter Ihrer eigenen Marke mit vertrauenswürdigen Herstellungspartnern auf den Markt."
+        },
+        "customProduct": {
+          "title": "Individuelle Produktentwicklung",
+          "description": "Entwickeln Sie maßgeschneiderte Produkte, die exakt auf Ihre Geschäftsanforderungen zugeschnitten sind."
+        },
+        "sustainableSourcing": {
+          "title": "Nachhaltige Beschaffung",
+          "description": "Zugang zu ethisch bezogenen Textilien und Lifestyle-Produkten aus Indien."
+        },
+        "globalSupport": {
+          "title": "Unterstützung beim globalen Export",
+          "description": "Von der Dokumentation bis zur Logistik helfen wir bei der Vereinfachung des internationalen Handels."
+        }
+      }
+    }
+  },
+  "faq": {
+    "page": {
+      "title": "Häufig gestellte Fragen | Zova Organics",
+      "description": "Haben Sie Fragen zum Bezug von Jutetaschen aus Indien? Wir haben unten alles beantwortet. Wenn Sie nicht finden, wonach Sie suchen, chatten Sie direkt per WhatsApp mit uns."
+    },
+    "sections": {
+      "0": {
+        "title": "Über Zova Organics",
+        "items": {
+          "0": {
+            "question": "Was ist Zova Organics?",
+            "answer": "Zova Organics ist ein Händler-Exporteur von hochwertigen Jutetaschen mit Sitz in Kalkutta, Indien."
+          }
+        }
+      }
+    }
+  },
+  "products": {
+    "page": {
+      "eyebrow": "Produkte",
+      "title": "Unsere nachhaltige Kollektion.",
+      "description": "GOTS-zertifizierte Bio-Baumwolle, Jutetaschen und umweltfreundliche Produkte. Großhandel ab 100 Einheiten."
+    },
+    "noProducts": {
+      "headline": "Keine Produkte gefunden",
+      "description": "Wir konnten keine Produkte finden, die Ihren Filtern entsprechen. Passen Sie Ihre Suchkriterien an oder kontaktieren Sie uns für eine individuelle Beschaffung."
+    }
+  },
+  "blogs": {
+    "page": {
+      "eyebrow": "Wissen & Einblicke",
+      "title": "Perspektiven für eine nachhaltige Beschaffung.",
+      "description": "Exportleitfäden, Bio-Textiltrends, Zertifizierungswissen und Einblicke in die Lieferkette für globale Käufer."
+    },
+    "minRead": "{{count}} Min. Lesezeit"
+  },
+  "product": {
+    "category": {
+      "organic-fabrics": "Bio-Stoffe",
+      "bags": "Taschen",
+      "pouches": "Beutel",
+      "home-textiles": "Heimtextilien",
+      "yoga-wellness": "Yoga & Wellness",
+      "custom-oem": "Individuelle OEM-Fertigung"
+    },
+    "highlights": {
+      "moq": "Mindestbestellmenge",
+      "leadTime": "Lieferzeit",
+      "shipping": "Versand",
+      "worldwide": "Weltweit"
+    },
+    "sustainablySourcedTitle": "Nachhaltig bezogen",
+    "sustainablySourcedDescription": "Hergestellt in Indien unter Verwendung zertifizierter organischer Materialien und ethischer Produktionspraktiken. Perfekt für Marken, die nachhaltige Lieferketten und Eigenmarken-Partnerschaften suchen.",
+    "requestSample": "Musterkit anfordern",
+    "requestQuote": "Angebot anfordern",
+    "sampleCtaHeadline": "Bewerten Sie {{productTitle}}, bevor Sie einen Produktionsauftrag erteilen.",
+    "sampleCtaDescription": "Erhalten Sie Produktmuster, technische Spezifikationen, Zertifizierungen, Anpassungsoptionen und Exportdokumente, um Ihre Beschaffungsentscheidung vertrauensvoll zu bestätigen.",
+    "productSamples": "Produktmuster",
+    "productSamplesDescription": "Bewerten Sie Materialqualität, Nähte, Haltbarkeit und Verarbeitung.",
+    "technicalDocumentation": "Technische Dokumentation",
+    "technicalDocumentationDescription": "Details zu Stoffgewicht (GSM), Abmessungen, Zertifizierungen, Anpassungsmöglichkeiten und Exportspezifikationen.",
+    "shippingComplianceTitle": "Versand & Konformität",
+    "hsCode": "HS-Code",
+    "reachEu": "REACH (EU)",
+    "compliant": "Konform",
+    "documentsProvided": "Bereitgestellte Dokumente"
+  },
+  "errors": {
+    "somethingWentWrong": "Etwas ist schiefgelaufen",
+    "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "openMobileMenu": "Mobiles Menü öffnen",
+    "homeAriaLabel": "Zova Organics Startseite"
+  }
+}

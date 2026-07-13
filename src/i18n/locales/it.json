@@ -1,0 +1,415 @@
+{
+  "language": {
+    "name": "Italiano",
+    "selectorLabel": "Seleziona la lingua",
+    "selectorAria": "Scegli la tua lingua preferita"
+  },
+  "nav": {
+    "products": "Prodotti",
+    "blogs": "Blog",
+    "certifications": "Certificazioni",
+    "aboutUs": "Chi Siamo",
+    "contact": "Contatti"
+  },
+  "buttons": {
+    "becomePartner": "Diventa Partner",
+    "exploreCollections": "Esplora le nostre Collezioni",
+    "requestQuote": "Richiedi un Preventivo",
+    "requestSampleKit": "Richiedi un Kit di Campioni",
+    "requestQuoteShort": "Richiedi Preventivo",
+    "enquireWhatsApp": "Richiedi su WhatsApp",
+    "backToHome": "Torna alla Home",
+    "exploreProducts": "Esplora Prodotti",
+    "tryAgain": "Riprova",
+    "sendInquiry": "Invia Richiesta",
+    "sendingInquiry": "Invio Richiesta in corso...",
+    "quoteContact": "Contattaci"
+  },
+  "home": {
+    "hero": {
+      "headline": "Realizzato in India. Scelto in tutto il mondo.",
+      "description": "Zova Organics è un esportatore di primo piano con sede a Calcutta, in India, che aiuta i marchi globali a reperire borse in iuta, borse in juco, tessuti biologici e imballaggi ecologici di alta qualità attraverso partner di produzione controllati, un rigoroso controllo di qualità e una logistica di esportazione affidabile.",
+      "ctaCollections": "Esplora le nostre Collezioni",
+      "ctaQuote": "Richiedi un Preventivo",
+      "featureSustainable": "Materiali Sostenibili",
+      "featureCertified": "Qualità Certificata",
+      "featureExport": "Esportazione Globale",
+      "featureEthical": "Partnership Etiche"
+    },
+    "collections": {
+      "sectionLabel": "Collezioni",
+      "title": "Realizzato per marchi e rivenditori globali.",
+      "cards": {
+        "fabricsTitle": "Tessuti Biologici e Naturali (Iuta, Cotone, Lino)",
+        "fabricsDescription": "La nostra collezione di borse in iuta include tote bag in iuta, borse per la spesa in iuta, borse regalo in iuta, portabottiglie in iuta, borse con coulisse in iuta e borse promozionali in iuta stampate su misura. Tutte disponibili all'ingrosso, con etichetta privata e stampa del logo personalizzata. Esportiamo in USA, Regno Unito, Germania, Francia, Australia, Emirati Arabi Uniti e oltre 25 paesi.",
+        "bagsTitle": "Borse in Iuta e Tote Bag Ecologiche — Ingrosso ed Etichetta Privata",
+        "bagsDescription": "La nostra collezione di borse in iuta include tote bag in iuta, borse per la spesa, borse regalo, portabottiglie, borse con coulisse e borse promozionali stampate su misura. Tutte disponibili all'ingrosso. MOQ disponibile per tutti i tipi di prodotto. Esportiamo in USA, Regno Unito, Germania, Francia, Australia, Emirati Arabi Uniti e oltre 25 paesi.",
+        "lifestyleTitle": "Prodotti Lifestyle Sostenibili per Marchi di Vendita al Dettaglio",
+        "lifestyleDescription": "Prodotti lifestyle sostenibili, tra cui decorazioni per la casa in iuta, accessori in cotone biologico e imballaggi ecologici per la vendita al dettaglio. Progettati per catene di negozi globali, marchi di abbonamento e marchi lifestyle ecologici."
+      }
+    },
+    "whyZova": {
+      "sectionLabel": "Perché Zova",
+      "title": "Perché gli acquirenti globali scelgono Zova Organics per la fornitura di borse in iuta",
+      "items": {
+        "ethicalProduction": {
+          "title": "Produzione Etica",
+          "description": "Produzione socialmente responsabile da fornitori indiani certificati e controllati."
+        },
+        "premiumMaterials": {
+          "title": "Iuta Premium e Materiali Biologici",
+          "description": "Iuta naturale e biodegradabile al 100% e cotone biologico — qualità da esportazione."
+        },
+        "reliablePartners": {
+          "title": "Partner di Produzione Affidabili",
+          "description": "Relazioni a lungo termine con i migliori stabilimenti di iuta di Calcutta."
+        },
+        "globalExpertise": {
+          "title": "Esperienza nell'Esportazione Globale",
+          "description": "Esperti in spedizioni verso USA, Regno Unito, UE, Medio Oriente e Asia Pacifico."
+        },
+        "qualityAssurance": {
+          "title": "Controllo Qualità",
+          "description": "Ispezione pre-spedizione, approvazione dei campioni e controllo qualità in ogni fase."
+        },
+        "longTerm": {
+          "title": "Partnership a Lungo Termine",
+          "description": "Cresciamo con il tuo marchio, dal primo campione ai successivi ordini di container."
+        }
+      }
+    },
+    "globalReach": {
+      "sectionLabel": "Portata Globale",
+      "title": "Esportiamo Borse in Iuta e Prodotti Sostenibili in oltre 30 Paesi",
+      "subtitle": "Scelto da marchi e distributori in Nord America, Europa, Medio Oriente e Asia Pacifico. Da Calcutta verso il mondo."
+    },
+    "cta": {
+      "title": "Pronto per procurarti borse in iuta e prodotti ecologici dall'India?",
+      "description": "Collabora con Zova Organics per borse in iuta all'ingrosso, imballaggi ecologici, personalizzazione del marchio ed esportazioni affidabili da Calcutta, India.",
+      "button": "Ottieni un Preventivo Gratuito"
+    },
+    "manifesto": {
+      "label": "La Nostra Filosofia",
+      "headline": "L'approvvigionamento deve essere trasparente, sostenibile e magnificamente eseguito",
+      "line1": "Crediamo che i prodotti eccezionali inizino molto prima di arrivare su uno scaffale. Iniziano con un approvvigionamento responsabile, maestria artigianale e partnership basate sulla fiducia.",
+      "line2": "Zova Organics collega marchi globali con borse in iuta di prima qualità, tessuti biologici e prodotti di lifestyle ecologico radicati nel patrimonio manifatturiero della iuta di Calcutta."
+    }
+  },
+  "footer": {
+    "topLabel": "Esportazioni Biologiche Globali",
+    "headline": "Costruire catene di approvvigionamento biologiche affidabili per i marchi globali.",
+    "description": "Collabora con Zova Organics per prodotti reperiti in modo responsabile, operazioni di esportazione affidabili e crescita a lungo termine.",
+    "requestQuote": "Richiedi un Preventivo",
+    "socialLabel": "Link Sociali",
+    "companyLabel": "Azienda",
+    "contactLabel": "Contatti",
+    "privacyPolicy": "Informativa sulla Privacy",
+    "terms": "Termini e Condizioni",
+    "faq": "Domande Frequenti",
+    "copyright": "© {{year}} Zova Organics. Tutti i diritti riservati.",
+    "brandDescription": "Esportiamo borse in iuta sostenibili e biologiche e imballaggi ecologici dall'India ad acquirenti internazionali, distributori e marchi privati."
+  },
+  "contact": {
+    "page": {
+      "eyebrow": "Contatti",
+      "title": "Costruiamo insieme qualcosa di significativo.",
+      "description": "Che tu stia cercando tessuti sostenibili, lanciando una collezione a marchio privato o cercando un partner di produzione affidabile, ci piacerebbe conoscere il tuo progetto.",
+      "faqSection": {
+        "eyebrow": "FAQ",
+        "title": "Domande frequenti.",
+        "description": "Ecco le risposte ad alcune delle nostre domande più frequenti. Se hai altre richieste, non esitare a contattarci direttamente."
+      }
+    },
+    "form": {
+      "labelInquiry": "Modulo di Richiesta",
+      "headline": "Parlaci dei tuoi requisiti di approvvigionamento.",
+      "description": "Che tu stia cercando tessuti biologici, borse personalizzate, produzione a marchio privato o partnership a lungo termine, ci piacerebbe conoscere il tuo progetto.",
+      "responseTimeTitle": "Tempo di Risposta",
+      "responseTimeValue": "Entro 24 ore lavorative",
+      "moqSupportTitle": "Supporto MOQ",
+      "moqSupportValue": "Soluzioni flessibili per marchi in crescita e importatori",
+      "shippingTitle": "Spedizione Globale",
+      "shippingValue": "Trasporto aereo e marittimo disponibile in tutto il mondo",
+      "nameLabel": "Il tuo Nome",
+      "companyLabel": "Azienda",
+      "emailLabel": "Email di Lavoro",
+      "phoneLabel": "Numero di Telefono",
+      "categoryLabel": "Categoria di Prodotto",
+      "projectDetailsLabel": "Dettagli del Progetto",
+      "namePlaceholder": "Mario Rossi",
+      "companyPlaceholder": "Nome dell'Azienda",
+      "emailPlaceholder": "mario@azienda.com",
+      "phonePlaceholder": "+39 123 456 789",
+      "messagePlaceholder": "Parlaci dei tuoi requisiti di prodotto, esigenze di personalizzazione, quantità previste, certificazioni e mercati di destinazione...",
+      "categoryOptions": {
+        "organicFabrics": "Tessuti Biologici",
+        "bags": "Tote Bag e Pochette",
+        "privateLabel": "Etichetta Privata",
+        "customProduct": "Prodotto Personalizzato",
+        "other": "Altro"
+      },
+      "success": "Grazie per averci contattato. Il nostro team esaminerà la tua richiesta e ti risponderà entro 24 ore lavorative.",
+      "error": "Qualcosa è andato storto. Riprova.",
+      "validation": {
+        "nameMin": "Il nome deve avere almeno 2 caratteri",
+        "companyMin": "Il nome dell'azienda è richiesto",
+        "email": "Inserisci un indirizzo email valido",
+        "phoneMin": "Il numero di telefono è troppo corto",
+        "messageMin": "Fornisci maggiori dettagli"
+      }
+    },
+    "info": {
+      "label": "Informazioni di Contatto",
+      "headline": "Diversi modi per connettersi.",
+      "items": {
+        "general": {
+          "title": "Richieste Generali",
+          "value": "info@zovaorganics.com",
+          "description": "Domande su prodotti, approvvigionamento o partnership."
+        },
+        "export": {
+          "title": "Esportazione e Ingrosso",
+          "value": "+91 9073896612",
+          "description": "Discuti MOQ, personalizzazione, logistica e prezzi."
+        },
+        "basedIn": {
+          "title": "Con Sede in India",
+          "value": "Operazioni di Esportazione Globale",
+          "description": "Mettiamo in contatto gli acquirenti internazionali con produttori affidabili."
+        }
+      }
+    },
+    "whyContact": {
+      "label": "Come Possiamo Aiutare",
+      "title": "Più di un fornitore. Un partner di approvvigionamento.",
+      "items": {
+        "privateLabel": {
+          "title": "Produzione a Marchio Privato",
+          "description": "Lancia prodotti con il tuo marchio collaborando con partner di produzione di fiducia."
+        },
+        "customProduct": {
+          "title": "Sviluppo Prodotti Personalizzati",
+          "description": "Sviluppa prodotti su misura progettati attorno alle tue esigenze aziendali."
+        },
+        "sustainableSourcing": {
+          "title": "Approvvigionamento Sostenibile",
+          "description": "Accedi a tessuti e prodotti lifestyle provenienti dall'India in modo etico."
+        },
+        "globalSupport": {
+          "title": "Supporto all'Esportazione Globale",
+          "description": "Dalla documentazione alla logistica, ti aiutiamo a semplificare il commercio internazionale."
+        }
+      }
+    }
+  },
+  "faq": {
+    "page": {
+      "title": "Domande Frequenti | Zova Organics",
+      "description": "Hai domande sull'approvvigionamento di borse in iuta dall'India? Abbiamo risposto a tutto qui sotto."
+    },
+    "sections": {
+      "0": {
+        "title": "Informazioni su Zova Organics",
+        "items": {
+          "0": {
+            "question": "Cos'è Zova Organics?",
+            "answer": "Zova Organics è un importante esportatore di borse in iuta premium, tessuti biologici e prodotti lifestyle sostenibili con sede a Calcutta, nel Bengala Occidentale, in India."
+          },
+          "1": {
+            "question": "Dove si trova Zova Organics?",
+            "answer": "Siamo con sede a Calcutta, in India, il cuore dell'industria globale della iuta."
+          },
+          "2": {
+            "question": "Qual è la differenza tra un commerciante esportatore e un produttore?",
+            "answer": "Un produttore produce merci nella propria fabbrica. Un esportatore come Zova Organics si rifornisce da più produttori specializzati e li esporta, offrendoti accesso a una gamma più ampia di prodotti e a un migliore controllo della qualità."
+          },
+          "3": {
+            "question": "Zova Organics è una società di esportazione registrata?",
+            "answer": "Sì. Zova Organics è un esportatore registrato con tutta la documentazione di esportazione indiana richiesta, incluso l'IEC (Import Export Code)."
+          }
+        }
+      },
+      "1": {
+        "title": "Prodotti",
+        "items": {
+          "0": {
+            "question": "Quali prodotti in iuta esporta Zova Organics?",
+            "answer": "Esportiamo una gamma completa di borse e prodotti in iuta: Tote Bag, borse per la spesa, borse regalo, borse per vino, borse con coulisse, borse da spiaggia, zaini, pochette e borse promozionali."
+          },
+          "1": {
+            "question": "Vendete solo borse in iuta o anche altri prodotti?",
+            "answer": "Oltre alle borse in iuta, esportiamo borse in cotone biologico, borse Juco, tessuti biologici e naturali e prodotti lifestyle sostenibili."
+          },
+          "2": {
+            "question": "Che grammatura dei tessuti offrite?",
+            "answer": "Offriamo borse in iuta in grammature che vanno da 200 GSM (leggere) a 500 GSM (robuste). Lo standard per le tote bag è 350 GSM."
+          },
+          "3": {
+            "question": "Posso ordinare borse in iuta in colori personalizzati?",
+            "answer": "Sì. La iuta naturale si presenta nel suo caratteristico colore marrone-dorato, ma offriamo anche iuta sbiancata e tinta su misura."
+          },
+          "4": {
+            "question": "Le vostre borse hanno delle certificazioni?",
+            "answer": "Sì. Lavoriamo con produttori altamente certificati (GOTS, Oeko-Tex Standard 100). Possiamo fornire rapporti di prova su richiesta."
+          },
+          "5": {
+            "question": "Le vostre borse in iuta sono adatte al contatto con gli alimenti?",
+            "answer": "Le nostre borse della spesa naturali sono adatte per alimenti secchi. Per il contatto diretto, possiamo fornire borse con un rivestimento interno adatto all'uso alimentare."
+          },
+          "6": {
+            "question": "Potete creare una borsa in iuta completamente nuova su misura?",
+            "answer": "Sì. Il nostro team di sviluppo del prodotto può creare campioni da zero in base alle tue specifiche."
+          }
+        }
+      },
+      "2": {
+        "title": "Ordini, Campioni e MOQ",
+        "items": {
+          "0": {
+            "question": "Qual è la quantità minima di ordine (MOQ)?",
+            "answer": "I nostri MOQ standard sono: Tote bag semplici: 3000-5000 pezzi. Borse stampate o su misura: 3000-10000 pezzi a seconda della complessità."
+          },
+          "1": {
+            "question": "Come faccio a effettuare un ordine?",
+            "answer": "Il processo è semplice: Richiesta -> Preventivo -> Campionamento -> Conferma dell'ordine -> Produzione -> Controllo qualità -> Spedizione."
+          },
+          "2": {
+            "question": "Quali termini di pagamento offrite?",
+            "answer": "I termini standard prevedono un anticipo del 30-50% alla conferma dell'ordine, con il saldo dovuto prima della spedizione."
+          },
+          "3": {
+            "question": "Lavorate con nuovi acquirenti o solo con aziende consolidate?",
+            "answer": "Accogliamo i nuovi acquirenti e rendiamo il processo il più semplice possibile per gli importatori alle prime armi."
+          },
+          "4": {
+            "question": "Posso mescolare prodotti diversi in un unico container?",
+            "answer": "Sì. Gestiamo regolarmente spedizioni miste."
+          }
+        }
+      },
+      "3": {
+        "title": "Personalizzazione ed Etichetta Privata",
+        "items": {
+          "0": {
+            "question": "Quali opzioni di personalizzazione sono disponibili?",
+            "answer": "Offriamo personalizzazione end-to-end: Dimensioni, peso, colore, manici, stampa, fodera, chiusura e imballaggio."
+          },
+          "1": {
+            "question": "Di quali formati di file avete bisogno per la stampa?",
+            "answer": "Preferiamo formati vettoriali come .AI, .EPS, o PDF vettoriale. Accettiamo anche file raster ad alta risoluzione (.PNG o .TIFF) a minimo 300 DPI."
+          },
+          "2": {
+            "question": "Offrite imballaggi a marchio bianco / privato?",
+            "answer": "Sì. Offriamo servizi completi di private label. Nessun marchio Zova Organics sarà visibile."
+          },
+          "3": {
+            "question": "Potete replicare un campione che vi invio?",
+            "answer": "Sì. Se hai un prodotto esistente, inviaci un campione fisico o foto dettagliate e faremo del nostro meglio per replicarlo."
+          },
+          "4": {
+            "question": "Fornite consulenza sullo sviluppo del prodotto?",
+            "answer": "Sì. Se stai creando una nuova linea di prodotti eco-compatibili, il nostro team può offrirti consulenza prima dell'inizio del campionamento."
+          }
+        }
+      },
+      "4": {
+        "title": "Spedizioni e Logistica",
+        "items": {
+          "0": {
+            "question": "Quali sono i vostri termini di spedizione (Incoterms)?",
+            "answer": "Offriamo: FOB Kolkata, CIF, Ex-Works, e DDP (su richiesta per destinazioni selezionate)."
+          },
+          "1": {
+            "question": "Quanto tempo impiega la spedizione nel mio paese?",
+            "answer": "I tempi di transito marittimo variano: Europa (20-28 giorni), USA (25-40 giorni), Australia (18-25 giorni). Il trasporto aereo richiede 5-10 giorni."
+          },
+          "2": {
+            "question": "Gestite tutta la documentazione per l'esportazione?",
+            "answer": "Sì. Forniamo tutta la documentazione per l'esportazione in conformità con i requisiti del tuo paese."
+          },
+          "3": {
+            "question": "Offrite spedizioni FCL e LCL?",
+            "answer": "Sì. Gestiamo sia carichi completi (FCL) che parziali (LCL)."
+          },
+          "4": {
+            "question": "Potete inviare campioni tramite corriere (DHL/FedEx)?",
+            "answer": "Sì. Inviamo i set di campioni tramite corriere espresso con tracciamento completo."
+          }
+        }
+      },
+      "5": {
+        "title": "Qualità e Sostenibilità",
+        "items": {
+          "0": {
+            "question": "Quali processi di controllo qualità seguite?",
+            "answer": "I nostri controlli includono ispezione delle materie prime, controlli in linea durante la produzione e un rigoroso controllo pre-spedizione."
+          },
+          "1": {
+            "question": "Le vostre borse in iuta sono veramente ecologiche e biodegradabili?",
+            "answer": "Sì. La iuta è biodegradabile al 100%, naturale e a impatto di carbonio negativo."
+          },
+          "2": {
+            "question": "Supportate il commercio equo e solidale e la produzione etica?",
+            "answer": "Sì. Tutti i nostri partner di produzione sono controllati per garantire salari equi, sicurezza sul lavoro e nessun lavoro minorile."
+          }
+        }
+      }
+    }
+  },
+  "products": {
+    "page": {
+      "eyebrow": "Prodotti",
+      "title": "La nostra collezione sostenibile.",
+      "description": "Borse, pochette e tessuti in cotone biologico certificato GOTS. Vendita all'ingrosso da 100 unità."
+    },
+    "noProducts": {
+      "headline": "Nessun prodotto trovato",
+      "description": "Non abbiamo trovato prodotti che corrispondono ai tuoi filtri. Prova un'altra ricerca o contattaci."
+    }
+  },
+  "blogs": {
+    "page": {
+      "eyebrow": "Approfondimenti",
+      "title": "Prospettive sull'approvvigionamento sostenibile.",
+      "description": "Linee guida per l'esportazione, tendenze dei tessuti biologici e approfondimenti sulla catena di fornitura per gli acquirenti globali."
+    },
+    "minRead": "{{count}} min di lettura"
+  },
+  "product": {
+    "category": {
+      "organic-fabrics": "Tessuti Biologici",
+      "bags": "Borse",
+      "pouches": "Pochette",
+      "home-textiles": "Tessili per la casa",
+      "yoga-wellness": "Yoga e Benessere",
+      "custom-oem": "OEM Personalizzato"
+    },
+    "highlights": {
+      "moq": "MOQ",
+      "leadTime": "Tempi di consegna",
+      "shipping": "Spedizione",
+      "worldwide": "In tutto il mondo"
+    },
+    "sustainablySourcedTitle": "Approvvigionamento Sostenibile",
+    "sustainablySourcedDescription": "Prodotto in India utilizzando materiali biologici certificati e pratiche di produzione etiche.",
+    "requestSample": "Richiedi un Kit di Campioni",
+    "requestQuote": "Richiedi un Preventivo",
+    "sampleCtaHeadline": "Valuta {{productTitle}} prima di effettuare un ordine.",
+    "sampleCtaDescription": "Ricevi campioni, specifiche tecniche, certificazioni, opzioni di personalizzazione e documentazione di esportazione.",
+    "productSamples": "Campioni di Prodotto",
+    "productSamplesDescription": "Valuta la qualità del materiale, le cuciture, la durata e la finitura.",
+    "technicalDocumentation": "Documentazione Tecnica",
+    "technicalDocumentationDescription": "Dettagli GSM, dimensioni, certificazioni, opzioni di personalizzazione e specifiche di esportazione.",
+    "shippingComplianceTitle": "Spedizione e Conformità",
+    "hsCode": "Codice HS",
+    "reachEu": "REACH (UE)",
+    "compliant": "Conforme",
+    "documentsProvided": "Documenti forniti"
+  },
+  "errors": {
+    "somethingWentWrong": "Qualcosa è andato storto",
+    "unexpectedError": "Si è verificato un errore imprevisto. Si prega di riprovare.",
+    "openMobileMenu": "Apri il menu mobile",
+    "homeAriaLabel": "Home Zova Organics"
+  }
+}
