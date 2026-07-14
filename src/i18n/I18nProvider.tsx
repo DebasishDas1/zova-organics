@@ -66,19 +66,22 @@ export function LanguageProvider({
   defaultLocale: Locale
   children: React.ReactNode
 }) {
-  const getInitialLocale = (): Locale => {
-    if (typeof window === 'undefined') {
-      return defaultLocale
-    }
+  const [locale, setLocaleState] = useState<Locale>(defaultLocale)
+  const [messages, setMessages] = useState(() => getMessages(defaultLocale))
 
+  useEffect(() => {
+    // Prevent hydration mismatches by only sniffing the browser locale after mount
     const storedLocale = getStoredLocale()
     const browserLocale = getBrowserLocale()
+    const clientLocale = storedLocale ?? browserLocale ?? defaultLocale
 
-    return storedLocale ?? browserLocale ?? defaultLocale
-  }
-
-  const [locale, setLocaleState] = useState<Locale>(getInitialLocale)
-  const [messages, setMessages] = useState(() => getMessages(getInitialLocale()))
+    if (clientLocale !== defaultLocale) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setLocaleState(clientLocale)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setMessages(getMessages(clientLocale))
+    }
+  }, [defaultLocale])
 
   useEffect(() => {
     document.documentElement.lang = locale

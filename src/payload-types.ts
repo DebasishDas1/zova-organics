@@ -98,11 +98,11 @@ export interface Config {
     | ('false' | 'none' | 'null')
     | false
     | null
-    | ('en' | 'fr' | 'de' | 'es' | 'it' | 'ar')
-    | ('en' | 'fr' | 'de' | 'es' | 'it' | 'ar')[];
+    | ('en' | 'fr' | 'de' | 'es' | 'it' | 'ar' | 'ru' | 'tr' | 'nl' | 'ja')
+    | ('en' | 'fr' | 'de' | 'es' | 'it' | 'ar' | 'ru' | 'tr' | 'nl' | 'ja')[];
   globals: {};
   globalsSelect: {};
-  locale: 'en' | 'fr' | 'de' | 'es' | 'it' | 'ar';
+  locale: 'en' | 'fr' | 'de' | 'es' | 'it' | 'ar' | 'ru' | 'tr' | 'nl' | 'ja';
   widgets: {
     collections: CollectionsWidget;
   };

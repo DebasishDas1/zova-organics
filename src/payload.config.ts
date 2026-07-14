@@ -34,7 +34,6 @@ if (
   throw new Error('PAYLOAD_SECRET must be set to a secure value in production')
 }
 
-// Single R2 folder for all media now that there's one Media collection.
 const r2Base = env('R2_PUBLIC_URL', 'https://media.zovaorganics.com')
 const makeFileURL =
   (prefix: string) =>
@@ -42,10 +41,6 @@ const makeFileURL =
     `${r2Base}/${prefix}/${filename}`
 
 export default buildConfig({
-  // Multi-language buyer-facing content for an export business.
-  // Only fields marked `localized: true` (product/post copy, SEO) get a
-  // row per locale — internal fields like SKU, HS code, and CRM notes
-  // stay single-row since they're never translated.
   localization: {
     locales: [
       { label: 'English', code: 'en' },
@@ -54,6 +49,10 @@ export default buildConfig({
       { label: 'Spanish', code: 'es' },
       { label: 'Italian', code: 'it' },
       { label: 'Arabic', code: 'ar' },
+      { label: 'Russian', code: 'ru' },
+      { label: 'Turkish', code: 'tr' },
+      { label: 'Dutch', code: 'nl' },
+      { label: 'Japanese', code: 'ja' },
     ],
     defaultLocale: 'en',
     fallback: true,
@@ -71,7 +70,6 @@ export default buildConfig({
     },
   },
 
-  // 5 collections instead of 7 — Media replaces Media/ProductImages/BlogImages.
   collections: [Users, Media, Products, Leads, Certifications, Posts],
 
   editor: lexicalEditor(),
@@ -93,10 +91,6 @@ export default buildConfig({
       idleTimeoutMillis: 30_000,
       connectionTimeoutMillis: 5_000,
     },
-    // This database holds real production data (Supabase), not disposable
-    // local dev data. `push` mode auto-applies schema changes on every
-    // server start with no review and no migration history — that's how
-    // we nearly lost data here. Always false; use `payload migrate` instead.
     push: false,
   }),
 
